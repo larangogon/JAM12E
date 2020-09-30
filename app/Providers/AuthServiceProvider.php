@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate \ Support \ Facades \ Gate;
+use Illuminate\Auth\Access\Response;
+
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,6 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+        'App\Order' => 'App\Policies\OrderPolicy',
         // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
@@ -25,6 +28,27 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('hasrole', function ($user) {
+            if ($user->tieneRol()->count() > 0) {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('Administrator', function ($user) {
+            return $user->hasRole('Administrator')
+            ? Response::allow()
+            : Response::deny('You must be a administrator.');
+        });
+
+        Gate::define('Guest', function ($user) {
+            return $user->hasRole('Guest');
+        });
+
+        Gate::before(function ($user) {
+            if ($user->hasRole('Administrator')) {
+                return true;
+            }
+        });
     }
 }
