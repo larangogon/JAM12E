@@ -2,6 +2,9 @@
 
 return [
 
+    'login' => env('PAY_LOGIN'),
+    'secretKey' => env('PAY_SECRETKEY'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -161,6 +164,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        'Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider',
+        Darryldecode\Cart\CartServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -174,7 +179,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*
@@ -226,6 +233,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'PaymentCons' => App\Constants\PlaceToPay::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
