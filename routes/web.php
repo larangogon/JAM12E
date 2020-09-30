@@ -58,12 +58,3 @@ Route::get('orders/{order}/shippingStatus')->uses('OrderController@shippingStatu
 
 Route::resource('shipping', 'ShippingController')->only(['create', 'store']);
 
-Route::get('exportUsers', 'ExportController@exportUsers')->name('exportUsers');
-Route::get('exportProducts', 'ExportController@exportProducts')->name('exportProducts');
-Route::get('exportOrders', 'ExportController@exportOrders')->name('exportOrders');
-
-Route::post('imports/import', 'ImportController@import')->name('import');
-Route::get('imports/index', 'ImportController@index')->name('imports.index');
-Route::get('imports/indexProducts', 'ImportController@indexProducts')->name('indexProducts');
-Route::post('imports/importProducts', 'ImportController@importProducts')->name('importProducts');
-
