@@ -7,6 +7,7 @@ $finder = Finder::create()
     ->in(__DIR__.DIRECTORY_SEPARATOR.'routes')
     ->in(__DIR__.DIRECTORY_SEPARATOR.'database')
     ->in(__DIR__.DIRECTORY_SEPARATOR.'config')
+    ->in(__DIR__.DIRECTORY_SEPARATOR.'bootstrap')
 ;
 return Config::create()
     ->setUsingCache(false)
