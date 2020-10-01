@@ -30,6 +30,6 @@ notifications:
     email:
       recipients:
         - johannitaarango2@gmail.com
+        - larangogon1@uniminuto.edu.co
       on_success: always
       on_failure: always
-
