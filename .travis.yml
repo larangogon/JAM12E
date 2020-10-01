@@ -19,7 +19,7 @@ cache:
 git:
   depth: 3
 before_install:
-  - mysql -e 'create database testingLaravel;'
+  - mysql -e 'create database laravelTest;'
 before_script:
   - composer install --prefer-dist --optimize-autoloader
   - npm install
