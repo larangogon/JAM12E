@@ -38,9 +38,9 @@ class DecoratorCart implements InterfaceCarts
 
         Auth::user()->cart->products()
             ->attach($product, [
-                'stock' => $stock,
+                'stock'    => $stock,
                 'color_id' => $color,
-                'size_id' => $size
+                'size_id'  => $size
             ]);
     }
 
@@ -66,7 +66,7 @@ class DecoratorCart implements InterfaceCarts
 
     /**
      * @param CartUpdateRequest $request
-     * @param $id
+     * @param int $id
      * @return Void
      */
     public function update(CartUpdateRequest $request, int $id): Void
@@ -75,7 +75,7 @@ class DecoratorCart implements InterfaceCarts
 
         $inCartItem = InCart::findOrFail($id);
 
-        $inCartItem->stock  = $request->get('stock');
+        $inCartItem->stock = $request->get('stock');
 
         $inCartItem->update();
     }

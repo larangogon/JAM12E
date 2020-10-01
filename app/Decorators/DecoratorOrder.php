@@ -186,7 +186,10 @@ class DecoratorOrder implements InterfaceOrders
                 ],
 
                 "expiration" => date('c', strtotime('+2 days')),
-                "returnUrl" => route('orders.show', ['user' => auth()->id(), 'order'=> $order->id]),
+                "returnUrl" => route('orders.show', [
+                    'user' => auth()->id(),
+                    'order'=> $order->id
+                ]),
                 "ipAddress" => "127.0.0.1",
                 "userAgent" => "PlacetoPay Sandbox"
             ];
