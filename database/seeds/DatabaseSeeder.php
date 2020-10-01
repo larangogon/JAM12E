@@ -17,12 +17,14 @@ class DatabaseSeeder extends Seeder
                 SizeSeeder::class,
                 ColorSeeder::class,
                 ProductsTableSeeder::class,
-            ]);
+            ]
+        );
 
         $this->call(
             [
                 PermissionsTableSeeder::class,
-                UserSeeder::class,  
-            ]);
+                UserSeeder::class,
+            ]
+        );
     }
 }

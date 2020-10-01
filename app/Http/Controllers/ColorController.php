@@ -29,7 +29,7 @@ class ColorController extends Controller
      */
     public function index(): View
     {
-        $colors = Color::all();
+        $colors = Color::all(['id','name']);
 
         return view('colors.index', ['colors' => $colors]);
     }

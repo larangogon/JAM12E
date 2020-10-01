@@ -247,6 +247,16 @@
                         </button>
                     </form>
                 @break
+            @default
+            <h5>
+                <small>
+                    {{__('Verifica el estado de tu orden')}}
+                </small>
+            </h5>
+            <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
+                Verificar el esado de tu orden
+            </a>
+            @break
             @endswitch
         @break
 
@@ -285,7 +295,27 @@
                         Verificar el esado de tu orden
                     </a>
                 @break
+            @default
+            <h5>
+                <small>
+                    {{__('Verifica el estado de tu orden')}}
+                </small>
+            </h5>
+            <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
+                Verificar el esado de tu orden
+            </a>
+            @break
             @endswitch
+        @break
+        @default
+            <h5>
+                <small>
+                    {{__('Verifica el estado de tu orden')}}
+                </small>
+            </h5>
+            <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
+                Verificar el esado de tu orden
+            </a>
         @break
     @endswitch
 </div>

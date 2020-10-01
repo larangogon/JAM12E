@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Cache;
 
 class Detail extends Model
 {
@@ -45,5 +46,15 @@ class Detail extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCacheInCarts()
+    {
+        return Cache::remember('in_carts', now()->addDay(), function () {
+            return $this->all();
+        });
     }
 }

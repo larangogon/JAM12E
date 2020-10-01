@@ -30,7 +30,7 @@ class CreateColorProductsTable extends Migration
                 ->references('id')
                 ->on('colors')
                 ->onDelete('cascade');
-         });
+        });
     }
 
     /**

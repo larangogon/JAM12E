@@ -46,7 +46,6 @@ class CreateDetailsTable extends Migration
 
 
             $table->timestamps();
-
         });
     }
 

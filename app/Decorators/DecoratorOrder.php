@@ -220,7 +220,6 @@ class DecoratorOrder implements InterfaceOrders
                 "internalReference"  => $order->payment->internalReference,
             ];
 
-
             $res = $client->post(
                 'https://test.placetopay.com/redirection/api/reverse',
                 ['json' => $request]

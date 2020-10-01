@@ -29,7 +29,7 @@ class SizeController extends Controller
      */
     public function index(): View
     {
-        $sizes = Size::all();
+        $sizes = Size::all(['id','name']);
 
         return view('sizes.index', ['sizes' => $sizes]);
     }
