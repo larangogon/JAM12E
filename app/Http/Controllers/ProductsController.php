@@ -53,10 +53,10 @@ class ProductsController extends Controller
      */
     public function create(): View
     {
-        $colors     = Color::all();
-        $categories = Category::all();
-        $sizes      = Size::all();
-        $imagenes   = Imagen::all();
+        $colors     = Color::all(['id','name']);
+        $categories = Category::all(['id','name']);
+        $sizes      = Size::all(['id','name']);
+        $imagenes   = Imagen::all(['id','name']);
 
         return view('products.create', [
             'colors'     => $colors,
@@ -96,9 +96,9 @@ class ProductsController extends Controller
     public function edit(int $id): View
     {
         $products = Product::find($id);
-        $colors = Color::all();
-        $categories = Category::all();
-        $sizes = Size::all();
+        $colors = Color::all(['id','name']);
+        $categories = Category::all(['id','name']);
+        $sizes = Size::all(['id','name']);
 
         return view('products.edit', ['products' => $products,
                     'colors' => $colors, 'categories' => $categories, 'sizes' => $sizes, ]);

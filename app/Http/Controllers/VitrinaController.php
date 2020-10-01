@@ -29,8 +29,6 @@ class VitrinaController extends Controller
      */
     public function index(Request $request): View
     {
-        $colors   = Color::all();
-        $sizes    = Size::all();
         $category = $request->get('category', null);
         $search   = $request->get('search', null);
 
@@ -38,8 +36,6 @@ class VitrinaController extends Controller
 
         return view('vitrina/index', [
             'search'   => $search,
-            'colors'   => $colors,
-            'sizes'    => $sizes,
             'products' => $this->products
                 ->category($category)
                 ->active()
