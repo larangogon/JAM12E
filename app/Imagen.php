@@ -20,4 +20,14 @@ class Imagen extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCacheImagenes()
+    {
+        return Cache::remember('imagenes', now()->addDay(), function () {
+            return $this->all();
+        });
+    }
 }

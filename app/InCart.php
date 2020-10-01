@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Cache;
 
 class InCart extends Pivot
 {
@@ -31,5 +32,15 @@ class InCart extends Pivot
     public function products(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCacheInCarts()
+    {
+        return Cache::remember('in_carts', now()->addDay(), function () {
+            return $this->all();
+        });
     }
 }

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Cache;
 
 class Cart extends Model
 {
@@ -58,5 +59,15 @@ class Cart extends Model
         }
 
         return $valor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCacheCart()
+    {
+        return Cache::remember('carts', now()->addDay(), function () {
+            return $this->all();
+        });
     }
 }
