@@ -4,6 +4,8 @@ $finder = Finder::create()
     ->name('*.php')
     ->in(__DIR__.DIRECTORY_SEPARATOR.'app')
     ->in(__DIR__.DIRECTORY_SEPARATOR.'tests')
+    ->in(__DIR__.DIRECTORY_SEPARATOR.'routes')
+    ->in(__DIR__.DIRECTORY_SEPARATOR.'database')
 ;
 return Config::create()
     ->setUsingCache(false)

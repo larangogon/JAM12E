@@ -53,6 +53,5 @@ class PermissionsTableSeeder extends Seeder
             'orders.show'
 
         ]);
-
     }
 }

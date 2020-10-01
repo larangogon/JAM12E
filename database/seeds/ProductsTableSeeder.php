@@ -21,17 +21,17 @@ class ProductsTableSeeder extends Seeder
         $sizes = Size::all();
         $categories = Category::all();
 
-        Product::inRandomOrder()->each(function ($product) use($colors, $sizes, $categories) {
+        Product::inRandomOrder()->each(function ($product) use ($colors, $sizes, $categories) {
             $product->colors()->attach(
-                $colors->random(rand(1,5))->pluck('id')->toArray()
+                $colors->random(rand(1, 5))->pluck('id')->toArray()
             );
 
             $product->sizes()->attach(
-                $sizes->random(rand(1,5))->pluck('id')->toArray()
+                $sizes->random(rand(1, 5))->pluck('id')->toArray()
             );
 
             $product->categories()->attach(
-                $categories->random(rand(1,2))->pluck('id')->toArray()
+                $categories->random(rand(1, 2))->pluck('id')->toArray()
             );
 
             factory(Imagen::class, rand(1, 2))->create([
