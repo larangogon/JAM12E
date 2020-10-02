@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <label for="email_recipient" class="negrita">Email_recipient:</label>
                                 <div>
-                                    <input class="form-control" placeholder="email_recipient" required="required" name="email_recipient" type="text"
+                                    <input class="form-control" placeholder="email_recipient@gmail.com" required="required" name="email_recipient" type="email"
                                     id="email_recipient">
                                 </div>
                             </div>
