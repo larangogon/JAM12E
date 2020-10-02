@@ -14,9 +14,10 @@ before_script:
   - cp .env.testing .env
   - sudo mysql -e 'CREATE DATABASE testing_laravel;'
   - composer self-update
-  - composer install --no-interaction
+  - composer install --prefer-dist --optimize-autoloader
   - npm install
-  - php artisan migrate --force
+  - npm install
+  - php artisan migrate
   - php artisan test
 notifications:
   email:
