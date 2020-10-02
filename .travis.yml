@@ -4,13 +4,8 @@ php:
 before_script:
   - travis_retry composer self-update
   - travis_retry composer install --prefer-source --no-interaction --dev
-script: phpunit
-before_script: ./before_script.sh
-script: "php run-phpunit.php"
 script: vendor/bin/phpunit --configuration phpunit.xml
 dist: trusty
-services:
-  - mysql
 cache:
   directories:
     - node_modules
