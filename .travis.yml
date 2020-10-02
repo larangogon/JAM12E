@@ -1,6 +1,10 @@
 language: php
 php:
   - '7.2'
+sudo: required
+dist: trusty
+services:
+  - mysql
 before_script:
   - travis_retry composer self-update
   - travis_retry composer install --prefer-source --no-interaction --dev
@@ -15,16 +19,16 @@ before_script:
   - composer install --prefer-dist --optimize-autoloader
   - npm install
 before_script:
-  -  - cp .env.testing .env
+  - cp .env.testing .env
   - sudo mysql -e 'CREATE DATABASE testing_laravel;'
   - composer self-update
   - composer install --no-interaction
   - php artisan migrate --no-interaction -vvv
   - php artisan test
 notifications:
-    email:
-      recipients:
-        - johannitaarango2@gmail.com
-        - larangogon1@uniminuto.edu.co
-      on_success: always
-      on_failure: always
+  email:
+    recipients:
+      - johannitaarango2@gmail.com
+      - larangogon1@uniminuto.edu.co
+    on_success: always
+    on_failure: always
