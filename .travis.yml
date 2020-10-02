@@ -4,13 +4,6 @@ php:
 before_script:
   - travis_retry composer self-update
   - travis_retry composer install --prefer-source --no-interaction --dev
-script: phpunit
-before_script: ./before_script.sh
-script: "php run-phpunit.php"
-script: vendor/bin/phpunit --configuration phpunit.xml
-dist: trusty
-services:
-  - mysql
 cache:
   directories:
     - node_modules
@@ -18,13 +11,15 @@ cache:
     - vendor
 git:
   depth: 3
-before_install:
-  - mysql -e 'create database testing_laravel;'
 before_script:
   - composer install --prefer-dist --optimize-autoloader
   - npm install
-script:
-  - php artisan migrate --testing.env=testing
+before_script:
+  - cp .travis.env
+  - sudo mysql -e 'CREATE DATABASE testing_laravel;'
+  - composer self-update
+  - composer install --no-interaction
+  - php artisan migrate --no-interaction -vvv
   - php artisan test
 notifications:
     email:
