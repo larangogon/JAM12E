@@ -46,8 +46,8 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
+            'host' => env('DB_HOST', 'host_prueba'),
+            'port' => env('DB_PORT', 'port'),
             'database' => env('DB_DATABASE'),
             'username' => env('DB_USERNAME', 'prueba'),
             'password' => env('DB_PASSWORD'),
@@ -65,8 +65,8 @@ return [
 
         'testing' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
+            'host' => env('DB_HOST'),
+            'port' => env('DB_PORT'),
             'database' => env('DB_TESTING_DATABASE'),
             'username' => env('DB_TESTING_USERNAME', 'prueba_testing'),
             'password' => env('DB_TESTING_PASSWORD'),
