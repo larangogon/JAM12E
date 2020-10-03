@@ -100,7 +100,7 @@ class CrudCartTest extends TestCase
 
         $response
             ->assertStatus(302);
-        $this->assertDatabaseMissing('in_Carts', [
+        $this->assertDatabaseMissing('in_carts', [
         'size_id' => $this->size->id = 2,
     ]);
     }
@@ -135,7 +135,7 @@ class CrudCartTest extends TestCase
         $response
             ->assertStatus(302);
 
-        $this->assertDatabaseHas('in_Carts', [
+        $this->assertDatabaseHas('in_carts', [
             'stock'      => '5',
             'product_id' => $this->product->id = 3,
             'color_id'   => $this->color->id = 3,
