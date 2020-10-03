@@ -13,7 +13,6 @@ git:
 before_install:
   - sudo mysql -e 'create database testing_laravel;'
 before_script:
-  - cp .env.testing .env
   - composer self-update
   - composer install --prefer-dist --optimize-autoloader
   - npm install
