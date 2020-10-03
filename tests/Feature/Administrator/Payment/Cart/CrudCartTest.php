@@ -68,7 +68,7 @@ class CrudCartTest extends TestCase
         $response
             ->assertStatus(302);
 
-        $this->assertDatabaseHas('in_Carts', [
+        $this->assertDatabaseHas('in_carts', [
             'stock'      => '23',
             'product_id' => $this->product->id = 1,
             'color_id'   => $this->color->id = 1,
