@@ -65,10 +65,10 @@ return [
 
         'testing' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST'),
-            'port' => env('DB_PORT'),
+            'host' => env('DB_TESTING_HOST'),
+            'port' => env('DB_TESTING_PORT'),
             'database' => env('DB_TESTING_DATABASE'),
-            'username' => env('DB_TESTING_USERNAME', 'prueba_testing'),
+            'username' => env('DB_TESTING_USERNAME'),
             'password' => env('DB_TESTING_PASSWORD'),
             'unix_socket' => env('DB_TESTING_SOCKET'),
             'charset' => 'utf8',
