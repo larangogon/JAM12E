@@ -32,7 +32,7 @@ class StoreOrderPayTest extends TestCase
         $this->cart->save();
     }
 
-    public function teststore(): void
+    public function testStore(): void
     {
         $this->order = new Order();
         $this->order->user_id = $this->user->id;
