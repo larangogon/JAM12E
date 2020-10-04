@@ -112,7 +112,7 @@ class DecoratorOrder implements InterfaceOrders
             'mobile'            => $payermobile,
             'locale'            => $locale,
             ]);
-        }elseif ($order->payment->status === PlaceToPay::APPROVED) {
+        } elseif ($order->payment->status === PlaceToPay::APPROVED) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
             $status            = $response->status->status;
