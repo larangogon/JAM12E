@@ -51,7 +51,7 @@ class CrudCartTest extends TestCase
     public function testHome(): void
     {
         $this->withoutMiddleware();
-        $response = $this->actingAs($this->user, 'web')
+        $response = $this->actingAs($this->user)
             ->get(route(
                 'home',
                 'cart => Auth::user()->cart'

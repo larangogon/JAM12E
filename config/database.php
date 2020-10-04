@@ -65,14 +65,14 @@ return [
 
         'testing' => [
             'driver' => 'mysql',
-            'host' => env('DB_TESTING_HOST'),
-            'port' => env('DB_TESTING_PORT'),
-            'database' => env('DB_TESTING_DATABASE'),
-            'username' => env('DB_TESTING_USERNAME'),
-            'password' => env('DB_TESTING_PASSWORD'),
-            'unix_socket' => env('DB_TESTING_SOCKET'),
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'host' => env('DB_TESTING_HOST', '127.0.0.1'),
+            'port' => env('DB_TESTING_PORT', '3306'),
+            'database' => env('DB_TESTING_DATABASE', 'testing_laravel'),
+            'username' => env('DB_TESTING_USERNAME', 'root'),
+            'password' => env('DB_TESTING_PASSWORD', ''),
+            'unix_socket' => env('DB_TESTING_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
@@ -81,6 +81,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
+
 
         'pgsql' => [
             'driver' => 'pgsql',
