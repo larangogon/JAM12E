@@ -141,18 +141,6 @@ class DecoratorOrder implements InterfaceOrders
         return $order;
     }
 
-    /**
-     * @param int $order_id
-     * @param string $status
-     */
-    public function status(int $order_id, string $status)
-    {
-        $this->ordersRepo->status($order_id, $status);
-
-        $order  = Order::find($order_id);
-        $order->status = $status;
-        $order->save();
-    }
 
     /**
      * @return array

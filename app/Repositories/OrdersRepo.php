@@ -26,16 +26,6 @@ class OrdersRepo implements InterfaceOrders
         //
     }
 
-
-    /**
-     * @param int $order_id
-     * @param string $status
-     */
-    public function status(int $order_id, string $status)
-    {
-        //
-    }
-
     /**
      * @param Request $request
      */

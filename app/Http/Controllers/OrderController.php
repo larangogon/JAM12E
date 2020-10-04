@@ -100,15 +100,6 @@ class OrderController extends Controller
 
     /**
      * @param int $order_id
-     * @param string $status
-     */
-    public function status(int $order_id, string $status)
-    {
-        $this->orders->status($order_id, $status);
-    }
-
-    /**
-     * @param int $order_id
      * @return RedirectResponse
      */
     public function shippingStatus(int $order_id):RedirectResponse

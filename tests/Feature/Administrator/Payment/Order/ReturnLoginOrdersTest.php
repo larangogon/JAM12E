@@ -17,10 +17,4 @@ class ReturnLoginOrdersTest extends TestCase
         $this->get(route('orders.index'))
             ->assertRedirect(route('login'));
     }
-
-    public function testViewStatusOrderslogin(): void
-    {
-        $this->get(route('orders.status'))
-            ->assertRedirect(route('login'));
-    }
 }

@@ -44,7 +44,6 @@ Route::resource('cart', 'CartController')->only(['show', 'destroy', 'update']);
 
 Route::resource('orders', 'OrderController');
 Route::get('orders/{user}/orders', 'OrderController@showv')->name('orders.showv');
-Route::post('orders/status', 'OrderController@status')->name('orders.status');
 Route::post('orders/resend', 'OrderController@resend')->name('orders.resend');
 Route::post('orders/complete', 'OrderController@complete')->name('orders.complete');
 Route::post('orders/reversePay', 'OrderController@reversePay')->name('orders.reversePay');
