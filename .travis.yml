@@ -12,6 +12,7 @@ cache:
 git:
   depth: 3
 before_install:
+  - cp .env.testing .env
   - sudo mysql -e 'create database testing_laravel;'
 before_script:
   - composer self-update

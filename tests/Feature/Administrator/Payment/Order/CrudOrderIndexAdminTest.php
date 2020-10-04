@@ -35,7 +35,7 @@ class CrudOrderIndexAdminTest extends TestCase
 
     public function testIndex(): void
     {
-        $response = $this->actingAs($this->user, 'web')
+        $response = $this->actingAs($this->user)
             ->get(route('orders.index'));
 
         $response

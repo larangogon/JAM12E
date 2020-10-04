@@ -234,7 +234,6 @@ class DecoratorOrder implements InterfaceOrders
 
             return json_decode($res->getBody()->getContents());
         } elseif ($requestType === 'reverse') {
-
             $request = [
                 'auth' => $this->authP2P(),
 
