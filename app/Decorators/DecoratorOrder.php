@@ -136,11 +136,20 @@ class DecoratorOrder implements InterfaceOrders
                 'mobile'            => $payermobile,
                 'locale'            => $locale,
             ]);
+        } elseif ($order->payment->status === PlaceToPay::REJECTED) {
+            $response = $this->requestP2P('getRequestinformation', $order);
+
+            $status            = $response->status->status;
+            $message           = $response->status->message;
+
+            $order->payment->update([
+                'status'            => $status,
+                "message"           => $message,
+            ]);
         }
 
         return $order;
     }
-
 
     /**
      * @return array
