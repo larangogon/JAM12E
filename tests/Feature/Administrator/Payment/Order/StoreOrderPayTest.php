@@ -8,6 +8,7 @@ use App\Payment;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class StoreOrderPayTest extends TestCase
@@ -120,6 +121,49 @@ class StoreOrderPayTest extends TestCase
 
         $this->assertDatabaseHas('orders', [
             'id'  => $this->order->id,
+        ]);
+    }
+
+    public function testDestroyOrder(): void
+    {
+        $this->withoutExceptionHandling();
+
+        $this->order = new Order();
+
+        $this->order->id = 4;
+        $this->order->user_id = $this->user->id;
+        $this->order->total   = $this->user->cart->total = '6778999';
+
+        $this->order->save();
+
+        $this->payment = new Payment();
+
+        $this->payment->order_id    = $this->order->id;
+        $this->payment->processUrl  = 'https://test.placetopay.com/redirection/session/412446/41173d8c3e45052f2e61de558f9baeb6' ;
+        $this->payment->requestId   = '412446';
+        $this->payment->status      = 'APROVED' ;
+
+        $this->payment->save();
+
+        Order::destroy($this->order->id = 4);
+
+        $response = $this->actingAs($this->user)
+            ->post(route('orders.reversePay', $this->order->id), [
+                'internalReference' => '1495465116',
+                'status'            => 'APPROVED',
+                "message"           => 'La petición ha sido aprobada exitosamente',
+                'amount'            => '6778999',
+                'document'          => '1234566',
+                'name'              => 'admin',
+                'email'             => 'johannitaarango@gmail.com',
+                'mobile'            => '12345667',
+                'locale'            => 'es_CO',
+            ]);
+
+        $response
+            ->assertStatus(302);
+        $this->assertDatabaseMissing('orders', [
+            'id'  => $this->order->id = 4,
         ]);
     }
 }

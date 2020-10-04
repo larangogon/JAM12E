@@ -13,7 +13,7 @@ class ProductsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testViewCeatelogin()
+    public function testViewCreatelogin()
     {
         $this->get(route('products.create'))
             ->assertRedirect(route('login'));
@@ -25,7 +25,7 @@ class ProductsTest extends TestCase
             ->assertRedirect(route('login'));
     }
 
-    public function testguests_cannot_delete_products()
+    public function test_delete_products()
     {
         $products = factory(Product::class)->create();
 
@@ -63,7 +63,9 @@ class ProductsTest extends TestCase
         $user = factory(User::class)->create();
         $this->actingAs($user);
 
-        $permission = Permission::create(['group' => 'categories' , 'name' => 'view categories' , 'label' => 'view categories']);
+        $permission = Permission::create([
+            'group' => 'categories' , 'name' => 'view categories' , 'label' => 'view categories'
+        ]);
 
         $role = Role::find($user->role_id);
 

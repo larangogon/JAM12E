@@ -3,6 +3,7 @@
 namespace Tests\Feature\Administrator\Products;
 
 use App\Cart;
+use App\Category;
 use App\Color;
 use App\Product;
 use App\Size;
@@ -97,6 +98,36 @@ class CrudProductsTest extends TestCase
         $this->assertDatabaseHas('products', [
             'id'  => $product->id,
             'name' => 'nameup'
+        ]);
+    }
+
+    public function testStore(): void
+    {
+        $this->withoutExceptionHandling();
+        $this->seed([
+            \ColorSeeder::class,
+            \SizeSeeder::class,
+            \CategorySeeder::class,
+        ]);
+
+
+
+        $response = $this->actingAs($this->user)->post(route('products.store'), [
+            'name'  => 'new',
+            'stock' => 56,
+            'price' => 23456,
+            'description' => 'jdhfbgyebhsabfreahbfgy',
+            'color' => [Color::all()->random()->id],
+            'size' => [Size::all()->random()->id],
+            'category' => [Category::all()->random()->id],
+            'img' => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
+        ]);
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect(route('products.index'));
+        $this->assertDatabaseHas('products', [
+            'name'  => 'new'
         ]);
     }
 }

@@ -20,13 +20,6 @@ interface InterfaceOrders
     public function update(Request $request, int $id);
 
     /**
-     * @param int $order_id
-     * @param string $status
-     * @return mixed
-     */
-    public function status(int $order_id, string $status);
-
-    /**
      * @param Request $request
      * @return mixed
      */

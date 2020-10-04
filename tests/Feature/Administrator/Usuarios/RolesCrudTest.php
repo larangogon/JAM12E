@@ -66,14 +66,14 @@ class RolesCrudTest extends TestCase
 
         $response = $this->actingAs($this->user, 'web')
             ->delete(route('roles.destroy', $role->id), [
-                $role->id
+                'id' => $role->id = 32
         ]);
 
         $response
             ->assertStatus(302)
             ->assertRedirect(route('roles.index'));
-        $this->assertDatabaseMissing('products', [
-            'id'  => $role->id,
+        $this->assertDatabaseMissing('roles', [
+            'id'  => $role->id = 32,
         ]);
     }
 }

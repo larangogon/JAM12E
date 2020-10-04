@@ -86,7 +86,7 @@ class DecoratorOrder implements InterfaceOrders
             $status = $response->status->status;
 
             $order->payment->update([
-                'status'            => $status,
+                'status' => $status,
                 ]);
         } elseif ($order->payment->status === PlaceToPay::APPROVED) {
             $response = $this->requestP2P('getRequestinformation', $order);
@@ -112,22 +112,43 @@ class DecoratorOrder implements InterfaceOrders
             'mobile'            => $payermobile,
             'locale'            => $locale,
             ]);
+        } elseif ($order->payment->status === PlaceToPay::APPROVED) {
+            $response = $this->requestP2P('getRequestinformation', $order);
+
+            $status            = $response->status->status;
+            $amount            = $response->payment[1]->amount->from->total;
+            $internalReference = $response->payment[1]->internalReference;
+            $message           = $response->status->message;
+            $payerdocument     = $response->request->payer->document;
+            $payername         = $response->request->payer->name;
+            $payeremail        = $response->request->payer->email;
+            $payermobile       = $response->request->payer->mobile;
+            $locale            = $response->request->locale;
+
+            $order->payment->update([
+                'internalReference' => $internalReference,
+                'status'            => $status,
+                "message"           => $message,
+                'amount'            => $amount,
+                'document'          => $payerdocument,
+                'name'              => $payername,
+                'email'             => $payeremail,
+                'mobile'            => $payermobile,
+                'locale'            => $locale,
+            ]);
+        } elseif ($order->payment->status === PlaceToPay::REJECTED) {
+            $response = $this->requestP2P('getRequestinformation', $order);
+
+            $status            = $response->status->status;
+            $message           = $response->status->message;
+
+            $order->payment->update([
+                'status'            => $status,
+                "message"           => $message,
+            ]);
         }
 
         return $order;
-    }
-
-    /**
-     * @param int $order_id
-     * @param string $status
-     */
-    public function status(int $order_id, string $status)
-    {
-        $this->ordersRepo->status($order_id, $status);
-
-        $order  = Order::find($order_id);
-        $order->status = $status;
-        $order->save();
     }
 
     /**
@@ -213,7 +234,7 @@ class DecoratorOrder implements InterfaceOrders
 
             return json_decode($res->getBody()->getContents());
         } elseif ($requestType === 'reverse') {
-            $internalReference  = $order->payment->internalReference;
+
             $request = [
                 'auth' => $this->authP2P(),
 
@@ -262,7 +283,8 @@ class DecoratorOrder implements InterfaceOrders
 
     /**
      * @param Request $request
-     * @return mixed|void
+     * @return mixed|void7
+     *
      */
     public function reversePay(Request $request): Void
     {
