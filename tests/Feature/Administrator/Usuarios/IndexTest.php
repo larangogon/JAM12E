@@ -55,6 +55,5 @@ class IndexTest extends TestCase
         $response = $this->get('roles');
 
         $response->assertStatus(200);
-        $this->withoutExceptionHandling();
     }
 }
