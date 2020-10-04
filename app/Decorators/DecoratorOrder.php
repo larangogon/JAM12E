@@ -234,7 +234,7 @@ class DecoratorOrder implements InterfaceOrders
 
             return json_decode($res->getBody()->getContents());
         } elseif ($requestType === 'reverse') {
-            $internalReference  = $order->payment->internalReference;
+
             $request = [
                 'auth' => $this->authP2P(),
 
