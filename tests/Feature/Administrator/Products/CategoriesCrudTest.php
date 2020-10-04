@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Administrator\Products;
 
 use App\Cart;
 use App\User;
