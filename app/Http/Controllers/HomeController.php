@@ -22,6 +22,8 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        return view('home', ['cart' => Auth::user()->cart]);
+        return view('home', [
+            'cart' => Auth::user()->cart
+        ]);
     }
 }

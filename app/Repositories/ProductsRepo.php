@@ -51,7 +51,9 @@ class ProductsRepo implements InterfaceProducts
             if (count($category)> 0) {
                 $category_id = $category[0]->id;
             }
-            $product->categories()->updateExistingPivot($category_id, ['category_id' => $request->get('category')]);
+            $product->categories()->updateExistingPivot($category_id, [
+                'category_id' => $request->get('category')
+            ]);
         }
 
         $product->sizes()->sync($request->get('size'));
@@ -66,8 +68,6 @@ class ProductsRepo implements InterfaceProducts
      */
     public function destroy(int $id): Void
     {
-        $products = Product::find($id);
-
         Product::destroy($id);
     }
 

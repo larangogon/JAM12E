@@ -38,14 +38,16 @@ class ProductsController extends Controller
     public function index(Request $request): View
     {
         $query    = trim($request->get('search'));
-        $products = Product::with('imagenes')
-                            ->where('name', 'LIKE', '%' . $query . '%')
+        $products = Product::where('name', 'LIKE', '%' . $query . '%')
                             ->orwhere('stock', 'LIKE', '%' . $query . '%')
                             ->orwhere('id', 'LIKE', '%' . $query . '%')
                             ->orderBy('id', 'asc')
                             ->paginate(5);
 
-        return view('products.index', ['products' => $products, 'search' => $query]);
+        return view('products.index', [
+            'products' => $products,
+            'search'   => $query
+        ]);
     }
 
     /**
@@ -95,13 +97,17 @@ class ProductsController extends Controller
      */
     public function edit(int $id): View
     {
-        $products = Product::find($id);
-        $colors = Color::all(['id','name']);
+        $products   = Product::find($id);
+        $colors     = Color::all(['id','name']);
         $categories = Category::all(['id','name']);
-        $sizes = Size::all(['id','name']);
+        $sizes      = Size::all(['id','name']);
 
-        return view('products.edit', ['products' => $products,
-                    'colors' => $colors, 'categories' => $categories, 'sizes' => $sizes, ]);
+        return view('products.edit', [
+            'products'   => $products,
+            'colors'     => $colors,
+            'categories' => $categories,
+            'sizes'      => $sizes,
+            ]);
     }
 
     /**
