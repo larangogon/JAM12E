@@ -65,7 +65,8 @@ return [
 
         'testing' => [
             'driver' => 'mysql',
-            'host' => env('DB_TESTING_HOST', '127.0.0.1'),
+            'host' => env('DB_TESTING_HOST', '
+            '),
             'port' => env('DB_TESTING_PORT', '3306'),
             'database' => env('DB_TESTING_DATABASE', 'testing_laravel'),
             'username' => env('DB_TESTING_USERNAME', 'root'),
