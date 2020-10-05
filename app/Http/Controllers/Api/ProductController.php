@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Imagen;
 use Illuminate\Http\Request;
 use App\Product;
 
@@ -16,7 +17,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all(['id','name', 'description', 'price', 'stock']);
-        return response()->json($products, 200);
+
+        return response()->json($products,  200);
     }
 
     /**
@@ -38,7 +40,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $products = Product::find($id);
+
+        return response()->json($products,  200);
     }
 
     /**
