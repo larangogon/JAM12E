@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Imagen;
 use Illuminate\Http\Request;
 use App\Product;
 
@@ -29,7 +28,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $response = Product::create($request->all());
+        return response()->json([
+            'status' => ($response) ? 'created' : 'failed'
+        ],  200);
+
     }
 
     /**
@@ -54,7 +57,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $response = Product::update($request->find($id));
+        return response()->json([
+            'status' => ($response) ? 'updated' : 'failed'
+        ],  200);
     }
 
     /**
@@ -65,6 +71,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::destroy($id);
+
+        return response()->json([
+            'status' => ($product) ? 'deleted' : 'failed'
+        ]);
     }
 }
