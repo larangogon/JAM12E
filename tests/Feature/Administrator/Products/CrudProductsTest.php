@@ -40,7 +40,9 @@ class CrudProductsTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->actingAs($this->user, 'web')->get(route('products.index'));
+        $response = $this->actingAs($this->user, 'web')
+            ->get(route('products.index'));
+
         $response
             ->assertStatus(200)
             ->assertViewHas(['products', 'search'])
@@ -64,6 +66,7 @@ class CrudProductsTest extends TestCase
         $response
             ->assertStatus(302)
             ->assertRedirect(route('products.index'));
+
         $this->assertDatabaseMissing('products', [
             'id'  => $products->id,
         ]);
@@ -110,9 +113,8 @@ class CrudProductsTest extends TestCase
             \CategorySeeder::class,
         ]);
 
-
-
-        $response = $this->actingAs($this->user)->post(route('products.store'), [
+        $response = $this->actingAs($this->user)
+            ->post(route('products.store'), [
             'name'  => 'new',
             'stock' => 56,
             'price' => 23456,
@@ -126,6 +128,7 @@ class CrudProductsTest extends TestCase
         $response
             ->assertStatus(302)
             ->assertRedirect(route('products.index'));
+
         $this->assertDatabaseHas('products', [
             'name'  => 'new'
         ]);

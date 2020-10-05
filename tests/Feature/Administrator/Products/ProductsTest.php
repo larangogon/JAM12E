@@ -64,7 +64,9 @@ class ProductsTest extends TestCase
         $this->actingAs($user);
 
         $permission = Permission::create([
-            'group' => 'categories' , 'name' => 'view categories' , 'label' => 'view categories'
+            'group' => 'categories' ,
+            'name' => 'view categories' ,
+            'label' => 'view categories'
         ]);
 
         $role = Role::find($user->role_id);

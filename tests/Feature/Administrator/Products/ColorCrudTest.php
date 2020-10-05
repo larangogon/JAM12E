@@ -35,7 +35,8 @@ class ColorCrudTest extends TestCase
 
     public function testIndex(): void
     {
-        $response = $this->actingAs($this->user)->get(route('colors.index'));
+        $response = $this->actingAs($this->user)
+            ->get(route('colors.index'));
         $response
             ->assertStatus(200)
             ->assertViewHas('colors')
@@ -44,13 +45,17 @@ class ColorCrudTest extends TestCase
 
     public function testStore(): void
     {
-        $response = $this->actingAs($this->user)->post(route('colors.store'), [
+        $response = $this->actingAs($this->user)
+            ->post(route('colors.store'), [
             'name' => 'amarillo',
         ]);
 
         $response
             ->assertStatus(302)
             ->assertRedirect(route('colors.index'));
-        $this->assertDatabaseHas('colors', ['name' => 'amarillo']);
+
+        $this->assertDatabaseHas('colors', [
+            'name' => 'amarillo'
+        ]);
     }
 }

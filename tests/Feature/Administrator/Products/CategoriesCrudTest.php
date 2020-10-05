@@ -35,7 +35,9 @@ class CategoriesCrudTest extends TestCase
 
     public function testIndex(): void
     {
-        $response = $this->actingAs($this->user)->get(route('categories.index'));
+        $response = $this->actingAs($this->user)
+            ->get(route('categories.index'));
+
         $response
             ->assertStatus(200)
             ->assertViewHas('categories')
@@ -44,13 +46,17 @@ class CategoriesCrudTest extends TestCase
 
     public function testStore(): void
     {
-        $response = $this->actingAs($this->user)->post(route('categories.store'), [
+        $response = $this->actingAs($this->user)
+            ->post(route('categories.store'), [
             'name' => 'adultos',
         ]);
 
         $response
             ->assertStatus(302)
             ->assertRedirect(route('categories.index'));
-        $this->assertDatabaseHas('categories', ['name' => 'adultos']);
+
+        $this->assertDatabaseHas('categories', [
+            'name' => 'adultos'
+        ]);
     }
 }

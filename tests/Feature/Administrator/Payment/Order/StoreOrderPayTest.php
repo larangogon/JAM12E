@@ -162,6 +162,7 @@ class StoreOrderPayTest extends TestCase
 
         $response
             ->assertStatus(302);
+
         $this->assertDatabaseMissing('orders', [
             'id'  => $this->order->id = 4,
         ]);

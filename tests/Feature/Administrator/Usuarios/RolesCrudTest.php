@@ -36,7 +36,9 @@ class RolesCrudTest extends TestCase
 
     public function testIndex(): void
     {
-        $response = $this->actingAs($this->user, 'web')->get(route('roles.index'));
+        $response = $this->actingAs($this->user, 'web')
+            ->get(route('roles.index'));
+
         $response
             ->assertStatus(200)
             ->assertViewHas(['roles', 'permissions'])
@@ -45,7 +47,8 @@ class RolesCrudTest extends TestCase
 
     public function testStore(): void
     {
-        $response = $this->actingAs($this->user, 'web')->post(route('roles.store'), [
+        $response = $this->actingAs($this->user, 'web')
+            ->post(route('roles.store'), [
             'name'       => 'rolesdr',
             'guard_name' => 'web',
             ]);
@@ -53,6 +56,7 @@ class RolesCrudTest extends TestCase
         $response
             ->assertStatus(302)
             ->assertRedirect(route('roles.index'));
+
         $this->assertDatabaseHas('roles', ['name' => 'rolesdr']);
     }
 
@@ -64,7 +68,7 @@ class RolesCrudTest extends TestCase
             'guard_name' => 'web',
         ]);
 
-        $response = $this->actingAs($this->user, 'web')
+        $response = $this->actingAs($this->user)
             ->delete(route('roles.destroy', $role->id), [
                 'id' => $role->id = 32
         ]);
@@ -72,6 +76,7 @@ class RolesCrudTest extends TestCase
         $response
             ->assertStatus(302)
             ->assertRedirect(route('roles.index'));
+
         $this->assertDatabaseMissing('roles', [
             'id'  => $role->id = 32,
         ]);

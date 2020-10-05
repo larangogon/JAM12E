@@ -35,7 +35,9 @@ class SizesCrudTest extends TestCase
 
     public function testIndex(): void
     {
-        $response = $this->actingAs($this->user)->get(route('sizes.index'));
+        $response = $this->actingAs($this->user)
+            ->get(route('sizes.index'));
+
         $response
             ->assertStatus(200)
             ->assertViewHas('sizes')
@@ -44,13 +46,17 @@ class SizesCrudTest extends TestCase
 
     public function testStore(): void
     {
-        $response = $this->actingAs($this->user)->post(route('sizes.store'), [
+        $response = $this->actingAs($this->user)
+            ->post(route('sizes.store'), [
             'name' => 'Unico',
         ]);
 
         $response
             ->assertStatus(302)
             ->assertRedirect(route('sizes.index'));
-        $this->assertDatabaseHas('sizes', ['name' => 'Unico']);
+
+        $this->assertDatabaseHas('sizes', [
+            'name' => 'Unico'
+        ]);
     }
 }
