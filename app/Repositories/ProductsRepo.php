@@ -37,9 +37,7 @@ class ProductsRepo implements InterfaceProducts
         $product->update($request->all());
 
         $product->colors()->sync($request->get('color'));
-
         $product->categories()->sync($request->get('category'));
-
         $product->sizes()->sync($request->get('size'));
 
         $files = $request->file('img');

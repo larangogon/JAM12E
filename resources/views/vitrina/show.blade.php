@@ -21,7 +21,6 @@
 <div class="container">
     <div class="content-box-large">
         <div class="panel-heading">
-
             <div class="panel-title">
                 <h2>Nombre del producto: {{ $products->name }}
                     <a href="{{ route('vitrina.index') }}" class="btn btn-success btn-sm btn:hover">Volver</a>

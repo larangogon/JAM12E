@@ -17,6 +17,13 @@ class ProductController extends Controller
     {
         $products = Product::all(['id','name', 'description', 'price', 'stock']);
 
+        foreach ($products as $product) {
+            $product->colors;
+            $product->sizes;
+            $product->categories;
+            $product->imagenes;
+        }
+
         return response()->json($products,  200);
     }
 
@@ -28,11 +35,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Product::create($request->all());
-        return response()->json([
-            'status' => ($response) ? 'created' : 'failed'
-        ],  200);
+        $product = Product::create($request->all());
 
+        $product->asignarColor($request->get('color'));
+        $product->asignarCategory($request->get('category'));
+        $product->asignarSize($request->get('size'));
+
+        $files = $request->file('img');
+        $product->asignarImagen($files, $product->id);
+
+
+        return response()->json([
+            'status' => ($product) ? 'created' : 'failed'
+        ],  200);
     }
 
     /**
@@ -43,9 +58,17 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $products = Product::find($id);
+        $product = Product::find($id,[
+            'id','name', 'description', 'price', 'stock'
+        ]);
 
-        return response()->json($products,  200);
+        $product->colors;
+        $product->categories;
+        $product->sizes;
+        $product->imagenes;
+
+
+        return response()->json($product, 200);
     }
 
     /**
@@ -57,9 +80,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = Product::update($request->find($id));
+        $product = Product::update($request->find($id));
+
+        $product->colors()->sync($request->get('color'));
+        $product->categories()->sync($request->get('category'));
+        $product->sizes()->sync($request->get('size'));
+
+        $files = $request->file('img');
+        $product->asignarImagen($files, $product->id);
+
         return response()->json([
-            'status' => ($response) ? 'updated' : 'failed'
+            'status' => ($product) ? 'updated' : 'failed'
         ],  200);
     }
 
