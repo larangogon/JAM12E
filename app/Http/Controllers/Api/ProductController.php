@@ -5,12 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemCreateRequest;
 use App\Http\Requests\ItemUpdateRequest;
-use Illuminate\Http\Request;
 use App\Product;
 
 class ProductController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('Status');
@@ -32,7 +30,7 @@ class ProductController extends Controller
             $product->imagenes;
         }
 
-        return response()->json(['lista de procustos', $products],  200);
+        return response()->json(['lista de procustos', $products], 200);
     }
 
     /**
@@ -55,7 +53,7 @@ class ProductController extends Controller
 
         return response()->json([
             'status' => ($product) ? 'created' : 'failed'
-        ],  200);
+        ], 200);
     }
 
     /**
@@ -66,11 +64,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id,[
+        $product = Product::find($id, [
             'id','name', 'description', 'price', 'stock'
         ]);
 
-        if(!$product){
+        if (!$product) {
             return response()
                 ->json('no se encontro el producto con este id', 404);
         }
@@ -95,7 +93,7 @@ class ProductController extends Controller
     {
         $product->update($request->all());
 
-        if(!$product){
+        if (!$product) {
             return response()
                 ->json('no se encontro el producto con este id', 404);
         }
@@ -109,7 +107,7 @@ class ProductController extends Controller
 
         return response()->json([
             'status' => ($product) ? 'updated' : 'failed'
-        ],  200);
+        ], 200);
     }
 
     /**
@@ -122,7 +120,7 @@ class ProductController extends Controller
     {
         $product = Product::destroy($id);
 
-        if(!$product){
+        if (!$product) {
             return response()
                 ->json('no se encontro el producto con este id', 404);
         }

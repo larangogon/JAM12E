@@ -20,10 +20,9 @@ Route::group(['prefix' => 'auth'], function () {
 
 
     // Las siguientes rutas además del prefijo requieren que el usuario tenga un token válido
-    Route::group(['middleware' => 'auth:api'], function() {
+    Route::group(['middleware' => 'auth:api'], function () {
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
         Route::apiResource('product', 'Api\ProductController');
     });
 });
-
