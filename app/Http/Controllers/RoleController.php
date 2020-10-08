@@ -23,6 +23,7 @@ class RoleController extends Controller
         $this->middleware('auth');
         $this->middleware('Status');
         $this->middleware('verified');
+        $this->middleware('role:Administrator');
     }
 
     /**
