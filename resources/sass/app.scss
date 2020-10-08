@@ -1,1 +1,131 @@
-//
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.list-group-scr{
+    max-height: 150px;
+    margin-bottom: 5px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.img {
+    transition: transform 1s;
+}
+
+.img:hover {
+    transform: scale(2);
+}
+
+.btn {
+    transition: transform 1s;
+}
+
+.btn:hover {
+    transform: translate(10px, 10px);
+}
+
+.main-footer {
+    background: url(dist/img/d16a267848036a50c0cd2bebe2ef8ff7.jpg);
+}
+
+
+.dropdown-item{
+    background: black;
+}
+
+.btn-dark {
+    background: black;
+}
+
+.btn-dark {
+    border-color: black;
+}
+
+.sidebar {
+    background: url(dist/img/d16a267848036a50c0cd2bebe2ef8ff7.jpg);
+}
+
+.brand-link {
+    background: url(dist/img/2d7922f7574bd895aee3fa8ad5cb5e0e.jpg);
+}
+
+.main-header navbar navbar-expand navbar-white navbar-light {
+    background: url(dist/img/2d7922f7574bd895aee3fa8ad5cb5e0e.jpg);
+}
+
+.btn-primary{
+    background:blue;
+}
+
+.btn-success {
+    background: green;
+}
+
+.btn-danger{
+    background: red;
+}
+
+html, body {
+    background:url(dist/img/galactic_outflows_410_410.jpg);
+    color:black ;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.title {
+    font-size: 84px;
+}
+
+
+.btn-primary {
+    color: #fff;
+    border-color: #3490dc;
+}
+
+.btn-danger {
+    color: #fff;
+    border-color: #e3342f;
+}
+
+.btn-dark {
+    color: #fff;
+    border-color: #fff;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
