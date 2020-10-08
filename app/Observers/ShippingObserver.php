@@ -6,7 +6,7 @@ class ShippingObserver
 {
     public function created($shipping)
     {
-        logger()->info(
+        logger()->channel('stack')->info(
             'se ha registrado un nuevo recipient_shipping',
             [
                 'name_recipient' => $shipping->name_recipient,
@@ -20,7 +20,7 @@ class ShippingObserver
 
     public function updated($shipping)
     {
-        logger()->info(
+        logger()->channel('stack')->info(
             'se ha editado recipient_shipping',
             [
                 'name_recipient' => $shipping->name_recipient,

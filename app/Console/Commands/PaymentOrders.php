@@ -40,7 +40,7 @@ class PaymentOrders extends Command
      */
     public function handle(Payment $payment)
     {
-        logger()->info('se han actualizado los pagos p2p');
+        logger()->channel('stack')->info('se han actualizado los pagos p2p');
         $payments = Payment::where('status', 'PENDING')->get();
 
         foreach ($payments as $payment) {
