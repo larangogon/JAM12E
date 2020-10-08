@@ -79,6 +79,11 @@ class CartController extends Controller
         ]);
     }
 
+    /**
+     * @param CartUpdateRequest $request
+     * @param int $id
+     * @return RedirectResponse
+     */
     public function update(CartUpdateRequest $request, int $id): RedirectResponse
     {
         $this->carts->update($request, $id);

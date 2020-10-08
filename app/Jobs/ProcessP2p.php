@@ -4,9 +4,7 @@ namespace App\Jobs;
 
 use App\Constants\PlaceToPay;
 use App\Order;
-use App\Payment;
 use App\Decorators\DecoratorOrder;
-use App\Repositories\OrdersRepo;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -19,10 +17,10 @@ class ProcessP2p implements ShouldQueue
 
     protected $payment;
     protected $order;
+
     /**
-     * Create a new job instance.
-     *
-     * @return void
+     * ProcessP2p constructor.
+     * @param Order $order
      */
     public function __construct(Order $order)
     {
@@ -30,9 +28,8 @@ class ProcessP2p implements ShouldQueue
     }
 
     /**
-     * Execute the job.
-     *
-     * @return void
+     * @param DecoratorOrder $orderD
+     * @throws \Exception
      */
     public function handle(DecoratorOrder $orderD)
     {

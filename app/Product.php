@@ -160,14 +160,6 @@ class Product extends Model
     }
 
     /**
-     * @return HasMany
-     */
-    public function stockproducts(): HasMany
-    {
-        return $this->hasMany('App\Stock');
-    }
-
-    /**
      * @return BelongsToMany
      */
     public function carts(): BelongsToMany

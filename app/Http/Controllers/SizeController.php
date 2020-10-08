@@ -22,6 +22,7 @@ class SizeController extends Controller
         $this->middleware('verified');
         $this->middleware('Status');
         $this->sizes = $sizes;
+        $this->middleware('role:Administrator');
     }
 
     /**
