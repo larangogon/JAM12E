@@ -80,8 +80,10 @@ class OrderController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Request $request
+     * @param Order $order
      * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Request $request, Order $order): View
     {
@@ -155,16 +157,5 @@ class OrderController extends Controller
     public function complete(Request $request): RedirectResponse
     {
         return $this->orders->complete($request);
-    }
-
-    /**
-     * @param  Request  $request
-     * @param  int  $orderId
-     * @return Response
-     */
-    public function ship(Request $request, int $orderId)
-    {
-        $order = Order::findOrFail($orderId);
-        Mail::to($request->user())->send(new Shipping($order));
     }
 }

@@ -139,8 +139,8 @@ class ProductsController extends Controller
     }
 
     /**
-     * @param integer $id
-     * @param integer $bid
+     * @param int $imagen_id
+     * @param int $product_id
      * @return RedirectResponse
      */
     public function destroyimagen(int $imagen_id, int $product_id): RedirectResponse

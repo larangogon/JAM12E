@@ -22,12 +22,4 @@ class NosotrosController extends Controller
     {
         return view('nosotros.index');
     }
-
-    /**
-     * @return View
-     */
-    public function message()
-    {
-        //
-    }
 }

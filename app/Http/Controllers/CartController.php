@@ -51,7 +51,6 @@ class CartController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return RedirectResponse
      */
     public function remove(): RedirectResponse
