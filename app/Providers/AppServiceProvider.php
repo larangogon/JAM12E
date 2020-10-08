@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Constants\PlaceToPay;
-use Illuminate\Http\Request;
 use App\Decorators\DecoratorRol;
 use App\Decorators\DecoratorCart;
 use App\Decorators\DecoratorSize;
