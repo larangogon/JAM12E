@@ -31,7 +31,9 @@ class SizeController extends Controller
     {
         $sizes = Size::all(['id','name']);
 
-        return view('sizes.index', ['sizes' => $sizes]);
+        return view('sizes.index', [
+            'sizes' => $sizes
+        ]);
     }
 
     /**

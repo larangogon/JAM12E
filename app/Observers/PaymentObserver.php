@@ -22,10 +22,14 @@ class PaymentObserver
 
         $order->save();
 
-        logger()->info('se ha editado un pago', ['status' => $payment->status]);
+        logger()->info('se ha editado un pago', [
+            'status' => $payment->status
+        ]);
     }
     public function created($payment)
     {
-        logger()->info('se ha creado un pago', ['status' => $payment->status]);
+        logger()->info('se ha creado un pago', [
+            'status' => $payment->status
+        ]);
     }
 }

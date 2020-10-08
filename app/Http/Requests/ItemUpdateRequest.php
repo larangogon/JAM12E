@@ -26,8 +26,8 @@ class ItemUpdateRequest extends FormRequest
         return [
             'name' => 'required|max:25',
             'stock' => 'required|integer|min:0',
-            'color' => ['required', 'array'],
-            'size' => ['required', 'array'],
+            'color' => ['required'],
+            'size' => ['required'],
         ];
     }
 }

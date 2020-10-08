@@ -32,7 +32,9 @@ class CartController extends Controller
      */
     public function show(): view
     {
-        return view('cart.show', ['cart' => Auth::user()->cart]);
+        return view('cart.show', [
+            'cart' => Auth::user()->cart
+        ]);
     }
 
     /**
@@ -43,7 +45,9 @@ class CartController extends Controller
     {
         $this->carts->add($request);
 
-        return redirect()->back()->with('success', 'product added to cart succesfully');
+        return redirect()
+            ->back()
+            ->with('success', 'product added to cart succesfully');
     }
 
     /**
@@ -54,7 +58,10 @@ class CartController extends Controller
     {
         $this->carts->remove();
 
-        return redirect()->route("cart.show", ['cart' => Auth::user()->cart]);
+        return redirect()
+            ->route("cart.show", [
+                'cart' => Auth::user()->cart
+            ]);
     }
 
     /**
@@ -67,7 +74,9 @@ class CartController extends Controller
 
         Session::flash('message', 'Eliminado Satisfactoriamente !');
 
-        return redirect()->route("cart.show", ['cart' => Auth::user()->cart]);
+        return redirect()->route("cart.show", [
+            'cart' => Auth::user()->cart
+        ]);
     }
 
     public function update(CartUpdateRequest $request, int $id): RedirectResponse
@@ -76,6 +85,8 @@ class CartController extends Controller
 
         Session::flash('message', 'Actualizado Satisfactoriamente !');
 
-        return redirect()->route("cart.show", ['cart' => Auth::user()->cart]);
+        return redirect()->route("cart.show", [
+            'cart' => Auth::user()->cart
+        ]);
     }
 }

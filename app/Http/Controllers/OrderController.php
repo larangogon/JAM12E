@@ -44,7 +44,10 @@ class OrderController extends Controller
                         ->orderBy('id', 'asc')
                         ->paginate(6);
 
-        return view('orders.index', ['orders' => $orders, 'search' => $query]);
+        return view('orders.index', [
+            'orders' => $orders,
+            'search' => $query
+        ]);
     }
 
     /**
@@ -53,7 +56,9 @@ class OrderController extends Controller
      */
     public function create(Request $request): View
     {
-        return view('orders.create', ['cart' => Auth::user()->cart]);
+        return view('orders.create', [
+            'cart' => Auth::user()->cart
+        ]);
     }
 
     /**
@@ -84,7 +89,9 @@ class OrderController extends Controller
 
         $order = $this->orders->update($request, $order->id);
 
-        return view('orders.show', ['order' => $order]);
+        return view('orders.show', [
+            'order' => $order
+        ]);
     }
 
     /**
@@ -94,8 +101,13 @@ class OrderController extends Controller
      */
     public function showv(User $user): View
     {
-        $this->authorize('ownerIndex', [Order::class, $user->id]);
-        return view('orders.showv', ['orders' => $user->orders]);
+        $this->authorize('ownerIndex', [
+            Order::class, $user->id
+        ]);
+
+        return view('orders.showv', [
+            'orders' => $user->orders
+        ]);
     }
 
     /**
@@ -107,6 +119,7 @@ class OrderController extends Controller
         $orders = Order::findOrFail($order_id);
 
         $state = $orders->shippingStatus;
+
         $orders->shippingStatus = !$state;
 
         $orders->update();

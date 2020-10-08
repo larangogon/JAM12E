@@ -29,9 +29,9 @@ class ItemCreateRequest extends FormRequest
             'stock' => 'required|numeric',
             'price' => 'required|numeric',
             'img' => 'required',
-            'color' => ['required','array'],
-            'category'=> ['required','array'],
-            'size' => ['required', 'array'],
+            'color' => ['required'],
+            'category'=> ['required'],
+            'size' => ['required'],
         ];
     }
 }

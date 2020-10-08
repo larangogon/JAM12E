@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\User;
-use App\Cart;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceUsers;
@@ -41,7 +40,10 @@ class UserController extends Controller
                     ->orderBy('id', 'asc')
                     ->paginate(6);
 
-        return view('users.index', ['users' => $users, 'search' => $query]);
+        return view('users.index', [
+            'users'  => $users,
+            'search' => $query
+        ]);
     }
 
     /**
@@ -50,7 +52,9 @@ class UserController extends Controller
      */
     public function show(int $id): View
     {
-        return view('users.show', ['user' => User::findOrFail($id)]);
+        return view('users.show', [
+            'user' => User::findOrFail($id)
+        ]);
     }
 
     /**
@@ -62,7 +66,10 @@ class UserController extends Controller
         $user  = User::findOrFail($id);
         $roles = Role::all(['id', 'name']);
 
-        return view('users.edit', ['user' => $user, 'roles' => $roles]);
+        return view('users.edit', [
+            'user'  => $user,
+            'roles' => $roles
+        ]);
     }
 
     /**

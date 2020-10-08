@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Size;
-use App\Color;
 use App\Product;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -40,7 +38,7 @@ class VitrinaController extends Controller
                 ->category($category)
                 ->active()
                 ->search($search)
-                ->paginate(20)
+                ->paginate(12)
         ]);
     }
 

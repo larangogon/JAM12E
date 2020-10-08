@@ -2,22 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Role;
 use App\User;
 use App\Interfaces\InterfaceUsers;
 use App\Http\Requests\UserEditFormRequest;
 
 class UsersRepo implements InterfaceUsers
 {
-    /**
-     * @param int $id
-     */
-    public function edit(int $id): Void
-    {
-        $user  = User::findOrFail($id);
-        $roles = Role::all();
-    }
-
     /**
      * @param UserEditFormRequest $request
      * @param int $id

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
 use App\Shipping;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;

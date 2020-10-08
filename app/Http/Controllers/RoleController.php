@@ -9,8 +9,6 @@ use\Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-;
-
 class RoleController extends Controller
 {
     protected $roles;
@@ -36,7 +34,7 @@ class RoleController extends Controller
         $permissions = Permission::all();
 
         return view('roles.index', [
-            'roles' => $roles,
+            'roles'       => $roles,
             'permissions' => $permissions
         ]);
     }

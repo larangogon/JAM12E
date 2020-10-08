@@ -139,12 +139,12 @@ class DecoratorOrder implements InterfaceOrders
         } elseif ($order->payment->status === PlaceToPay::REJECTED) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
-            $status            = $response->status->status;
-            $message           = $response->status->message;
+            $status  = $response->status->status;
+            $message = $response->status->message;
 
             $order->payment->update([
-                'status'            => $status,
-                "message"           => $message,
+                'status'  => $status,
+                "message" => $message,
             ]);
         }
 
@@ -200,16 +200,16 @@ class DecoratorOrder implements InterfaceOrders
                     "description" => "pruebas p2p",
                     "amount"      => [
                         "currency" => "COP",
-                        "total" => $order->total,
+                        "total"    => $order->total,
                     ],
 
                     "allowPartial" => false,
                 ],
 
                 "expiration" => date('c', strtotime('+2 days')),
-                "returnUrl" => route('orders.show', [
-                    'user' => auth()->id(),
-                    'order'=> $order->id
+                "returnUrl"  => route('orders.show', [
+                    'user'   => auth()->id(),
+                    'order'  => $order->id
                 ]),
                 "ipAddress" => "127.0.0.1",
                 "userAgent" => "PlacetoPay Sandbox"
@@ -266,6 +266,7 @@ class DecoratorOrder implements InterfaceOrders
     public function resend(Request $request): RedirectResponse
     {
         $order = Order::find($request->get('order'));
+
         $response = $this->requestP2P('create', $order);
 
         $processUrl = $response->processUrl;
@@ -288,6 +289,7 @@ class DecoratorOrder implements InterfaceOrders
     public function reversePay(Request $request): Void
     {
         $order = Order::find($request->get('order'));
+
         $response = $this->requestP2P('reverse', $order);
 
         $requestId  = $order->payment->requestId;
@@ -314,10 +316,11 @@ class DecoratorOrder implements InterfaceOrders
     public function complete(Request $request): RedirectResponse
     {
         $order = Order::find($request->get('order'));
+
         $response = $this->requestP2P('complete', $order);
 
         $processUrl = $order->payment->processUrl;
-        $requestId = $order->payment->requestId;
+        $requestId  = $order->payment->requestId;
 
         $order->payment->update([
             'processUrl' => $processUrl,

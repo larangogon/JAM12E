@@ -17,21 +17,14 @@ class ProductsRepo implements InterfaceProducts
      */
     public function store(ItemCreateRequest $request): Void
     {
-        $products= new Product();
+        $product = Product::create($request->all());
 
-        $products->name        = $request->name;
-        $products->description = $request->description;
-        $products->price       = $request->price;
-        $products->stock       = $request->stock;
-
-        $products->save();
-
-        $products->asignarColor($request->get('color'));
-        $products->asignarCategory($request->get('category'));
-        $products->asignarSize($request->get('size'));
+        $product->asignarColor($request->get('color'));
+        $product->asignarCategory($request->get('category'));
+        $product->asignarSize($request->get('size'));
 
         $files = $request->file('img');
-        $products->asignarImagen($files, $products->id);
+        $product->asignarImagen($files, $product->id);
     }
 
     /**
@@ -44,16 +37,7 @@ class ProductsRepo implements InterfaceProducts
         $product->update($request->all());
 
         $product->colors()->sync($request->get('color'));
-
-        if ($request->get('category', null)) {
-            $category = $product->categories;
-
-            if (count($category)> 0) {
-                $category_id = $category[0]->id;
-            }
-            $product->categories()->updateExistingPivot($category_id, ['category_id' => $request->get('category')]);
-        }
-
+        $product->categories()->sync($request->get('category'));
         $product->sizes()->sync($request->get('size'));
 
         $files = $request->file('img');
@@ -66,8 +50,6 @@ class ProductsRepo implements InterfaceProducts
      */
     public function destroy(int $id): Void
     {
-        $products = Product::find($id);
-
         Product::destroy($id);
     }
 
