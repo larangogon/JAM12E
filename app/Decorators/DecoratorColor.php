@@ -22,9 +22,9 @@ class DecoratorColor implements InterfaceColors
 
     /**
      * @param Request $request
-     * @return mixed|void
+     * @return void
      */
-    public function store(Request $request): Void
+    public function store(Request $request): void
     {
         $this->colorsRepo->store($request);
 

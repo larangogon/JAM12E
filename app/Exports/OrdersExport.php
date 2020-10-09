@@ -10,6 +10,9 @@ class OrdersExport implements FromQuery
 {
     use Exportable;
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
+     */
     public function query()
     {
         return Order::query()->where('status', 'APPROVED');

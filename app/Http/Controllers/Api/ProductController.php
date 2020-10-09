@@ -6,20 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemCreateRequest;
 use App\Http\Requests\ItemUpdateRequest;
 use App\Product;
+use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
+    /**
+     * ProductController constructor.
+     */
     public function __construct()
     {
         $this->middleware('Status');
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $products = Product::all(['id','name', 'description', 'price', 'stock']);
 
@@ -34,12 +36,10 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ItemCreateRequest $request
+     * @return JsonResponse
      */
-    public function store(ItemCreateRequest $request)
+    public function store(ItemCreateRequest $request): JsonResponse
     {
         $product = Product::create($request->all());
 
@@ -57,12 +57,10 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
         $product = Product::find($id, [
             'id','name', 'description', 'price', 'stock'
@@ -83,13 +81,11 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param ItemUpdateRequest $request
+     * @param Product $product
+     * @return JsonResponse
      */
-    public function update(ItemUpdateRequest $request, Product $product)
+    public function update(ItemUpdateRequest $request, Product $product): JsonResponse
     {
         $product->update($request->all());
 
@@ -111,12 +107,10 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $product = Product::destroy($id);
 

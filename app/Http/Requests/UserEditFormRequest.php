@@ -24,11 +24,11 @@ class UserEditFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:30',
-            'phone' => 'required',
-            'cellphone'=> 'required',
-            'document'=> 'required',
-            'address'=> 'required',
+            'name'      => 'required|min:2|max:30',
+            'phone'     => 'required',
+            'cellphone' => 'required',
+            'document'  => 'required',
+            'address'   => 'required'
         ];
     }
 }

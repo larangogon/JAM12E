@@ -24,7 +24,7 @@ class CartUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'stock' => 'required|numeric',
+            'stock' => 'required|numeric'
         ];
     }
 }

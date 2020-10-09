@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e83a0f81b9dd96d7b4479a8d2d7523e",
+    "content-hash": "0de71ceb043995b0335f4c797fe579bd",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3848,20 +3848,20 @@
         },
         {
             "name": "rap2hpoutre/laravel-log-viewer",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rap2hpoutre/laravel-log-viewer.git",
-                "reference": "02023f590b84d11be8716a8c07146c128f9e7b42"
+                "reference": "27392d29234b6ff38a456454558f4bcc40cc837a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/02023f590b84d11be8716a8c07146c128f9e7b42",
-                "reference": "02023f590b84d11be8716a8c07146c128f9e7b42",
+                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/27392d29234b6ff38a456454558f4bcc40cc837a",
+                "reference": "27392d29234b6ff38a456454558f4bcc40cc837a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "4.2.*|5.*|^6.0|^7.0",
+                "illuminate/support": "4.2.*|5.*|^6.0|^7.0|^8.0",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -3903,7 +3903,7 @@
                 "logging",
                 "lumen"
             ],
-            "time": "2020-04-27T06:40:08+00:00"
+            "time": "2020-09-08T12:21:27+00:00"
         },
         {
             "name": "spatie/laravel-permission",

@@ -22,9 +22,9 @@ class DecoratorSize implements InterfaceSizes
 
     /**
      * @param Request $request
-     * @return mixed|void
+     * @return void
      */
-    public function store(Request $request): Void
+    public function store(Request $request): void
     {
         $this->sizesRepo->store($request);
 

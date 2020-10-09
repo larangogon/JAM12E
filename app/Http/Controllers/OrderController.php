@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Shipping;
 use App\User;
 use App\Order;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Constants\PaceToPay;
@@ -80,8 +78,10 @@ class OrderController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Request $request
+     * @param Order $order
      * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Request $request, Order $order): View
     {
@@ -111,12 +111,12 @@ class OrderController extends Controller
     }
 
     /**
-     * @param int $order_id
+     * @param int $id
      * @return RedirectResponse
      */
-    public function shippingStatus(int $order_id):RedirectResponse
+    public function shippingStatus(int $id): RedirectResponse
     {
-        $orders = Order::findOrFail($order_id);
+        $orders = Order::findOrFail($id);
 
         $state = $orders->shippingStatus;
 
@@ -141,11 +141,10 @@ class OrderController extends Controller
      */
     public function reversePay(Request $request): RedirectResponse
     {
-        $order = $this->orders->reversePay($request);
+        $this->orders->reversePay($request);
 
-        Session::flash('message', ' el pago se  ha revertido exitosamente!');
-
-        return redirect('vitrina');
+        return redirect('vitrina')
+            ->with('success', ' el pago se  ha revertido exitosamente!');
     }
 
     /**
@@ -155,16 +154,5 @@ class OrderController extends Controller
     public function complete(Request $request): RedirectResponse
     {
         return $this->orders->complete($request);
-    }
-
-    /**
-     * @param  Request  $request
-     * @param  int  $orderId
-     * @return Response
-     */
-    public function ship(Request $request, int $orderId)
-    {
-        $order = Order::findOrFail($orderId);
-        Mail::to($request->user())->send(new Shipping($order));
     }
 }

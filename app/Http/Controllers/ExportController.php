@@ -6,29 +6,30 @@ use App\Exports\OrdersExport;
 use App\Exports\ProdustsExport;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExportController extends Controller
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      */
-    public function exportUsers()
+    public function exportUsers(): BinaryFileResponse
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      */
-    public function exportProducts()
+    public function exportProducts(): BinaryFileResponse
     {
         return Excel::download(new ProdustsExport, 'products.xlsx');
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      */
-    public function exportOrders()
+    public function exportOrders(): BinaryFileResponse
     {
         return Excel::download(new OrdersExport, 'orders.xlsx');
     }

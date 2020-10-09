@@ -17,7 +17,7 @@ class Shipping extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function order(): BelongsTo
     {

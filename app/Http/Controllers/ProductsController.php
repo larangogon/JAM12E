@@ -78,7 +78,7 @@ class ProductsController extends Controller
         $this->products->store($request);
 
         return redirect('/products')
-            ->with('message', 'Guardado Satisfactoriamente !');
+            ->with('success', 'producto Creado Satisfactoriamente');
     }
 
     /**
@@ -120,9 +120,8 @@ class ProductsController extends Controller
     {
         $this->products->update($request, $product);
 
-        Session::flash('message', ' producto Editado Satisfactoriamente !');
-
-        return redirect('/products');
+        return redirect('/products')
+            ->with('success', 'producto Editado Satisfactoriamente');
     }
 
     /**
@@ -133,23 +132,21 @@ class ProductsController extends Controller
     {
         $this->products->destroy($id);
 
-        Session::flash('message', 'Eliminado Satisfactoriamente !');
-
-        return Redirect('/products');
+        return Redirect('/products')
+            ->with('success', 'Eliminado Satisfactoriamente !');
     }
 
     /**
-     * @param integer $id
-     * @param integer $bid
+     * @param int $id
+     * @param Product $product
      * @return RedirectResponse
      */
-    public function destroyimagen(int $imagen_id, int $product_id): RedirectResponse
+    public function destroyimagen(int $id, Product $product): RedirectResponse
     {
-        $this->products->destroyimagen($imagen_id, $product_id);
+        $this->products->destroyimagen($id, $product);
 
-        Session::flash('message', 'Imagen Eliminada Satisfactoriamente !');
-
-        return redirect("products/edit/{$product_id}");
+        return redirect()->back()
+            ->with('success', 'Imagen Eliminada Satisfactoriamente !');
     }
 
     /**

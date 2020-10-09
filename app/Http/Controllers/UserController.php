@@ -86,7 +86,7 @@ class UserController extends Controller
     }
 
     /**
-     * @param [type] $id
+     * @param int $id
      * @return RedirectResponse
      */
     public function active(int $id): RedirectResponse

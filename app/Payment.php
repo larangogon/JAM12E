@@ -17,7 +17,7 @@ class Payment extends Model
     protected $table = 'payments';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function order(): BelongsTo
     {

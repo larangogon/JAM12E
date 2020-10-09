@@ -25,9 +25,9 @@ class DecoratorCart implements InterfaceCarts
 
     /**
      * @param CartAddRequest $request
-     * @return mixed|void
+     * @return void
      */
-    public function add(CartAddRequest $request): Void
+    public function add(CartAddRequest $request): void
     {
         $this->cartsRepo->add($request);
 
@@ -45,18 +45,18 @@ class DecoratorCart implements InterfaceCarts
     }
 
     /**
-     * @return mixed|void
+     * @return void
      */
-    public function remove(): Void
+    public function remove(): void
     {
         Auth::user()->cart->products()->detach(null);
     }
 
     /**
      * @param Request $request
-     * @return mixed|void
+     * @return void
      */
-    public function destroy(Request $request): Void
+    public function destroy(Request $request): void
     {
         $pivot_id  = ($request->get('id'));
         $item_cart = InCart::find($pivot_id);
@@ -67,9 +67,9 @@ class DecoratorCart implements InterfaceCarts
     /**
      * @param CartUpdateRequest $request
      * @param int $id
-     * @return Void
+     * @return void
      */
-    public function update(CartUpdateRequest $request, int $id): Void
+    public function update(CartUpdateRequest $request, int $id): void
     {
         $this->cartsRepo->update($request, $id);
 

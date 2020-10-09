@@ -32,9 +32,9 @@
                     @if ( !empty ( $products->imagenes) )
                         <span>Imagen(es) Actual(es): </span>
                         <br>
-                        @if(Session::has('message'))
-                            <div class="alert-default-primary" role="alert">
-                                {{ Session::get('message') }}
+                        @if (session('success'))
+                            <div class="alert-default-success" role="alert">
+                                <p>{{session('success')}}</p>
                             </div>
                         @endif
                             @foreach($products->imagenes as $img)

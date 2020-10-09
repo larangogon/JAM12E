@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function signup(Request $request)
     {
         $request->validate([
@@ -25,6 +29,10 @@ class AuthController extends Controller
             'message' => 'Successfully created user!'], 201);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         $request->validate([
@@ -54,6 +62,10 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
@@ -61,6 +73,10 @@ class AuthController extends Controller
             'Successfully logged out']);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function user(Request $request)
     {
         return response()->json($request->user());

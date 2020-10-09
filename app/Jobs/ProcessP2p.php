@@ -13,7 +13,10 @@ use Illuminate\Queue\SerializesModels;
 
 class ProcessP2p implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected $payment;
     protected $order;

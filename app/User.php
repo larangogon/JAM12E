@@ -14,8 +14,8 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasApiTokens;
-
+    use Notifiable;
+    use HasApiTokens;
     use HasRoles;
 
     /**
@@ -56,7 +56,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * @param $role
      */
-    public function asignarRol($role): Void
+    public function asignarRol($role): void
     {
         $this->roles()->sync($role, false);
     }

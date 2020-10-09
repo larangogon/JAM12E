@@ -39,8 +39,6 @@ class OrderShipped extends Mailable
     {
         return $this->from('johannitaarango2@gmail.com')
             ->view('emails.orders.shipped')
-            ->with([
-            'order' => $this->order->total,
-            ]);
+            ->with(['order' => $this->order->total]);
     }
 }

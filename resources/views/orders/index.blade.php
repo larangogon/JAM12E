@@ -18,6 +18,19 @@
             }
         }
     </script>
+    <script type="text/javascript">
+        function confirmarCancelar() {
+            var x = confirm("Estas seguro de Eliminar la orden y revertir el pago?");
+            if (x==true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    </script>
 
     <h2>
         Ordenes
@@ -57,6 +70,9 @@
                     <th scope="col">
                         Envio
                     </th>
+                    <th scope="col">
+                        Cancelar pago
+                    </th>
                 </tr>
               </thead>
               <tbody>
@@ -92,6 +108,15 @@
                                               {{$order->shippingStatus ?  'enviado' : 'pendiente_shipping'}}
                                           </button>
                                       </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{route('orders.reversePay')}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="order" value="{{$order->id}}">
+                                            <button class="btn btn-sm btn-danger" onclick="return confirmarCancelar()" type="submit" >
+                                                Cancelar pago
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @break

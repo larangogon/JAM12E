@@ -13,7 +13,7 @@ class UsersRepo implements InterfaceUsers
      * @param int $id
      * @return mixed|void
      */
-    public function update(UserEditFormRequest $request, int $id): Void
+    public function update(UserEditFormRequest $request, int $id): void
     {
         $usuario = User::findOrFail($id);
 
@@ -26,7 +26,7 @@ class UsersRepo implements InterfaceUsers
      * @param int $id
      * @return mixed|void
      */
-    public function active(int $id): Void
+    public function active(int $id): void
     {
         $user = User::findOrFail($id);
 

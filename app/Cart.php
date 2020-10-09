@@ -12,7 +12,7 @@ class Cart extends Model
     /**
      * @return BelongsToMany
      */
-    public function products():BelongsToMany
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany('App\Product', 'in_carts')
             ->using(InCart::class)

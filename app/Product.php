@@ -25,7 +25,7 @@ class Product extends Model
      * @param array|null $files
      * @param int $product_id
      */
-    public function asignarImagen(?array $files, int $product_id): Void
+    public function asignarImagen(?array $files, int $product_id)
     {
         if (!$files) {
             return;

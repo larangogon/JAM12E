@@ -24,9 +24,8 @@ class DecoratorProduct implements InterfaceProducts
 
     /**
      * @param ItemCreateRequest $request
-     * @return mixed|void
      */
-    public function store(ItemCreateRequest $request): Void
+    public function store(ItemCreateRequest $request): void
     {
         $this->productsRepo->store($request);
 
@@ -36,9 +35,8 @@ class DecoratorProduct implements InterfaceProducts
     /**
      * @param ItemUpdateRequest $request
      * @param Product $product
-     * @return Void
      */
-    public function update(ItemUpdateRequest $request, Product $product): Void
+    public function update(ItemUpdateRequest $request, Product $product): void
     {
         $this->productsRepo->update($request, $product);
 
@@ -47,9 +45,8 @@ class DecoratorProduct implements InterfaceProducts
 
     /**
      * @param int $id
-     * @return mixed|void
      */
-    public function destroy(int $id): Void
+    public function destroy(int $id): void
     {
         $this->productsRepo->destroy($id);
 
@@ -57,22 +54,20 @@ class DecoratorProduct implements InterfaceProducts
     }
 
     /**
-     * @param int $imagen_id
-     * @param int $product_id
-     * @return mixed|void
+     * @param int $id
+     * @param Product $product
      */
-    public function destroyimagen(int $imagen_id, int $product_id): Void
+    public function destroyimagen(int $id, Product $product): void
     {
-        $this->productsRepo->destroyimagen($imagen_id, $product_id);
+        $this->productsRepo->destroyimagen($id, $product);
 
         Cache::tags('products')->flush();
     }
 
     /**
      * @param int $id
-     * @return mixed|void
      */
-    public function active(int $id): Void
+    public function active(int $id): void
     {
         $this->productsRepo->active($id);
 
