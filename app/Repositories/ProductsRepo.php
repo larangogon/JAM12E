@@ -15,7 +15,7 @@ class ProductsRepo implements InterfaceProducts
      * @param ItemCreateRequest $request
      * @return mixed|void
      */
-    public function store(ItemCreateRequest $request): Void
+    public function store(ItemCreateRequest $request): void
     {
         $product = Product::create($request->all());
 
@@ -32,7 +32,7 @@ class ProductsRepo implements InterfaceProducts
      * @param Product $product
      * @return mixed|void
      */
-    public function update(ItemUpdateRequest $request, Product $product): Void
+    public function update(ItemUpdateRequest $request, Product $product): void
     {
         $product->update($request->all());
 
@@ -48,7 +48,7 @@ class ProductsRepo implements InterfaceProducts
      * @param int $id
      * @return mixed|void
      */
-    public function destroy(int $id): Void
+    public function destroy(int $id): void
     {
         Product::destroy($id);
     }

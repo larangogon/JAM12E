@@ -13,7 +13,7 @@ class CartsRepo implements InterfaceCarts
      * @param CartAddRequest $request
      * @return mixed|void
      */
-    public function add(CartAddRequest $request): Void
+    public function add(CartAddRequest $request): void
     {
         //
     }
@@ -21,7 +21,7 @@ class CartsRepo implements InterfaceCarts
     /**
      * @return mixed|void
      */
-    public function remove(): Void
+    public function remove(): void
     {
         //
     }
@@ -30,7 +30,7 @@ class CartsRepo implements InterfaceCarts
      * @param Request $request
      * @return mixed|void
      */
-    public function destroy(Request $request): Void
+    public function destroy(Request $request): void
     {
         //
     }
@@ -40,7 +40,7 @@ class CartsRepo implements InterfaceCarts
      * @param int $id
      * @return Void
      */
-    public function update(CartUpdateRequest $request, int $id): Void
+    public function update(CartUpdateRequest $request, int $id): void
     {
         //
     }

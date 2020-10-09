@@ -1,17 +1,4 @@
 <div>
-    <script type="text/javascript">
-        function confirmarCancelar() {
-            var x = confirm("Estas seguro de Eliminar la orden y revertir el pago?");
-            if (x==true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    </script>
     @switch($order->status)
         @case('pending_pay')
                 @switch($order->payment->status)
@@ -24,18 +11,6 @@
                         <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
                             Verificar el esado de tu orden
                         </a>
-                        <form action="{{route('orders.resend')}}" method="post">
-                        @csrf
-                            <input type="hidden" name="order" value="{{$order->id}}">
-                            <p>
-                                <small>
-                                    {{__('reintenta tu pago!!')}}
-                                </small>
-                            </p>
-                            <button class="btn btn-block btn-sm btn-primary" type="submit">
-                                Reintentar Pago
-                            </button>
-                        </form>
                     @break
 
                     @case('APPROVED_PARTIAL')
@@ -158,20 +133,7 @@
                                         {{__('Orden en proceso de envio!!')}}
                                     </small>
                                 </p>
-                                <div>
-                                    <h5>
-                                        <small>
-                                            {{__('*Completa los datos de envio!!')}}
-                                        </small>
-                                    </h5>
-                                </div>
-                                <form action="{{route('orders.reversePay')}}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="order" value="{{$order->id}}">
-                                    <button class="btn btn-block btn-sm btn-danger" onclick="return confirmarCancelar()" type="submit" >
-                                        Cancelar pago
-                                    </button>
-                                </form>
+                                @include('orders.modal')
                             @break
                             @case('1')
                                 <h5>
@@ -272,18 +234,6 @@
                     <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
                         Verificar el esado de tu orden
                     </a>
-                   <form action="{{route('orders.resend')}}" method="post">
-                        @csrf
-                        <input type="hidden" name="order" value="{{$order->id}}">
-                        <p>
-                            <small>
-                                {{__('reintenta tu pago!!')}}
-                            </small>
-                        </p>
-                        <button class="btn btn-block btn-sm btn-primary" type="submit" >
-                            Reintentar Pago
-                        </button>
-                    </form>
                 @break
                 @case('APPROVED')
                     <h5>

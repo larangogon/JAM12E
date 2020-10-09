@@ -111,7 +111,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @param int $order_id
+     * @param int $id
      * @return RedirectResponse
      */
     public function shippingStatus(int $id): RedirectResponse

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Decorators;
 
 use Illuminate\Http\Request;

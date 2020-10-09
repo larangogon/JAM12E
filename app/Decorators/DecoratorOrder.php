@@ -111,7 +111,7 @@ class DecoratorOrder implements InterfaceOrders
                 'name'              => $payername,
                 'email'             => $payeremail,
                 'mobile'            => $payermobile,
-                'locale'            => $locale,
+                'locale'            => $locale
             ]);
         } elseif ($order->payment->status === PlaceToPay::REJECTED) {
             $response = $this->requestP2P('getRequestinformation', $order);
@@ -121,7 +121,7 @@ class DecoratorOrder implements InterfaceOrders
 
             $order->payment->update([
                 'status'  => $status,
-                "message" => $message,
+                "message" => $message
             ]);
         } elseif ($order->payment->status === PlaceToPay::APPROVED) {
             $response = $this->requestP2P('getRequestinformation', $order);
@@ -145,7 +145,7 @@ class DecoratorOrder implements InterfaceOrders
                 'name'              => $payername,
                 'email'             => $payeremail,
                 'mobile'            => $payermobile,
-                'locale'            => $locale,
+                'locale'            => $locale
             ]);
         }
 

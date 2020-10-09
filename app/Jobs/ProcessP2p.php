@@ -13,7 +13,10 @@ use Illuminate\Queue\SerializesModels;
 
 class ProcessP2p implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected $payment;
     protected $order;
@@ -56,40 +59,6 @@ class ProcessP2p implements ShouldQueue
                 'email'             => $payeremail,
                 'mobile'            => $payermobile,
                 'locale'            => $locale,
-            ]);
-        } elseif ($this->order->payment->status === PlaceToPay::PENDING) {
-            $response = $orderD->requestP2P('getRequestinformation', $this->order);
-
-            $status             = $response->status->status;
-            $amount             = $response->payment[1]->amount->from->total;
-            $internalReference  = $response->payment[1]->internalReference;
-            $message            = $response->status->message;
-            $payerdocument      = $response->request->payer->document;
-            $payername          = $response->request->payer->name;
-            $payeremail         = $response->request->payer->email;
-            $payermobile        = $response->request->payer->mobile;
-            $locale             = $response->request->locale;
-
-            $this->order->payment->update([
-                'internalReference' => $internalReference,
-                'status'            => $status,
-                "message"           => $message,
-                'amount'            => $amount,
-                'document'          => $payerdocument,
-                'name'              => $payername,
-                'email'             => $payeremail,
-                'mobile'            => $payermobile,
-                'locale'            => $locale,
-            ]);
-        } elseif ($this->order->payment->status === PlaceToPay::REJECTED) {
-            $response = $orderD->requestP2P('getRequestinformation', $this->order);
-
-            $status  = $response->status->status;
-            $message = $response->status->message;
-
-            $this->order->payment->update([
-                'status'  => $status,
-                "message" => $message,
             ]);
         }
     }
