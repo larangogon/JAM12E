@@ -23,13 +23,13 @@ class PaymentObserver
         $order->save();
 
         logger()->channel('stack')->info('se ha editado un pago', [
-            'status' => $payment->status
+            'status' => $payment->status, 'order' => $payment->order,
         ]);
     }
     public function created($payment)
     {
         logger()->channel('stack')->info('se ha creado un pago', [
-            'status' => $payment->status
+            'status' => $payment->status, 'order' => $payment->order,
         ]);
     }
 }

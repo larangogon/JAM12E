@@ -2,13 +2,13 @@
 
 @section('content')
 
-  <div>  
-    @if(Session::has('message'))
-          <div class="alert-default-primary" role="alert">
-              {{ Session::get('message') }}
+  <div>
+      @if (session('success'))
+          <div class="alert-default-success" role="alert">
+              <p>{{session('success')}}</p>
           </div>
-        @endif 
-    @include('vitrina.frm.prt') 
+      @endif
+    @include('vitrina.frm.prt')
   </div>
 
 @endsection

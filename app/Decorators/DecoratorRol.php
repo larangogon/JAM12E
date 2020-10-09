@@ -25,7 +25,7 @@ class DecoratorRol implements InterfaceRoles
      * @param Request $request
      * @return mixed|void
      */
-    public function store(Request $request): Void
+    public function store(Request $request): void
     {
         $this->rolesRepo->store($request);
 

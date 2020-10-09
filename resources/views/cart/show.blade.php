@@ -5,9 +5,9 @@
 @if(count($cart->products))
 
     <div>
-        @if(Session::has('message'))
-            <div class="alert-default-danger" role="alert">
-                {{ Session::get('message') }}
+        @if (session('success'))
+            <div class="alert-default-success" role="alert">
+                <p>{{session('success')}}</p>
             </div>
         @endif
     </div>

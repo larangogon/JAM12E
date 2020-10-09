@@ -15,10 +15,11 @@ class NosotrosController extends Controller
         $this->middleware('Status');
         $this->middleware('verified');
     }
+
     /**
      * @return View
      */
-    public function index() : View
+    public function index(): View
     {
         return view('nosotros.index');
     }

@@ -17,8 +17,6 @@ class PaymentOrders extends Command
     protected $signature = 'payment:orders';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'Actualizar pago consulata de p2p';
@@ -34,13 +32,11 @@ class PaymentOrders extends Command
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return int
+     * @param Payment $payment
      */
     public function handle(Payment $payment)
     {
-        logger()->channel('stack')->info('se han actualizado los pagos p2p');
+        logger()->channel('stack')->info('se han actualizado los pagos pendientes');
         $payments = Payment::where('status', 'PENDING')->get();
 
         foreach ($payments as $payment) {

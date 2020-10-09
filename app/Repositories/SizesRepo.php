@@ -15,7 +15,9 @@ class SizesRepo implements InterfaceSizes
     public function store(Request $request) : Void
     {
         $size = new Size();
+
         $size->name = request('name');
+        
         $size->save();
     }
 }

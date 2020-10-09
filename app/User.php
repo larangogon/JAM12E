@@ -14,8 +14,8 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasApiTokens;
-
+    use Notifiable;
+    use HasApiTokens;
     use HasRoles;
 
     /**

@@ -54,24 +54,23 @@ class ProductsRepo implements InterfaceProducts
     }
 
     /**
-     * @param int $imagen_id
-     * @param int $product_id
-     * @return mixed|void
+     * @param int $id
+     * @param Product $product
      */
-    public function destroyimagen(int $imagen_id, int $product_id): Void
+    public function destroyimagen(int $id, Product $product): void
     {
-        $imagen = Imagen::find($imagen_id);
+        $imagen = Imagen::find($id);
 
-        Storage::delete(public_path('uploads/') . $imagen->name);
+        Storage::delete(public_path('uploads/') . $imagen);
 
         $imagen->delete();
     }
 
     /**
      * @param int $id
-     * @return mixed|void
+     * @return void
      */
-    public function active(int $id): Void
+    public function active(int $id): void
     {
         $products = Product::findOrFail($id);
 

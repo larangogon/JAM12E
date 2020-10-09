@@ -17,11 +17,11 @@
           }
       </script>
       <div class="container">
-        @if(Session::has('message'))
-          <div class="alert-default-primary" role="alert">
-              {{ Session::get('message') }}
-          </div>
-        @endif
+          @if (session('success'))
+              <div class="alert-default-success" role="alert">
+                  <p>{{session('success')}}</p>
+              </div>
+          @endif
         <h2>Producto Creados
             <a href="products/create">
                 <button type="button" class="btn btn-success btn-sm float-right">

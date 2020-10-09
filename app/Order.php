@@ -11,7 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 class Order extends Model
 {
     use HasRoles;
-    
+
     protected $fillable = ['user_id', 'id', 'status', 'total'];
 
     protected $table = 'orders';
@@ -35,7 +35,7 @@ class Order extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function payment(): HasOne
     {
@@ -53,7 +53,7 @@ class Order extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function shipping(): HasOne
     {

@@ -18,11 +18,11 @@ class ColorController extends Controller
      */
     public function __construct(InterfaceColors $colors)
     {
+        $this->colors = $colors;
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('Status');
         $this->middleware('role:Administrator');
-        $this->colors = $colors;
     }
 
     /**

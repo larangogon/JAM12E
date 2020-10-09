@@ -25,7 +25,7 @@ class DecoratorUser implements InterfaceUsers
      * @param int $id
      * @return mixed|void
      */
-    public function update(UserEditFormRequest $request, int $id): Void
+    public function update(UserEditFormRequest $request, int $id): void
     {
         $this->usersRepo->update($request, $id);
 
@@ -34,9 +34,9 @@ class DecoratorUser implements InterfaceUsers
 
     /**
      * @param int $id
-     * @return mixed|void
+     * @return void
      */
-    public function active(int $id): Void
+    public function active(int $id): void
     {
         $this->usersRepo->active($id);
 

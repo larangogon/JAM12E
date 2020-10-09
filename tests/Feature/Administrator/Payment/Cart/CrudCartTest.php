@@ -52,7 +52,6 @@ class CrudCartTest extends TestCase
 
     public function testHome(): void
     {
-        $this->withoutMiddleware();
         $response = $this->actingAs($this->user)
             ->get(route(
                 'home',
@@ -141,9 +140,9 @@ class CrudCartTest extends TestCase
             ->put(route('cart.update', $this->user->cart->products->id), [
                 'id'         => 1,
                 'stock'      => '5',
-                'product_id' => $this->product->id = 3,
-                'color_id'   => $this->color->id = 3,
-                'size_id'    => $this->size->id = 3,
+                'product_id' => $this->product->id,
+                'color_id'   => $this->color->id,
+                'size_id'    => $this->size->id,
                 'cart_id'    => $this->user->cart->id,
         ]);
 
@@ -152,9 +151,9 @@ class CrudCartTest extends TestCase
 
         $this->assertDatabaseHas('in_carts', [
             'stock'      => '5',
-            'product_id' => $this->product->id = 3,
-            'color_id'   => $this->color->id = 3,
-            'size_id'    => $this->size->id = 3,
+            'product_id' => $this->product->id,
+            'color_id'   => $this->color->id,
+            'size_id'    => $this->size->id,
             'cart_id'    => $this->user->cart->id,
         ]);
     }

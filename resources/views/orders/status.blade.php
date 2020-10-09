@@ -201,7 +201,7 @@
                     @case('REJECTED')
                         <h5>
                             <small>
-                                {{__('El estado de tu pago esta Pendiente')}}
+                                {{__('El estado de tu pago esta rechazado')}}
                             </small>
                         </h5>
                         <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">

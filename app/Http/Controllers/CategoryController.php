@@ -12,13 +12,17 @@ class CategoryController extends Controller
 {
     protected $categories;
 
+    /**
+     * CategoryController constructor.
+     * @param InterfaceCategories $categories
+     */
     public function __construct(InterfaceCategories $categories)
     {
+        $this->categories = $categories;
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('Status');
         $this->middleware('role:Administrator');
-        $this->categories = $categories;
     }
 
     /**
