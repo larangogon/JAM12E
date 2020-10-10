@@ -52,7 +52,16 @@ class ProductController extends Controller
 
 
         return response()->json([
-            'status' => ($product) ? 'created' : 'failed'
+            'status' => ($product) ? 'created' : 'failed',[
+                'productoId'  => $product->id,
+                'name'        => $product->name,
+                'price'       => $product->price,
+                'stock'       => $product->stock,
+                'description' => $product->description,
+                'color'       => $product->colors,
+                'category'    => $product->categories,
+                'size'        => $product->sizes
+            ]
         ], 200);
     }
 
@@ -102,7 +111,16 @@ class ProductController extends Controller
         $product->asignarImagen($files, $product->id);
 
         return response()->json([
-            'status' => ($product) ? 'updated' : 'failed'
+            'status' => ($product) ? 'updated' : 'failed',[
+                'productoId'  => $product->id,
+                'name'        => $product->name,
+                'price'       => $product->price,
+                'stock'       => $product->stock,
+                'description' => $product->description,
+                'color'       => $product->colors,
+                'category'    => $product->categories,
+                'size'        => $product->sizes
+            ]
         ], 200);
     }
 
@@ -120,7 +138,9 @@ class ProductController extends Controller
         }
 
         return response()->json([
-            'status' => ($product) ? 'deleted' : 'failed'
+            'status' => ($product) ? 'deleted' : 'failed',
+                'se ha eliminado el producto exitosamente'
+
         ]);
     }
 }
