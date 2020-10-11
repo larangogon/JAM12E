@@ -27,9 +27,9 @@ class ProductsController extends Controller
     {
         $this->products = $products;
         $this->middleware('auth');
-        $this->middleware('role:Administrator');
         $this->middleware('Status');
         $this->middleware('verified');
+        $this->middleware('role:Administrator');
     }
 
     /**

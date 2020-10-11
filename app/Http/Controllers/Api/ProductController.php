@@ -7,6 +7,7 @@ use App\Http\Requests\ApiStoreRequest;
 use App\Http\Requests\ApiUpdateRequest;
 use App\Product;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -21,9 +22,13 @@ class ProductController extends Controller
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $products = Product::all(['id','name', 'description', 'price', 'stock']);
+        $query    = trim($request->get('search'));
+        $products = Product::where('name', 'LIKE', '%' . $query . '%')
+            ->orwhere('id', 'LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            ->paginate(2);
 
         foreach ($products as $product) {
             $product->colors;
@@ -32,7 +37,7 @@ class ProductController extends Controller
             $product->imagenes;
         }
 
-        return response()->json(['lista de procustos', $products], 200);
+        return response()->json(['lista de procustos', $products, 'search',$query], 200);
     }
 
     /**
