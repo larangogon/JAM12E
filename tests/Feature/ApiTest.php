@@ -79,7 +79,8 @@ class ApiTest extends TestCase
         $this->withoutExceptionHandling();
         $this->seed([
             \ColorSeeder::class,
-            \SizeSeeder::class
+            \SizeSeeder::class,
+            \CategorySeeder::class
         ]);
         $product = Product::create([
             'name'        => 'nameApi',
@@ -93,7 +94,8 @@ class ApiTest extends TestCase
                 'name'  => 'nameupApi',
                 'stock' => $product->stock,
                 'color' => [Color::all()->random()->id],
-                'size' => [Size::all()->random()->id]
+                'size' => [Size::all()->random()->id],
+                'category' => [Category::all()->random()->id]
             ]);
 
         $response

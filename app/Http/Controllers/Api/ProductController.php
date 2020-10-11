@@ -5,22 +5,27 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApiStoreRequest;
 use App\Http\Requests\ApiUpdateRequest;
+use App\Interfaces\Api\InterfaceApiProducts;
 use App\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected $products;
+
     /**
-     * ProductController constructor.
+     * ProductsController constructor.
+     * @param InterfaceApiProducts $products
      */
-    public function __construct()
+    public function __construct(InterfaceApiProducts $products)
     {
-        //
+        $this->products = $products;
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
     public function index(Request $request): JsonResponse
     {
@@ -46,32 +51,15 @@ class ProductController extends Controller
      */
     public function store(ApiStoreRequest $request): JsonResponse
     {
-        if (!$request) {
+        $this->products->store($request);
+
+        if (!'product') {
             return response()
-                ->json('faltan datos', 422);
+                ->json('failed', 200);
         }
-        $product = Product::create($request->all());
-
-        $product->asignarColor($request->get('color'));
-        $product->asignarCategory($request->get('category'));
-        $product->asignarSize($request->get('size'));
-
-        $files = $request->file('img');
-        $product->asignarImagen($files, $product->id);
-
-
 
         return response()->json([
-            'status' => ($product) ? 'created' : 'failed',[
-                'productoId'  => $product->id,
-                'name'        => $product->name,
-                'price'       => $product->price,
-                'stock'       => $product->stock,
-                'description' => $product->description,
-                'color'       => $product->colors,
-                'category'    => $product->categories,
-                'size'        => $product->sizes
-            ]
+            'status' => 'created'
         ], 200);
     }
 
@@ -107,31 +95,15 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
+        $this->products->update($request, $id);
+
         if (!$product) {
             return response()
                 ->json('no se encontro el producto con este id', 404);
         }
 
-        $product->update($request->all());
-
-        $product->colors()->sync($request->get('color'));
-        $product->categories()->sync($request->get('category'));
-        $product->sizes()->sync($request->get('size'));
-
-        $files = $request->file('img');
-        $product->asignarImagen($files, $product->id);
-
         return response()->json([
-            'status' => ($product) ? 'updated' : 'failed',[
-                'productoId'  => $product->id,
-                'name'        => $product->name,
-                'price'       => $product->price,
-                'stock'       => $product->stock,
-                'description' => $product->description,
-                'color'       => $product->colors,
-                'category'    => $product->categories,
-                'size'        => $product->sizes
-            ]
+            'status' => ($product) ? 'updated' : 'failed'
         ], 200);
     }
 
@@ -149,8 +121,8 @@ class ProductController extends Controller
         }
 
         return response()->json([
-            'status' => ($product) ? 'deleted' : 'failed',
-                'se ha eliminado el producto exitosamente'
+            'status' => ($product) ? 'deleted' : 'failed'
         ]);
     }
 }
+

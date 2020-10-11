@@ -25,10 +25,11 @@ class ApiUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'required|max:25',
-            'stock' => 'required|integer|min:0',
-            'color' => ['required'],
-            'size'  => ['required']
+            'name'     => 'required|max:25',
+            'stock'    => 'required|integer|min:0',
+            'color'    => ['required'],
+            'size'     => ['required'],
+            'category' => ['required']
         ];
     }
 
