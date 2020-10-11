@@ -29,5 +29,4 @@ class CategoryApiController extends Controller
         return response()->json([
             'status' => ($category) ? 'created' : 'failed'], 200);
     }
-
 }

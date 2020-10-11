@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ItemCreateRequest;
-use App\Http\Requests\ItemUpdateRequest;
+use App\Http\Requests\ApiStoreRequest;
+use App\Http\Requests\ApiUpdateRequest;
 use App\Product;
 use Illuminate\Http\JsonResponse;
 
@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('Status');
+        //
     }
 
     /**
@@ -36,11 +36,15 @@ class ProductController extends Controller
     }
 
     /**
-     * @param ItemCreateRequest $request
+     * @param ApiStoreRequest $request
      * @return JsonResponse
      */
-    public function store(ItemCreateRequest $request): JsonResponse
+    public function store(ApiStoreRequest $request): JsonResponse
     {
+        if (!$request) {
+            return response()
+                ->json('faltan datos', 422);
+        }
         $product = Product::create($request->all());
 
         $product->asignarColor($request->get('color'));
@@ -49,6 +53,7 @@ class ProductController extends Controller
 
         $files = $request->file('img');
         $product->asignarImagen($files, $product->id);
+
 
 
         return response()->json([
@@ -85,23 +90,24 @@ class ProductController extends Controller
         $product->sizes;
         $product->imagenes;
 
-
         return response()->json(['Produto', $product], 200);
     }
 
     /**
-     * @param ItemUpdateRequest $request
-     * @param Product $product
+     * @param ApiUpdateRequest $request
+     * @param int $id
      * @return JsonResponse
      */
-    public function update(ItemUpdateRequest $request, Product $product): JsonResponse
+    public function update(ApiUpdateRequest $request, int $id): JsonResponse
     {
-        $product->update($request->all());
+        $product = Product::find($id);
 
         if (!$product) {
             return response()
                 ->json('no se encontro el producto con este id', 404);
         }
+
+        $product->update($request->all());
 
         $product->colors()->sync($request->get('color'));
         $product->categories()->sync($request->get('category'));
@@ -140,7 +146,6 @@ class ProductController extends Controller
         return response()->json([
             'status' => ($product) ? 'deleted' : 'failed',
                 'se ha eliminado el producto exitosamente'
-
         ]);
     }
 }
