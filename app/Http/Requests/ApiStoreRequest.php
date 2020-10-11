@@ -4,10 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Response;
-use Illuminate\Validation\ValidationException;
 
-class ItemCreateRequest extends FormRequest
+class ApiStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -36,5 +34,12 @@ class ItemCreateRequest extends FormRequest
             'category'    => ['required'],
             'size'        => ['required']
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        abort(response()->json(['errors' => $validator->errors()->toArray()
+
+        ]));
     }
 }

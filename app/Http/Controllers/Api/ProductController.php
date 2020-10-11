@@ -3,27 +3,37 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ItemCreateRequest;
-use App\Http\Requests\ItemUpdateRequest;
+use App\Http\Requests\ApiStoreRequest;
+use App\Http\Requests\ApiUpdateRequest;
+use App\Interfaces\Api\InterfaceApiProducts;
 use App\Product;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected $products;
+
     /**
-     * ProductController constructor.
+     * ProductsController constructor.
+     * @param InterfaceApiProducts $products
      */
-    public function __construct()
+    public function __construct(InterfaceApiProducts $products)
     {
-        $this->middleware('Status');
+        $this->products = $products;
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $products = Product::all(['id','name', 'description', 'price', 'stock']);
+        $query    = trim($request->get('search'));
+        $products = Product::where('name', 'LIKE', '%' . $query . '%')
+            ->orwhere('id', 'LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            ->paginate(2);
 
         foreach ($products as $product) {
             $product->colors;
@@ -32,27 +42,24 @@ class ProductController extends Controller
             $product->imagenes;
         }
 
-        return response()->json(['lista de procustos', $products], 200);
+        return response()->json(['lista de procustos', $products, 'search',$query], 200);
     }
 
     /**
-     * @param ItemCreateRequest $request
+     * @param ApiStoreRequest $request
      * @return JsonResponse
      */
-    public function store(ItemCreateRequest $request): JsonResponse
+    public function store(ApiStoreRequest $request): JsonResponse
     {
-        $product = Product::create($request->all());
+        $this->products->store($request);
 
-        $product->asignarColor($request->get('color'));
-        $product->asignarCategory($request->get('category'));
-        $product->asignarSize($request->get('size'));
-
-        $files = $request->file('img');
-        $product->asignarImagen($files, $product->id);
-
+        if (!'product') {
+            return response()
+                ->json('failed', 200);
+        }
 
         return response()->json([
-            'status' => ($product) ? 'created' : 'failed'
+            'status' => 'created'
         ], 200);
     }
 
@@ -76,30 +83,24 @@ class ProductController extends Controller
         $product->sizes;
         $product->imagenes;
 
-
         return response()->json(['Produto', $product], 200);
     }
 
     /**
-     * @param ItemUpdateRequest $request
-     * @param Product $product
+     * @param ApiUpdateRequest $request
+     * @param int $id
      * @return JsonResponse
      */
-    public function update(ItemUpdateRequest $request, Product $product): JsonResponse
+    public function update(ApiUpdateRequest $request, int $id): JsonResponse
     {
-        $product->update($request->all());
+        $product = Product::find($id);
+
+        $this->products->update($request, $id);
 
         if (!$product) {
             return response()
                 ->json('no se encontro el producto con este id', 404);
         }
-
-        $product->colors()->sync($request->get('color'));
-        $product->categories()->sync($request->get('category'));
-        $product->sizes()->sync($request->get('size'));
-
-        $files = $request->file('img');
-        $product->asignarImagen($files, $product->id);
 
         return response()->json([
             'status' => ($product) ? 'updated' : 'failed'
@@ -124,3 +125,4 @@ class ProductController extends Controller
         ]);
     }
 }
+

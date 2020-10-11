@@ -9,7 +9,6 @@ use App\Http\Requests\CartAddRequest;
 use App\Http\Requests\CartUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use App\Interfaces\InterfaceCarts;
-use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {

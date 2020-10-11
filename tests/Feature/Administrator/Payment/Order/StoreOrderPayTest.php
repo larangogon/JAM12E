@@ -8,16 +8,12 @@ use App\Payment;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class StoreOrderPayTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @var \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
-     */
     private $user;
 
     protected function setUp(): void
@@ -33,22 +29,10 @@ class StoreOrderPayTest extends TestCase
         $this->cart->save();
     }
 
-    public function testStore(): void
-    {
-        $this->order = new Order();
-        $this->order->user_id = $this->user->id;
-        $this->order->total   = $this->user->cart->total = '239844';
-        $this->order->save();
-
-        $this->assertDatabaseHas('orders', [
-             'total' => '239844'
-         ]);
-    }
-
     /**
-     * @return Void
+     * @return void
      */
-    public function testOrderShowv(): Void
+    public function testOrderShowv(): void
     {
         $this->withoutMiddleware();
         $this->withoutExceptionHandling();
@@ -57,29 +41,6 @@ class StoreOrderPayTest extends TestCase
             ->get(route('orders.showv', $this->user->id));
 
         $response->assertStatus(200);
-    }
-
-    public function testStorePay(): void
-    {
-        $this->withoutMiddleware();
-
-        $this->order = new Order();
-
-        $this->order->user_id = $this->user->id;
-        $this->order->total   = $this->user->cart->total = '239844';
-        $this->order->save();
-
-        $this->pay = new Payment();
-        $this->pay->order_id    = $this->order->id;
-        $this->pay->processUrl  = 'https://test.placetopay.com/redirection/session/401660/f355a2ce680602583c87b9423e5699d8' ;
-        $this->pay->requestId   = '401660';
-        $this->pay->status      = 'PENDING' ;
-
-        $this->pay->save();
-
-        $this->assertDatabaseHas('payments', [
-            'status' => 'PENDING'
-        ]);
     }
 
     public function testUpdatePay(): void
@@ -120,7 +81,8 @@ class StoreOrderPayTest extends TestCase
             ->assertStatus(200);
 
         $this->assertDatabaseHas('orders', [
-            'id'  => $this->order->id,
+            'id'     => $this->order->id,
+            'status' => 'APPROVED',
         ]);
     }
 
