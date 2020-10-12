@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-4 mx-auto">
                 <h2>
-                    Colores de Productos
+                    Colores
                     @include('colors.modal')
                 </h2>
                 <table class="table table-hover">

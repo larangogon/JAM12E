@@ -94,4 +94,31 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->all();
         });
     }
+
+    /**
+     * @param $query
+     * @param $search
+     * @return mixed
+     */
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where('name', 'LIKE', "%$search%");
+        }
+    }
+
+    /**
+     * @param $query
+     * @param $role
+     */
+    public function scopeRole($query, $role)
+    {
+        if (empty($role)) {
+            return;
+        }
+
+        return  $query->whereHas('roles', function ($query) use ($role) {
+            $query->where('name', $role);
+        });
+    }
 }
