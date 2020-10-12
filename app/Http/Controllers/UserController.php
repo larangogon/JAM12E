@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserFormRequest;
+use App\Http\Requests\UserStoreRequest;
 use App\Role;
 use App\User;
 use Illuminate\View\View;
@@ -18,9 +20,10 @@ class UserController extends Controller
      * UserController constructor.
      * @param InterfaceUsers $users
      */
-    public function __construct(InterfaceUsers $users)
+    public function __construct(InterfaceUsers $users, User $user)
     {
         $this->users = $users;
+        $this->user = $user;
         $this->middleware('auth');
         $this->middleware('Status');
         $this->middleware('verified');
@@ -33,22 +36,43 @@ class UserController extends Controller
      */
     public function index(Request $request): View
     {
-        $query = trim($request->get('search'));
+        $role = $request->get('role', null);
+        $search   = $request->get('search', null);
 
-        $users = User::where('name', 'LIKE', '%' . $query . '%')
-                    ->orwhere('email', 'LIKE', '%' . $query . '%')
-                    ->orwhere('id', 'LIKE', '%' . $query . '%')
-                    ->orderBy('id', 'asc')
-                    ->paginate(6);
+        $this->user = new User();
 
         return view('users.index', [
-            'users'  => $users,
-            'search' => $query
+            'search'   => $search,
+            'users' => $this->user
+                ->role($role)
+                ->search($search)
+                ->paginate(12)
         ]);
     }
 
     /**
-     * @param integer $id
+     * @return View
+     */
+    public function create(): View
+    {
+        $roles = Role::all();
+
+        return view('users.create', ['roles' => $roles]);
+    }
+
+    /**
+     * @param UserFormRequest $request
+     * @return RedirectResponse
+     */
+    public function store(UserFormRequest $request): RedirectResponse
+    {
+        $this->users->store($request);
+
+        return redirect('/users');
+    }
+
+    /**
+     * @param int $id
      * @return View
      */
     public function show(int $id): View

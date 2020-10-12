@@ -180,15 +180,56 @@
                                     </p>
                                 </a>
                             </li>
-
-                             @can('Administrator')
-                            <li class="nav-item">
-                                <a href="{{url('users')}}"
-                                    class="{{ Request::path() === 'users' ? 'nav-link active' : 'nav-link' }}">
-                                    <i class="fas fa-users-cog"></i>
-                                    <p>Usuarios</p>
+                            @can('Administrator')
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Usuarios
+                                    </p>
                                 </a>
-                            </li>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{url('users')}}"
+                                           class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
+                                            <i class="far fa-check-circle"></i>
+                                            <p>Todos usuarios</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item has-treeview">
+                                        <a href="#" class="nav-link">
+                                            <i class="nav-icon fas fa-users"></i>
+                                            <p>
+                                                Empleados
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <form action="{{route('users.index')}}" method="get">
+                                                        <input type="text" name="role" id="" value="Administrator" hidden>
+                                                        <button type="submit"  class="btn-dark btn-sm btn-block text-left">
+                                                            <i class="far fa-check-circle"></i>
+                                                            <p>Administrator</p>
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link" >
+                                                    <form action="{{route('users.index')}}" method="get">
+                                                        <input type="text" name="role" id="" value="Guest" hidden>
+                                                        <button type="submit"  class="btn-dark btn-sm btn-block text-left"
+                                                                class="{{ Request::path() === 'guest' ? 'nav-link active' : 'nav-link' }}">
+                                                            <i class="far fa-check-circle"></i>
+                                                            <p>Guest</p>
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
                               @endcan
                               @can('Administrator')
                               <li class="nav-item">
@@ -291,8 +332,7 @@
                                         <a href="#" class="nav-link">
                                         <form action="{{route('vitrina.index')}}" method="get">
                                             <input type="text" name="category" id="" value="Hombre" hidden>
-                                            <button type="submit"  class="btn btn-dark btn-sm btn-block text-left"
-                                            <button type="submit" class="btn  btn-sm btn-block text-left"
+                                            <button type="submit"  class="btn-dark btn-sm btn-block text-left"
                                                 class="{{ Request::path() === 'hombre' ? 'nav-link active' : 'nav-link' }}">
                                                 <i class="far fa-check-circle"></i>
                                                 <p>Hombre</p>
@@ -304,8 +344,7 @@
                                         <a href="#" class="nav-link" >
                                         <form action="{{route('vitrina.index')}}" method="get">
                                             <input type="text" name="category" id="" value="Mujer" hidden>
-                                            <button type="submit"  class="btn btn-dark btn-sm btn-block text-left"
-                                            <button  type="submit"  class="btn  btn-sm btn-block text-left "
+                                            <button type="submit"  class="btn-dark btn-sm btn-block text-left"
                                                 class="{{ Request::path() === 'hombre' ? 'nav-link active' : 'nav-link' }}">
                                                 <i class="far fa-check-circle"></i>
                                                 <p>Mujer</p>
@@ -324,7 +363,7 @@
                                         <a href="#" class="nav-link">
                                         <form action="{{route('vitrina.index')}}" method="get">
                                             <input type="text" name="category" id="" value="Hogar" hidden>
-                                            <button type="submit"  class="btn btn-dark btn-sm btn-block text-left"
+                                            <button type="submit"  class="btn-dark btn-sm btn-block text-left"
                                                 class="{{ Request::path() === 'hombre' ? 'nav-link active' : 'nav-link' }}">
                                                 <i class="far fa-check-circle"></i>
                                                 <p>Todo para tu hogar</p>

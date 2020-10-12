@@ -5,6 +5,11 @@
 <div class="container">
   <h2>
       Usuarios Registrados
+      <a href="users/create">
+          <button type="button" class="btn btn-success btn-sm float-right">
+              Agregar usuario
+          </button>
+      </a>
       <a href="{{ route('imports.index') }}">
           <button type="button" class="btn btn-primary btn-sm float-right">
               importar Usuarios
