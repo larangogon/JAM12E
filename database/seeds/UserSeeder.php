@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Cart;
 use App\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -26,5 +27,10 @@ class UserSeeder extends Seeder
 
         $user = User::find(1);
         $user->assignRole('Administrator');
+
+        $this->cart =  new Cart();
+
+        $this->cart->user_id = $user->id;
+        $this->cart->save();
     }
 }
