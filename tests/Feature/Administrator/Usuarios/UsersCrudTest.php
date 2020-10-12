@@ -28,6 +28,7 @@ class UsersCrudTest extends TestCase
             'active' => 1
         ]);
         $this->user->assignRole('Administrator');
+
         $this->cart =  new Cart();
 
         $this->cart->user_id = $this->user->id;
