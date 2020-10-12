@@ -19,9 +19,11 @@ class OrderController extends Controller
     /**
      * OrderController constructor.
      * @param InterfaceOrders $orders
+     * @param Order $order
      */
-    public function __construct(InterfaceOrders $orders)
+    public function __construct(InterfaceOrders $orders, Order $order)
     {
+        $this->order = $order;
         $this->orders = $orders;
         $this->middleware('auth');
         $this->middleware('Status');
@@ -34,17 +36,15 @@ class OrderController extends Controller
      */
     public function index(Request $request): View
     {
-        $query  = trim($request->get('search'));
+        $search   = $request->get('search', null);
 
-        $orders = Order::where('id', 'LIKE', '%' . $query . '%')
-                        ->orWhere('status', 'LIKE', '%' . $query . '%')
-                        ->orWhere('shippingStatus', 'LIKE', '%' . $query . '%')
-                        ->orderBy('id', 'asc')
-                        ->paginate(6);
+        $this->order = new Order();
 
         return view('orders.index', [
-            'orders' => $orders,
-            'search' => $query
+            'search'   => $search,
+            'orders' => $this->order
+                ->search($search)
+                ->paginate(12)
         ]);
     }
 
