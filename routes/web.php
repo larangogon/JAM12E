@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified', 'Status');
-Route::resource('users', 'UserController')->only(['index', 'show', 'edit', 'update']);
+Route::resource('users', 'UserController');
 Route::get('users/{user}/active')->uses('UserController@active')->name('users.active');
 
 Route::resource('roles', 'RoleController')->only(['index', 'store', 'update', 'destroy']);

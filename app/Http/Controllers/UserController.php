@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
+use App\Http\Requests\UserFormRequest;
+use App\Http\Requests\UserStoreRequest;
 use App\Role;
 use App\User;
 use Illuminate\View\View;
@@ -46,6 +49,34 @@ class UserController extends Controller
                 ->search($search)
                 ->paginate(12)
         ]);
+    }
+
+    /**
+     * @return View
+     */
+    public function create(): View
+    {
+        $roles = Role::all();
+
+        return view('users.create', ['roles' => $roles]);
+    }
+
+    /**
+     * @param UserFormRequest $request
+     * @return RedirectResponse
+     */
+    public function store(UserFormRequest $request): RedirectResponse
+    {
+        $user = User::create($request->all());
+
+        $user->asignarRol($request->get('rol'));
+
+        $this->cart = new Cart();
+
+        $this->cart->user_id = $user->id;
+        $this->cart->save();
+
+        return redirect('/users');
     }
 
     /**
