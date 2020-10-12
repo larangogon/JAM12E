@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
 use App\Http\Requests\UserFormRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Role;
@@ -67,14 +66,7 @@ class UserController extends Controller
      */
     public function store(UserFormRequest $request): RedirectResponse
     {
-        $user = User::create($request->all());
-
-        $user->asignarRol($request->get('rol'));
-
-        $this->cart = new Cart();
-
-        $this->cart->user_id = $user->id;
-        $this->cart->save();
+        $this->users->store($request);
 
         return redirect('/users');
     }

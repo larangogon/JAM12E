@@ -3,6 +3,7 @@
 namespace App\Decorators;
 
 use App\Http\Requests\UserEditFormRequest;
+use App\Http\Requests\UserFormRequest;
 use App\Repositories\UsersRepo;
 use App\Interfaces\InterfaceUsers;
 use Illuminate\Support\Facades\Cache;
@@ -18,6 +19,16 @@ class DecoratorUser implements InterfaceUsers
     public function __construct(UsersRepo $usersRepo)
     {
         $this->usersRepo = $usersRepo;
+    }
+
+    /**
+     * @param UserFormRequest $request
+     */
+    public function store(UserFormRequest $request)
+    {
+        $this->usersRepo->store($request);
+
+        Cache::tags('users')->flush();
     }
 
     /**
