@@ -3,24 +3,48 @@
 @section('content')
 @can('Administrator')
 <div class="container">
-  <h2>
-      Usuarios Registrados
-      <a href="users/create">
-          <button type="button" class="btn btn-success btn-sm float-right">
-              Agregar usuario
-          </button>
-      </a>
-      <a href="{{ route('imports.index') }}">
-          <button type="button" class="btn btn-primary btn-sm float-right">
-              importar Usuarios
-          </button>
-      </a>
-      <a href="{{ route('exportUsers') }}">
-          <button type="button" class="btn btn-warning btn-sm float-right">
-              Exportar Usuarios
-          </button>
-      </a>
-  </h2>
+    <div class="row">
+        <div class="col-md-8">
+            <h2>
+                Producto Creados
+            </h2>
+        </div>
+        <div class="col-md-4">
+            <nav class="mt-2 float-right">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <p>Opciones Avanzadas</p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('exportUsers') }}">
+                                    <button type="button" class="btn btn-primary btn-sm btn-block float-right">
+                                        Exportar Usuarios
+                                    </button>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('imports.index') }}">
+                                    <button type="button" class="btn btn-warning btn-block btn-sm float-right">
+                                        importar Usuarios
+                                    </button>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="users/create">
+                                    <button type="button" class="btn btn-success btn-sm btn-block float-right">
+                                        Agregar Usuario
+                                    </button>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
   <h6>
       @if($search)

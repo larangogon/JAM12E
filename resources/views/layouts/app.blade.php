@@ -234,8 +234,7 @@
                               @can('Administrator')
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="far fa-file"></i>
-                                    <p>Administracion de ordenes</p>
+                                    <p><i class="far fa-file"></i> Administracion de ordenes</p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
@@ -247,6 +246,7 @@
                                     </li>
                                     <li class="nav-item has-treeview">
                                         <a href="#" class="nav-link">
+                                            <i class="fas fa-sort"></i>
                                             <p>Filtro por estado</p>
                                         </a>
                                         <ul class="nav nav-treeview">

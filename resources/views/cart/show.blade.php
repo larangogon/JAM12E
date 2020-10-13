@@ -79,7 +79,7 @@
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" class="btn btn-warning btn-sm" role="button">
-                                            @
+                                            <i class="fas fa-undo-alt"></i>
                                         </button>
                                     </form>
                                     @error('stock')
