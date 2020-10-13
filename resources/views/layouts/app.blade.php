@@ -183,7 +183,7 @@
                             @can('Administrator')
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-users"></i>
+                                    <i class="fas fa-user-check"></i>
                                     <p>
                                         Usuarios
                                     </p>
@@ -232,15 +232,68 @@
                                 </ul>
                               @endcan
                               @can('Administrator')
-                              <li class="nav-item">
-                                  <a href="{{url('orders')}}"
-                                      class="{{ Request::path() === 'orders' ? 'nav-link active' : 'nav-link' }}">
-                                      <i class="fas fa-shopping-bag"></i>
-                                      <p>Admin Orders</p>
-                                  </a>
-                              </li>
-                                @endcan
-
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <p><i class="far fa-file"></i> Administracion de ordenes</p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{url('orders')}}"
+                                           class="{{ Request::path() === 'orders' ? 'nav-link active' : 'nav-link' }}">
+                                            <i class="far fa-check-circle"></i>
+                                            <p>Todas la ordenes</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item has-treeview">
+                                        <a href="#" class="nav-link">
+                                            <i class="fas fa-sort"></i>
+                                            <p>Filtro por estado</p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <form action="{{route('orders.index')}}" method="get">
+                                                        <input type="text" name="search" id="" value="APPROVED" hidden>
+                                                        <button type="submit"  class="btn-dark btn-sm btn-block text-left"
+                                                                class="{{ Request::path() === 'approved' ? 'nav-link active' : 'nav-link' }}">
+                                                            <i class="far fa-check-circle"></i>
+                                                            <p>Aprovadas</p>
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <form action="{{route('orders.index')}}" method="get">
+                                                        <input type="text" name="search" id="" value="REJECTED" hidden>
+                                                        <button type="submit"  class="btn-dark btn-sm btn-block text-left"
+                                                                class="{{ Request::path() === 'approved' ? 'nav-link active' : 'nav-link' }}">
+                                                            <i class="far fa-check-circle"></i>
+                                                            <p>Rechazadas</p>
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <form action="{{route('orders.index')}}" method="get">
+                                                        <input type="text" name="search" id="" value="PENDING" hidden>
+                                                        <button type="submit"  class="btn-dark btn-sm btn-block text-left"
+                                                                class="{{ Request::path() === 'approved' ? 'nav-link active' : 'nav-link' }}">
+                                                            <i class="far fa-check-circle"></i>
+                                                            <p>Pendientes</p>
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            @endcan
                               @can('Administrator')
                               <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
@@ -302,7 +355,7 @@
                                         @if(count(auth()->user()->orders))
                                     <a href="{{route('orders.showv', auth()->id())}}"
                                        class="{{ Request::path() === 'clients' ? 'nav-link active' : 'nav-link' }}">
-                                        <i class="fas fa-warehouse"></i>
+                                        <i class="fas fa-cash-register"></i>
                                         <p>Historial de compra</p>
                                     </a>
                                         @endif

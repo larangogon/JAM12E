@@ -59,4 +59,17 @@ class Order extends Model
     {
         return $this->hasOne(Shipping::class);
     }
+
+    /**
+     * @param $query
+     * @param $search
+     * @return mixed
+     */
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where('status', 'LIKE', "%$search%");
+        }
+    }
+
 }

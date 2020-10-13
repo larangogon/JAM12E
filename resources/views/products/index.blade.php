@@ -22,23 +22,48 @@
                   <p>{{session('success')}}</p>
               </div>
           @endif
-        <h2>Producto Creados
-            <a href="products/create">
-                <button type="button" class="btn btn-success btn-sm float-right">
-                    Agregar Producto
-                </button>
-            </a>
-            <a href="{{ route('indexProducts') }}">
-                <button type="button" class="btn btn-primary btn-sm float-right">
-                    importar Productos
-                </button>
-            </a>
-            <a href="{{ route('exportProducts') }}">
-                <button type="button" class="btn btn-warning btn-sm float-right">
-                    Exportar Productos
-                </button>
-            </a>
-        </h2>
+          <div class="row">
+              <div class="col-md-8">
+                  <h2>
+                      Producto Creados
+                  </h2>
+              </div>
+              <div class="col-md-4">
+                  <nav class="mt-2 float-right">
+                      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                          data-accordion="false">
+                          <li class="nav-item has-treeview">
+                              <a href="#" class="nav-link">
+                                  <p>Opciones Avanzadas</p>
+                              </a>
+                              <ul class="nav nav-treeview">
+                                  <li class="nav-item">
+                                      <a href="{{ route('exportProducts') }}">
+                                          <button type="button" class="btn btn-primary btn-sm btn-block float-right">
+                                              Exportar Productos
+                                          </button>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('indexProducts') }}">
+                                          <button type="button" class="btn btn-warning btn-block btn-sm float-right">
+                                              importar Productos
+                                          </button>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="products/create">
+                                          <button type="button" class="btn btn-success btn-sm btn-block float-right">
+                                              Agregar Producto
+                                          </button>
+                                      </a>
+                                  </li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
         <h6>
             @if($search)
                 <div class="alert-default-primary" role="alert">

@@ -31,15 +31,36 @@
             }
         }
     </script>
+    <div class="row">
+        <div class="col-md-8">
+            <h2>
+                Ordenes
+            </h2>
+        </div>
+        <div class="col-md-4">
+            <nav class="mt-2 float-right">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <p>Opciones Avanzadas</p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('exportOrders') }}">
+                                    <button type="button" class="btn btn-primary btn-sm float-right">
+                                        Exportar Ordenes Aprovadas
+                                    </button>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
-    <h2>
-        Ordenes
-        <a href="{{ route('exportOrders') }}">
-            <button type="button" class="btn btn-primary btn-sm float-right">
-                Exportar Ordenes
-            </button>
-        </a>
-    </h2>
+
 
         <h6>
             @if($search)
@@ -77,8 +98,6 @@
               </thead>
               <tbody>
                     @foreach($orders as $order)
-                        @switch($order->status)
-                            @case('APPROVED')
                                 <tr>
                                     <td>
                                         {{$order->id}}
@@ -95,7 +114,7 @@
                                     <td>
                                         <a href="{{route('orders.show', $order->id) }}">
                                             <button type="button" class="btn btn-dark btn-sm">
-                                                Ver detalle
+                                                <i class="fas fa-eye"></i>
                                             </button>
                                         </a>
                                     </td>
@@ -104,8 +123,8 @@
                                           @csrf
                                           @method('GET')
                                           <button type="submit" class=" btn-sm btn
-                                              {{$order->shippingStatus ?  'btn-success' : 'btn-warning'}}" role="button" onclick="return confirmarEnvio()">
-                                              {{$order->shippingStatus ?  'enviado' : 'pendiente_shipping'}}
+                                              {{$order->shippingStatus ?  'btn-success' : 'btn-danger'}}" role="button" onclick="return confirmarEnvio()">
+                                              {{$order->shippingStatus ?  'enviado' : 'pendiente'}}
                                           </button>
                                       </form>
                                     </td>
@@ -114,13 +133,11 @@
                                             @csrf
                                             <input type="hidden" name="order" value="{{$order->id}}">
                                             <button class="btn btn-sm btn-danger" onclick="return confirmarCancelar()" type="submit" >
-                                                Cancelar pago
+                                                <i class="fas fa-minus-circle"></i>
                                             </button>
                                         </form>
                                     </td>
                                 </tr>
-                            @break
-                        @endswitch
                     @endforeach
               </tbody>
         </table>

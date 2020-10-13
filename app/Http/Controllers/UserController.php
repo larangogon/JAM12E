@@ -19,6 +19,7 @@ class UserController extends Controller
     /**
      * UserController constructor.
      * @param InterfaceUsers $users
+     * @param User $user
      */
     public function __construct(InterfaceUsers $users, User $user)
     {
