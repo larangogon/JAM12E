@@ -19,7 +19,7 @@ class ImportController extends Controller
     {
         Excel::import(new UsersImport, $request->file('file'));
 
-        return redirect('/')->with('success', 'All good!');
+        return redirect('users')->with('success', 'All good!');
     }
 
     /**
@@ -38,7 +38,7 @@ class ImportController extends Controller
     {
         Excel::import(new ProductsImport, $request->file('file'));
 
-        return redirect('/')->with('success', 'All good!');
+        return redirect('products')->with('success', 'All good!');
     }
 
     /**
