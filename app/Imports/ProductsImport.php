@@ -18,7 +18,6 @@ class ProductsImport implements OnEachRow
             'description' => $row[2],
             'price'       => $row[3],
             'stock'       => $row[4],
-
         ]);
 
         $product->colors()->create([

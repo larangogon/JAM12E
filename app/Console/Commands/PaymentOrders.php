@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Jobs\ProcessP2p;
-use App\Order;
 use App\Payment;
 use Illuminate\Console\Command;
 
