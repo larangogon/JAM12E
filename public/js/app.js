@@ -36952,7 +36952,7 @@ Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;
 Popper.placements = placements;
 Popper.Defaults = Defaults;
 
-/* harmony default export */ __webpack_exports__["default"] = (Popper);
+/* harmony default exporUsers */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
@@ -37302,9 +37302,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\JAM12E\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\laragon\www\JAM12E\resources\js\bootstrap.js */"./resources/js/bootstrap.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\JAM12E\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\JAM12\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\JAM12\resources\js\bootstrap.js */"./resources/js/bootstrap.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\JAM12\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

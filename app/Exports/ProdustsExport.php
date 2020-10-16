@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Product;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
@@ -11,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class ProdustsExport implements FromCollection, WithMapping, WithHeadings
 {
     /**
-    * @return \Illuminate\Support\Collection
+    * @return Collection
     */
     public function collection()
     {
@@ -19,6 +20,7 @@ class ProdustsExport implements FromCollection, WithMapping, WithHeadings
     }
 
     /**
+     * @return array
      * @var Product $product
      */
     public function map($product): array
@@ -29,14 +31,17 @@ class ProdustsExport implements FromCollection, WithMapping, WithHeadings
             $product->description,
             $product->price,
             $product->stock,
-            $product->colors,
-            $product->sizes,
-            $product->categories,
-            $product->imagenes,
+            $product->colors()->pluck('name'),
+            $product->sizes()->pluck('name'),
+            $product->categories()->pluck('name'),
+            $product->imagenes()->pluck('name'),
             Date::dateTimeToExcel($product->created_at),
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function headings(): array
     {
         return [

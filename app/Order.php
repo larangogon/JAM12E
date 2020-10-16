@@ -71,5 +71,4 @@ class Order extends Model
             return $query->where('status', 'LIKE', "%$search%");
         }
     }
-
 }

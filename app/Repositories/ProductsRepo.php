@@ -61,7 +61,7 @@ class ProductsRepo implements InterfaceProducts
     {
         $imagen = Imagen::find($id);
 
-        Storage::delete(public_path('uploads/') . $imagen);
+        Storage::delete(public_path('uploads/') . $imagen->name);
 
         $imagen->delete();
     }
