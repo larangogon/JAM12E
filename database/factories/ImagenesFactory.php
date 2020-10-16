@@ -3,7 +3,6 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Imagen;
-use App\Model;
 use App\Product;
 use Faker\Generator as Faker;
 

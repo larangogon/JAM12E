@@ -1,10 +1,8 @@
 <?php
 
-
 use App\Cart;
 use App\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {

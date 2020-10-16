@@ -29,7 +29,6 @@ class ProductsController extends Controller
         $this->middleware('auth');
         $this->middleware('Status');
         $this->middleware('verified');
-        $this->middleware('role:Administrator');
     }
 
     /**
@@ -38,6 +37,8 @@ class ProductsController extends Controller
      */
     public function index(Request $request): View
     {
+        $this->middleware('role:Guest');
+
         $query    = trim($request->get('search'));
         $products = Product::where('name', 'LIKE', '%' . $query . '%')
                             ->orwhere('stock', 'LIKE', '%' . $query . '%')

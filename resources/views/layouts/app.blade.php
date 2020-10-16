@@ -165,30 +165,31 @@
                             data-accordion="false">
 
                             <li class="nav-item">
+                                <a href="{{url('nosotros')}}">
+                                    <p>
+                                        Quienes somos!
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>Inicio</p>
                                 </a>
                             </li>
 
-                            <li class="nav-item">
-                                <a href="{{url('nosotros')}}"
-                                    class="{{ Request::path() === 'nosotros' ? 'nav-link active' : 'nav-link' }}">
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p>
-                                        Quienes somos!
-                                    </p>
-                                </a>
-                            </li>
                             @can('Administrator')
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link"
+                                    class="{{ Request::path() === 'nosotros' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="fas fa-user-check"></i>
                                     <p>
                                         Usuarios
                                     </p>
                                 </a>
-                                <ul class="nav nav-treeview">
+                                <ul cass="nav nav-pills nav-sidebar flex-column"data-widget="treeview" role="menu"
+                                    data-accordion="false">
                                     <li class="nav-item">
                                         <a href="{{url('users')}}"
                                            class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
@@ -236,7 +237,7 @@
                                 <a href="#" class="nav-link">
                                     <p><i class="far fa-file"></i> Administracion de ordenes</p>
                                 </a>
-                                <ul class="nav nav-treeview">
+                                <ul cass="nav nav-pills nav-sidebar flex-column">
                                     <li class="nav-item">
                                         <a href="{{url('orders')}}"
                                            class="{{ Request::path() === 'orders' ? 'nav-link active' : 'nav-link' }}">
@@ -339,7 +340,7 @@
                               </li>
                             </ul>
                                 @endcan
-                              @can('Administrator')
+                              @can('hasrole')
                                     <li class="nav-item">
                                         <a href="{{url('products')}}"
                                             class="{{ Request::path() === 'products' ? 'nav-link active' : 'nav-link' }}">
@@ -367,7 +368,7 @@
                                     <i class="fas fa-shopping-bag"></i>
                                     <p>Lo que buscas esta aqui!<i class="fas fa-angle-left right"></i></p>
                                 </a>
-                                <ul class="nav nav-treeview">
+                                <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
                                     <li class="nav-item">
                                         <a href="{{url('vitrina')}}"
                                             class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">

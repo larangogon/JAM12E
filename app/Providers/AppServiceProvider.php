@@ -23,6 +23,12 @@ use App\Interfaces\InterfaceProducts;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\InterfaceCategories;
+use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Events\BeforeExport;
+use Maatwebsite\Excel\Events\BeforeSheet;
+use Maatwebsite\Excel\Events\BeforeWriting;
+use Maatwebsite\Excel\Sheet;
+use Maatwebsite\Excel\Writer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,7 +39,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Writer::listen(BeforeExport::class, function () {
+            //
+        });
+
+        Writer::listen(BeforeWriting::class, function () {
+            //
+        });
+
+        Sheet::listen(BeforeSheet::class, function () {
+            //
+        });
+
+        Sheet::listen(AfterSheet::class, function () {
+            //
+        });
     }
 
     /**

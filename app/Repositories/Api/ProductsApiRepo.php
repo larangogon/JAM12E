@@ -22,7 +22,6 @@ class ProductsApiRepo implements InterfaceApiProducts
 
         $files = $request->file('img');
         $product->asignarImagen($files, $product->id);
-
     }
 
     /**

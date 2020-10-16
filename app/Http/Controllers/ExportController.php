@@ -3,13 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Exports\OrdersExport;
-use App\Exports\ProdustsExport;
+use App\Exports\ProductsExport;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExportController extends Controller
 {
+    /**
+     * ExportController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('Status');
+        $this->middleware('verified');
+        $this->middleware('role:Administrator');
+    }
+
     /**
      * @return BinaryFileResponse
      */
@@ -23,7 +34,7 @@ class ExportController extends Controller
      */
     public function exportProducts(): BinaryFileResponse
     {
-        return Excel::download(new ProdustsExport, 'products.xlsx');
+        return Excel::download(new ProductsExport, 'products.xlsx');
     }
 
     /**

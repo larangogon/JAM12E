@@ -1,6 +1,6 @@
 <?php
 
-use App\Imgproducts;
+use App\Imagen;
 use Illuminate\Database\Seeder;
 
 class ImagenesSeeder extends Seeder
@@ -12,6 +12,6 @@ class ImagenesSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Imagen::class, 10)->create();
+        //factory(Imagen::class, 10)->create();
     }
 }
