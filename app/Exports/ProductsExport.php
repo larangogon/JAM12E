@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ProdustsExport implements FromCollection, WithMapping, WithHeadings
+class ProductsExport implements FromCollection, WithMapping, WithHeadings
 {
     /**
     * @return Collection

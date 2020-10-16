@@ -10,14 +10,14 @@ class ProductsImport implements OnEachRow
 {
     public function onRow(Row $row)
     {
-        $row      = $row->toArray();
+        $row  = $row->toArray();
 
         $product = Product::firstOrCreate([
-            'id' => $row[0],
-            'name' => $row[1],
+            'id'          => $row[0],
+            'name'        => $row[1],
             'description' => $row[2],
-            'price' => $row[3],
-            'stock' => $row[4],
+            'price'       => $row[3],
+            'stock'       => $row[4],
 
         ]);
 

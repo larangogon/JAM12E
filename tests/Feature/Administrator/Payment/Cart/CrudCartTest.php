@@ -70,9 +70,9 @@ class CrudCartTest extends TestCase
 
         $this->user->cart->products = InCart::create([
             'stock'      => '23',
-            'product_id' => $this->product->id = 1,
-            'color_id'   => $this->color->id = 1,
-            'size_id'    => $this->size->id = 1,
+            'product_id' => $this->product->id,
+            'color_id'   => $this->color->id,
+            'size_id'    => $this->size->id,
             'cart_id'    => $this->user->cart->id,
         ]);
 
@@ -84,9 +84,9 @@ class CrudCartTest extends TestCase
 
         $this->assertDatabaseHas('in_carts', [
             'stock'      => '23',
-            'product_id' => $this->product->id = 1,
-            'color_id'   => $this->color->id = 1,
-            'size_id'    => $this->size->id = 1,
+            'product_id' => $this->product->id,
+            'color_id'   => $this->color->id,
+            'size_id'    => $this->size->id,
             'cart_id'    => $this->user->cart->id,
         ]);
     }
@@ -100,22 +100,22 @@ class CrudCartTest extends TestCase
 
         $this->user->cart->products = InCart::create([
             'stock'      => '12',
-            'product_id' => $this->product->id = 2,
-            'color_id'   => $this->color->id = 2,
-            'size_id'    => $this->size->id = 2,
+            'product_id' => $this->product->id,
+            'color_id'   => $this->color->id,
+            'size_id'    => $this->size->id,
             'cart_id'    => $this->user->cart->id,
         ]);
 
         $response = $this->actingAs($this->user, 'web')
             ->get(route('cart.remove', $this->user->cart->products->id), [
-                    $this->user->cart->products->id = 1
+                    $this->user->cart->products->id
                 ]);
 
         $response
             ->assertStatus(302);
 
         $this->assertDatabaseMissing('in_carts', [
-        'size_id' => $this->size->id = 2,
+        'size_id' => $this->size->id,
             ]);
     }
 
@@ -130,9 +130,9 @@ class CrudCartTest extends TestCase
         $this->user->cart->products = InCart::create([
             'id'         => 1,
             'stock'      => '12',
-            'product_id' => $this->product->id = 3,
-            'color_id'   => $this->color->id = 3,
-            'size_id'    => $this->size->id = 3,
+            'product_id' => $this->product->id,
+            'color_id'   => $this->color->id,
+            'size_id'    => $this->size->id,
             'cart_id'    => $this->user->cart->id,
         ]);
 
