@@ -340,7 +340,7 @@
                               </li>
                             </ul>
                                 @endcan
-                              @can('Administrator')
+                              @can('hasrole')
                                     <li class="nav-item">
                                         <a href="{{url('products')}}"
                                             class="{{ Request::path() === 'products' ? 'nav-link active' : 'nav-link' }}">

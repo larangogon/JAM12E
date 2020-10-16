@@ -17,7 +17,18 @@ class UsersRepo implements InterfaceUsers
      */
     public function store(UserFormRequest $request)
     {
-        $user = User::create($request->all());
+        $user= new User();
+
+        $user->name      = request('name');
+        $user->email     = request('email');
+        $user->phone     = request('phone');
+        $user->cellphone = request('cellphone');
+        $user->address   = request('address');
+        $user->document  = request('document');
+        $user->password  = bcrypt(request('password'));
+        $user->email_verified_at = now();
+
+        $user->save();
 
         $user->asignarRol($request->get('rol'));
 

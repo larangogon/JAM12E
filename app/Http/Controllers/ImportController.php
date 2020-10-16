@@ -12,6 +12,17 @@ use Maatwebsite\Excel\Facades\Excel;
 class ImportController extends Controller
 {
     /**
+     * ImportController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('Status');
+        $this->middleware('verified');
+        $this->middleware('role:Administrator');
+    }
+
+    /**
      * @param ImportRequest $request
      * @return RedirectResponse
      */
@@ -38,7 +49,8 @@ class ImportController extends Controller
     {
         Excel::import(new ProductsImport, $request->file('file'));
 
-        return redirect('products')->with('success', 'All good!');
+        return redirect('products')->with('success', 'All good,
+        import of products successfully!');
     }
 
     /**

@@ -11,6 +11,17 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class ExportController extends Controller
 {
     /**
+     * ExportController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('Status');
+        $this->middleware('verified');
+        $this->middleware('role:Administrator');
+    }
+
+    /**
      * @return BinaryFileResponse
      */
     public function exportUsers(): BinaryFileResponse
