@@ -23,4 +23,12 @@ class NosotrosController extends Controller
     {
         return view('nosotros.index');
     }
+
+    /**
+     * @return View
+     */
+    public function indexApi(): View
+    {
+        return view('nosotros.indexApi');
+    }
 }

@@ -171,7 +171,15 @@
                                     </p>
                                 </a>
                             </li>
-
+                            @can('Administrator')
+                            <li class="nav-item">
+                                <a href="{{route('nosotros.indexApi')}}">
+                                    <p>
+                                        Como consumir nuestra API!
+                                    </p>
+                                </a>
+                            </li>
+                            @endcan
                             <li class="nav-item">
                                 <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-home"></i>
