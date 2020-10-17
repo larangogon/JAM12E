@@ -182,6 +182,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -237,6 +238,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'PaymentCons' => App\Constants\PlaceToPay::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
