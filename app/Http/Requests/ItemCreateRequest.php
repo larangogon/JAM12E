@@ -34,7 +34,10 @@ class ItemCreateRequest extends FormRequest
             'img'         => 'required',
             'color'       => ['required'],
             'category'    => ['required'],
-            'size'        => ['required']
+            'size'        => ['required'],
+            'color' => 'exists:colors,id',
+            'size'  => 'exists:sizes,id',
+            'category' => 'exists:categories,id',
         ];
     }
 }

@@ -31,6 +31,7 @@ Route::get('products/destroyimagen/{imagen_id}/{product_id}', 'ProductsControlle
 
 Route::resource('vitrina', 'VitrinaController')->only(['index', 'show']);
 Route::resource('nosotros', 'NosotrosController')->only('index');
+Route::get('nosotros/indexApi', 'NosotrosController@indexApi')->name('nosotros.indexApi');
 
 Route::resource('categories', 'CategoryController')->only(['index', 'store']);
 Route::resource('colors', 'ColorController')->only(['index', 'store']);

@@ -171,6 +171,13 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{route('nosotros.indexApi')}}">
+                                    <p>
+                                        Como consumir nuestra API!
+                                    </p>
+                                </a>
+                            </li>
 
                             <li class="nav-item">
                                 <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
