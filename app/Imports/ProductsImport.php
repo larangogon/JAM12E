@@ -22,6 +22,7 @@ class ProductsImport implements OnEachRow
 
         $product->colors()->create([
             'name' => $row[5],
+
         ]);
 
         $product->sizes()->create([
