@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+
 class ReportController extends Controller
 {
     /**
@@ -12,6 +14,18 @@ class ReportController extends Controller
     public function index()
     {
         return view('reports.index');
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $factura = Order::find($id);
+        $pdf = \PDF::loadView('reports.show', compact('factura'));
+        return $pdf->download('factura.pdf');
+
     }
 
     /**

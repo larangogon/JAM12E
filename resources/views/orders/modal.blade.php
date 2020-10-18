@@ -2,6 +2,14 @@
 <button type="button" class="btn btn-primary btn-sm btn-block float-right" data-toggle="modal" data-target="#addshipping">
     Datos del envio
 </button>
+<small>
+    {{__('Genera factura de tu compra')}}
+</small>
+<a href="{{ route('reports.show', $order->id) }}">
+    <button type="button" class="btn btn-success btn-block btn-sm float-right">
+        Generar factura
+    </button>
+</a>
 
 @else
     <div>
@@ -16,7 +24,7 @@
     </button>
 @endif
 
-{!! Form::open(['url' => 'orders']) !!}
+{!! Form::open(['url' => 'shipping']) !!}
 {{ Form::token() }}
 <div class="modal fade" id="addshipping" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

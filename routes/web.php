@@ -63,6 +63,6 @@ Route::post('imports/importProducts', 'ImportController@importProducts')->name('
 
 Route::get('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
 Route::get('/reportUsers-pdf', 'ReportController@reportProducts')->name('reportProducts');
-Route::resource('reports', 'ReportController')->only(['index', 'store']);
+Route::resource('reports', 'ReportController')->only(['index', 'show']);
 
 

@@ -87,6 +87,9 @@
                     <th scope="col">
                         Cancelar pago
                     </th>
+                    <th scope="col">
+                        Generar Factura
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -115,7 +118,7 @@
                             <form action= "{{ route('orders.shippingStatus',  $order->id)}}" method = "POST">
                                 @csrf
                                 @method('GET')
-                                <button type="submit" class=" btn-sm btn{{$order->shippingStatus ?  'btn-success' : 'btn-danger'}}" role="button" onclick="return confirmarEnvio()">
+                                <button type="submit" class="btn-sm btn {{$order->shippingStatus ?  'btn-success' : 'btn-danger'}}" role="button" onclick="return confirmarEnvio()">
                                     {{$order->shippingStatus ?  'enviado' : 'pendiente'}}
                                 </button>
                             </form>
@@ -128,6 +131,13 @@
                                     <i class="fas fa-minus-circle"></i>
                                 </button>
                             </form>
+                        </td>
+                        <td>
+                            <a href="{{ route('reports.show', $order->id) }}">
+                                <button type="button" class="btn btn-primary btn-sm float-right">
+                                    Generar factura
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
