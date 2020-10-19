@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
+use App\Entities\Order;
 
 class ReportController extends Controller
 {
@@ -25,7 +25,6 @@ class ReportController extends Controller
         $factura = Order::find($id);
         $pdf = \PDF::loadView('reports.show', compact('factura'));
         return $pdf->download('factura.pdf');
-
     }
 
     /**
@@ -45,5 +44,4 @@ class ReportController extends Controller
         $pdf = \PDF::loadView('reports.reportProducts');
         return $pdf->download('productspdf.pdf');
     }
-
 }

@@ -2,15 +2,12 @@
 
 namespace App\Observers;
 
-use App\Payment;
+use App\Entities\Payment;
 
 class PaymentObserver
 {
     /**
-     * Handle the payment "updated" event.
-     *
-     * @param  \App\Payment  $payment
-     * @return void
+     * @param Payment $payment
      */
     public function updated(Payment $payment)
     {
@@ -26,6 +23,10 @@ class PaymentObserver
             'status' => $payment->status, 'order' => $payment->order,
         ]);
     }
+
+    /**
+     * @param $payment
+     */
     public function created($payment)
     {
         logger()->channel('stack')->info('se ha creado un pago', [

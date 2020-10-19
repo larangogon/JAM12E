@@ -1,10 +1,10 @@
 <?php
 
-use App\Category;
-use App\Color;
-use App\Imagen;
-use App\Product;
-use App\Size;
+use App\Entities\Category;
+use App\Entities\Color;
+use App\Entities\Imagen;
+use App\Entities\Product;
+use App\Entities\Size;
 use Illuminate\Database\Seeder;
 
 class ProductsTableSeeder extends Seeder

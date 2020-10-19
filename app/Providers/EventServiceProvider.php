@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\User;
-use App\Product;
-use App\Payment;
-use App\Shipping;
+use App\Entities\User;
+use App\Entities\Product;
+use App\Entities\Payment;
+use App\Entities\Shipping;
 use App\Observers\UserObserver;
 use App\Observers\ShippingObserver;
 use App\Observers\PaymentObserver;

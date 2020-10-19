@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\ProcessP2p;
-use App\Payment;
+use App\Entities\Payment;
 use Illuminate\Console\Command;
 
 class PaymentOrders extends Command

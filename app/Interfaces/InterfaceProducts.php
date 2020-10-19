@@ -2,9 +2,9 @@
 
 namespace App\Interfaces;
 
+use App\Entities\Product;
 use App\Http\Requests\ItemCreateRequest;
 use App\Http\Requests\ItemUpdateRequest;
-use App\Product;
 
 interface InterfaceProducts
 {

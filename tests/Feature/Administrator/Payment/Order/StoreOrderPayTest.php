@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Administrator\Payment\Order;
 
-use App\Cart;
-use App\Order;
-use App\Payment;
-use App\User;
+use App\Entities\Cart;
+use App\Entities\Order;
+use App\Entities\Payment;
+use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;

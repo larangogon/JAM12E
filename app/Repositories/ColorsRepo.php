@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Color;
+use App\Entities\Color;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceColors;
 

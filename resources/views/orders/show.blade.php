@@ -6,30 +6,13 @@
             <p>{{session('success')}}</p>
         </div>
     @endif
+
     <div class="row">
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-black">
                     <p class="card-text">@include('orders.status')</p>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-primary">
-                <table class="table">
-                    <tr>
-                        <th>Order Id</th>
-                        <td>{{$order->id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Total de la ordern</th>
-                        <td>{{$order->total}}</td>
-                    </tr>
-                    <tr>
-                        <th>Estatus de la orden </th>
-                        <td>{{$order->status}}</td>
-                    </tr>
-                </table>
             </div>
         </div>
         <div class="col-md-4">
@@ -50,6 +33,28 @@
                     <tr>
                         <th>Correo</th>
                         <td>{{$order->user->email}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-primary">
+                <table class="table">
+                    <tr>
+                        <th>Order Id</th>
+                        <td>{{$order->id}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total de la orden</th>
+                        <td>{{$order->total}}</td>
+                    </tr>
+                    <tr>
+                        <th>Estatus de la orden </th>
+                        <td>{{$order->status}}</td>
+                    </tr>
+                    <tr>
+                        <th>Estado del pago</th>
+                        <td>{{$order->payment->status}}</td>
                     </tr>
                 </table>
             </div>
@@ -93,5 +98,7 @@
                 </div>
             </div>
         </div>
+    </div>
+
 @endsection
 

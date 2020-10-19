@@ -5,7 +5,7 @@ namespace App\Repositories\Api;
 use App\Http\Requests\ApiStoreRequest;
 use App\Http\Requests\ApiUpdateRequest;
 use App\Interfaces\Api\InterfaceApiProducts;
-use App\Product;
+use App\Entities\Product;
 
 class ProductsApiRepo implements InterfaceApiProducts
 {

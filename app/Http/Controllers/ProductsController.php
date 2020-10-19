@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Size;
-use App\Color;
-use App\Imagen;
-use App\Product;
-use App\Category;
+use App\Entities\Size;
+use App\Entities\Color;
+use App\Entities\Imagen;
+use App\Entities\Product;
+use App\Entities\Category;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceProducts;

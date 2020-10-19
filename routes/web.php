@@ -65,4 +65,5 @@ Route::get('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOr
 Route::get('/reportUsers-pdf', 'ReportController@reportProducts')->name('reportProducts');
 Route::resource('reports', 'ReportController')->only(['index', 'show']);
 
-
+Route::get('metrics', 'MetricController@index')->name('metrics.index');
+Route::get('metrics/{metric}', 'MetricController@show')->name('metrics.show');

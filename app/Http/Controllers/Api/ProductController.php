@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ApiStoreRequest;
 use App\Http\Requests\ApiUpdateRequest;
 use App\Interfaces\Api\InterfaceApiProducts;
-use App\Product;
+use App\Entities\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

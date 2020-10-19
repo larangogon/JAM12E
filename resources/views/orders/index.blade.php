@@ -85,10 +85,10 @@
                         Envio
                     </th>
                     <th scope="col">
-                        Cancelar pago
+                        Factura
                     </th>
                     <th scope="col">
-                        Generar Factura
+                        Cancelar pago
                     </th>
                 </tr>
                 </thead>
@@ -124,6 +124,13 @@
                             </form>
                         </td>
                         <td>
+                            <a href="{{ route('reports.show', $order->id) }}">
+                                <button type="button" class="btn btn-primary btn-sm ">
+                                    Generar factura
+                                </button>
+                            </a>
+                        </td>
+                        <td>
                             <form action="{{route('orders.reversePay')}}" method="post">
                                 @csrf
                                 <input type="hidden" name="order" value="{{$order->id}}">
@@ -131,13 +138,6 @@
                                     <i class="fas fa-minus-circle"></i>
                                 </button>
                             </form>
-                        </td>
-                        <td>
-                            <a href="{{ route('reports.show', $order->id) }}">
-                                <button type="button" class="btn btn-primary btn-sm float-right">
-                                    Generar factura
-                                </button>
-                            </a>
                         </td>
                     </tr>
                 @endforeach

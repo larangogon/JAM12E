@@ -189,6 +189,15 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('Administrator')
+                                <li class="nav-item">
+                                    <a href="{{route('metrics.index')}}">
+                                        <p>
+                                            Metricas
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                             <li class="nav-item">
                                 <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-home"></i>
@@ -369,7 +378,6 @@
 
                                 <li class="nav-item">
                                     @auth
-
                                         @if(count(auth()->user()->orders))
                                     <a href="{{route('orders.showv', auth()->id())}}"
                                        class="{{ Request::path() === 'clients' ? 'nav-link active' : 'nav-link' }}">
