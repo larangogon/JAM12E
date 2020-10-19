@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Imagen extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['id', 'name', 'product_id'];
 
     protected $table = 'imagenes';
 
@@ -16,6 +16,6 @@ class Imagen extends Model
      */
     public function product(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'product_id');
+        return $this->belongsToMany(Product::class);
     }
 }

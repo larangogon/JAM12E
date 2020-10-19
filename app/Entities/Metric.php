@@ -2,7 +2,6 @@
 
 namespace App\Entities;
 
-use App\Entities\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -10,7 +9,6 @@ use Illuminate\Support\Collection;
 class Metric extends Model
 {
     protected $fillable = ['metric', 'primary_id', 'secondary_id', 'date', 'keyword', 'status_type', 'status'];
-
 
     /**
      * @param array|string|null $primaryId

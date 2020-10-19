@@ -33,5 +33,7 @@ class UserSeeder extends Seeder
 
         $this->cart->user_id = $user->id;
         $this->cart->save();
+
+        factory(User::class, 10)->create();
     }
 }

@@ -46,7 +46,7 @@ class UserController extends Controller
             'users' => $this->user
                 ->role($role)
                 ->search($search)
-                ->paginate(12)
+                ->paginate(5)
         ]);
     }
 
