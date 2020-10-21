@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Payment::class, function (Faker $faker) {
     return [
         'internalReference' => '1494590937',
-        'status'            => 'APPROVED',
+        'status'            => $faker->randomElement(\App\Constants\Statuses::toArray()),
         "message"           => 'estos datos son generados como faker',
         'amount'            => $faker->numberBetween(10000, 200000),
         'document'          => $faker->numberBetween(10000, 200000),

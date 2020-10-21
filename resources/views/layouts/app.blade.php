@@ -20,7 +20,6 @@
     <link href="{{asset('plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet" >
 
     <!-- Fonts -->
-    <link href="{{asset('//fonts.gstatic.com')}}" rel="stylesheet" >
     <link href="{{asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700')}}" rel="stylesheet">
 
     <!-- Styles -->
@@ -63,7 +62,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <form action="{{route('vitrina.index')}}" method="get">
-                                <input type="text" name="category" id="" value="Hogar" hidden>
+                                <label for=""></label><input type="text" name="category" id="" value="Hogar" hidden>
                                 <button type="submit" class="btn btn-link">Hogar</button>
                             </form>
                         </a>
@@ -81,7 +80,7 @@
                             <form action="{{route('vitrina.index')}}" method="get">
                                 <input type="text" name="category" id="" value="Mujer" hidden>
                                 <button type="submit" class="btn btn-link">Mujer</button>
-                            </form></h5>
+                            </form>
                         </a>
                     </li>
                      </ul>
@@ -106,18 +105,18 @@
                                 <a class="navbar-brand" class="nav-link dropdown-toggle" href="{{ url('cart/show') }}">
                                     <i class="fas fa-cart-arrow-down ">
                                         @auth
-                                         @if (count(auth()->user()->cart->products))
-                                        <span class="badge badge-danger">
-                                            {{(count(auth()->user()->cart->products))}}
-                                          </span>
+                                            @if (count(auth()->user()->cart->products))
+                                                <span class="badge badge-danger">
+                                                    {{(count(auth()->user()->cart->products))}}
+                                                </span>
                                             @endif
                                         @endauth
-                                        </i>
+                                    </i>
                                 </a>
                             </div>
                             </ul>
                         </li>
-                </ul>
+                     </ul>
 
             </nav>
             <!-- /.navbar -->
@@ -148,12 +147,10 @@
                                            document.getElementById('logout-form').submit();">
                                     Cerrar Sesión
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf
                                 </form>
-
                                 @endguest
                             </a>
                         </div>
@@ -201,7 +198,9 @@
                             <li class="nav-item">
                                 <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-home"></i>
-                                    <p>Inicio</p>
+                                    <p>
+                                        Inicio
+                                    </p>
                                 </a>
                             </li>
 
@@ -220,7 +219,9 @@
                                         <a href="{{url('users')}}"
                                            class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
                                             <i class="far fa-check-circle"></i>
-                                            <p>Todos usuarios</p>
+                                            <p>
+                                                Todos usuarios
+                                            </p>
                                         </a>
                                     </li>
                                     <li class="nav-item has-treeview">
@@ -403,7 +404,7 @@
                                     </li>
                                     <li class="nav-item has-treeview">
                                         <a href="#" class="nav-link">
-                                            <i class="fas fa-tshirt"></i></i>
+                                            <i class="fas fa-tshirt"></i>
                                             <p>Moda<i class="fas fa-angle-left right"></i></p>
                                         </a>
                                   <ul class="nav nav-treeview">
@@ -453,7 +454,10 @@
                                 </ul>
                             </li>
                         </ul>
+                              </li>
+                        </ul>
                     </nav>
+
                     <!-- /.sidebar-menu -->
                 </div>
                 <!-- /.sidebar -->
@@ -477,7 +481,7 @@
             <footer class="main-footer">
                 <!-- NO QUITAR -->
 
-                <strong>JAM Stores
+                <strong>JAM Stores</strong>
 
             </footer>
 

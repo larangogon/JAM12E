@@ -5,7 +5,7 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
-                    MÉTRICAS
+                    Info Estado de ordenes
                 </h1>
             </div>
         </div>
@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="chart-container">
-                                <canvas id="orderBar" height="200"></canvas>
+                                <canvas id="orderBar" height="100"></canvas>
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="chart-container">
-                                <canvas id="orderPie" height="200"></canvas>
+                                <canvas id="orderPie" height="100"></canvas>
                             </div>
                         </div>
                     </div>

@@ -12,4 +12,3 @@ $factory->define(Imagen::class, function (Faker $faker) {
         'product_id' => Product::all()->random()->id
     ];
 });
-

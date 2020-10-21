@@ -4,7 +4,7 @@ import {stringify} from "qs";
 import PieChart from "./charts/PieChart";
 import LineChart from "./charts/LineChart";
 export default {
-    name: "OrderMetric",
+    name: "orderMetric",
     data() {
         return {
             orderCount: {},
@@ -53,7 +53,7 @@ export default {
         this.from = new Date(
             this.to.getFullYear(),
             this.to.getMonth(),
-            (this.to.getDate() - 7)
+            (this.to.getDate() - 15)
         );
         this.getMetrics();
     },

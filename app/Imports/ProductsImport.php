@@ -26,7 +26,9 @@ class ProductsImport implements OnEachRow
         $colors = explode(',', $row[5]);
         $count = count($colors);
         foreach ($colors as $key => $color) {
-            if($key == $count - 1) break;
+            if ($key == $count - 1) {
+                break;
+            }
             $ColorId = Color::where('name', $color)->first();
             $product->colors()->attach($ColorId->id);
         }
@@ -34,7 +36,9 @@ class ProductsImport implements OnEachRow
         $sizes = explode(',', $row[6]);
         $count = count($sizes);
         foreach ($sizes as $key => $size) {
-            if($key == $count - 1) break;
+            if ($key == $count - 1) {
+                break;
+            }
             $sizeId = Size::where('name', $size)->first();
             $product->sizes()->attach($sizeId->id);
         }
@@ -42,7 +46,9 @@ class ProductsImport implements OnEachRow
         $categories = explode(',', $row[7]);
         $count = count($categories);
         foreach ($categories as $key => $category) {
-            if($key == $count - 1) break;
+            if ($key == $count - 1) {
+                break;
+            }
             $categoryId = Category::where('name', $category)->first();
             $product->categories()->attach($categoryId->id);
         }
@@ -50,7 +56,9 @@ class ProductsImport implements OnEachRow
         $imagenes = explode(',', $row[8]);
         $count = count($imagenes);
         foreach ($imagenes as $key => $imagen) {
-            if($key == $count - 1) break;
+            if ($key == $count - 1) {
+                break;
+            }
             $product->imagenes()->create([
                 'name' => $imagen,
             ]);

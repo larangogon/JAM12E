@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Entities\Order;
 use App\Entities\User;
 use App\Entities\Product;
 use App\Entities\Payment;
 use App\Entities\Shipping;
+use App\Events\OrderIsCreated;
+use App\Listeners\StoreOrderInMetrics;
+use App\Observers\OrderObserver;
 use App\Observers\UserObserver;
 use App\Observers\ShippingObserver;
 use App\Observers\PaymentObserver;
@@ -23,8 +27,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
+        OrderIsCreated::class => [
+            StoreOrderInMetrics::class,
         ],
     ];
 
