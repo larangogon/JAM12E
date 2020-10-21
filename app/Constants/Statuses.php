@@ -6,9 +6,8 @@ use MyCLabs\Enum\Enum;
 
 class Statuses extends Enum
 {
-    public const PAID = 'APPROVED';
-    public const UNPAID = 'REJECTED';
+    public const PAID    = 'APPROVED';
+    public const UNPAID  = 'REJECTED';
     public const OVERDUE = 'PENDING';
     public const PENDING = 'pending_pay';
-
 }

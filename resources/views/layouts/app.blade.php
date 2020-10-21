@@ -162,7 +162,7 @@
                             data-accordion="false">
 
                             <li class="nav-item">
-                                <a href="{{url('nosotros')}}">
+                                <a href="{{url('nosotros')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <p>
                                         Quienes somos!
                                     </p>
@@ -170,7 +170,8 @@
                             </li>
                             @can('Administrator')
                             <li class="nav-item">
-                                <a href="{{route('nosotros.indexApi')}}">
+                                <a href="{{route('nosotros.indexApi')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="fas fa-file-medical-alt"></i>
                                     <p>
                                         Como consumir nuestra API!
                                     </p>
@@ -179,7 +180,8 @@
                             @endcan
                             @can('Administrator')
                                 <li class="nav-item">
-                                    <a href="{{route('reports.index')}}">
+                                    <a href="{{route('reports.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-flag"></i>
                                         <p>
                                             Generar reportes
                                         </p>
@@ -188,7 +190,8 @@
                             @endcan
                             @can('Administrator')
                                 <li class="nav-item">
-                                    <a href="{{route('metrics.index')}}">
+                                    <a href="{{route('metrics.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-file-alt"></i>
                                         <p>
                                             Metricas
                                         </p>
@@ -213,10 +216,10 @@
                                         Usuarios
                                     </p>
                                 </a>
-                                <ul cass="nav nav-pills nav-sidebar flex-column"data-widget="treeview" role="menu"
+                                <ul cass="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu"
                                     data-accordion="false">
                                     <li class="nav-item">
-                                        <a href="{{url('users')}}"
+                                        <a href="{{url('users')}}" class="nav-link"
                                            class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
                                             <i class="far fa-check-circle"></i>
                                             <p>
@@ -258,6 +261,7 @@
                                         </ul>
                                     </li>
                                 </ul>
+                            </li>
                               @endcan
                               @can('Administrator')
                             <li class="nav-item has-treeview">
@@ -392,7 +396,7 @@
                               <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="fas fa-shopping-bag"></i>
-                                    <p>Lo que buscas esta aqui!<i class="fas fa-angle-left right"></i></p>
+                                    <p>Vitrina<i class="fas fa-angle-left right"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
                                     <li class="nav-item">
