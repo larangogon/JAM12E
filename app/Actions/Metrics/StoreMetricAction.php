@@ -7,9 +7,6 @@ use App\Entities\Order;
 
 class StoreMetricAction
 {
-    /**
-     * @param Order $order
-     */
     public static function execute(Order $order): void
     {
         $metric = Metric::firstOrCreate([

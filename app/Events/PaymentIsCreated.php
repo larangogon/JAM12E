@@ -2,25 +2,25 @@
 
 namespace App\Events;
 
-use App\Entities\Order;
+use App\Entities\Payment;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class OrderIsCreated
+class PaymentIsCreated
 {
     use Dispatchable;
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $order;
+    public $payment;
 
     /**
      * OrderIsCreated constructor.
-     * @param Order $order
+     * @param Payment $payment
      */
-    public function __construct(Order $order)
+    public function __construct(Payment $payment)
     {
-        $this->order = $order;
+        $this->payment = $payment;
     }
 }

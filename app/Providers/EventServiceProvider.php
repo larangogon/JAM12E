@@ -8,8 +8,11 @@ use App\Entities\Product;
 use App\Entities\Payment;
 use App\Entities\Shipping;
 use App\Events\OrderIsCreated;
+use App\Events\PaymentIsCreated;
 use App\Listeners\StoreOrderInMetrics;
+use App\Listeners\StorePaymentInMetrics;
 use App\Observers\OrderObserver;
+use App\Observers\PaymentMetricObserver;
 use App\Observers\UserObserver;
 use App\Observers\ShippingObserver;
 use App\Observers\PaymentObserver;
@@ -30,6 +33,9 @@ class EventServiceProvider extends ServiceProvider
         OrderIsCreated::class => [
             StoreOrderInMetrics::class,
         ],
+        PaymentIsCreated::class => [
+            StorePaymentInMetrics::class,
+        ],
     ];
 
     /**
@@ -41,6 +47,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
+        Payment::observe(PaymentMetricObserver::class);
+        Order::observe(OrderObserver::class);
         User::observe(UserObserver::class);
         Shipping::observe(ShippingObserver::class);
         Payment::observe(PaymentObserver::class);
