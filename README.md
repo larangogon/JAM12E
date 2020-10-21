@@ -21,6 +21,28 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+Install a server side application. Example: Xampp, Wamp, Lampp, Laragon, etc.
+Clone the repository on the root. (htdocs for xampp, www for laragon and wamp, etc).
+Open terminal and run the following commands:
+cd JAM12E
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+mysql -u root
+create database jam;
+create database testing;
+exit
+php artisan migrate
+phpunit
+php artisan db:seed
+To finish and deploy the application, run the command:
+php artisan optimize:clear
+php artisan serve
+Go to the generated link.
+Login. (user: admin@example.com, password: 123).
+exit cd ..
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
