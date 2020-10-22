@@ -7,9 +7,10 @@ use App\Entities\Color;
 use App\Entities\Product;
 use App\Entities\Size;
 use Maatwebsite\Excel\Concerns\OnEachRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Row;
 
-class ProductsImport implements OnEachRow
+class ProductsImport implements OnEachRow, WithValidation
 {
     public function onRow(Row $row)
     {
@@ -21,6 +22,8 @@ class ProductsImport implements OnEachRow
             'description' => $row[2],
             'price'       => $row[3],
             'stock'       => $row[4],
+            'created_by'  => auth()->user()->id,
+            'updated_by'  => auth()->user()->id,
         ]);
 
         $colors = explode(',', $row[5]);
@@ -63,5 +66,31 @@ class ProductsImport implements OnEachRow
                 'name' => $imagen,
             ]);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            '*.0' => 'required',
+            '*.1' => 'required|max:25',
+            '*.2' => 'required|max:250',
+            '*.3' => 'required|numeric',
+            '*.4' => 'required|numeric',
+            '*.5' => ['required'],'exists:colors,id',
+            '*.6' => ['required'],'exists:colors,id',
+            '*.7' => ['required'],'exists:colors,id',
+            '*.8' => 'required',
+            ];
+    }
+
+    /**
+     * @return int
+     */
+    public function batchSize(): int
+    {
+        return 1000;
     }
 }

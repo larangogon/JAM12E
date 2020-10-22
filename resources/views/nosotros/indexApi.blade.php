@@ -54,7 +54,6 @@
                                         </tr>
                                     </table>
                                 </div>
-                                </p>
                                 <p>
                                     <em>Todos los campos son requeridos</em>
                                 </p>

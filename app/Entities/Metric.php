@@ -49,8 +49,4 @@ class Metric extends Model
 
         return collect($data);
     }
-
-    public static function firstOrCreate(array $array)
-    {
-    }
 }

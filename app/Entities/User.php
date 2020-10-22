@@ -121,4 +121,20 @@ class User extends Authenticatable implements MustVerifyEmail
             $query->where('name', $role);
         });
     }
+
+    /**
+     * @return HasMany
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'created_by');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function productsUpdate(): HasMany
+    {
+        return $this->hasMany(Product::class, 'updated_by');
+    }
 }

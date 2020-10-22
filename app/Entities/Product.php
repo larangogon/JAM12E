@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
@@ -11,7 +12,7 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    protected $fillable = ['name', 'description', 'price', 'stock', 'active'];
+    protected $fillable = ['name', 'description', 'price', 'stock', 'active', 'created_by', 'updated_by',];
 
     /**
      * @return HasMany
@@ -175,5 +176,21 @@ class Product extends Model
         return Cache::remember('products', now()->addDay(), function () {
             return $this->all();
         });
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function userCreate(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function UserUpdate(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

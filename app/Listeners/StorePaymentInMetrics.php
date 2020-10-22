@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Actions\Metrics\PaymentStoreMetricAction;
 use App\Events\PaymentIsCreated;
 
 class StorePaymentInMetrics
@@ -11,6 +12,6 @@ class StorePaymentInMetrics
      */
     public function handle(PaymentIsCreated $event)
     {
-        //PaymentStoreMetricAction::execute($event->payment);
+        PaymentStoreMetricAction::execute($event->payment);
     }
 }

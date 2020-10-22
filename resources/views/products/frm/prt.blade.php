@@ -1,4 +1,5 @@
 @if ( !empty ( $products->id) )
+    <input type="hidden" value="{{auth()->user()->id}}" name="updated_by">
     <div class="row">
         <div class="col-sm-4">
             <div class="form-group">
@@ -124,6 +125,7 @@
         </div>
     </div>
 @else
+    <input type="hidden" value="{{auth()->user()->id}}" name="created_by">
     <div class="row">
         <div class="col-sm-6">
 

@@ -12,6 +12,6 @@ class StoreOrderInMetrics
      */
     public function handle(OrderIsCreated $event)
     {
-        //StoreMetricAction::execute($event->order);
+        StoreMetricAction::execute($event->order);
     }
 }

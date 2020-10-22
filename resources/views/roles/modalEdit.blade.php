@@ -1,16 +1,15 @@
-
-<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#addRol">
-    Crear Rol
+<button type="button" class="btn btn-danger btn-sm float-right" data-toggle="modal" data-target="#updateRol">
+    Eliminar Rol
 </button>
 
 {!! Form::open(['url' => 'roles']) !!}
 {{ Form::token() }}
-<div class="modal fade" id="addRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    Nuevo Rol de usuario
+                    Actualizar roles
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -18,12 +17,16 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">
-                            Nombre del rol:
-                        </label>
-                        <input name="name" type="text" class="form-control" id="recipient-name">
-                    </div>
+                    @foreach($roles as $role)
+                        <form action= "{{ route('roles.destroy',  $role->id)}}" method = "POST">
+                            @csrf
+                            @method('DELETE')
+                            {{$role->name}}
+                            <button type="submit" class="btn btn-danger btn-sm float-right"  role="button" >
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    @endforeach
                 </form>
             </div>
             <div class="modal-footer">
@@ -31,7 +34,7 @@
                     Cerrar
                 </button>
                 <button type="submit" class="btn btn-primary">
-                    Guardar Rol
+                    Actualizar Rol
                 </button>
             </div>
         </div>

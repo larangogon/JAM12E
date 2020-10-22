@@ -4,11 +4,16 @@
     @can('Administrator')
         <div class="container">
             <div class="row">
+                <div class="col-md-5 mx-auto">
+                <h2>
+                    Editar Roles y permisos
+                    @include('roles.modal')
+                    @include('roles.modalEdit')
+                </h2>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-8 mx-auto">
-                    <h2 class="mt-3">
-                        Editar Roles y permisos
-                        @include('roles.modal')
-                    </h2>
                     <div class="mt-3 mb-5">
                     <div class="row h-50">
                         <div class="col-3">
@@ -40,30 +45,9 @@
                                                     </li>
                                                 @endforeach
                                             </ul>
-                                            <button type="submit" class="btn btn-block btn-primary">{{__('actualizar permisos')}}</button>
+                                            <button type="submit" class="btn btn-block btn-primary">Actualizar permisos</button>
                                         </form>
                                     </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="card">
-                                @foreach($roles as $role)
-                                    <table class="table-responsive-sm">
-                                        <tr>
-                                            <th>{{$role->name}}</th>
-                                            <td>
-                                                <form action= "{{ route('roles.destroy',  $role->id)}}" method = "POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm float-right"  role="button" >
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </table>
                                 @endforeach
                             </div>
                         </div>

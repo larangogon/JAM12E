@@ -20,8 +20,20 @@ class CreateProductsTable extends Migration
             $table->string('price');
             $table->string('stock');
             $table->boolean('active')->default(false);
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('updated_by')
+                ->references('id')->
+                on('users')->
+                onDelete('cascade');
         });
     }
 

@@ -10,7 +10,7 @@ class OrderObserver
     /**
      * @param Order $order
      */
-    public function created(Order $order)
+    public function updated(Order $order)
     {
         event(new OrderIsCreated($order));
     }
