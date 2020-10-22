@@ -3,32 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Exports\OrdersExport;
-use App\Exports\ProdustsExport;
+use App\Exports\ProductsExport;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExportController extends Controller
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * ExportController constructor.
      */
-    public function exportUsers()
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('Status');
+        $this->middleware('verified');
+        $this->middleware('role:Administrator');
+    }
+
+    /**
+     * @return BinaryFileResponse
+     */
+    public function exportUsers(): BinaryFileResponse
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      */
-    public function exportProducts()
+    public function exportProducts(): BinaryFileResponse
     {
-        return Excel::download(new ProdustsExport, 'products.xlsx');
+        return Excel::download(new ProductsExport, 'products.xlsx');
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      */
-    public function exportOrders()
+    public function exportOrders(): BinaryFileResponse
     {
         return Excel::download(new OrdersExport, 'orders.xlsx');
     }

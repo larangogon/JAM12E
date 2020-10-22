@@ -24,5 +24,8 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
         Route::apiResource('product', 'Api\ProductController');
+        Route::apiResource('color', 'Api\ColorApiController');
+        Route::apiResource('category', 'Api\CategoryApiController');
+        Route::apiResource('size', 'Api\SizeApiController');
     });
 });

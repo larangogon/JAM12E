@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use App\User;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -17,6 +16,7 @@ class PermissionsTableSeeder extends Seeder
     {
         Permission::create(['name' => 'products.index']);
         Permission::create(['name' => 'products.edit']);
+        Permission::create(['name' => 'opciones.avanzadas']);
         Permission::create(['name' => 'products.show']);
         Permission::create(['name' => 'products.create']);
         Permission::create(['name' => 'products.destroy']);
@@ -51,7 +51,6 @@ class PermissionsTableSeeder extends Seeder
             'products.index',
             'products.show',
             'orders.show'
-
         ]);
     }
 }

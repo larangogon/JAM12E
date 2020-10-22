@@ -2,10 +2,10 @@
 
 namespace App\Decorators;
 
-use App\Cart;
-use App\Order;
-use App\Detail;
-use App\Payment;
+use App\Entities\Cart;
+use App\Entities\Order;
+use App\Entities\Detail;
+use App\Entities\Payment;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Constants\PlaceToPay;
@@ -28,7 +28,7 @@ class DecoratorOrder implements InterfaceOrders
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      * @throws \Exception
      */
     public function store(Request $request): RedirectResponse
@@ -73,6 +73,7 @@ class DecoratorOrder implements InterfaceOrders
      * @param Request $request
      * @param int $id
      * @return mixed
+     * @throws \Exception
      */
     public function update(Request $request, int $id)
     {
@@ -86,31 +87,41 @@ class DecoratorOrder implements InterfaceOrders
             $status = $response->status->status;
 
             $order->payment->update([
-                'status' => $status,
-                ]);
+                'status' => $status
+            ]);
         } elseif ($order->payment->status === PlaceToPay::APPROVED) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
-            $status             = $response->status->status;
-            $amount             = $response->payment[0]->amount->from->total;
-            $internalReference  = $response->payment[0]->internalReference;
-            $message            = $response->status->message;
-            $payerdocument      = $response->request->payer->document;
-            $payername          = $response->request->payer->name;
-            $payeremail         = $response->request->payer->email;
-            $payermobile        = $response->request->payer->mobile;
-            $locale             = $response->request->locale;
+            $status            = $response->status->status;
+            $amount            = $response->payment[0]->amount->from->total;
+            $internalReference = $response->payment[0]->internalReference;
+            $message           = $response->status->message;
+            $payerdocument     = $response->request->payer->document;
+            $payername         = $response->request->payer->name;
+            $payeremail        = $response->request->payer->email;
+            $payermobile       = $response->request->payer->mobile;
+            $locale            = $response->request->locale;
 
             $order->payment->update([
-            'internalReference' => $internalReference,
-            'status'            => $status,
-            "message"           => $message,
-            'amount'            => $amount,
-            'document'          => $payerdocument,
-            'name'              => $payername,
-            'email'             => $payeremail,
-            'mobile'            => $payermobile,
-            'locale'            => $locale,
+                'internalReference' => $internalReference,
+                'status'            => $status,
+                "message"           => $message,
+                'amount'            => $amount,
+                'document'          => $payerdocument,
+                'name'              => $payername,
+                'email'             => $payeremail,
+                'mobile'            => $payermobile,
+                'locale'            => $locale
+            ]);
+        } elseif ($order->payment->status === PlaceToPay::REJECTED) {
+            $response = $this->requestP2P('getRequestinformation', $order);
+
+            $status  = $response->status->status;
+            $message = $response->status->message;
+
+            $order->payment->update([
+                'status'  => $status,
+                "message" => $message
             ]);
         } elseif ($order->payment->status === PlaceToPay::APPROVED) {
             $response = $this->requestP2P('getRequestinformation', $order);
@@ -134,17 +145,7 @@ class DecoratorOrder implements InterfaceOrders
                 'name'              => $payername,
                 'email'             => $payeremail,
                 'mobile'            => $payermobile,
-                'locale'            => $locale,
-            ]);
-        } elseif ($order->payment->status === PlaceToPay::REJECTED) {
-            $response = $this->requestP2P('getRequestinformation', $order);
-
-            $status  = $response->status->status;
-            $message = $response->status->message;
-
-            $order->payment->update([
-                'status'  => $status,
-                "message" => $message,
+                'locale'            => $locale
             ]);
         }
 
@@ -261,7 +262,8 @@ class DecoratorOrder implements InterfaceOrders
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function resend(Request $request): RedirectResponse
     {
@@ -283,10 +285,9 @@ class DecoratorOrder implements InterfaceOrders
 
     /**
      * @param Request $request
-     * @return mixed|void7
-     *
+     * @throws \Exception
      */
-    public function reversePay(Request $request): Void
+    public function reversePay(Request $request): void
     {
         $order = Order::find($request->get('order'));
 
@@ -311,7 +312,8 @@ class DecoratorOrder implements InterfaceOrders
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function complete(Request $request): RedirectResponse
     {

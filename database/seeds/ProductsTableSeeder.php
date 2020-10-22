@@ -1,10 +1,10 @@
 <?php
 
-use App\Category;
-use App\Color;
-use App\Imagen;
-use App\Product;
-use App\Size;
+use App\Entities\Category;
+use App\Entities\Color;
+use App\Entities\Imagen;
+use App\Entities\Product;
+use App\Entities\Size;
 use Illuminate\Database\Seeder;
 
 class ProductsTableSeeder extends Seeder
@@ -16,7 +16,7 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Product::class, 40)->create();
+        factory(Product::class, 2)->create();
         $colors = Color::all();
         $sizes = Size::all();
         $categories = Category::all();

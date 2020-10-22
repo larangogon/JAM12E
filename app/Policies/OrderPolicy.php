@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Order;
+use App\Entities\User;
+use App\Entities\Order;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class OrderPolicy

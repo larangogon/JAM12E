@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Category;
+use App\Entities\Category;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceCategories;
 
@@ -12,11 +12,11 @@ class CategoriesRepo implements InterfaceCategories
      * @param Request $request
      * @return mixed|void
      */
-    public function store(Request $request): Void
+    public function store(Request $request): void
     {
-        $role = new Category();
-        $role->name = request('name');
+        $category = new Category();
+        $category->name = request('name');
 
-        $role->save();
+        $category->save();
     }
 }

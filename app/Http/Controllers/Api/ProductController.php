@@ -3,25 +3,37 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ItemCreateRequest;
-use App\Http\Requests\ItemUpdateRequest;
-use App\Product;
+use App\Http\Requests\ApiStoreRequest;
+use App\Http\Requests\ApiUpdateRequest;
+use App\Interfaces\Api\InterfaceApiProducts;
+use App\Entities\Product;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    protected $products;
+
+    /**
+     * ProductsController constructor.
+     * @param InterfaceApiProducts $products
+     */
+    public function __construct(InterfaceApiProducts $products)
     {
-        $this->middleware('Status');
+        $this->products = $products;
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        $products = Product::all(['id','name', 'description', 'price', 'stock']);
+        $query    = trim($request->get('search'));
+        $products = Product::where('name', 'LIKE', '%' . $query . '%')
+            ->orwhere('id', 'LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            ->paginate(2);
 
         foreach ($products as $product) {
             $product->colors;
@@ -30,39 +42,32 @@ class ProductController extends Controller
             $product->imagenes;
         }
 
-        return response()->json(['lista de procustos', $products], 200);
+        return response()->json(['lista de procustos', $products, 'search',$query], 200);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ApiStoreRequest $request
+     * @return JsonResponse
      */
-    public function store(ItemCreateRequest $request)
+    public function store(ApiStoreRequest $request): JsonResponse
     {
-        $product = Product::create($request->all());
+        $this->products->store($request);
 
-        $product->asignarColor($request->get('color'));
-        $product->asignarCategory($request->get('category'));
-        $product->asignarSize($request->get('size'));
-
-        $files = $request->file('img');
-        $product->asignarImagen($files, $product->id);
-
+        if (!'product') {
+            return response()
+                ->json('failed', 200);
+        }
 
         return response()->json([
-            'status' => ($product) ? 'created' : 'failed'
+            'status' => 'created'
         ], 200);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
         $product = Product::find($id, [
             'id','name', 'description', 'price', 'stock'
@@ -78,32 +83,24 @@ class ProductController extends Controller
         $product->sizes;
         $product->imagenes;
 
-
         return response()->json(['Produto', $product], 200);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param ApiUpdateRequest $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function update(ItemUpdateRequest $request, Product $product)
+    public function update(ApiUpdateRequest $request, int $id): JsonResponse
     {
-        $product->update($request->all());
+        $product = Product::find($id);
+
+        $this->products->update($request, $id);
 
         if (!$product) {
             return response()
                 ->json('no se encontro el producto con este id', 404);
         }
-
-        $product->colors()->sync($request->get('color'));
-        $product->categories()->sync($request->get('category'));
-        $product->sizes()->sync($request->get('size'));
-
-        $files = $request->file('img');
-        $product->asignarImagen($files, $product->id);
 
         return response()->json([
             'status' => ($product) ? 'updated' : 'failed'
@@ -111,12 +108,10 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $product = Product::destroy($id);
 

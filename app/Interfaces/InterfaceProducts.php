@@ -2,9 +2,9 @@
 
 namespace App\Interfaces;
 
+use App\Entities\Product;
 use App\Http\Requests\ItemCreateRequest;
 use App\Http\Requests\ItemUpdateRequest;
-use App\Product;
 
 interface InterfaceProducts
 {
@@ -28,11 +28,11 @@ interface InterfaceProducts
     public function destroy(int $id);
 
     /**
-     * @param int $imagen_id
-     * @param int $product_id
+     * @param int $id
+     * @param Product $product
      * @return mixed
      */
-    public function destroyimagen(int $imagen_id, int $product_id);
+    public function destroyimagen(int $id, Product $product);
 
     /**
      * @param int $id

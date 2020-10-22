@@ -3,7 +3,6 @@
 namespace App\Interfaces;
 
 use Illuminate\Http\Request;
-use Spatie\Permission\Traits\HasRoles;
 
 interface InterfaceRoles
 {

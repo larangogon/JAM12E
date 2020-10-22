@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Shipping;
-use App\User;
-use App\Order;
-use Illuminate\Support\Facades\Mail;
+use App\Entities\User;
+use App\Entities\Order;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use App\Constants\PaceToPay;
 use App\Interfaces\InterfaceOrders;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -21,9 +17,11 @@ class OrderController extends Controller
     /**
      * OrderController constructor.
      * @param InterfaceOrders $orders
+     * @param Order $order
      */
-    public function __construct(InterfaceOrders $orders)
+    public function __construct(InterfaceOrders $orders, Order $order)
     {
+        $this->order = $order;
         $this->orders = $orders;
         $this->middleware('auth');
         $this->middleware('Status');
@@ -36,17 +34,15 @@ class OrderController extends Controller
      */
     public function index(Request $request): View
     {
-        $query  = trim($request->get('search'));
+        $search   = $request->get('search', null);
 
-        $orders = Order::where('id', 'LIKE', '%' . $query . '%')
-                        ->orWhere('status', 'LIKE', '%' . $query . '%')
-                        ->orWhere('shippingStatus', 'LIKE', '%' . $query . '%')
-                        ->orderBy('id', 'asc')
-                        ->paginate(6);
+        $this->order = new Order();
 
         return view('orders.index', [
-            'orders' => $orders,
-            'search' => $query
+            'search'   => $search,
+            'orders' => $this->order
+                ->search($search)
+                ->paginate(5)
         ]);
     }
 
@@ -80,8 +76,10 @@ class OrderController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Request $request
+     * @param Order $order
      * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Request $request, Order $order): View
     {
@@ -111,12 +109,12 @@ class OrderController extends Controller
     }
 
     /**
-     * @param int $order_id
+     * @param int $id
      * @return RedirectResponse
      */
-    public function shippingStatus(int $order_id):RedirectResponse
+    public function shippingStatus(int $id): RedirectResponse
     {
-        $orders = Order::findOrFail($order_id);
+        $orders = Order::findOrFail($id);
 
         $state = $orders->shippingStatus;
 
@@ -141,11 +139,10 @@ class OrderController extends Controller
      */
     public function reversePay(Request $request): RedirectResponse
     {
-        $order = $this->orders->reversePay($request);
+        $this->orders->reversePay($request);
 
-        Session::flash('message', ' el pago se  ha revertido exitosamente!');
-
-        return redirect('vitrina');
+        return redirect('vitrina')
+            ->with('success', ' el pago se  ha revertido exitosamente!');
     }
 
     /**
@@ -155,16 +152,5 @@ class OrderController extends Controller
     public function complete(Request $request): RedirectResponse
     {
         return $this->orders->complete($request);
-    }
-
-    /**
-     * @param  Request  $request
-     * @param  int  $orderId
-     * @return Response
-     */
-    public function ship(Request $request, int $orderId)
-    {
-        $order = Order::findOrFail($orderId);
-        Mail::to($request->user())->send(new Shipping($order));
     }
 }

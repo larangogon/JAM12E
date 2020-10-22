@@ -9,7 +9,6 @@ use App\Http\Requests\CartAddRequest;
 use App\Http\Requests\CartUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use App\Interfaces\InterfaceCarts;
-use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -28,9 +27,9 @@ class CartController extends Controller
     }
 
     /**
-     * @return view
+     * @return View
      */
-    public function show(): view
+    public function show(): View
     {
         return view('cart.show', [
             'cart' => Auth::user()->cart
@@ -51,7 +50,6 @@ class CartController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return RedirectResponse
      */
     public function remove(): RedirectResponse
@@ -72,11 +70,9 @@ class CartController extends Controller
     {
         $this->carts->destroy($request);
 
-        Session::flash('message', 'Eliminado Satisfactoriamente !');
-
-        return redirect()->route("cart.show", [
-            'cart' => Auth::user()->cart
-        ]);
+        return redirect()
+            ->back()
+            ->with('success', 'Eliminado Satisfactoriamente !');
     }
 
     /**
@@ -88,10 +84,8 @@ class CartController extends Controller
     {
         $this->carts->update($request, $id);
 
-        Session::flash('message', 'Actualizado Satisfactoriamente !');
-
-        return redirect()->route("cart.show", [
-            'cart' => Auth::user()->cart
-        ]);
+        return redirect()
+            ->back()
+            ->with('success', 'Actualizado Satisfactoriamente !');
     }
 }

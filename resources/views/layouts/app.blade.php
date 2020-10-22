@@ -20,7 +20,6 @@
     <link href="{{asset('plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet" >
 
     <!-- Fonts -->
-    <link href="{{asset('//fonts.gstatic.com')}}" rel="stylesheet" >
     <link href="{{asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700')}}" rel="stylesheet">
 
     <!-- Styles -->
@@ -63,7 +62,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <form action="{{route('vitrina.index')}}" method="get">
-                                <input type="text" name="category" id="" value="Hogar" hidden>
+                                <label for=""></label><input type="text" name="category" id="" value="Hogar" hidden>
                                 <button type="submit" class="btn btn-link">Hogar</button>
                             </form>
                         </a>
@@ -81,7 +80,7 @@
                             <form action="{{route('vitrina.index')}}" method="get">
                                 <input type="text" name="category" id="" value="Mujer" hidden>
                                 <button type="submit" class="btn btn-link">Mujer</button>
-                            </form></h5>
+                            </form>
                         </a>
                     </li>
                      </ul>
@@ -106,18 +105,18 @@
                                 <a class="navbar-brand" class="nav-link dropdown-toggle" href="{{ url('cart/show') }}">
                                     <i class="fas fa-cart-arrow-down ">
                                         @auth
-                                         @if (count(auth()->user()->cart->products))
-                                        <span class="badge badge-danger">
-                                            {{(count(auth()->user()->cart->products))}}
-                                          </span>
+                                            @if (count(auth()->user()->cart->products))
+                                                <span class="badge badge-danger">
+                                                    {{(count(auth()->user()->cart->products))}}
+                                                </span>
                                             @endif
                                         @endauth
-                                        </i>
+                                    </i>
                                 </a>
                             </div>
                             </ul>
                         </li>
-                </ul>
+                     </ul>
 
             </nav>
             <!-- /.navbar -->
@@ -148,12 +147,10 @@
                                            document.getElementById('logout-form').submit();">
                                     Cerrar Sesión
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf
                                 </form>
-
                                 @endguest
                             </a>
                         </div>
@@ -165,41 +162,170 @@
                             data-accordion="false">
 
                             <li class="nav-item">
-                                <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
-                                    <i class="nav-icon fas fa-home"></i>
-                                    <p>Inicio</p>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{{url('nosotros')}}"
-                                    class="{{ Request::path() === 'nosotros' ? 'nav-link active' : 'nav-link' }}">
-                                    <i class="nav-icon fas fa-users"></i>
+                                <a href="{{url('nosotros')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <p>
                                         Quienes somos!
                                     </p>
                                 </a>
                             </li>
-
-                             @can('Administrator')
+                            @can('Administrator')
                             <li class="nav-item">
-                                <a href="{{url('users')}}"
-                                    class="{{ Request::path() === 'users' ? 'nav-link active' : 'nav-link' }}">
-                                    <i class="fas fa-users-cog"></i>
-                                    <p>Usuarios</p>
+                                <a href="{{route('nosotros.indexApi')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="fas fa-file-medical-alt"></i>
+                                    <p>
+                                        Como consumir nuestra API!
+                                    </p>
                                 </a>
+                            </li>
+                            @endcan
+                            @can('Administrator')
+                                <li class="nav-item">
+                                    <a href="{{route('reports.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-flag"></i>
+                                        <p>
+                                            Generar reportes
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('Administrator')
+                                <li class="nav-item">
+                                    <a href="{{route('metrics.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-file-alt"></i>
+                                        <p>
+                                            Metricas
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            <li class="nav-item">
+                                <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Inicio
+                                    </p>
+                                </a>
+                            </li>
+
+                            @can('Administrator')
+                            <li class="nav-item">
+                                <a href="#" class="nav-link"
+                                    class="{{ Request::path() === 'nosotros' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="fas fa-user-check"></i>
+                                    <p>
+                                        Usuarios
+                                    </p>
+                                </a>
+                                <ul cass="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu"
+                                    data-accordion="false">
+                                    <li class="nav-item">
+                                        <a href="{{url('users')}}" class="nav-link"
+                                           class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
+                                            <i class="far fa-check-circle"></i>
+                                            <p>
+                                                Todos usuarios
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item has-treeview">
+                                        <a href="#" class="nav-link">
+                                            <i class="nav-icon fas fa-users"></i>
+                                            <p>
+                                                Empleados
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <form action="{{route('users.index')}}" method="get">
+                                                        <input type="text" name="role" id="" value="Administrator" hidden>
+                                                        <button type="submit"  class="btn-dark btn-sm btn-block text-left">
+                                                            <i class="far fa-check-circle"></i>
+                                                            <p>Administrator</p>
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link" >
+                                                    <form action="{{route('users.index')}}" method="get">
+                                                        <input type="text" name="role" id="" value="Guest" hidden>
+                                                        <button type="submit"  class="btn-dark btn-sm btn-block text-left"
+                                                                class="{{ Request::path() === 'guest' ? 'nav-link active' : 'nav-link' }}">
+                                                            <i class="far fa-check-circle"></i>
+                                                            <p>Guest</p>
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </li>
                               @endcan
                               @can('Administrator')
-                              <li class="nav-item">
-                                  <a href="{{url('orders')}}"
-                                      class="{{ Request::path() === 'orders' ? 'nav-link active' : 'nav-link' }}">
-                                      <i class="fas fa-shopping-bag"></i>
-                                      <p>Admin Orders</p>
-                                  </a>
-                              </li>
-                                @endcan
-
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <p><i class="far fa-file"></i> Administracion de ordenes</p>
+                                </a>
+                                <ul cass="nav nav-pills nav-sidebar flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{url('orders')}}"
+                                           class="{{ Request::path() === 'orders' ? 'nav-link active' : 'nav-link' }}">
+                                            <i class="far fa-check-circle"></i>
+                                            <p>Todas la ordenes</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item has-treeview">
+                                        <a href="#" class="nav-link">
+                                            <i class="fas fa-sort"></i>
+                                            <p>Filtro por estado</p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <form action="{{route('orders.index')}}" method="get">
+                                                        <input type="text" name="search" id="" value="APPROVED" hidden>
+                                                        <button type="submit"  class="btn-dark btn-sm btn-block text-left"
+                                                                class="{{ Request::path() === 'approved' ? 'nav-link active' : 'nav-link' }}">
+                                                            <i class="far fa-check-circle"></i>
+                                                            <p>Aprovadas</p>
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <form action="{{route('orders.index')}}" method="get">
+                                                        <input type="text" name="search" id="" value="REJECTED" hidden>
+                                                        <button type="submit"  class="btn-dark btn-sm btn-block text-left"
+                                                                class="{{ Request::path() === 'approved' ? 'nav-link active' : 'nav-link' }}">
+                                                            <i class="far fa-check-circle"></i>
+                                                            <p>Rechazadas</p>
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <form action="{{route('orders.index')}}" method="get">
+                                                        <input type="text" name="search" id="" value="PENDING" hidden>
+                                                        <button type="submit"  class="btn-dark btn-sm btn-block text-left"
+                                                                class="{{ Request::path() === 'approved' ? 'nav-link active' : 'nav-link' }}">
+                                                            <i class="far fa-check-circle"></i>
+                                                            <p>Pendientes</p>
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            @endcan
                               @can('Administrator')
                               <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
@@ -245,7 +371,7 @@
                               </li>
                             </ul>
                                 @endcan
-                              @can('Administrator')
+                              @can('hasrole')
                                     <li class="nav-item">
                                         <a href="{{url('products')}}"
                                             class="{{ Request::path() === 'products' ? 'nav-link active' : 'nav-link' }}">
@@ -257,11 +383,10 @@
 
                                 <li class="nav-item">
                                     @auth
-
                                         @if(count(auth()->user()->orders))
                                     <a href="{{route('orders.showv', auth()->id())}}"
                                        class="{{ Request::path() === 'clients' ? 'nav-link active' : 'nav-link' }}">
-                                        <i class="fas fa-warehouse"></i>
+                                        <i class="fas fa-cash-register"></i>
                                         <p>Historial de compra</p>
                                     </a>
                                         @endif
@@ -271,9 +396,9 @@
                               <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="fas fa-shopping-bag"></i>
-                                    <p>Lo que buscas esta aqui!<i class="fas fa-angle-left right"></i></p>
+                                    <p>Vitrina<i class="fas fa-angle-left right"></i></p>
                                 </a>
-                                <ul class="nav nav-treeview">
+                                <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
                                     <li class="nav-item">
                                         <a href="{{url('vitrina')}}"
                                             class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
@@ -283,7 +408,7 @@
                                     </li>
                                     <li class="nav-item has-treeview">
                                         <a href="#" class="nav-link">
-                                            <i class="fas fa-tshirt"></i></i>
+                                            <i class="fas fa-tshirt"></i>
                                             <p>Moda<i class="fas fa-angle-left right"></i></p>
                                         </a>
                                   <ul class="nav nav-treeview">
@@ -291,8 +416,7 @@
                                         <a href="#" class="nav-link">
                                         <form action="{{route('vitrina.index')}}" method="get">
                                             <input type="text" name="category" id="" value="Hombre" hidden>
-                                            <button type="submit"  class="btn btn-dark btn-sm btn-block text-left"
-                                            <button type="submit" class="btn  btn-sm btn-block text-left"
+                                            <button type="submit"  class="btn-dark btn-sm btn-block text-left"
                                                 class="{{ Request::path() === 'hombre' ? 'nav-link active' : 'nav-link' }}">
                                                 <i class="far fa-check-circle"></i>
                                                 <p>Hombre</p>
@@ -304,8 +428,7 @@
                                         <a href="#" class="nav-link" >
                                         <form action="{{route('vitrina.index')}}" method="get">
                                             <input type="text" name="category" id="" value="Mujer" hidden>
-                                            <button type="submit"  class="btn btn-dark btn-sm btn-block text-left"
-                                            <button  type="submit"  class="btn  btn-sm btn-block text-left "
+                                            <button type="submit"  class="btn-dark btn-sm btn-block text-left"
                                                 class="{{ Request::path() === 'hombre' ? 'nav-link active' : 'nav-link' }}">
                                                 <i class="far fa-check-circle"></i>
                                                 <p>Mujer</p>
@@ -324,7 +447,7 @@
                                         <a href="#" class="nav-link">
                                         <form action="{{route('vitrina.index')}}" method="get">
                                             <input type="text" name="category" id="" value="Hogar" hidden>
-                                            <button type="submit"  class="btn btn-dark btn-sm btn-block text-left"
+                                            <button type="submit"  class="btn-dark btn-sm btn-block text-left"
                                                 class="{{ Request::path() === 'hombre' ? 'nav-link active' : 'nav-link' }}">
                                                 <i class="far fa-check-circle"></i>
                                                 <p>Todo para tu hogar</p>
@@ -335,7 +458,10 @@
                                 </ul>
                             </li>
                         </ul>
+                              </li>
+                        </ul>
                     </nav>
+
                     <!-- /.sidebar-menu -->
                 </div>
                 <!-- /.sidebar -->
@@ -359,7 +485,7 @@
             <footer class="main-footer">
                 <!-- NO QUITAR -->
 
-                <strong>JAM Stores
+                <strong>JAM Stores</strong>
 
             </footer>
 

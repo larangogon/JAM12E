@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Administrator\Usuarios;
 
-use App\User;
+use App\Entities\User;
 use Tests\TestCase;
 
 class UsuariosTest extends TestCase

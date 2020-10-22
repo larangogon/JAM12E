@@ -11,7 +11,7 @@ class OrdersRepo implements InterfaceOrders
      * @param Request $request
      * @return mixed|void
      */
-    public function store(Request $request): Void
+    public function store(Request $request): void
     {
         //
     }
@@ -21,7 +21,7 @@ class OrdersRepo implements InterfaceOrders
      * @param int $id
      * @return mixed|void
      */
-    public function update(Request $request, int $id): Void
+    public function update(Request $request, int $id): void
     {
         //
     }

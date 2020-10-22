@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Size;
+use App\Entities\Size;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceSizes;
@@ -18,10 +18,10 @@ class SizeController extends Controller
      */
     public function __construct(InterfaceSizes $sizes)
     {
+        $this->sizes = $sizes;
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('Status');
-        $this->sizes = $sizes;
         $this->middleware('role:Administrator');
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Color;
+use App\Entities\Color;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceColors;
@@ -18,11 +18,11 @@ class ColorController extends Controller
      */
     public function __construct(InterfaceColors $colors)
     {
+        $this->colors = $colors;
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('Status');
         $this->middleware('role:Administrator');
-        $this->colors = $colors;
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Constants\PlaceToPay;
-use App\Order;
+use App\Entities\Order;
 use App\Decorators\DecoratorOrder;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,7 +13,10 @@ use Illuminate\Queue\SerializesModels;
 
 class ProcessP2p implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected $payment;
     protected $order;

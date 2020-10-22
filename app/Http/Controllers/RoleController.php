@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceRoles;
-use\Illuminate\Http\RedirectResponse;
+use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 

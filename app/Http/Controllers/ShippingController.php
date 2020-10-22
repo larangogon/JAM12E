@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Shipping;
+use App\Entities\Shipping;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ShippingRequest;
@@ -26,7 +26,7 @@ class ShippingController extends Controller
     {
         $shipping->create($request->all());
 
-        return redirect('vitrina')
+        return redirect()->back()
             ->with('message', 'Los datos para tu envio se han guardado exitosamente!');
     }
 }

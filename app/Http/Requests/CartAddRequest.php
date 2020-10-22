@@ -24,9 +24,9 @@ class CartAddRequest extends FormRequest
     public function rules()
     {
         return [
-           'stock' => 'required',
+           'stock'    => 'required',
            'color_id' => 'required',
-           'size_id' => 'required',
+           'size_id'  => 'required'
         ];
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Imagen;
-use App\Product;
+use App\Entities\Imagen;
+use App\Entities\Product;
 use App\Interfaces\InterfaceProducts;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ItemCreateRequest;
@@ -15,7 +15,7 @@ class ProductsRepo implements InterfaceProducts
      * @param ItemCreateRequest $request
      * @return mixed|void
      */
-    public function store(ItemCreateRequest $request): Void
+    public function store(ItemCreateRequest $request): void
     {
         $product = Product::create($request->all());
 
@@ -30,9 +30,8 @@ class ProductsRepo implements InterfaceProducts
     /**
      * @param ItemUpdateRequest $request
      * @param Product $product
-     * @return mixed|void
      */
-    public function update(ItemUpdateRequest $request, Product $product): Void
+    public function update(ItemUpdateRequest $request, Product $product): void
     {
         $product->update($request->all());
 
@@ -48,19 +47,18 @@ class ProductsRepo implements InterfaceProducts
      * @param int $id
      * @return mixed|void
      */
-    public function destroy(int $id): Void
+    public function destroy(int $id): void
     {
         Product::destroy($id);
     }
 
     /**
-     * @param int $imagen_id
-     * @param int $product_id
-     * @return mixed|void
+     * @param int $id
+     * @param Product $product
      */
-    public function destroyimagen(int $imagen_id, int $product_id): Void
+    public function destroyimagen(int $id, Product $product): void
     {
-        $imagen = Imagen::find($imagen_id);
+        $imagen = Imagen::find($id);
 
         Storage::delete(public_path('uploads/') . $imagen->name);
 
@@ -69,9 +67,9 @@ class ProductsRepo implements InterfaceProducts
 
     /**
      * @param int $id
-     * @return mixed|void
+     * @return void
      */
-    public function active(int $id): Void
+    public function active(int $id): void
     {
         $products = Product::findOrFail($id);
 

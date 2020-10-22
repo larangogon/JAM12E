@@ -1,40 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-@can('Administrator')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 mx-auto">
-                <h2>
-                    Colores de Productos
-                    @include('colors.modal')
-                </h2>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                ID
-                            </th>
-                            <th scope="col">
-                                Nombre
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($colors as $color)
+    @can('Administrator')
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mx-auto">
+                    <h2>
+                        Colores
+                        @include('colors.modal')
+                    </h2>
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-                                <th scope="row">
-                                    {{$color->id}}
+                                <th scope="col">
+                                    ID
                                 </th>
-                                <td>
-                                    {{$color->name}}
-                                </td>
+                                <th scope="col">
+                                    Nombre
+                                </th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach($colors as $color)
+                                <tr>
+                                    <th scope="row">
+                                        {{$color->id}}
+                                    </th>
+                                    <td>
+                                        {{$color->name}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-@endcan
+    @endcan
 @endsection

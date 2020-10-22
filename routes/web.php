@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified', 'Status');
-Route::resource('users', 'UserController')->only(['index', 'show', 'edit', 'update']);
+Route::resource('users', 'UserController');
 Route::get('users/{user}/active')->uses('UserController@active')->name('users.active');
 
 Route::resource('roles', 'RoleController')->only(['index', 'store', 'update', 'destroy']);
@@ -31,6 +31,7 @@ Route::get('products/destroyimagen/{imagen_id}/{product_id}', 'ProductsControlle
 
 Route::resource('vitrina', 'VitrinaController')->only(['index', 'show']);
 Route::resource('nosotros', 'NosotrosController')->only('index');
+Route::get('nosotros/indexApi', 'NosotrosController@indexApi')->name('nosotros.indexApi');
 
 Route::resource('categories', 'CategoryController')->only(['index', 'store']);
 Route::resource('colors', 'ColorController')->only(['index', 'store']);
@@ -59,3 +60,10 @@ Route::post('imports/import', 'ImportController@import')->name('import');
 Route::get('imports/index', 'ImportController@index')->name('imports.index');
 Route::get('imports/indexProducts', 'ImportController@indexProducts')->name('indexProducts');
 Route::post('imports/importProducts', 'ImportController@importProducts')->name('importProducts');
+
+Route::get('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
+Route::get('/reportUsers-pdf', 'ReportController@reportProducts')->name('reportProducts');
+Route::resource('reports', 'ReportController')->only(['index', 'show']);
+
+Route::get('metrics', 'MetricController@index')->name('metrics.index');
+Route::get('metrics/{metric}', 'MetricController@show')->name('metrics.show');

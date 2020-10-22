@@ -2,24 +2,6 @@
 
 @section('content')
 
-<!-- Styles -->
-    <link href="{{ asset('dist/css/adminlte.min.css') }}" rel="stylesheet">
-    <!-- Styles -->
-    <style>
-      .content-wrapper{
-        background:url(dist/img/c4cd43c7-155f-47d9-b41d-5c8029047a08.jpg);
-        background-size: cover;
-        padding-bottom: 80em;
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 100vh;
-        color: white;
-
-
-      }
-    </style>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 <div class="container">
     <div class="content-box-large">
         <div class="panel-heading">
@@ -61,6 +43,7 @@
                                 9.- Diversidad
                             </p>
                         </div>
+
                     </div>
                 </div>
             </div>
