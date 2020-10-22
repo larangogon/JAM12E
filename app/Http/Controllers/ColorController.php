@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Color;
+use App\Entities\Color;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceColors;

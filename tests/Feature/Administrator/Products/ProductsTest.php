@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Administrator\Products;
 
-use App\User;
-use App\Product;
+use App\Entities\User;
+use App\Entities\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;

@@ -2,7 +2,7 @@
 
 namespace App\Decorators;
 
-use App\InCart;
+use App\Entities\InCart;
 use Illuminate\Http\Request;
 use App\Repositories\CartsRepo;
 use App\Interfaces\InterfaceCarts;

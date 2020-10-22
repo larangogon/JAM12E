@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Imagen;
-use App\Product;
+use App\Entities\Imagen;
+use App\Entities\Product;
 use App\Interfaces\InterfaceProducts;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ItemCreateRequest;
@@ -30,7 +30,6 @@ class ProductsRepo implements InterfaceProducts
     /**
      * @param ItemUpdateRequest $request
      * @param Product $product
-     * @return mixed|void
      */
     public function update(ItemUpdateRequest $request, Product $product): void
     {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Color;
+use App\Entities\Color;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

@@ -60,3 +60,10 @@ Route::post('imports/import', 'ImportController@import')->name('import');
 Route::get('imports/index', 'ImportController@index')->name('imports.index');
 Route::get('imports/indexProducts', 'ImportController@indexProducts')->name('indexProducts');
 Route::post('imports/importProducts', 'ImportController@importProducts')->name('importProducts');
+
+Route::get('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
+Route::get('/reportUsers-pdf', 'ReportController@reportProducts')->name('reportProducts');
+Route::resource('reports', 'ReportController')->only(['index', 'show']);
+
+Route::get('metrics', 'MetricController@index')->name('metrics.index');
+Route::get('metrics/{metric}', 'MetricController@show')->name('metrics.show');

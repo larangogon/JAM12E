@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Size;
+use App\Entities\Size;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceSizes;

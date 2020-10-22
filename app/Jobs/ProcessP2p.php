@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Constants\PlaceToPay;
-use App\Order;
+use App\Entities\Order;
 use App\Decorators\DecoratorOrder;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

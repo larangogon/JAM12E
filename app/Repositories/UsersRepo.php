@@ -2,12 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Cart;
+use App\Entities\Cart;
 use App\Http\Requests\UserFormRequest;
-use App\User;
+use App\Entities\User;
 use App\Interfaces\InterfaceUsers;
 use App\Http\Requests\UserEditFormRequest;
-use Illuminate\Http\RedirectResponse;
 
 class UsersRepo implements InterfaceUsers
 {

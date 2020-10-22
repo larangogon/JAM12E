@@ -1,7 +1,7 @@
 <?php
 
-use App\Cart;
-use App\User;
+use App\Entities\Cart;
+use App\Entities\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -33,5 +33,7 @@ class UserSeeder extends Seeder
 
         $this->cart->user_id = $user->id;
         $this->cart->save();
+
+        factory(User::class, 10)->create();
     }
 }

@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Order;
+use App\Entities\User;
+use App\Entities\Order;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use App\Constants\PaceToPay;
 use App\Interfaces\InterfaceOrders;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -44,7 +42,7 @@ class OrderController extends Controller
             'search'   => $search,
             'orders' => $this->order
                 ->search($search)
-                ->paginate(12)
+                ->paginate(5)
         ]);
     }
 

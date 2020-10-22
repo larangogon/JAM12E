@@ -2,7 +2,7 @@
 
 namespace App\Decorators;
 
-use App\Product;
+use App\Entities\Product;
 use App\Repositories\ProductsRepo;
 use App\Interfaces\InterfaceProducts;
 use Illuminate\Support\Facades\Cache;

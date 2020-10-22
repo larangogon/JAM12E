@@ -57,7 +57,7 @@ return [
     |
     */
 
-    'model' => env('CASHIER_MODEL', App\User::class),
+    'model' => env('CASHIER_MODEL', App\Entities\User::class),
 
     /*
     |--------------------------------------------------------------------------

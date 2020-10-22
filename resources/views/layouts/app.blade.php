@@ -20,7 +20,6 @@
     <link href="{{asset('plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet" >
 
     <!-- Fonts -->
-    <link href="{{asset('//fonts.gstatic.com')}}" rel="stylesheet" >
     <link href="{{asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700')}}" rel="stylesheet">
 
     <!-- Styles -->
@@ -63,7 +62,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <form action="{{route('vitrina.index')}}" method="get">
-                                <input type="text" name="category" id="" value="Hogar" hidden>
+                                <label for=""></label><input type="text" name="category" id="" value="Hogar" hidden>
                                 <button type="submit" class="btn btn-link">Hogar</button>
                             </form>
                         </a>
@@ -81,7 +80,7 @@
                             <form action="{{route('vitrina.index')}}" method="get">
                                 <input type="text" name="category" id="" value="Mujer" hidden>
                                 <button type="submit" class="btn btn-link">Mujer</button>
-                            </form></h5>
+                            </form>
                         </a>
                     </li>
                      </ul>
@@ -106,18 +105,18 @@
                                 <a class="navbar-brand" class="nav-link dropdown-toggle" href="{{ url('cart/show') }}">
                                     <i class="fas fa-cart-arrow-down ">
                                         @auth
-                                         @if (count(auth()->user()->cart->products))
-                                        <span class="badge badge-danger">
-                                            {{(count(auth()->user()->cart->products))}}
-                                          </span>
+                                            @if (count(auth()->user()->cart->products))
+                                                <span class="badge badge-danger">
+                                                    {{(count(auth()->user()->cart->products))}}
+                                                </span>
                                             @endif
                                         @endauth
-                                        </i>
+                                    </i>
                                 </a>
                             </div>
                             </ul>
                         </li>
-                </ul>
+                     </ul>
 
             </nav>
             <!-- /.navbar -->
@@ -148,12 +147,10 @@
                                            document.getElementById('logout-form').submit();">
                                     Cerrar Sesión
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf
                                 </form>
-
                                 @endguest
                             </a>
                         </div>
@@ -165,7 +162,7 @@
                             data-accordion="false">
 
                             <li class="nav-item">
-                                <a href="{{url('nosotros')}}">
+                                <a href="{{url('nosotros')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <p>
                                         Quienes somos!
                                     </p>
@@ -173,17 +170,40 @@
                             </li>
                             @can('Administrator')
                             <li class="nav-item">
-                                <a href="{{route('nosotros.indexApi')}}">
+                                <a href="{{route('nosotros.indexApi')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="fas fa-file-medical-alt"></i>
                                     <p>
                                         Como consumir nuestra API!
                                     </p>
                                 </a>
                             </li>
                             @endcan
+                            @can('Administrator')
+                                <li class="nav-item">
+                                    <a href="{{route('reports.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-flag"></i>
+                                        <p>
+                                            Generar reportes
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('Administrator')
+                                <li class="nav-item">
+                                    <a href="{{route('metrics.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-file-alt"></i>
+                                        <p>
+                                            Metricas
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                             <li class="nav-item">
                                 <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-home"></i>
-                                    <p>Inicio</p>
+                                    <p>
+                                        Inicio
+                                    </p>
                                 </a>
                             </li>
 
@@ -196,13 +216,15 @@
                                         Usuarios
                                     </p>
                                 </a>
-                                <ul cass="nav nav-pills nav-sidebar flex-column"data-widget="treeview" role="menu"
+                                <ul cass="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu"
                                     data-accordion="false">
                                     <li class="nav-item">
-                                        <a href="{{url('users')}}"
+                                        <a href="{{url('users')}}" class="nav-link"
                                            class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
                                             <i class="far fa-check-circle"></i>
-                                            <p>Todos usuarios</p>
+                                            <p>
+                                                Todos usuarios
+                                            </p>
                                         </a>
                                     </li>
                                     <li class="nav-item has-treeview">
@@ -239,6 +261,7 @@
                                         </ul>
                                     </li>
                                 </ul>
+                            </li>
                               @endcan
                               @can('Administrator')
                             <li class="nav-item has-treeview">
@@ -360,7 +383,6 @@
 
                                 <li class="nav-item">
                                     @auth
-
                                         @if(count(auth()->user()->orders))
                                     <a href="{{route('orders.showv', auth()->id())}}"
                                        class="{{ Request::path() === 'clients' ? 'nav-link active' : 'nav-link' }}">
@@ -374,7 +396,7 @@
                               <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="fas fa-shopping-bag"></i>
-                                    <p>Lo que buscas esta aqui!<i class="fas fa-angle-left right"></i></p>
+                                    <p>Vitrina<i class="fas fa-angle-left right"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
                                     <li class="nav-item">
@@ -386,7 +408,7 @@
                                     </li>
                                     <li class="nav-item has-treeview">
                                         <a href="#" class="nav-link">
-                                            <i class="fas fa-tshirt"></i></i>
+                                            <i class="fas fa-tshirt"></i>
                                             <p>Moda<i class="fas fa-angle-left right"></i></p>
                                         </a>
                                   <ul class="nav nav-treeview">
@@ -436,7 +458,10 @@
                                 </ul>
                             </li>
                         </ul>
+                              </li>
+                        </ul>
                     </nav>
+
                     <!-- /.sidebar-menu -->
                 </div>
                 <!-- /.sidebar -->
@@ -460,7 +485,7 @@
             <footer class="main-footer">
                 <!-- NO QUITAR -->
 
-                <strong>JAM Stores
+                <strong>JAM Stores</strong>
 
             </footer>
 

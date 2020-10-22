@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Administrator\Api;
 
-use App\Cart;
-use App\Category;
-use App\Color;
-use App\Product;
-use App\Size;
-use App\User;
+use App\Entities\Cart;
+use App\Entities\Category;
+use App\Entities\Color;
+use App\Entities\Product;
+use App\Entities\Size;
+use App\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;

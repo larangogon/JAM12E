@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Size;
+use App\Entities\Size;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceSizes;
 

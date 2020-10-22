@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Administrator\Payment\Shipping;
 
-use App\Cart;
-use App\Order;
-use App\Shipping;
-use App\User;
+use App\Entities\Cart;
+use App\Entities\Order;
+use App\Entities\Shipping;
+use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;

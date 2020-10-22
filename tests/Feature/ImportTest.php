@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Cart;
-use App\Imports\UsersImport;
-use App\User;
+use App\Entities\Cart;
+use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Maatwebsite\Excel\Facades\Excel;

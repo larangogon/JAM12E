@@ -1,5 +1,5 @@
 
-<button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#addRol">
+<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#addRol">
     Crear Rol
 </button>
 

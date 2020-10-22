@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Administrator\Payment\Cart;
 
-use App\Cart;
-use App\Color;
-use App\InCart;
-use App\Product;
-use App\Size;
-use App\User;
+use App\Entities\Cart;
+use App\Entities\Color;
+use App\Entities\InCart;
+use App\Entities\Product;
+use App\Entities\Size;
+use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;

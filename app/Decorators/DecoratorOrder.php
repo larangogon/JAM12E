@@ -2,10 +2,10 @@
 
 namespace App\Decorators;
 
-use App\Cart;
-use App\Order;
-use App\Detail;
-use App\Payment;
+use App\Entities\Cart;
+use App\Entities\Order;
+use App\Entities\Detail;
+use App\Entities\Payment;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Constants\PlaceToPay;

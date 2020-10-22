@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Order;
+use App\Entities\Order;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
 

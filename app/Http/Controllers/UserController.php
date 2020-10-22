@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserFormRequest;
-use App\Http\Requests\UserStoreRequest;
-use App\Role;
-use App\User;
+use App\Entities\Role;
+use App\Entities\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceUsers;
@@ -47,7 +46,7 @@ class UserController extends Controller
             'users' => $this->user
                 ->role($role)
                 ->search($search)
-                ->paginate(12)
+                ->paginate(5)
         ]);
     }
 

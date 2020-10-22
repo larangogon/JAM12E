@@ -1,6 +1,6 @@
 <?php
 
-use App\Imagen;
+use App\Entities\Imagen;
 use Illuminate\Database\Seeder;
 
 class ImagenesSeeder extends Seeder

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Administrator\Usuarios;
 
-use App\Cart;
-use App\User;
+use App\Entities\Cart;
+use App\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;

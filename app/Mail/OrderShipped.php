@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Order;
+use App\Entities\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -20,10 +20,8 @@ class OrderShipped extends Mailable
     public $order;
 
     /**
-     * Create a new message instance.
-     *
-     * @param  \App\Models\Order  $order
-     * @return void
+     * OrderShipped constructor.
+     * @param Order $order
      */
     public function __construct(Order $order)
     {

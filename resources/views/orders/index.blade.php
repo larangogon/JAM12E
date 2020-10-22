@@ -85,6 +85,9 @@
                         Envio
                     </th>
                     <th scope="col">
+                        Factura
+                    </th>
+                    <th scope="col">
                         Cancelar pago
                     </th>
                 </tr>
@@ -115,10 +118,17 @@
                             <form action= "{{ route('orders.shippingStatus',  $order->id)}}" method = "POST">
                                 @csrf
                                 @method('GET')
-                                <button type="submit" class=" btn-sm btn{{$order->shippingStatus ?  'btn-success' : 'btn-danger'}}" role="button" onclick="return confirmarEnvio()">
+                                <button type="submit" class="btn-sm btn {{$order->shippingStatus ?  'btn-success' : 'btn-danger'}}" role="button" onclick="return confirmarEnvio()">
                                     {{$order->shippingStatus ?  'enviado' : 'pendiente'}}
                                 </button>
                             </form>
+                        </td>
+                        <td>
+                            <a href="{{ route('reports.show', $order->id) }}">
+                                <button type="button" class="btn btn-primary btn-sm ">
+                                    Generar factura
+                                </button>
+                            </a>
                         </td>
                         <td>
                             <form action="{{route('orders.reversePay')}}" method="post">

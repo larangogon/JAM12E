@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Size;
+use App\Entities\Size;
 use Illuminate\Http\Request;
 
 class SizeApiController extends Controller

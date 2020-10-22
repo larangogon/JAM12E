@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Category;
+use App\Entities\Category;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceCategories;
 
