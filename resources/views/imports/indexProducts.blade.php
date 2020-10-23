@@ -2,6 +2,7 @@
 
 @section('content')
     @can('Administrator')
+
         <div class="col-md-6">
             <div class="card w-75">
                 <div class="card-body">

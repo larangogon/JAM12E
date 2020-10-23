@@ -55,6 +55,7 @@ class ProductsExport implements FromCollection, WithMapping
             $product->description,
             $product->price,
             $product->stock,
+            $product->active,
             $colors,
             $sizes,
             $categories,
