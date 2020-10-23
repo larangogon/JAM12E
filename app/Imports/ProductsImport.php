@@ -14,7 +14,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
 {
     public function model(array $row)
     {
-        $product = Product::updateOrCreate(
+        $product = Product::firstOrCreate(
             ['id' => $row[0]
             ],
             [
@@ -28,15 +28,6 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
             ]
         );
 
-        $colors = explode(',', $row[6]);
-        $count = count($colors);
-        foreach ($colors as $key => $color) {
-            if ($key == $count - 1) {
-                break;
-            }
-            $ColorId = Color::where('name', $color)->first();
-            $product->colors()->attach($ColorId->id);
-        }
 
         $sizes = explode(',', $row[7]);
         $count = count($sizes);
