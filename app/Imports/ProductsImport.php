@@ -6,15 +6,27 @@ use App\Entities\Category;
 use App\Entities\Color;
 use App\Entities\Product;
 use App\Entities\Size;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Validators\Failure;
+use Throwable;
 
 class ProductsImport implements WithValidation, ToModel, WithBatchInserts
 {
+    use Importable;
+    use SkipsErrors;
+    use SkipsFailures;
+
     public function model(array $row)
     {
-        $product = Product::firstOrCreate(
+        $product = Product::updateOrCreate(
             ['id' => $row[0]
             ],
             [
@@ -28,6 +40,17 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
             ]
         );
 
+        $colors = explode(',', $row[6]);
+
+        $count = count($colors);
+        foreach ($colors as $key => $color) {
+            if ($key == $count - 1){
+                break;
+            }
+                $colorBd = Color::where('name', $color)->first();
+                $product->colors()->sync(array($colorBd->id));
+        }
+
 
         $sizes = explode(',', $row[7]);
         $count = count($sizes);
@@ -35,8 +58,8 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
             if ($key == $count - 1) {
                 break;
             }
-            $sizeId = Size::where('name', $size)->first();
-            $product->sizes()->attach($sizeId->id);
+            $sizeBd = Size::where('name', $size)->firstOrFail();
+            $product->sizes()->sync($sizeBd->id);
         }
 
         $categories = explode(',', $row[8]);
@@ -45,8 +68,8 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
             if ($key == $count - 1) {
                 break;
             }
-            $categoryId = Category::where('name', $category)->first();
-            $product->categories()->attach($categoryId->id);
+            $categoryBd = Category::where('name', $category)->first();
+            $product->categories()->sync($categoryBd->id);
         }
 
         $imagenes = explode(',', $row[9]);
@@ -55,7 +78,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
             if ($key == $count - 1) {
                 break;
             }
-            $product->imagenes()->create([
+            $product->imagenes()->updateOrCreate([
                 'name' => $imagen,
             ]);
         }
@@ -69,8 +92,8 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
         return [
             '*.1' => 'required',
             '*.2' => 'required',
-            '*.3' => 'required',
-            '*.4' => 'required',
+            '*.3' => ['required', 'numeric'],
+            '*.4' => ['required', 'numeric'],
             '*.5' => 'required',
             '*.6' => 'required',
             '*.7' => 'required',

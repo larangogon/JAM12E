@@ -8,6 +8,7 @@ use App\Imports\UsersImport;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 class ImportController extends Controller
 {
@@ -45,12 +46,20 @@ class ImportController extends Controller
      * @param ImportRequest $request
      * @return RedirectResponse
      */
-    public function importProducts(importRequest $request): RedirectResponse
+    public function importProducts(importRequest $request)
     {
-        Excel::import(new ProductsImport, $request->file('file'));
+        $file = $request->file('file')->store('import');
 
-        return redirect('products')->with('success', 'All good,
+        $import = new ProductsImport;
+        $import->import($file);
+
+        if($import->failures()->isNotEmpty()) {
+            return back()->withFailures($import->failures());
+        }
+
+        return back()->with('success', 'All good,
         import of products successfully!');
+
     }
 
 
