@@ -29,9 +29,17 @@ class ImportController extends Controller
      */
     public function import(importRequest $request): RedirectResponse
     {
-        Excel::import(new UsersImport, $request->file('file'));
+        $file = $request->file('file')->store('import');
 
-        return redirect('users')->with('success', 'All good!');
+        $import = new UsersImport;
+        $import->import($file);
+
+        if ($import->failures()->isNotEmpty()) {
+            return back()->withFailures($import->failures());
+        }
+
+        return back()->with('success', 'All good,
+        import of users successfully!');
     }
 
     /**
@@ -60,7 +68,6 @@ class ImportController extends Controller
         return back()->with('success', 'All good,
         import of products successfully!');
     }
-
 
     /**
      * @return View

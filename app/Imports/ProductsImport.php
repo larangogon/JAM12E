@@ -24,6 +24,10 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
     use SkipsErrors;
     use SkipsFailures;
 
+    /**
+     * @param array $row
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Model[]|void|null
+     */
     public function model(array $row)
     {
         $product = Product::updateOrCreate(
@@ -39,6 +43,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
                 'updated_by'  => auth()->user()->id
             ]
         );
+
         $product->colors()->detach(null);
 
         $colors = explode(',', $row[6]);
@@ -101,7 +106,6 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
             '*.6' => 'required',
             '*.7' => 'required',
             '*.8' => 'required',
-            '*.9' => 'required',
         ];
     }
 
