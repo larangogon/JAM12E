@@ -12,7 +12,7 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    protected $fillable = ['name', 'description', 'price', 'stock', 'active', 'created_by', 'updated_by',];
+    protected $fillable = ['id', 'name', 'description', 'price', 'stock', 'active', 'created_by', 'updated_by'];
 
     /**
      * @return HasMany
