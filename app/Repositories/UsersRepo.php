@@ -16,7 +16,7 @@ class UsersRepo implements InterfaceUsers
      */
     public function store(UserFormRequest $request)
     {
-        $user= new User();
+        $user = new User();
 
         $user->name      = request('name');
         $user->email     = request('email');

@@ -16,12 +16,12 @@ class UserSeeder extends Seeder
         $this->user =  new User();
 
         $this->user->name = 'Admin';
-        $this->user->email = 'johannitaarango2@gmail.com';
+        $this->user->email = 'admin@example.com';
         $this->user->address = 'Cra 79-94-51';
         $this->user->email_verified_at = now();
         $this->user->cellphone = '3002133378';
         $this->user->phone = '4895013';
-        $this->user->password = bcrypt(1214716610);
+        $this->user->password = bcrypt(123);
         $this->user->document = '1214716610';
 
         $this->user->save();

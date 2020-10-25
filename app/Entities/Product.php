@@ -12,7 +12,7 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    protected $fillable = ['name', 'description', 'price', 'stock', 'active', 'created_by', 'updated_by',];
+    protected $fillable = ['id', 'name', 'description', 'price', 'stock', 'active', 'created_by', 'updated_by'];
 
     /**
      * @return HasMany
@@ -33,7 +33,7 @@ class Product extends Model
         }
         foreach ($files as $file) {
             $name = $file->getClientOriginalName();
-            $file->move(public_path().'/uploads/', $name);
+            $file->move(public_path() . '/uploads/', $name);
 
             $imagen = new Imagen();
 
@@ -99,7 +99,7 @@ class Product extends Model
     /**
      * @param $color
      */
-    public function asignarColor($color): Void
+    public function asignarColor($color): void
     {
         $this->colors()->sync($color, false);
     }
@@ -123,7 +123,7 @@ class Product extends Model
     /**
      * @param $category
      */
-    public function asignarCategory($category): Void
+    public function asignarCategory($category): void
     {
         $this->categories()->sync($category, false);
     }
@@ -147,7 +147,7 @@ class Product extends Model
     /**
      * @param $size
      */
-    public function asignarSize($size): Void
+    public function asignarSize($size): void
     {
         $this->sizes()->sync($size, false);
     }
@@ -189,7 +189,7 @@ class Product extends Model
     /**
      * @return BelongsTo
      */
-    public function UserUpdate(): BelongsTo
+    public function userUpdate(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
