@@ -12,19 +12,26 @@
 - **Install a server side application. Example: Xampp, Wamp, Lampp, Laragon, etc.**
 - **Clone the repository on the root. (htdocs for xampp, www for laragon and wamp, etc).**
 - **Open terminal and run the following commands:**
- - cd JAM12E
- - composer install
- - npm install
- - cp .env.example .env
+     -cd JAM12E
+     -composer install
+     -npm install
+     -cp .env.example .env
+     -cp .env.testing.example .env
  - **Create databases:**
- -mysql -u root
- -create database jam;
- -create database testing_laravel;
- -exit
- -php artisan migrate --seed
+     -mysql -u root
+     -create database jam;
+     -create database testing_laravel;
+     -exit
+     -php artisan migrate --seed
+ - **Create databases:**
+      -mysql -u root
+      -use jam
+      -call metrics_generate('2020-10-20', '2021-01-11');
+      -call payment_metrics_generate('2020-10-20', '2021-01-11');
+      -exit
 - **To finish and deploy the application, run the command:**
-- php artisan optimize:clear
-- php artisan serve
+    -php artisan optimize:clear
+    -php artisan passport:install
+    -php artisan serve
 - **Login.**
-- (user: admin@example.com, password: 123).
-
+    -(user: admin@example.com, password: 123).

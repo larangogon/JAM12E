@@ -53,13 +53,12 @@ class ImportController extends Controller
         $import = new ProductsImport;
         $import->import($file);
 
-        if($import->failures()->isNotEmpty()) {
+        if ($import->failures()->isNotEmpty()) {
             return back()->withFailures($import->failures());
         }
 
         return back()->with('success', 'All good,
         import of products successfully!');
-
     }
 
 

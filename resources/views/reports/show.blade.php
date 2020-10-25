@@ -1,34 +1,77 @@
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <title>Factura de compra</title>
-    </head>
-    <body>
-        <header class="clearfix">
-            <h1>RECIBO DE PAGO No# {{$factura->id}}</h1>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <title>Factura de compra</title>
+</head>
+<div class="container">
+    <div class="justify-content-center">
+        <h2>
+            Order generada N# {{$factura->id}}
+        </h2>
+        <h6>
+            {{$factura->created_at}}
             <div class="clearfix">
                 <div>Empresa</div>
                 <div>xxxx</div>
                 <div>NIT 98764553, <br> Codigo 123000000083736</div>
                 <div>xxxx@gmail.com</div>
             </div>
-            <h3>Datos del usuario</h3>
-            <div class="col-md-4">
-                <div class="justify-content-end" >
-                    <div>A nombre de: {{$factura->user->name}}</div>
-                    <div>Telefono: {{$factura->user->phone}}</div>
-                    <div>Email: {{$factura->user->email}}</div>
-                    <div>Documento: {{$factura->user->document}}</div>
-                </div>
+        </h6>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-body">
+                <div class="card-header ">Detalle del usuario</div>
+                <table class="table table-sm">
+                    <tr>
+                        <th>Nombre</th>
+                        <td>{{$factura->user->name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Telefono</th>
+                        <td>{{$factura->user->phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>Celular</th>
+                        <td>{{$factura->user->cellphone}}</td>
+                    </tr>
+                    <tr>
+                        <th>Correo</th>
+                        <td>{{$factura->user->email}}</td>
+                    </tr>
+                </table>
             </div>
-            <h3>Datos del pago</h3>
-            <div class="col-md-4">
-                <div class="justify-content-end" >
-                    <div>Fecha de pago: {{$factura->payment->updated_at}}</div>
-                    <div>Concepto de: Total: {{number_format($factura->payment->amount)}}</div>
-                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card-body">
+                <div class="card-header ">Detalle Fctura</div>
+                <table class="table table-sm">
+                    <tr>
+                        <th>Order Id</th>
+                        <td>{{$factura->id}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total de la orden</th>
+                        <td>{{$factura->total}}</td>
+                    </tr>
+                    <tr>
+                        <th>Estatus de la orden </th>
+                        <td>{{$factura->status}}</td>
+                    </tr>
+                    <tr>
+                        <th>Estado del pago</th>
+                        <td>{{$factura->payment->status}}</td>
+                    </tr>
+                </table>
             </div>
-            <h3>Detalle de la compra</h3>
+        </div>
+    </div>
+    <div class="row justify-content-end">
+        <div class="col-md-10">
+            <div class="card-body">
+                <div class="card-header ">Detalle de la compra</div>
                 <table class="table">
                     <thead>
                     @foreach($factura->details as $detail)
@@ -60,6 +103,9 @@
                     @endforeach
                     </thead>
                 </table>
-        </header>
-    </body>
+            </div>
+        </div>
+    </div>
+</div>
 </html>
+

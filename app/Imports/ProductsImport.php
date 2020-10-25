@@ -39,19 +39,21 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
                 'updated_by'  => auth()->user()->id
             ]
         );
+        $product->colors()->detach(null);
 
         $colors = explode(',', $row[6]);
 
         $count = count($colors);
         foreach ($colors as $key => $color) {
-            if ($key == $count - 1){
+            if ($key == $count - 1) {
                 break;
             }
-                $colorBd = Color::where('name', $color)->first();
-                $product->colors()->sync(array($colorBd->id));
+            $colorBd = Color::where('name', $color)->first();
+            $product->colors()->attach(array($colorBd->id));
         }
 
 
+        $product->sizes()->detach(null);
         $sizes = explode(',', $row[7]);
         $count = count($sizes);
         foreach ($sizes as $key => $size) {
@@ -59,9 +61,10 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
                 break;
             }
             $sizeBd = Size::where('name', $size)->firstOrFail();
-            $product->sizes()->sync($sizeBd->id);
+            $product->sizes()->attach($sizeBd->id);
         }
 
+        $product->categories()->detach(null);
         $categories = explode(',', $row[8]);
         $count = count($categories);
         foreach ($categories as $key => $category) {
@@ -69,7 +72,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
                 break;
             }
             $categoryBd = Category::where('name', $category)->first();
-            $product->categories()->sync($categoryBd->id);
+            $product->categories()->attach($categoryBd->id);
         }
 
         $imagenes = explode(',', $row[9]);
