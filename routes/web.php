@@ -62,7 +62,11 @@ Route::get('imports/indexProducts', 'ImportController@indexProducts')->name('ind
 Route::post('imports/importProducts', 'ImportController@importProducts')->name('importProducts');
 
 Route::get('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
-Route::get('/reportUsers-pdf', 'ReportController@reportProducts')->name('reportProducts');
+Route::get('/reportProducts-pdf', 'ReportController@reportProducts')->name('reportProducts');
+Route::get('/reportUsers-pdf', 'ReportController@reportUsers')->name('reportUsers');
+Route::get('/reportPayment-pdf', 'ReportController@reportPayments')->name('reportPayments');
+Route::get('/reportShipping-pdf', 'ReportController@reportShippings')->name('reportShippings');
+Route::get('/reportAnual-pdf', 'ReportController@reportAnual')->name('reportAnual');
 Route::resource('reports', 'ReportController')->only(['index', 'show']);
 
 Route::get('metrics', 'MetricController@index')->name('metrics.index');
