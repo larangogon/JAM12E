@@ -31,6 +31,18 @@
                     <h2>
                         Ordenes
                     </h2>
+                    <form>
+                        <div class="form-group">
+                            <label>
+                                Desde:
+                                <input type="date" name="fecha_inicio"/>
+                            </label>
+                            <label>
+                                Hasta:
+                                <input type="date" name="fecha_final"/>
+                            </label>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-md-4">
                     <nav class="mt-2 float-right">

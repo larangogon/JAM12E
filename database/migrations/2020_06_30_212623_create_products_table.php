@@ -19,6 +19,8 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->string('price');
             $table->string('stock');
+            $table->unsignedBigInteger('visits')->default(0);
+            $table->unsignedBigInteger('sales')->default(0);
             $table->boolean('active')->default(false);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

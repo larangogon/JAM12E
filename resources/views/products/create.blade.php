@@ -3,12 +3,9 @@
 @section('content')
     @can('Administrator')
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
+            <div class="row justify-content-center">
+                <div class="col-sm-10">
                     <div class="panel-body">
-                        <h2>
-                            Crear producto
-                        </h2>
                         <section class="example mt-8">
                             @if ($errors->any())
                                 <div class="alert alert-danger">

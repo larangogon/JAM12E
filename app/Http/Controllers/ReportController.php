@@ -7,6 +7,7 @@ use App\Entities\Payment;
 use App\Entities\Product;
 use App\Entities\Shipping;
 use App\Entities\User;
+use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
@@ -19,6 +20,7 @@ class ReportController extends Controller
     {
         return view('reports.index');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -56,8 +58,12 @@ class ReportController extends Controller
      */
     public function reportShippings()
     {
+        $order = Order::all();
         $shipping = Shipping::where('created_at', '>=', now()->subDays(30))->get();
-        $pdf = \PDF::loadView('reports.reportShippings', compact('shipping'));
+        $pdf = \PDF::loadView('reports.reportShippings',[
+            'shipping' => $shipping,
+            'order' => $order
+        ]);
         return $pdf->download('shippingpdf.pdf');
     }
 
@@ -88,11 +94,14 @@ class ReportController extends Controller
     {
         $user = User::all();
         $product = Product::all();
+        $order = Order::all();
+
         $payment = Payment::where('created_at', '>=', now()->subYears(1))->get();
         $pdf = \PDF::loadView('reports.reportAnual',[
             'payment' => $payment,
             'product' => $product,
-            'user'    => $user
+            'user'    => $user,
+            'order'    => $order
         ]);
         return $pdf->download('anualpdf.pdf');
     }

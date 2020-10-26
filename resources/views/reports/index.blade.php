@@ -34,7 +34,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Reporte Anual</h5>
                         <p class="card-text">
-                            Reporte anual con detalle de productos, ordenes y pagos.</p>
+                            Reporte anual con detalle de productos, ordenes y pagos.
+                        </p>
+
                         <a href="{{ route('reportAnual') }}">
                             <button type="button" class="btn btn-warning btn-sm float-right">
                                 Generar Reporte

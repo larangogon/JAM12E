@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Order;
+use App\Entities\Payment;
 use App\Metrics\MetricsManager;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\View\View;
 
 class MetricController extends Controller
@@ -16,7 +19,10 @@ class MetricController extends Controller
      */
     public function index()
     {
-        return view('metrics.index');
+        $hoy = Order::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->count();
+        $pay = Payment::whereDate('updated_at', '=', Carbon::now()->format('Y-m-d'))->count();
+
+        return view('metrics.index')->with(['hoy' => $hoy, 'pay' => $pay]);
     }
 
     /**

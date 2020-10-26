@@ -1,16 +1,26 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-
-        <section class="hero">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">
-                        Metricas
-                    </h1>
+        <div class="card-deck">
+            <div class="card text-white bg-primary mb-2" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Consumo</h5>
+                    <p class="card-text"> Hoy se ha agregado {{$hoy}} nuevas ordenes</p>
                 </div>
             </div>
-        </section>
+            <div class="card text-white bg-success mb-2" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Success card title</h5>
+                    <p class="card-text">Hoy se ejecutaron {{$pay}} pagos.</p>
+                </div>
+            </div>
+            <div class="card text-white bg-danger mb-2" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Danger card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
         <section class="hero">
             <div class="hero-body">
                 <div class="container">

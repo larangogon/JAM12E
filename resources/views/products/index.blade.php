@@ -135,8 +135,6 @@
                                             </button>
                                         @endcan
                                     </form>
-
-
                                 <td class="v-align-middle">
                                     <form action= "{{ route('products.destroy',  $product->id)}}" method = "POST">
                                         @csrf
