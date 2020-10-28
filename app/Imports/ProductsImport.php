@@ -6,6 +6,7 @@ use App\Entities\Category;
 use App\Entities\Color;
 use App\Entities\Product;
 use App\Entities\Size;
+use App\Rules\RuleTest;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
@@ -102,8 +103,8 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
             '*.2' => 'required',
             '*.3' => ['required', 'numeric'],
             '*.4' => ['required', 'numeric'],
-            '*.5' => 'required',
-            '*.6' => 'required',
+            '*.5' => ['required'],
+            '*.6' => ['required'],
             '*.7' => 'required',
             '*.8' => 'required',
         ];

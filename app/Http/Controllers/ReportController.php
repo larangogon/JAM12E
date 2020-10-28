@@ -39,7 +39,7 @@ class ReportController extends Controller
     public function reportOrders()
     {
         $order = Order::where('created_at', '>=', now()->subDays(30))->get();
-        $pdf = \PDF::loadView('reports.reportOrders', compact('order'));
+        $pdf = \PDF::loadView('orders.index', compact('order'));
         return $pdf->download('orderpdf.pdf');
     }
 

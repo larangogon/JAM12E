@@ -4,7 +4,7 @@
     @can('Administrator')
         <div class="container">
             <div class="panel-title">
-                <h2>Nombre del producto: {{ $products->name }}
+                <h2>Nombre del producto: {{ $product->name }}
                     <a href="{{ route('products.index') }}" class="btn btn-outline-success  btn-sm">
                         Volver
                     </a>
@@ -17,35 +17,35 @@
                             <table class="table">
                                 <tr>
                                     <th>Descripcion</th>
-                                    <td>{{ $products->description }}</td>
+                                    <td>{{ $product->description }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Precio</th>
-                                    <td>{{ $products->price }}</td>
+                                    <th>Precio</th
+                                    <td>{{ $product->price }}</td>
                                 </tr>
                                 <tr>
                                     <th>Stock</th>
-                                    <td>{{ $products->stock }}</td>
+                                    <td>{{ $product->stock }}</td>
                                 </tr>
                                 <tr>
                                     <th>Color</th>
-                                    <td>{{$products->colors->implode('name',', ')}}</td>
+                                    <td>{{$product->colors->implode('name',', ')}}</td>
                                 </tr>
                                 <tr>
                                     <th>Categoria</th>
-                                    <td>{{$products->categories->implode('name',', ')}}</td>
+                                    <td>{{$product->categories->implode('name',', ')}}</td>
                                 </tr>
                                 <tr>
                                     <th>Talla</th>
-                                    <td>{{$products->sizes->implode('name',', ')}}</strong></td>
+                                    <td>{{$product->sizes->implode('name',', ')}}</strong></td>
                                 </tr>
                                 <tr>
                                     <th>Actualizado</th>
-                                    <td>{{ $products->updated_at }}</strong></td>
+                                    <td>{{ $product->updated_at }}</strong></td>
                                 </tr>
                                 <tr>
                                     <th>Creado</th>
-                                    <td>{{ $products->created_at }}</strong></td>
+                                    <td>{{ $product->created_at }}</strong></td>
                                 </tr>
                             </table>
                         </div>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">
-                        @foreach($products->imagenes as $img)
+                        @foreach($product->imagenes as $img)
                             <a data-fancybox="gallery" href="../../../uploads/{{ $img->name }}">
                                 <img class="img img:hover" src="../../../uploads/{{ $img->name }}" width="200" class="img-fluid">
                             </a>

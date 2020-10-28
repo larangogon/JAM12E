@@ -22,7 +22,7 @@
     <div class="content-box-large">
         <div class="panel-heading">
             <div class="panel-title">
-                <h2>Nombre del producto: {{ $products->name }}
+                <h2>Nombre del producto: {{ $product->name }}
                     <a href="{{ route('vitrina.index') }}" class="btn btn-success btn-sm btn:hover">Volver</a>
                </h2></div>
             </div>
@@ -32,27 +32,27 @@
                       <table class="table">
                           <tr>
                               <th>Descripcion</th>
-                              <td>{{ $products->description }}</td>
+                              <td>{{ $product->description }}</td>
                           </tr>
                           <tr>
                               <th>Precio</th>
-                              <td>{{ $products->price }}</td>
+                              <td>{{ $product->price }}</td>
                           </tr>
                           <tr>
                               <th>Stock</th>
-                              <td>{{ $products->stock }}</td>
+                              <td>{{ $product->stock }}</td>
                           </tr>
                           <tr>
                               <th>Color</th>
-                              <td>{{$products->colors->implode('name',', ')}}</td>
+                              <td>{{$product->colors->implode('name',', ')}}</td>
                           </tr>
                           <tr>
                               <th>Categoria</th>
-                              <td>{{$products->categories->implode('name',', ')}}</td>
+                              <td>{{$product->categories->implode('name',', ')}}</td>
                           </tr>
                           <tr>
                               <th>Talla</th>
-                              <td>{{$products->sizes->implode('name',', ')}}</strong></td>
+                              <td>{{$product->sizes->implode('name',', ')}}</strong></td>
                           </tr>
                       </table>
                       </div>
@@ -61,7 +61,7 @@
                   <div class="col-md-3">
                       <div class="card-body">
                         <!-- Mostramos todas las imágenes pertenecientes a a este registro -->
-                        @foreach($products->imagenes as $img)
+                        @foreach($product->imagenes as $img)
                             <a data-fancybox="gallery" href="../../../uploads/{{ $img->name }}">
                                 <img class="img img:hover" src="../../../uploads/{{ $img->name }}" width="200"  class="img-fluid">
                             </a>
@@ -82,7 +82,7 @@
                                         @error('stock')
                                         {{$message}}
                                         @enderror
-                                        <input type="hidden" value="{{$products->id}}" name="products_id">
+                                        <input type="hidden" value="{{$product->id}}" name="products_id">
                                     </td>
                                 </tr>
 
@@ -91,7 +91,7 @@
                                     <td>
                                         <select name="color_id" class="form-control">
                                             <option selected disabled>elige un color</option>
-                                            @foreach ($products->colors as $color )
+                                            @foreach ($product->colors as $color )
                                                 <option value="{{ $color->id}}">{{$color->name}}</option>
                                             @endforeach
                                         </select>
@@ -106,8 +106,8 @@
                                     <th>Selecciona una talla</th>
                                     <td>
                                         <select name="size_id" class="form-control">
-                                            <option selected disabled>elige una talla</option>
-                                            @foreach ($products->sizes as $size )
+                                            <option selected disabled>Elige una talla</option>
+                                            @foreach ($product->sizes as $size )
                                                 <option value="{{ $size->id}}">{{$size->name}}</option>
                                             @endforeach
                                         </select>

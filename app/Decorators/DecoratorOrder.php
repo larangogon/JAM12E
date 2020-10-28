@@ -6,6 +6,7 @@ use App\Entities\Cart;
 use App\Entities\Order;
 use App\Entities\Detail;
 use App\Entities\Payment;
+use App\Entities\Product;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Constants\PlaceToPay;

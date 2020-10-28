@@ -109,13 +109,6 @@
                             </div>
                         </ul>
                      </li>
-                     <li class="nav-item dropdown">
-                         <div class="container">
-                             <a class="navbar-brand" href="">
-                                 <i class="fas fa-phone-alt"></i>+57 300 213 3568
-                             </a>
-                         </div>
-                     </li>
                  </ul>
             </nav>
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -174,22 +167,10 @@
                             @can('Administrator')
                                 <div class="info">
                                     <li class="nav-item">
-                                        <a href="{{route('reports.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
-                                            <i class="fas fa-flag"></i>
-                                            <p>
-                                                Generar reportes
-                                            </p>
-                                        </a>
-                                    </li>
-                                </div>
-                            @endcan
-                            @can('Administrator')
-                                <div class="info">
-                                    <li class="nav-item">
                                         <a href="{{route('metrics.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                             <i class="fas fa-file-alt"></i>
                                             <p>
-                                                Metricas
+                                                Reportes
                                             </p>
                                         </a>
                                     </li>
@@ -455,7 +436,7 @@
                 </section>
             </div>
             <footer class="main-footer">
-                <strong>JAM Stores</strong>
+                <strong>JAM Stores__<i class="fas fa-phone-alt"></i>+57 300 213 3568</strong>
             </footer>
             <aside class="control-sidebar control-sidebar-dark">
             </aside>
