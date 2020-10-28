@@ -2,9 +2,10 @@
 
 namespace App\Rules;
 
+use App\Entities\Size;
 use Illuminate\Contracts\Validation\Rule;
 
-class RuleTest implements Rule
+class SizeRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +26,17 @@ class RuleTest implements Rule
      */
     public function passes($attribute, $value)
     {
-        dd($attribute, $value);
+        $values = explode(',', $value);
+
+        foreach ($values as $value) {
+            $size = Size::where('name', $value)->first();
+
+            if ($size) continue;
+            $pase = true;
+            break;
+        }
+
+        return $pase;
     }
 
     /**

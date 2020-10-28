@@ -20,7 +20,7 @@
                                     <td>{{ $product->description }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Precio</th
+                                    <th>Precio</th>
                                     <td>{{ $product->price }}</td>
                                 </tr>
                                 <tr>

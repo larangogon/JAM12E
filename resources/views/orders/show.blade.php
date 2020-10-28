@@ -46,7 +46,7 @@
                 <div class="card-body">
                     <table class="table table-sm">
                         <tr>
-                            <th>Order Id</th>
+                            <th># Orden</th>
                             <td>{{$order->id}}</td>
                         </tr>
                         <tr>
@@ -54,7 +54,7 @@
                             <td>{{$order->total}}</td>
                         </tr>
                         <tr>
-                            <th>Estatus de la orden </th>
+                            <th>Estado de la orden </th>
                             <td>{{$order->status}}</td>
                         </tr>
                         <tr>
@@ -74,28 +74,18 @@
                             @foreach($order->details as $detail)
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>talla</th>
-                                    <th>color</th>
+                                    <th>Talla</th>
+                                    <th>Color</th>
                                     <th>Cantidad</th>
                                     <th>subtotal</th>
                                 </tr>
                             <thead>
                             <tr>
-                                <th class="v-align-middle">
-                                    {{ $detail->product->name}}
-                                </th>
-                                <th class="v-align-middle">
-                                    {{ $detail->size->name}}
-                                </th>
-                                <th class="v-align-middle">
-                                    {{ $detail->color->name}}
-                                </th>
-                                <th class="v-align-middle">
-                                    {{ $detail->stock}}U
-                                </th>
-                                <th class="v-align-middle">
-                                    ${{ number_format($detail->total) }}
-                                </th>
+                                <th class="v-align-middle">{{ $detail->product->name}}</th>
+                                <th class="v-align-middle">{{ $detail->size->name}}</th>
+                                <th class="v-align-middle">{{ $detail->color->name}}</th>
+                                <th class="v-align-middle">{{ $detail->stock}}U</th>
+                                <th class="v-align-middle">$.{{ number_format($detail->total) }}</th>
                             </tr>
                             @endforeach
                             </thead>

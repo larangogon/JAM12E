@@ -22,7 +22,7 @@
                                        id="exampleFormControlFile1">
                             </div>
                             <button type="submit" class="btn btn-success btn-sm">
-                                importar
+                                Importar
                             </button>
                         </form>
                     </p>

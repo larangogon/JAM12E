@@ -16,16 +16,14 @@ class OrderObserver
         event(new OrderIsCreated($order));
 
         if($order->status == 'APPROVED'){
-            //$detail = $order->details[0]->product_id;
-            foreach($order->details as $details)
-            {
+            foreach($order->details as $details) {
                 $detail = $details->product_id;
-            }
 
-            $product = Product::where('id', '=', $detail)
-                ->firstOrFail();
-            $product->sales += 1;
-            $product->save();
+                $product = Product::where('id', '=', $detail)
+                    ->firstOrFail();
+                $product->sales += 1;
+                $product->save();
+            }
         }
     }
 }

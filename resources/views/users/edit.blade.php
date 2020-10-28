@@ -23,7 +23,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="name">
-                                        Name
+                                        Nombre
                                     </label>
                                     <input type="text" class="form-control"
                                            name="name" value="{{ $user->name}}"
@@ -31,7 +31,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="phone">Phone
+                                    <label for="phone">Telefono
                                     </label>
                                     <input type="text" class="form-control"
                                            name="phone" value="{{ $user->phone}}"
@@ -40,7 +40,7 @@
 
                                 <div class="form-group">
                                     <label for="cellphone">
-                                        Cellphone
+                                        Celular
                                     </label>
                                     <input type="text" class="form-control"
                                            name="cellphone" value="{{ $user->cellphone}}"
@@ -51,7 +51,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="document">
-                                        Document
+                                        Documento
                                     </label>
                                     <input type="text" class="form-control"
                                            name="document" value="{{ $user->document}}"
@@ -60,7 +60,7 @@
 
                                 <div class="form-group">
                                     <label for="address">
-                                        Address
+                                        Direccion
                                     </label>
                                     <input type="text" class="form-control" name="address"
                                            value="{{ $user->address}}" placeholder ="escribe tu address">

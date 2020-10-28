@@ -13,43 +13,21 @@
                     <thead>
                         <tr>
                         <h5>
-                            <div class="row justify-content-center align-items-center">
-                                Datos del usuario
-                            </div>
+                            <div class="row justify-content-center align-items-center">Datos del usuario</div>
                         </h5>
-                            <th>
-                                Nombre
-                            </th>
-                            <th>
-                                Documento
-                            </th>
-                            <th>
-                                Direccion
-                            </th>
-                            <th>
-                                Celular
-                            </th>
-                            <th>
-                                Telefono
-                            </th>
+                            <th>Nombre</th>
+                            <th>Documento</th>
+                            <th>Direccion</th>
+                            <th>Celular</th>
+                            <th>Telefono</th>
                         </tr>
                     <thead>
                         <tr>
-                            <th class="v-align-middle">
-                                {{auth()->user()->name}}
-                            </th>
-                            <th class="v-align-middle">
-                                {{auth()->user()->document}}
-                            </th>
-                            <th class="v-align-middle">
-                                {{auth()->user()->address}}
-                            </th>
-                            <th class="v-align-middle">
-                                {{auth()->user()->phone}}
-                            </th>
-                            <th class="v-align-middle">
-                                {{auth()->user()->cellphone}}
-                            </th>
+                            <th class="v-align-middle">{{auth()->user()->name}}</th>
+                            <th class="v-align-middle">{{auth()->user()->document}}</th>
+                            <th class="v-align-middle">{{auth()->user()->address}}</th>
+                            <th class="v-align-middle">{{auth()->user()->phone}}</th>
+                            <th class="v-align-middle">{{auth()->user()->cellphone}}</th>
                         </tr>
                     </thead>
                 </table>
@@ -72,24 +50,12 @@
                                      width="50" height="50"
                                 />
                             </td>
-                            <th class="v-align-middle">
-                                {{$product->name }}
-                            </th>
-                            <th class="v-align-middle">
-                                {{$product->pivot->size->name}}
-                            </th>
-                            <th class="v-align-middle">
-                                {{$product->pivot->color->name}}
-                            </th>
-                            <th class="v-align-middle">
-                                ${{number_format($product->price) }}
-                            </th>
-                            <th class="v-align-middle">
-                                {{$product->pivot->stock }}
-                            </th>
-                            <th class="v-align-middle">
-                                ${{number_format($product->price * $product->pivot->stock)}}
-                            </th>
+                            <th class="v-align-middle">{{$product->name }}</th>
+                            <th class="v-align-middle">{{$product->pivot->size->name}}</th>
+                            <th class="v-align-middle">{{$product->pivot->color->name}}</th>
+                            <th class="v-align-middle">$.{{number_format($product->price) }}</th>
+                            <th class="v-align-middle">{{$product->pivot->stock }}</th>
+                            <th class="v-align-middle">$.{{number_format($product->price * $product->pivot->stock)}}</th>
                         </tr>
                         @endforeach
                     </thead>
@@ -102,7 +68,7 @@
                                 @csrf
                                 <input type="hidden" name="cart_id" value="{{$cart->id}}">
                                 <button type="submit" class="btn btn-success btn-block text-left">
-                                    Pagar p2p
+                                    Generar Pago
                                 </button>
                             </form>
                         </div>

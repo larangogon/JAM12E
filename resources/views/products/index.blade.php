@@ -52,7 +52,7 @@
                                                 <a href="{{ route('indexProducts') }}">
                                                     <button type="button"
                                                             class="btn btn-warning btn-block btn-sm float-right">
-                                                        importar Productos
+                                                        Importar Productos
                                                     </button>
                                                 </a>
                                             </li>
@@ -80,10 +80,10 @@
                     <table class="table table-hover table-bordered">
                         <thead>
                         <tr class="table-primary">
-                            <th scope="col">id</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>price</th>
+                            <th scope="col">#</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>precio</th>
                             <th>stock</th>
                             <th>imagenes</th>
                             <th>Opciones</th>
@@ -93,23 +93,12 @@
                         <tbody>
                         @foreach($products as $product)
                             <tr>
-                                <td class="v-align-middle">
-                                    {{$product->id}}
-                                </td>
-                                <td class="v-align-middle">
-                                    {{$product->name}}
-                                </td>
-                                <td class="v-align-middle text-truncate" style="max-width: 200px">
-                                    {{$product->description}}
-                                </td>
-                                <td class="v-align-middle">
-                                    {{$product->price}}
-                                </td>
-                                <td class="v-align-middle">
-                                    {{$product->stock}}
-                                </td>
-                                <td class="v-align-middle">
-                                    <img class="img img:hover"
+                                <td class="v-align-middle">{{$product->id}}</td>
+                                <td class="v-align-middle">{{$product->name}}</td>
+                                <td class="v-align-middle text-truncate" style="max-width: 200px">{{$product->description}}</td>
+                                <td class="v-align-middle">{{$product->price}}</td>
+                                <td class="v-align-middle">{{$product->stock}}</td>
+                                <td class="v-align-middle"><img class="img img:hover"
                                          src="../uploads/{{$product->imagenes()->first()['name']}}"
                                          width="30" class="img-responsive">
                                 </td>

@@ -87,15 +87,21 @@ class DecoratorOrder implements InterfaceOrders
 
             $status = $response->status->status;
 
+
             $order->payment->update([
                 'status' => $status
             ]);
         } elseif ($order->payment->status === PlaceToPay::APPROVED) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
+            foreach($response->payment as $payments)
+            {
+                $pay = $payments;
+            }
+
             $status            = $response->status->status;
-            $amount            = $response->payment[0]->amount->from->total;
-            $internalReference = $response->payment[0]->internalReference;
+            $amount            = $pay->amount->from->total;
+            $internalReference = $pay->internalReference;
             $message           = $response->status->message;
             $payerdocument     = $response->request->payer->document;
             $payername         = $response->request->payer->name;
@@ -123,30 +129,6 @@ class DecoratorOrder implements InterfaceOrders
             $order->payment->update([
                 'status'  => $status,
                 "message" => $message
-            ]);
-        } elseif ($order->payment->status === PlaceToPay::APPROVED) {
-            $response = $this->requestP2P('getRequestinformation', $order);
-
-            $status            = $response->status->status;
-            $amount            = $response->payment[1]->amount->from->total;
-            $internalReference = $response->payment[1]->internalReference;
-            $message           = $response->status->message;
-            $payerdocument     = $response->request->payer->document;
-            $payername         = $response->request->payer->name;
-            $payeremail        = $response->request->payer->email;
-            $payermobile       = $response->request->payer->mobile;
-            $locale            = $response->request->locale;
-
-            $order->payment->update([
-                'internalReference' => $internalReference,
-                'status'            => $status,
-                "message"           => $message,
-                'amount'            => $amount,
-                'document'          => $payerdocument,
-                'name'              => $payername,
-                'email'             => $payeremail,
-                'mobile'            => $payermobile,
-                'locale'            => $locale
             ]);
         }
 

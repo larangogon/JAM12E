@@ -9,7 +9,7 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="name" class="negrita">
-                            Name:
+                            Nombre:
                         </label>
                         <div>
                             <input class="form-control" placeholder="products" required="required"
@@ -19,7 +19,7 @@
 
                     <div class="form-group">
                         <label for="description" class="negrita">
-                            Description:
+                            Descripción:
                         </label>
                         <div>
                             <textarea class="form-control" placeholder="description"
@@ -31,7 +31,7 @@
 
                     <div class="form-group">
                         <label for="price" class="negrita">
-                            Price:
+                            Precio:
                         </label>
                         <div>
                             <input class="form-control" placeholder="4.500" required="required"
@@ -47,7 +47,7 @@
                         </label>
                         <select name="category" class="form-control">
                             <option selected disabled>
-                                elige una category para este producto
+                                elige una categoria para este producto
                             </option>
                             @foreach ($categories as $category )
                                 @if($products->tieneCategory()->contains($category->name))
@@ -142,7 +142,7 @@
                 <div class="col-sm-3">
                     <div class="form-group">
                         <label for="name" class="negrita">
-                            Name:
+                            Nombre:
                         </label>
                         <div>
                             <input class="form-control" placeholder="producto" required="required"
@@ -151,7 +151,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description" class="negrita">
-                            Description:
+                            Descripción:
                         </label>
                         <div>
                             <textarea name="description" placeholder="description"  class="form-control"
@@ -161,7 +161,7 @@
                     </div>
                     <div class="form-group">
                         <label for="price" class="negrita">
-                            Price:
+                            Precio:
                         </label>
                         <div>
                             <input class="form-control" placeholder="price" required="required"
@@ -212,7 +212,7 @@
                         </label>
                         <select name="category[]" class="form-control">
                             <option selected disabled>
-                                elige una category para este producto
+                                elige una categoria para este producto
                             </option>
                             @foreach ($categories as $category )
                                 <option value="{{ $category->id}}">

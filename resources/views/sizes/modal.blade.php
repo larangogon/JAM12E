@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#addSize">Crear Size</button>
+<button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#addSize">Crear talla</button>
 
 {!! Form::open(['url' => 'sizes']) !!}
 {{ Form::token() }}
@@ -7,7 +7,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    Nueva Size del producto
+                    Nueva Talla del producto
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -17,7 +17,7 @@
                 <form>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">
-                            Nombre del size:
+                            Nombre de la Talla:
                         </label>
                         <input name="name" type="text" class="form-control" id="recipient-name">
                     </div>
@@ -28,7 +28,7 @@
                     Cerrar
                 </button>
                 <button type="submit" class="btn btn-primary">
-                    Guardar Size
+                    Guardar talla
                 </button>
             </div>
         </div>

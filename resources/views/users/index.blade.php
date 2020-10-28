@@ -28,7 +28,7 @@
                                     <li class="nav-item">
                                         <a href="{{ route('imports.index') }}">
                                             <button type="button" class="btn btn-warning btn-block btn-sm float-right">
-                                                importar Usuarios
+                                                Importar Usuarios
                                             </button>
                                         </a>
                                     </li>
@@ -55,7 +55,7 @@
             <table class="table table-hover table-bordered">
                 <thead>
                 <tr class="table-primary">
-                    <th scope="col">ID</th>
+                    <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">document</th>
                     <th scope="col">Email</th>

@@ -7,10 +7,11 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class ProductsExport implements FromCollection, WithMapping
+class ProductsExport implements FromCollection, WithMapping, WithHeadings
 {
     use Exportable;
     use RegistersEventListeners;
@@ -61,6 +62,23 @@ class ProductsExport implements FromCollection, WithMapping
             $categories,
             $imagenes,
             Date::dateTimeToExcel($product->created_at),
+        ];
+    }
+
+    public function headings(): array
+    {
+        return [
+            '#',
+            'Name',
+            'Descripcion',
+            'Precio',
+            'Stock',
+            'Estado',
+            'Colores',
+            'Tallas',
+            'Categorias',
+            'Imagenes',
+            'Date',
         ];
     }
 }
