@@ -143,49 +143,41 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
-                            <div class="info">
+                            <li class="nav-item">
+                                <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Inicio
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url('nosotros')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <p>
+                                        Quienes somos!
+                                    </p>
+                                </a>
+                            </li>
+                            @can('Administrator')
                                 <li class="nav-item">
-                                    <a href="{{url('nosotros')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <a href="{{route('nosotros.indexApi')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-file-medical-alt"></i>
                                         <p>
-                                            Quienes somos!
+                                            Como consumir nuestra API!
                                         </p>
                                     </a>
                                 </li>
-                            </div>
-                            @can('Administrator')
-                                <div class="info">
-                                    <li class="nav-item">
-                                        <a href="{{route('nosotros.indexApi')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
-                                            <i class="fas fa-file-medical-alt"></i>
-                                            <p>
-                                                Como consumir nuestra API!
-                                            </p>
-                                        </a>
-                                    </li>
-                                </div>
                             @endcan
                             @can('Administrator')
-                                <div class="info">
-                                    <li class="nav-item">
-                                        <a href="{{route('metrics.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
-                                            <i class="fas fa-file-alt"></i>
-                                            <p>
-                                                Reportes
-                                            </p>
-                                        </a>
-                                    </li>
-                                </div>
-                            @endcan
-                            <div class="info">
                                 <li class="nav-item">
-                                    <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
-                                        <i class="nav-icon fas fa-home"></i>
+                                    <a href="{{route('metrics.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-file-alt"></i>
                                         <p>
-                                            Inicio
+                                            Reportes
                                         </p>
                                     </a>
                                 </li>
-                            </div>
+                            @endcan
 
                             @can('Administrator')
                                 <li class="nav-item has-treeview">
@@ -299,6 +291,16 @@
                                             </ul>
                                         </li>
                                     </ul>
+                                </li>
+                            @endcan
+                            @can('Administrator')
+                                <li class="nav-item">
+                                    <a href="{{route('orders.canceller')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-file-medical-alt"></i>
+                                        <p>
+                                            Pagos cancelados
+                                        </p>
+                                    </a>
                                 </li>
                             @endcan
                             @can('Administrator')

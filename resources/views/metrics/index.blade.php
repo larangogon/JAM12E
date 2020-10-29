@@ -113,7 +113,7 @@
                     </p>
                     <a href="{{ route('reportAnual') }}">
                         <button type="button" class="btn btn-warning btn-sm float-right">
-                            Generar Reporte
+                            Generar <i class="far fa-file-pdf"></i>
                         </button>
                     </a>
                 </div>

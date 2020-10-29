@@ -2,11 +2,11 @@
 
 namespace App\Decorators;
 
+use App\Entities\Cancelled;
 use App\Entities\Cart;
 use App\Entities\Order;
 use App\Entities\Detail;
 use App\Entities\Payment;
-use App\Entities\Product;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Constants\PlaceToPay;
@@ -288,6 +288,23 @@ class DecoratorOrder implements InterfaceOrders
             'status'     => $status,
             "message"    => $message,
             "amount"     => $amount,
+        ]);
+
+        $orderCancelled = Cancelled::create([
+        'user_id' => $order->user->id,
+        'statusTransaction' => $order->payment->status,
+        'requestId' => $order->payment->requestId,
+        'internalReference' =>  $order->payment->internalReference,
+        'processUrl' => $order->payment->processUrl,
+        'message' => $order->payment->message,
+        'document' => $order->payment->document,
+        'name' => $order->payment->name,
+        'email' => $order->payment->email,
+        'mobile' => $order->payment->mobile,
+        'locale' => $order->payment->locale,
+        'amountReturn' => $order->payment->amount,
+        'order_id' => $order->id,
+        'totalOrder' => $order->total,
         ]);
 
         Order::destroy($request->get('order'));

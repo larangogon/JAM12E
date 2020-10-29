@@ -27,16 +27,18 @@ class CategoryRule implements Rule
     public function passes($attribute, $value)
     {
         $values = explode(',', $value);
-
+        array_pop($values);
+        $paso = true;
         foreach ($values as $value) {
             $category = Category::where('name', $value)->first();
 
-            if ($category) continue;
-            $pase = true;
-            break;
+            if (!$category) {
+                $paso = false;
+                break;
+            }
         }
 
-        return $pase;
+        return $paso;
     }
 
     /**

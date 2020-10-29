@@ -31,23 +31,44 @@ class ProductsExport implements FromCollection, WithMapping, WithHeadings
     public function map($product): array
     {
         $colors = '';
-        foreach ($product->colors()->pluck('name') as $color) {
-            $colors .= $color . ',';
+        $col = array_keys($product->colors()->pluck('name')->toArray());
+        foreach ($product->colors()->pluck('name')->toArray() as $key =>  $color) {
+            if ($key === end($col)){
+                $colors .= $color;
+            } else {
+                $colors .= $color . ',';
+            }
         }
 
         $categories = '';
-        foreach ($product->categories()->pluck('name') as $category) {
-            $categories .= $category . ',';
+        $r = array_keys($product->categories()->pluck('name')->toArray());
+        foreach ($product->categories()->pluck('name')->toArray() as $key => $category) {
+            if ($key === end($r)){
+                $categories .= $category;
+            } else {
+                $categories .= $category . ',';
+            }
         }
 
         $sizes = '';
-        foreach ($product->sizes()->pluck('name') as $size) {
-            $sizes .= $size . ',';
+        $siz = array_keys($product->sizes()->pluck('name')->toArray());
+        foreach ($product->sizes()->pluck('name')->toArray() as $key =>  $size) {
+            if ($key === end($siz)){
+                $sizes .= $size;
+            } else {
+                $sizes .= $size . ',';
+            }
         }
 
         $imagenes = '';
-        foreach ($product->imagenes()->pluck('name') as $imagen) {
-            $imagenes .= $imagen . ',';
+        $img = array_keys($product->imagenes()->pluck('name')->toArray());
+        foreach ($product->imagenes()->pluck('name')->toArray() as $key =>  $imagen) {
+            if ($key === end($img)){
+                $imagenes .= $imagen;
+            } else {
+                $imagenes .= $imagen . ',';
+            }
+
         }
 
         return [

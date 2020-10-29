@@ -27,14 +27,16 @@ class RuleColor implements Rule
     public function passes($attribute, $value)
     {
         $values = explode(',', $value);
-
+        $pase = true;
         foreach ($values as $value) {
             $color = Color::where('name', $value)->first();
 
-            if ($color) continue;
-            $pase = true;
-            break;
+            if (!$color) {
+                $pase = false;
+                break;
+            }
         }
+
 
         return $pase;
     }

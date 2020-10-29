@@ -28,12 +28,14 @@ class SizeRule implements Rule
     {
         $values = explode(',', $value);
 
+        $pase = true;
         foreach ($values as $value) {
             $size = Size::where('name', $value)->first();
 
-            if ($size) continue;
-            $pase = true;
-            break;
+            if (!$size) {
+                $pase = false;
+                break;
+            }
         }
 
         return $pase;

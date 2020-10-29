@@ -24,7 +24,7 @@
             @endforeach
         </div>
     @else
-        <div class="card text-white bg-warning">
+        <div class="card-body">
             <h3>
                 <div class="row justify-content-center align-items-center">
                     Sorry, There are no orders

@@ -38,7 +38,7 @@ class ReportController extends Controller
      */
     public function reportOrders()
     {
-        $order = Order::where('created_at', '>=', now()->subDays(30))->get();
+        $order = Order::all();
         $pdf = \PDF::loadView('orders.index', compact('order'));
         return $pdf->download('orderpdf.pdf');
     }
@@ -49,7 +49,7 @@ class ReportController extends Controller
     public function reportPayments()
     {
         $payment = Payment::where('created_at', '>=', now()->subDays(30))->get();
-        $pdf = \PDF::loadView('reports.reportPayments', compact('payment'));
+        $pdf = \PDF::loadView('payments', compact('payment'));
         return $pdf->download('paymentpdf.pdf');
     }
 
@@ -60,7 +60,7 @@ class ReportController extends Controller
     {
         $order = Order::all();
         $shipping = Shipping::where('created_at', '>=', now()->subDays(30))->get();
-        $pdf = \PDF::loadView('reports.reportShippings',[
+        $pdf = \PDF::loadView('shippings',[
             'shipping' => $shipping,
             'order' => $order
         ]);
@@ -73,7 +73,7 @@ class ReportController extends Controller
     public function reportProducts()
     {
         $product = Product::where('created_at', '>=', now()->subMonths(6))->get();
-        $pdf = \PDF::loadView('reports.reportProducts', compact('product'));
+        $pdf = \PDF::loadView('products', compact('product'));
         return $pdf->download('productspdf.pdf');
     }
 
@@ -83,7 +83,7 @@ class ReportController extends Controller
     public function reportUsers()
     {
         $user = User::where('created_at', '>=', now()->subMonths(6))->get();
-        $pdf = \PDF::loadView('reports.reportUsers', compact('user'));
+        $pdf = \PDF::loadView('users', compact('user'));
         return $pdf->download('userspdf.pdf');
     }
 

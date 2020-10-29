@@ -50,6 +50,7 @@ Route::post('orders/complete', 'OrderController@complete')->name('orders.complet
 Route::post('orders/reversePay', 'OrderController@reversePay')->name('orders.reversePay');
 Route::get('orders/{order}/shippingStatus')->uses('OrderController@shippingStatus')->name('orders.shippingStatus');
 
+Route::get('canceller')->uses( 'OrderController@canceller')->name('orders.canceller');
 Route::resource('shipping', 'ShippingController')->only(['create', 'store']);
 
 Route::get('exportUsers', 'ExportController@exportUsers')->name('exportUsers');

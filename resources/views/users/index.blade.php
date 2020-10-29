@@ -27,7 +27,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ route('imports.index') }}">
-                                            <button type="button" class="btn btn-warning btn-block btn-sm float-right">
+                                            <button type="button" class="btn btn-dark btn-block btn-sm float-right">
                                                 Importar Usuarios
                                             </button>
                                         </a>

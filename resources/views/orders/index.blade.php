@@ -26,11 +26,16 @@
                     }
                 }
             </script>
+
             <div class="row">
                 <div class="col-md-8">
                     <h2>
                         Ordenes
                     </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
                     <form>
                         <div class="form-group">
                             <label>
@@ -45,28 +50,17 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-4">
-                    <nav class="mt-2 float-right">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                            data-accordion="false">
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <p>
-                                        Opciones Avanzadas
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('exportOrders') }}">
-                                            <button type="button" class="btn btn-primary btn-sm float-right">
-                                                Exportar Ordenes Aprovadas
-                                            </button>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="col-md-5">
+                    <a href="{{ route('exportOrders') }}">
+                        <button type="button" class="btn btn-dark btn-sm float-right">
+                            Exportar
+                        </button>
+                    </a>
+                    <a href="{{ route('reportOrders') }}">
+                        <button type="button" class="btn btn-info btn-sm float-right">
+                            Generar <i class="far fa-file-pdf"></i>
+                        </button>
+                    </a>
                 </div>
             </div>
             <h6>
@@ -84,9 +78,11 @@
                     <th scope="col">Estado</th>
                     <th scope="col">Total</th>
                     <th scope="col">Detalle</th>
+                    <th scope="col">Pago</th>
+                    <th scope="col">Actualizado</th>
                     <th scope="col">Envio</th>
                     <th scope="col">Factura</th>
-                    <th scope="col">Cancelar pago</th>
+                    <th scope="col">Eliminar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -103,6 +99,9 @@
                                 </button>
                             </a>
                         </td>
+                        <td>{{$order->payment->status}}</td>
+                        <td>{{$order->payment->updated_at}}</td>
+
 
                         <td>
                             @if($order->status == 'APPROVED')
@@ -126,13 +125,15 @@
                         </td>
                         <td>
                             @if($order->status == 'APPROVED')
-                                <form action="{{route('orders.reversePay')}}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="order" value="{{$order->id}}">
-                                    <button class="btn btn-sm btn-danger" onclick="return confirmarCancelar()" type="submit" >
-                                        <i class="fas fa-minus-circle"></i>
-                                    </button>
-                                </form>
+                                @if($order->shippingStatus == '0')
+                                    <form action="{{route('orders.reversePay')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="order" value="{{$order->id}}">
+                                        <button class="btn btn-sm btn-danger" onclick="return confirmarCancelar()" type="submit" >
+                                            <i class="fas fa-minus-circle"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             @endif
                         </td>
                     </tr>
