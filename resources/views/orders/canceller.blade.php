@@ -38,16 +38,17 @@
                 <thead>
                 <tr class="table-primary">
                     <th scope="col">#</th>
-                    <th scope="col"># Usuario</th>
+                    <th scope="col">Usuario</th>
                     <th >Estado</th>
-                    <th >requestId</th>
-                    <th >internalReference</th>
-                    <th >processUrl</th>
-                    <th >document pagador</th>
-                    <th >creado</th>
-                    <th >order_id</th>
-                    <th >totalReturn</th>
-                    <th>Nombre Pagador</th></tr>
+                    <th >RequestId</th>
+                    <th >InternalRef</th>
+                    <th >ProcessUrl</th>
+                    <th >Documento</th>
+                    <th >Creado</th>
+                    <th >Orden</th>
+                    <th >Devuelto</th>
+                    <th >Admin</th>
+                    <th>Pagador</th></tr>
                 </thead>
                 <tbody>
                 @foreach($cancellers as $canceller)
@@ -66,6 +67,7 @@
                         <td>{{$canceller->created_at}}</td>
                         <td>{{$canceller->order_id}}</td>
                         <td>$.{{number_format($canceller->amountReturn)}}</td>
+                        <td>{{$canceller->cancelled_by}}</td>
                         <td>{{$canceller->name}}</td>
                     </tr>
                 @endforeach

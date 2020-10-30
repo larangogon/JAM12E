@@ -17,7 +17,7 @@ class CreateMetricsCancelledsTable extends Migration
             $table->bigIncrements('id');
             $table->string('date');
             $table->unsignedBigInteger('primary_id');
-            $table->string('status')->default('CANCELADO');
+            $table->enum('status', \App\Constants\StatusCancelled::toArray());
             $table->integer('total')->default(0);
             $table->timestamps();
         });

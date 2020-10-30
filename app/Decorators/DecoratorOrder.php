@@ -82,7 +82,10 @@ class DecoratorOrder implements InterfaceOrders
 
         $order = Order::find($id);
 
-        if ($order->payment->status === PlaceToPay::PENDING) {
+        if($order->payment == null){
+          $order = Order::find($id);
+
+        } elseif ($order->payment->status === PlaceToPay::PENDING) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
             $status = $response->status->status;
@@ -291,20 +294,21 @@ class DecoratorOrder implements InterfaceOrders
         ]);
 
         $orderCancelled = Cancelled::create([
-        'user_id' => $order->user->id,
+        'user_id'           => $order->user->id,
         'statusTransaction' => $order->payment->status,
-        'requestId' => $order->payment->requestId,
+        'requestId'         => $order->payment->requestId,
         'internalReference' =>  $order->payment->internalReference,
-        'processUrl' => $order->payment->processUrl,
-        'message' => $order->payment->message,
-        'document' => $order->payment->document,
-        'name' => $order->payment->name,
-        'email' => $order->payment->email,
-        'mobile' => $order->payment->mobile,
-        'locale' => $order->payment->locale,
-        'amountReturn' => $order->payment->amount,
-        'order_id' => $order->id,
-        'totalOrder' => $order->total,
+        'processUrl'        => $order->payment->processUrl,
+        'message'           => $order->payment->message,
+        'document'          => $order->payment->document,
+        'name'              => $order->payment->name,
+        'email'             => $order->payment->email,
+        'mobile'            => $order->payment->mobile,
+        'locale'            => $order->payment->locale,
+        'amountReturn'      => $order->payment->amount,
+        'order_id'          => $order->id,
+        'cancelled_by'      => auth()->user()->id,
+        'totalOrder'        => $order->total,
         ]);
 
         Order::destroy($request->get('order'));

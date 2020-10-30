@@ -32,6 +32,7 @@ class CreateCancelledsTable extends Migration
             $table->float('amountReturn', 14, 2)->nullable();
             $table->unsignedBigInteger('order_id');
             $table->integer('totalOrder');
+            $table->unsignedBigInteger('cancelled_by')->nullable();
 
             $table->foreign('user_id')
                 ->references('id')

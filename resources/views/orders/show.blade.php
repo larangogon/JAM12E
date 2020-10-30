@@ -59,7 +59,7 @@
                         </tr>
                         <tr>
                             <th>Estado del pago</th>
-                            <td>{{$order->payment->status}}</td>
+                            <td>{{$order->payment->status ?? __('no existe')}}</td>
                         </tr>
                     </table>
                 </div>

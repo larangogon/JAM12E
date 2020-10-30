@@ -9,7 +9,7 @@
             <div class="card text-white bg-dark mb-2" style="max-width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Consumo</h5>
-                    <p class="card-text"> Se han requistrado {{$users}} usuarios hasta la fecha</p>
+                    <p class="card-text"> Se han registrado {{$users}} usuarios hasta la fecha</p>
                     <p class="card-text">Hata la fecha se ha cancelado {{$cancelled}} pagos</p>
                     <p class="card-text">Este año se han  creado  {{$products}} productos</p>
                 </div>
@@ -32,7 +32,7 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <td>{{$product->id}}</td>
-                                    <th scope="col">Name</th>
+                                    <th scope="col"></th>
                                     <td>{{$product->name}}</td>
                                     <th scope="col"></th>
                                     <td>{{$product->sales}}</td>
@@ -53,7 +53,7 @@
                             <tr>
                                 <th scope="col">Id</th>
                                 <td>{{$product->id}}</td>
-                                <th scope="col">Name</th>
+                                <th scope="col"></th>
                                 <td>{{$product->name}}</td>
                                 <th scope="col"></th>
                                 <td>{{$product->visits}}</td>
@@ -105,19 +105,37 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="card border-warning">
-                <div class="card-body">
-                    <h5 class="card-title">Reporte General</h5>
-                    <p class="card-text">
-                        Reporte anual con detalle de productos, ordenes y pagos.
-                    </p>
-                    <a href="{{ route('reportAnual') }}">
-                        <button type="button" class="btn btn-warning btn-sm float-right">
-                            Generar <i class="far fa-file-pdf"></i>
-                        </button>
-                    </a>
+            <div class="col-sm-4">
+                <div class="card border-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">Reporte General</h5>
+                        <p class="card-text">
+                            Reporte anual con detalle de productos, ordenes y pagos.
+                        </p>
+                        <a href="{{ route('reportAnual') }}">
+                            <button type="button" class="btn btn-warning btn-sm float-right">
+                                Generar <i class="far fa-file-pdf"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card border-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">Reporte financiero</h5>
+                        <p class="card-text">
+                            Reporte detallado de ordenes y pagos hasta la fecha.
+                        </p>
+                        <a href="{{ route('reportOrders') }}">
+                            <button type="button" class="btn btn-warning btn-sm float-right">
+                                Generar <i class="far fa-file-pdf"></i>
+                            </button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+56

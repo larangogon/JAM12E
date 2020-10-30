@@ -36,6 +36,7 @@ class ProductsTableSeeder extends Seeder
 
             factory(Imagen::class, rand(1, 2))->create([
                 'product_id' => $product->id
+
             ]);
         });
     }

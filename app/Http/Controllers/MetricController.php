@@ -25,10 +25,10 @@ class MetricController extends Controller
         $now = new \DateTime();
 
         $visit = Product::orderBy('visits', 'desc')
-            ->take(5)->get(['name', 'id', 'visits']);
+            ->take(4)->get(['name', 'id', 'visits']);
 
         $sales = Product::orderBy('sales', 'desc')
-            ->take(5)->get(['name', 'id', 'sales']);
+            ->take(4)->get(['name', 'id', 'sales']);
 
         $hoy = Order::whereDate('created_at', '=', now()->format('Y-m-d'))->count();
         $pay = Payment::whereDate('updated_at', '=', now()->format('Y-m-d'))->count();

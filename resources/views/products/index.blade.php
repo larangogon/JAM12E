@@ -85,9 +85,6 @@
                             <th>Descripción</th>
                             <th>precio</th>
                             <th>stock</th>
-                            <th>Colores</th>
-                            <th>Categoria</th>
-                            <th>Tallas</th>
                             <th>Img</th>
                             <th>Opciones</th>
                             <th>X</th>
@@ -98,22 +95,9 @@
                             <tr>
                                 <td class="v-align-middle">{{$product->id}}</td>
                                 <td class="v-align-middle">{{$product->name}}</td>
-                                <td class="v-align-middle text-truncate" style="max-width: 100px">{{$product->description}}</td>
+                                <td class="v-align-middle text-truncate" style="max-width: 200px">{{$product->description}}</td>
                                 <td class="v-align-middle">$.{{number_format($product->price)}}</td>
                                 <td class="v-align-middle">{{$product->stock}}</td>
-                                <td class="v-align-middle text-truncate" style="max-width: 100px">
-                                    @foreach($product->colors as $color)
-                                        {{$color->name}},
-                                    @endforeach
-                                </td>
-                                <td class="v-align-middle text-truncate" style="max-width: 100px">
-                                        {{$product->categories()->first()['name']}}
-                                </td>
-                                <td class="v-align-middle text-truncate" style="max-width: 100px">
-                                    @foreach($product->sizes as $size)
-                                        {{$size->name}},
-                                    @endforeach
-                                </td>
                                 <td class="v-align-middle"><img class="img img:hover"
                                          src="../uploads/{{$product->imagenes()->first()['name']}}"
                                          width="30" class="img-responsive">

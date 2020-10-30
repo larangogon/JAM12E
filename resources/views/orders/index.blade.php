@@ -94,8 +94,8 @@
                                 </button>
                             </a>
                         </td>
-                        <td>{{$order->payment->status}}</td>
-                        <td>{{$order->payment->updated_at}}</td>
+                        <td>{{$order->payment->status ?? __('no existe')}}</td>
+                        <td>{{$order->payment->updated_at ?? __('no existe')}}</td>
 
 
                         <td>
