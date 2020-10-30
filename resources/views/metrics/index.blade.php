@@ -9,9 +9,9 @@
             <div class="card text-white bg-dark mb-2" style="max-width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Consumo</h5>
-                    <p class="card-text"> Hoy se ha agregado nuevas ordenes</p>
-                    <p class="card-text">Hoy se ejecutaron  pagos.</p>
-                    <p class="card-text">Hoy se hay creado productos</p>
+                    <p class="card-text"> Se han requistrado {{$users}} usuarios hasta la fecha</p>
+                    <p class="card-text">Hata la fecha se ha cancelado {{$cancelled}} pagos</p>
+                    <p class="card-text">Este año se han  creado  {{$products}} productos</p>
                 </div>
             </div>
             <div class="card text-white bg-primary mb-2" style="max-width: 18rem;">
@@ -19,7 +19,7 @@
                     <h5 class="card-title">Consumo</h5>
                     <p class="card-text"> Hoy se ha agregado {{$hoy}} nuevas ordenes</p>
                     <p class="card-text">Hoy se ejecutaron {{$pay}} pagos.</p>
-                    <p class="card-text">Hoy se hay creado productos</p>
+                    <p class="card-text">Hasta la fecha se han actualizado {{$payments}} pagos</p>
                 </div>
             </div>
             <div class="card text-white bg-success mb-2" style="max-width: 18rem;">
@@ -78,17 +78,17 @@
                 </order-metric>
             </div>
             <div class="col-sm-4">
-                <payment-metric inline-template>
+                <cancelled-metric inline-template>
                     <div>
                         <div class="card">
                             <div class="card-content">
                                 <div class="chart-container">
-                                    <canvas id="paymentBar" height="200"></canvas>
+                                    <canvas id="cancelledLine" height="200"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </payment-metric>
+                </cancelled-metric>
             </div>
             <div class="col-sm-4">
                 <payment-metric inline-template>
@@ -96,7 +96,7 @@
                         <div class="card">
                             <div class="card-content">
                                 <div class="chart-container">
-                                    <canvas id="paymentLine" height="200"></canvas>
+                                    <canvas id="paymentBar" height="200"></canvas>
                                 </div>
                             </div>
                         </div>

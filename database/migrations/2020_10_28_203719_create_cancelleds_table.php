@@ -16,8 +16,8 @@ class CreateCancelledsTable extends Migration
         Schema::create('cancelleds', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->string('status')->default('CANCELADO');
             $table->unsignedBigInteger('user_id');
-            $table->string('status')->default('Cancelled');
             $table->boolean('shippingStatus')->default(false);
             $table->text('statusTransaction')->nullable();
             $table->string('requestId')->nullable();

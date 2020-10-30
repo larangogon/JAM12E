@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Entities\Order;
 use App\Entities\Payment;
 use App\Entities\Product;
-use App\Entities\Shipping;
 use App\Entities\User;
 use Illuminate\Http\Request;
 
@@ -36,55 +35,12 @@ class ReportController extends Controller
     /**
      * @return mixed
      */
-    public function reportOrders()
+    public function reportOrders(Request $request)
     {
-        $order = Order::all();
-        $pdf = \PDF::loadView('orders.index', compact('order'));
+        $search   = $request->get('search', null);
+        $orders = Order::all();
+        $pdf = \PDF::loadView('reports.orders',['orders' => $orders, 'search' => $search]);
         return $pdf->download('orderpdf.pdf');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function reportPayments()
-    {
-        $payment = Payment::where('created_at', '>=', now()->subDays(30))->get();
-        $pdf = \PDF::loadView('payments', compact('payment'));
-        return $pdf->download('paymentpdf.pdf');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function reportShippings()
-    {
-        $order = Order::all();
-        $shipping = Shipping::where('created_at', '>=', now()->subDays(30))->get();
-        $pdf = \PDF::loadView('shippings',[
-            'shipping' => $shipping,
-            'order' => $order
-        ]);
-        return $pdf->download('shippingpdf.pdf');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function reportProducts()
-    {
-        $product = Product::where('created_at', '>=', now()->subMonths(6))->get();
-        $pdf = \PDF::loadView('products', compact('product'));
-        return $pdf->download('productspdf.pdf');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function reportUsers()
-    {
-        $user = User::where('created_at', '>=', now()->subMonths(6))->get();
-        $pdf = \PDF::loadView('users', compact('user'));
-        return $pdf->download('userspdf.pdf');
     }
 
     /**

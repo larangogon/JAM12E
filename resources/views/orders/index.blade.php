@@ -56,11 +56,6 @@
                             Exportar
                         </button>
                     </a>
-                    <a href="{{ route('reportOrders') }}">
-                        <button type="button" class="btn btn-info btn-sm float-right">
-                            Generar <i class="far fa-file-pdf"></i>
-                        </button>
-                    </a>
                 </div>
             </div>
             <h6>

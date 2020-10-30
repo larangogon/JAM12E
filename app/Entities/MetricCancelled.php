@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class MetricShipping extends Model
+class MetricCancelled extends Model
 {
-    protected $table = 'metrics_shippings';
+    protected $table = 'metrics_cancelleds';
 
     protected $fillable = ['metric', 'primary_id', 'secondary_id', 'date', 'keyword', 'status_type', 'status'];
 
@@ -50,9 +50,5 @@ class MetricShipping extends Model
         }
 
         return collect($data);
-    }
-
-    public static function firstOrCreate(array $array)
-    {
     }
 }
