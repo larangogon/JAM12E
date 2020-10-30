@@ -2,11 +2,16 @@
 
 namespace App\Jobs;
 
+use App\Entities\Report;
+use App\Entities\User;
+use App\Notifications\Export;
+use App\Notifications\FinishedExport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Notification;
 
 class ProcessReport implements ShouldQueue
 {
@@ -18,11 +23,11 @@ class ProcessReport implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Report $report
      */
     public function __construct()
     {
-        //
+
     }
 
     /**
@@ -30,8 +35,15 @@ class ProcessReport implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(Report $report)
     {
-        //
+        dd($report->toArray());
+        $report->created_by = auth()->user()->id;
+        $report->save();
+        $admin = User::with('roles' == 'Administrator')->get();
+        dd($admin);
+        Notification::send($admin, new Export($report));
+
+        $user->notify(new FinishedExport());
     }
 }

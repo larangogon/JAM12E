@@ -39,15 +39,20 @@ class ProcessP2p implements ShouldQueue
         if ($this->order->payment->status === PlaceToPay::PENDING) {
             $response = $orderD->requestP2P('getRequestinformation', $this->order);
 
-            $status             = $response->status->status;
-            $amount             = $response->payment[0]->amount->from->total;
-            $internalReference  = $response->payment[0]->internalReference;
-            $message            = $response->status->message;
-            $payerdocument      = $response->request->payer->document;
-            $payername          = $response->request->payer->name;
-            $payeremail         = $response->request->payer->email;
-            $payermobile        = $response->request->payer->mobile;
-            $locale             = $response->request->locale;
+            foreach($response->payment as $payments)
+            {
+                $pay = $payments;
+            }
+
+            $status            = $response->status->status;
+            $amount            = $pay->amount->from->total;
+            $internalReference = $pay->internalReference;
+            $message           = $response->status->message;
+            $payerdocument     = $response->request->payer->document;
+            $payername         = $response->request->payer->name;
+            $payeremail        = $response->request->payer->email;
+            $payermobile       = $response->request->payer->mobile;
+            $locale            = $response->request->locale;
 
             $this->order->payment->update([
                 'internalReference' => $internalReference,

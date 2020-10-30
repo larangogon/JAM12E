@@ -2,6 +2,7 @@
 
 namespace App\Decorators;
 
+use App\Entities\Cancelled;
 use App\Entities\Cart;
 use App\Entities\Order;
 use App\Entities\Detail;
@@ -81,10 +82,14 @@ class DecoratorOrder implements InterfaceOrders
 
         $order = Order::find($id);
 
-        if ($order->payment->status === PlaceToPay::PENDING) {
+        if($order->payment == null){
+          $order = Order::find($id);
+
+        } elseif ($order->payment->status === PlaceToPay::PENDING) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
             $status = $response->status->status;
+
 
             $order->payment->update([
                 'status' => $status
@@ -92,9 +97,14 @@ class DecoratorOrder implements InterfaceOrders
         } elseif ($order->payment->status === PlaceToPay::APPROVED) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
+            foreach($response->payment as $payments)
+            {
+                $pay = $payments;
+            }
+
             $status            = $response->status->status;
-            $amount            = $response->payment[0]->amount->from->total;
-            $internalReference = $response->payment[0]->internalReference;
+            $amount            = $pay->amount->from->total;
+            $internalReference = $pay->internalReference;
             $message           = $response->status->message;
             $payerdocument     = $response->request->payer->document;
             $payername         = $response->request->payer->name;
@@ -122,30 +132,6 @@ class DecoratorOrder implements InterfaceOrders
             $order->payment->update([
                 'status'  => $status,
                 "message" => $message
-            ]);
-        } elseif ($order->payment->status === PlaceToPay::APPROVED) {
-            $response = $this->requestP2P('getRequestinformation', $order);
-
-            $status            = $response->status->status;
-            $amount            = $response->payment[1]->amount->from->total;
-            $internalReference = $response->payment[1]->internalReference;
-            $message           = $response->status->message;
-            $payerdocument     = $response->request->payer->document;
-            $payername         = $response->request->payer->name;
-            $payeremail        = $response->request->payer->email;
-            $payermobile       = $response->request->payer->mobile;
-            $locale            = $response->request->locale;
-
-            $order->payment->update([
-                'internalReference' => $internalReference,
-                'status'            => $status,
-                "message"           => $message,
-                'amount'            => $amount,
-                'document'          => $payerdocument,
-                'name'              => $payername,
-                'email'             => $payeremail,
-                'mobile'            => $payermobile,
-                'locale'            => $locale
             ]);
         }
 
@@ -305,6 +291,24 @@ class DecoratorOrder implements InterfaceOrders
             'status'     => $status,
             "message"    => $message,
             "amount"     => $amount,
+        ]);
+
+        $orderCancelled = Cancelled::create([
+        'user_id'           => $order->user->id,
+        'statusTransaction' => $order->payment->status,
+        'requestId'         => $order->payment->requestId,
+        'internalReference' =>  $order->payment->internalReference,
+        'processUrl'        => $order->payment->processUrl,
+        'message'           => $order->payment->message,
+        'document'          => $order->payment->document,
+        'name'              => $order->payment->name,
+        'email'             => $order->payment->email,
+        'mobile'            => $order->payment->mobile,
+        'locale'            => $order->payment->locale,
+        'amountReturn'      => $order->payment->amount,
+        'order_id'          => $order->id,
+        'cancelled_by'      => auth()->user()->id,
+        'totalOrder'        => $order->total,
         ]);
 
         Order::destroy($request->get('order'));

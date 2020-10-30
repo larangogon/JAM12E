@@ -137,4 +137,20 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Product::class, 'updated_by');
     }
+
+    /**
+     * @return HasMany
+     */
+    public function cancellers(): HasMany
+    {
+        return $this->hasMany(Cancelled::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Cancelled::class);
+    }
 }

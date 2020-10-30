@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
                 ColorSeeder::class,
                 ProductsTableSeeder::class,
                 //ImagenesSeeder::class,
-                OrderSeeder::class,
-                PaymentSeeder::class,
+                //OrderSeeder::class,
+                //PaymentSeeder::class,
             ]
         );
     }

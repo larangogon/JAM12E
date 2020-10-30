@@ -16,7 +16,7 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Product::class, 2)->create();
+        factory(Product::class, 3)->create();
         $colors = Color::all();
         $sizes = Size::all();
         $categories = Category::all();
@@ -36,6 +36,7 @@ class ProductsTableSeeder extends Seeder
 
             factory(Imagen::class, rand(1, 2))->create([
                 'product_id' => $product->id
+
             ]);
         });
     }

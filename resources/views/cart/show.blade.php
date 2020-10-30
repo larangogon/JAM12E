@@ -31,7 +31,7 @@
             </h2>
             <p>
                 <a href="{{ route('cart.remove')}}" class="btn btn-danger btn-sm">
-                    vaciar carrito
+                    Vaciar carrito
                 </a>
                 <a href="{{route('vitrina.index') }}" class="btn btn-primary btn-sm">
                     Seguir comprando

@@ -41,7 +41,5 @@ class UsersExport implements FromCollection, WithMapping
             $roles,
             Date::dateTimeToExcel($user->created_at),
         ];
-
-
     }
 }

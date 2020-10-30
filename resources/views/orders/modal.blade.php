@@ -42,61 +42,32 @@
                 @if($order->shipping)
                     <table class="table">
                         <tr>
-                            <th>
-                                Nombre
-                            </th>
-                            <td>
-                                {{$order->shipping->name_recipient}}
-                            </td>
+                            <th>Nombre</th>
+                            <td>{{$order->shipping->name_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>
-                                N Documento
-                            </th>
-                            <td>
-                                {{$order->shipping->document_recipient}}
-                            </td>
+                            <th>N Documento</th>
+                            <td>{{$order->shipping->document_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>
-                                Telefono y celular
-                            </th>
-                            <td>
-                                {{$order->shipping->phone_recipient}}-
-                                {{$order->shipping->cellphone_recipient}}
-                            </td>
+                            <th>Telefono y celular</th>
+                            <td>{{$order->shipping->phone_recipient}}-{{$order->shipping->cellphone_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>
-                                Dirreccion
-                            </th>
-                            <td>
-                                {{$order->shipping->address_recipient}}
-                            </td>
+                            <th>Dirreccion</th>
+                            <td>{{$order->shipping->address_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>
-                                Email
-                            </th>
-                            <td>
-                                {{$order->shipping->email_recipient}}
-                            </td>
+                            <th>Email</th>
+                            <td>{{$order->shipping->email_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>
-                                Pais
-                            </th>
-                            <td>
-                                {{$order->shipping->country_recipient}}
-                            </td>
+                            <th>Pais</th>
+                            <td>{{$order->shipping->country_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>
-                                Ciudad
-                            </th>
-                            <td>
-                                {{$order->shipping->city_recipient}}
-                            </td>
+                            <th>Ciudad</th>
+                            <td>{{$order->shipping->city_recipient}}</td>
                         </tr>
                     </table>
 

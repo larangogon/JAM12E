@@ -48,10 +48,12 @@ class VitrinaController extends Controller
      */
     public function show(int $id): View
     {
-        $products = Product::active()
+        $product = Product::active()
             ->where('id', '=', $id)
             ->firstOrFail();
+        $product->visits += 1;
+        $product->save();
 
-        return view('vitrina/show', compact('products'));
+        return view('vitrina/show', compact('product'));
     }
 }

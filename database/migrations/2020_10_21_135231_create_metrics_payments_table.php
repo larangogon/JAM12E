@@ -15,7 +15,7 @@ class CreateMetricsPaymentsTable extends Migration
     public function up()
     {
         Schema::create('metrics_payments', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('date');
             $table->unsignedBigInteger('primary_id');
             $table->enum('status', \App\Constants\Statuses::toArray());

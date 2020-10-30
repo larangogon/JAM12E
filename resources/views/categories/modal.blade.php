@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#addCategory">
-    Crear Category
+    Crear Categoria
 </button>
 
 {!! Form::open(['url' => 'categories']) !!}
@@ -9,7 +9,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    Nueva Category de Articulo
+                    Nueva Categoria de Articulo
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -19,7 +19,7 @@
                 <form>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">
-                            Nombre de la category:
+                            Nombre de la categoria:
                         </label>
                         <input name="name" type="text" class="form-control" id="recipient-name">
                     </div>
@@ -30,7 +30,7 @@
                     Cerrar
                 </button>
                 <button type="submit" class="btn btn-primary">
-                    Guardar Category
+                    Guardar Categoria
                 </button>
             </div>
         </div>

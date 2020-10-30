@@ -53,10 +53,10 @@ class UsersImport implements WithValidation, ToModel, WithBatchInserts
         }
     }
 
-        /**
-         * @return string[]
-         */
-        public function rules(): array
+    /**
+     * @return string[]
+     */
+    public function rules(): array
     {
         return [
             '*.1' => 'required',
@@ -70,10 +70,10 @@ class UsersImport implements WithValidation, ToModel, WithBatchInserts
         ];
     }
 
-        /**
-         * @return int
-         */
-        public function batchSize(): int
+    /**
+     * @return int
+     */
+    public function batchSize(): int
     {
         return 1000;
     }

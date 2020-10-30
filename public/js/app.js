@@ -1899,6 +1899,175 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/metrics/cancelledMetric.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/metrics/cancelledMetric.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _charts_BarChart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./charts/BarChart */ "./resources/js/metrics/charts/BarChart.vue");
+/* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! qs */ "./node_modules/qs/lib/index.js");
+/* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(qs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _charts_PieChart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./charts/PieChart */ "./resources/js/metrics/charts/PieChart.vue");
+/* harmony import */ var _charts_LineChart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./charts/LineChart */ "./resources/js/metrics/charts/LineChart.vue");
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "cancelledMetric",
+  data: function data() {
+    return {
+      cancelledCount: {},
+      cancelledData: {},
+      labelX: "Fecha",
+      labelY: "Cantidad",
+      to: null,
+      from: null,
+      cancelledBarChart: null,
+      cancelledLineChart: null,
+      cancelledPieChart: null
+    };
+  },
+  computed: {
+    dates: function dates() {
+      var days = [];
+      var dates = [];
+
+      for (var i = this.rangeOnDays; i >= 0; i--) {
+        days[i] = new Date(this.to.getFullYear(), this.to.getMonth(), this.to.getDate() - i).toISOString().slice(0, 10);
+      }
+
+      Object.values(days).reverse().forEach(function (date) {
+        dates[date] = date;
+      });
+      return dates;
+    },
+    rangeOnDays: function rangeOnDays() {
+      return Math.round((this.to - this.from) / (1000 * 60 * 60 * 24));
+    },
+    labels: function labels() {
+      var _this$cancelledData, _Object$keys$;
+
+      return Object.keys((_this$cancelledData = this.cancelledData[(_Object$keys$ = Object.keys(this.cancelledData)[0]) !== null && _Object$keys$ !== void 0 ? _Object$keys$ : 0]) !== null && _this$cancelledData !== void 0 ? _this$cancelledData : []);
+    },
+    total: function total() {
+      var _this$cancelledData$C;
+
+      var mapper = function mapper(item) {
+        return Number(item);
+      };
+
+      return this.sum([this.sum(Object.values((_this$cancelledData$C = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C !== void 0 ? _this$cancelledData$C : [0]).map(mapper))]);
+    }
+  },
+  created: function created() {
+    this.to = new Date();
+    this.from = new Date(this.to.getFullYear(), this.to.getMonth(), this.to.getDate() - 15);
+    this.getMetrics();
+  },
+  methods: {
+    sum: function sum(array) {
+      return +array.reduce(function (carry, b) {
+        return Number(carry) + Number(b);
+      }, 0).toFixed(2);
+    },
+    getMetrics: function getMetrics() {
+      var _this = this;
+
+      axios.get('/metrics/cancelled-count', {
+        params: {
+          'filter': {
+            'from': this.from.toISOString().slice(0, 10),
+            'to': this.to.toISOString().slice(0, 10),
+            'primary': 'all'
+          }
+        }
+      }).then(function (_ref) {
+        var metric = _ref.data.metric;
+        _this.cancelledCount = Object.assign({}, metric);
+
+        _this.buildMetric();
+
+        _this.loading = false;
+      })["catch"](function (error) {
+        console.log(error);
+        _this.loading = false;
+      });
+    },
+    buildMetric: function buildMetric() {
+      this.completeLabels();
+      this.drawCharts();
+    },
+    completeLabels: function completeLabels() {
+      var _this$cancelledCount,
+          _this2 = this;
+
+      Object.keys((_this$cancelledCount = this.cancelledCount) !== null && _this$cancelledCount !== void 0 ? _this$cancelledCount : []).forEach(function (item) {
+        var _this2$cancelledCount;
+
+        _this2.cancelledData[item] = {};
+        var listFormat = {};
+        var keys = _this2.dates;
+        var byStatus = (_this2$cancelledCount = _this2.cancelledCount[item]) !== null && _this2$cancelledCount !== void 0 ? _this2$cancelledCount : [];
+        Object.keys(byStatus).forEach(function (date) {
+          listFormat[keys[date]] = _this2.cancelledCount[item][date];
+        });
+        Object.values(keys).forEach(function (period) {
+          if (!Object.keys(listFormat).includes(period.toString())) listFormat[period] = 0;
+        });
+        listFormat = Object.fromEntries(Object.entries(listFormat).sort());
+        _this2.cancelledData[item] = listFormat;
+      });
+    },
+    drawCharts: function drawCharts() {
+      this.drawCancelledBar();
+      this.drawCancelledLine();
+      this.drawCancelledPie();
+    },
+    drawCancelledBar: function drawCancelledBar() {
+      this.cancelledBarChart = new _charts_BarChart__WEBPACK_IMPORTED_MODULE_0__["default"]().drawBarChart('cancelledBar', this.labels, this.mapCancelledBarDataset(), this.cancelledBarChart, this.labelX, this.labelY);
+    },
+    drawCancelledLine: function drawCancelledLine() {
+      this.cancelledLineChart = new _charts_LineChart__WEBPACK_IMPORTED_MODULE_3__["default"]().drawLineChart('cancelledLine', this.labels, this.mapCancelledBarDataset(), this.cancelledLineChart, this.labelX, this.labelY);
+    },
+    mapCancelledBarDataset: function mapCancelledBarDataset() {
+      var _this$cancelledData$C2, _this$cancelledData$C3;
+
+      return [{
+        'label': 'CANCELADO',
+        'data': Object.values((_this$cancelledData$C2 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C2 !== void 0 ? _this$cancelledData$C2 : [0]),
+        'hidden': Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])([0]) === Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])(Object.values((_this$cancelledData$C3 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C3 !== void 0 ? _this$cancelledData$C3 : [0])),
+        'borderColor': 'rgba(54, 162, 235)',
+        'borderWidth': 2,
+        'backgroundColor': 'rgba(54, 162, 235, 0.6)'
+      }];
+    },
+    drawCancelledPie: function drawCancelledPie() {
+      this.cancelledPieChart = new _charts_PieChart__WEBPACK_IMPORTED_MODULE_2__["default"]().drawPieChart('cancelledPie', this.mapCancelledPieDataset(), this.cancelledPieChart);
+    },
+    mapCancelledPieDataset: function mapCancelledPieDataset() {
+      var _this$cancelledData$C4;
+
+      return {
+        'datasets': [{
+          data: [this.sum(Object.values((_this$cancelledData$C4 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C4 !== void 0 ? _this$cancelledData$C4 : [0]))],
+          backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 206, 86, 0.6)'],
+          borderColor: ['rgba(54, 162, 235)', 'rgba(255,99,132)', 'rgba(255, 206, 86)'],
+          borderWidth: 2
+        }],
+        'totals': this.total,
+        'labels': ['CANCELADO']
+      };
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/metrics/charts/BarChart.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/metrics/charts/BarChart.vue?vue&type=script&lang=js& ***!
@@ -94666,6 +94835,8 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _metrics_orderMetric__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./metrics/orderMetric */ "./resources/js/metrics/orderMetric.vue");
 /* harmony import */ var _metrics_paymentMetric__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./metrics/paymentMetric */ "./resources/js/metrics/paymentMetric.vue");
+/* harmony import */ var _metrics_cancelledMetric__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./metrics/cancelledMetric */ "./resources/js/metrics/cancelledMetric.vue");
+
 
 
 
@@ -94674,6 +94845,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 Vue.component("orderMetric", _metrics_orderMetric__WEBPACK_IMPORTED_MODULE_0__["default"]);
 Vue.component("paymentMetric", _metrics_paymentMetric__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Vue.component("cancelledMetric", _metrics_cancelledMetric__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var app = new Vue({
   el: '#app'
 });
@@ -94724,6 +94896,56 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/metrics/cancelledMetric.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/metrics/cancelledMetric.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cancelledMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cancelledMetric.vue?vue&type=script&lang=js& */ "./resources/js/metrics/cancelledMetric.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _cancelledMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/metrics/cancelledMetric.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/metrics/cancelledMetric.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/metrics/cancelledMetric.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cancelledMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./cancelledMetric.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/metrics/cancelledMetric.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cancelledMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

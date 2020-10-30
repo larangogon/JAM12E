@@ -6,19 +6,18 @@ use App\Entities\Category;
 use App\Entities\Color;
 use App\Entities\Product;
 use App\Entities\Size;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Rules\CategoryRule;
+use App\Rules\RuleColor;
+use App\Rules\SizeRule;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
-use Maatwebsite\Excel\Concerns\SkipsOnError;
-use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Validators\Failure;
-use Throwable;
 
-class ProductsImport implements WithValidation, ToModel, WithBatchInserts
+class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withStartRow
 {
     use Importable;
     use SkipsErrors;
@@ -102,10 +101,10 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
             '*.2' => 'required',
             '*.3' => ['required', 'numeric'],
             '*.4' => ['required', 'numeric'],
-            '*.5' => 'required',
-            '*.6' => 'required',
-            '*.7' => 'required',
-            '*.8' => 'required',
+            '*.5' => ['required'],
+            '*.6' => ['required', new RuleColor],
+            '*.7' => ['required', new SizeRule],
+            '*.8' => ['required', new CategoryRule],
         ];
     }
 
@@ -115,5 +114,10 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts
     public function batchSize(): int
     {
         return 1000;
+    }
+
+    public function startRow(): int
+    {
+        return 2;
     }
 }
