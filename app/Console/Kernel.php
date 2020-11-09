@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        PaymentOrders::class
+        PaymentOrders::class,
     ];
 
     /**

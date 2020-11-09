@@ -40,7 +40,7 @@ class OrderController extends Controller
         $this->order = new Order();
 
         return view('orders.index', [
-            'search'   => $search,
+            'search' => $search,
             'orders' => $this->order
                 ->search($search)
                 ->paginate(5)

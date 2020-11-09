@@ -298,6 +298,9 @@
                                         <tr><th>"price" = "324455",</th>
                                             <td><mark>campo requerido</mark></td>
                                         </tr>
+                                        <tr><th>"barcode" = "324455656574",</th>
+                                            <td><mark>campo requerido,#,unico</mark></td>
+                                        </tr>
                                         <tr><th>"stock" = "5",</th>
                                             <td><mark>campo requerido</mark></td>
                                         </tr>

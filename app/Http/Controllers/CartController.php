@@ -43,7 +43,15 @@ class CartController extends Controller
      */
     public function add(CartAddRequest $request): RedirectResponse
     {
+        $product = Product::where('id', '=', $request->products_id)
+            ->first();
+        if ($product->stock < $request->stock) {
+            return redirect()
+                ->back()
+                ->with('success', 'Excede la cantida disponible, la cantidad maxima son...'. $product->stock . '...de esta referencia');
+        }
         $this->carts->add($request);
+
 
         return redirect()
             ->back()

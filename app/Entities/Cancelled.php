@@ -8,12 +8,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Cancelled extends Model
 {
     protected $fillable = [
-        'user_id', 'statusTransaction',
-        'requestId', 'internalReference',
-        'processUrl' , 'message', 'document'
-        , 'name', 'email', 'mobile', 'locale',
-        'amountReturn', 'order_id',
-        'cancelled_by', 'totalOrder'
+        'user_id',
+        'statusTransaction',
+        'requestId',
+        'internalReference',
+        'processUrl',
+        'message',
+        'document',
+        'name',
+        'email',
+        'mobile',
+        'locale',
+        'amountReturn',
+        'order_id',
+        'cancelled_by',
+        'totalOrder'
     ];
 
     protected $table = 'cancelleds';
@@ -23,7 +32,7 @@ class Cancelled extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'cancelled_by');
     }
 
     /**

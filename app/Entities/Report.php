@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Report extends Model
 {
-    protected $fillable = ['created_by', 'file'];
+    protected $fillable = [
+        'created_by',
+        'file'
+    ];
 
     protected $table = 'reports';
 
@@ -16,6 +19,6 @@ class Report extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

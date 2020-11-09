@@ -2041,9 +2041,9 @@ __webpack_require__.r(__webpack_exports__);
         'label': 'CANCELADO',
         'data': Object.values((_this$cancelledData$C2 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C2 !== void 0 ? _this$cancelledData$C2 : [0]),
         'hidden': Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])([0]) === Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])(Object.values((_this$cancelledData$C3 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C3 !== void 0 ? _this$cancelledData$C3 : [0])),
-        'borderColor': 'rgba(54, 162, 235)',
+        'borderColor': 'rgba(255, 99, 132)',
         'borderWidth': 2,
-        'backgroundColor': 'rgba(54, 162, 235, 0.6)'
+        'backgroundColor': 'rgba(255, 99, 132, 0.6)'
       }];
     },
     drawCancelledPie: function drawCancelledPie() {
@@ -2055,8 +2055,8 @@ __webpack_require__.r(__webpack_exports__);
       return {
         'datasets': [{
           data: [this.sum(Object.values((_this$cancelledData$C4 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C4 !== void 0 ? _this$cancelledData$C4 : [0]))],
-          backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 206, 86, 0.6)'],
-          borderColor: ['rgba(54, 162, 235)', 'rgba(255,99,132)', 'rgba(255, 206, 86)'],
+          backgroundColor: ['rgba(255, 99, 132, 0.6)'],
+          borderColor: ['rgba(255,99,132)'],
           borderWidth: 2
         }],
         'totals': this.total,

@@ -31,16 +31,18 @@ class DecoratorCart implements InterfaceCarts
     {
         $this->cartsRepo->add($request);
 
-        $product = $request->get('products_id');
-        $stock   = $request->get('stock');
-        $color   = $request->get('color_id');
-        $size    = $request->get('size_id');
+        $product   = $request->get('products_id');
+        $stock     = $request->get('stock');
+        $color     = $request->get('color_id');
+        $size      = $request->get('size_id');
+        $category  = $request->get('category_id');
 
         Auth::user()->cart->products()
             ->attach($product, [
-                'stock'    => $stock,
-                'color_id' => $color,
-                'size_id'  => $size
+                'stock'       => $stock,
+                'color_id'    => $color,
+                'category_id' => $category,
+                'size_id'     => $size
             ]);
     }
 

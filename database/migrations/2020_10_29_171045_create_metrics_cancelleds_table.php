@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateMetricsCancelledsTable extends Migration
@@ -17,7 +18,7 @@ class CreateMetricsCancelledsTable extends Migration
             $table->bigIncrements('id');
             $table->string('date');
             $table->unsignedBigInteger('primary_id');
-            $table->enum('status', \App\Constants\StatusCancelled::toArray());
+            $table->string('status')->default('CANCELADO');
             $table->integer('total')->default(0);
             $table->timestamps();
         });
@@ -26,8 +27,8 @@ class CreateMetricsCancelledsTable extends Migration
 CREATE PROCEDURE `cancelled_metrics_generate` (p_from date, p_until date)
 BEGIN
     START TRANSACTION;
-    DELETE FROM `metrics` WHERE `date` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
-    INSERT INTO `metrics` (`date`, `primary_id`, `status`, `total`)
+    DELETE FROM `metrics_cancelleds` WHERE `date` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
+    INSERT INTO `metrics_cancelleds` (`date`, `primary_id`, `status`, `total`)
     SELECT DATE(`created_at`) AS date, `user_id` as primary_id, `status`,
          COUNT(*) as total
          FROM cancelleds

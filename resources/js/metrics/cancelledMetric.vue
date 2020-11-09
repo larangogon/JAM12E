@@ -128,9 +128,9 @@ export default {
                     'label': 'CANCELADO',
                     'data': Object.values(this.cancelledData['CANCELADO'] ?? [0]),
                     'hidden': stringify([0]) === stringify(Object.values(this.cancelledData['CANCELADO'] ?? [0])),
-                    'borderColor': 'rgba(54, 162, 235)',
+                    'borderColor': 'rgba(255, 99, 132)',
                     'borderWidth': 2,
-                    'backgroundColor': 'rgba(54, 162, 235, 0.6)'
+                    'backgroundColor': 'rgba(255, 99, 132, 0.6)',
                 },
             ]
         },
@@ -147,14 +147,10 @@ export default {
                         this.sum(Object.values(this.cancelledData['CANCELADO'] ?? [0])),
                     ],
                     backgroundColor: [
-                        'rgba(54, 162, 235, 0.6)',
                         'rgba(255, 99, 132, 0.6)',
-                        'rgba(255, 206, 86, 0.6)',
                     ],
                     borderColor: [
-                        'rgba(54, 162, 235)',
                         'rgba(255,99,132)',
-                        'rgba(255, 206, 86)',
                     ],
                     borderWidth: 2,
                 }],

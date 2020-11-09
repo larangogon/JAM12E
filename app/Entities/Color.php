@@ -15,7 +15,8 @@ class Color extends Model
      */
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany('App\Entities\Product')->withTimestamps();
+        return $this->belongsToMany('App\Entities\Product')
+            ->withTimestamps();
     }
 
     /**

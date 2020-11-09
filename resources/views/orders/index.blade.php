@@ -3,7 +3,6 @@
 @section('content')
     @can('Administrator')
         <div class="container">
-
             <script type="text/javascript">
                 function confirmarEnvio() {
                     var x = confirm("Estas seguro de cambiar el estado del envio?");
@@ -35,22 +34,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-7">
-                    <form>
-                        <div class="form-group">
-                            <label>
-                                Desde:
-                                <input type="date" name="fecha_inicio"/>
-                            </label>
-                            <label>
-                                Hasta:
-                                <input type="date" name="fecha_final"/>
-                            </label>
-                            <button class="btn btn-success btn-sm">Filtrar</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-5">
+                <div class="col-md-12">
                     <a href="{{ route('exportOrders') }}">
                         <button type="button" class="btn btn-dark btn-sm float-right">
                             Exportar
@@ -103,8 +87,8 @@
                                 <form action= "{{ route('orders.shippingStatus',  $order->id)}}" method = "POST">
                                     @csrf
                                     @method('GET')
-                                    <button type="submit" class="btn-sm btn {{$order->shippingStatus ?  'btn-success' : 'btn-danger'}}" role="button" onclick="return confirmarEnvio()">
-                                        {{$order->shippingStatus ?  'enviado' : 'pendiente'}}
+                                    <button type="submit" class="btn-sm btn {{$order->shippingStatus ?  'Enviado' : 'btn-danger'}}" role="button" onclick="return confirmarEnvio()">
+                                        {{$order->shippingStatus ?  'Enviado' : 'pendiente'}}
                                     </button>
                                 </form>
                             @endif

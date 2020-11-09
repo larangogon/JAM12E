@@ -13,7 +13,12 @@ class Order extends Model
 {
     use HasRoles;
 
-    protected $fillable = ['user_id', 'id', 'status', 'total'];
+    protected $fillable = [
+        'user_id',
+        'id',
+        'status',
+        'total'
+    ];
 
     protected $table = 'orders';
 
@@ -69,7 +74,47 @@ class Order extends Model
     public function scopeSearch($query, $search)
     {
         if ($search) {
-            return $query->where('status', 'LIKE', "%$search%");
+            return $query
+                ->where('status', 'LIKE', "%$search%");
+        }
+    }
+
+    /**
+     * @param $query
+     * @param $status
+     * @return mixed
+     */
+    public function scopeStatus($query, $status)
+    {
+        if ($status) {
+            return $query
+                ->where('status', 'LIKE', "%$status%");
+        }
+    }
+
+    /**
+     * @param $query
+     * @param $fechaInicio
+     * @return mixed
+     */
+    public function scopeFechaInicio($query, $fechaInicio)
+    {
+        if ($fechaInicio) {
+            return $query
+                ->where('created_at', 'LIKE', "%$fechaInicio%");
+        }
+    }
+
+    /**
+     * @param $query
+     * @param $fechaFinal
+     * @return mixed
+     */
+    public function scopeFechaFinal($query, $fechaFinal)
+    {
+        if ($fechaFinal) {
+            return $query
+                ->where('created_at', 'LIKE', "%$fechaFinal%");
         }
     }
 }

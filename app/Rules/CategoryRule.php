@@ -27,8 +27,11 @@ class CategoryRule implements Rule
     public function passes($attribute, $value)
     {
         $values = explode(',', $value);
+
         array_pop($values);
+
         $paso = true;
+
         foreach ($values as $value) {
             $category = Category::where('name', $value)->first();
 
@@ -48,6 +51,6 @@ class CategoryRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Category does not exist in the database';
     }
 }

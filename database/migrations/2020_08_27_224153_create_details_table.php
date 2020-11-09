@@ -19,8 +19,9 @@ class CreateDetailsTable extends Migration
             $table->unsignedBigInteger('product_id')->unsigned();
             $table->unsignedBigInteger('color_id');
             $table->unsignedBigInteger('size_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('order_id');
-            
+
             $table->integer('total');
             $table->integer('stock');
 
@@ -28,7 +29,7 @@ class CreateDetailsTable extends Migration
                 ->references('id')
                 ->on('products')
                 ->onDelete('cascade');
-            
+
             $table->foreign('order_id')
                 ->references('id')
                 ->on('orders')
@@ -37,6 +38,11 @@ class CreateDetailsTable extends Migration
             $table->foreign('color_id')
                 ->references('id')
                 ->on('colors')
+                ->onDelete('cascade');
+
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
                 ->onDelete('cascade');
 
             $table->foreign('size_id')

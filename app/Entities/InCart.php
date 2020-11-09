@@ -10,6 +10,8 @@ class InCart extends Pivot
 {
     protected $table = 'in_carts';
 
+    protected $guarded = [];
+
     /**
      * @return BelongsTo
      */
@@ -24,6 +26,14 @@ class InCart extends Pivot
     public function size(): BelongsTo
     {
         return $this->belongsTo(Size::class, 'size_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Size::class, 'category_id');
     }
 
     /**

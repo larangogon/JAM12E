@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Imagen extends Model
 {
-    protected $fillable = ['id', 'name', 'product_id'];
+    protected $fillable = [
+        'id',
+        'name',
+        'product_id'
+    ];
 
     protected $table = 'imagenes';
 

@@ -135,6 +135,9 @@
     <div class="card">
         <div class="card-header">
             Crear Producto
+            <a href="{{ route('products.index') }}" class="btn btn-success btn-sm float-right">
+                Cancelar
+            </a>
         </div>
         <div class="container">
             <input type="hidden" value="{{auth()->user()->id}}" name="created_by">
@@ -226,6 +229,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="carcode" class="negrita">
+                            Codigo de barras:
+                        </label>
+                        <div>
+                            <input class="form-control" placeholder="barcode" required="required"
+                                   name="barcode" type="text" id="barcode">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="img" class="negrita">
                             Selecciona una imagen:
                         </label>
@@ -237,15 +250,13 @@
                     {{$message}}
                     @enderror
 
-                    <button type="submit" class="btn btn-primary btn-sm">
-                        Guardar
-                    </button>
-                    <a href="{{ route('products.index') }}" class="btn btn-secondary btn-sm">
-                        Cancelar
-                    </a>
                 </div>
 
             </div>
+            <button type="submit" class="btn btn-block btn-primary btn-sm">
+                Guardar
+            </button>
+
         </div>
     </div>
 @endif

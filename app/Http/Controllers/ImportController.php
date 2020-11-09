@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImportImgsRequest;
 use App\Http\Requests\ImportRequest;
 use App\Imports\ProductsImport;
 use App\Imports\UsersImport;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Validators\ValidationException;
@@ -32,14 +34,15 @@ class ImportController extends Controller
         $file = $request->file('file')->store('import');
 
         $import = new UsersImport;
+
         $import->import($file);
 
         if ($import->failures()->isNotEmpty()) {
             return back()->withFailures($import->failures());
         }
 
-        return back()->with('success', 'All good,
-        import of users successfully!');
+        return back()
+            ->with('success', 'All good, import of users successfully!');
     }
 
     /**
@@ -59,14 +62,15 @@ class ImportController extends Controller
         $file = $request->file('file')->store('import');
 
         $import = new ProductsImport;
+
         $import->import($file);
 
         if ($import->failures()->isNotEmpty()) {
             return back()->withFailures($import->failures());
         }
 
-        return back()->with('success', 'All good,
-        import of products successfully!');
+        return back()
+            ->with('success', 'All good, import of products successfully!');
     }
 
     /**
@@ -75,5 +79,25 @@ class ImportController extends Controller
     public function indexProducts(): View
     {
         return view('imports.indexProducts');
+    }
+
+    /**
+     * @param ImportImgsRequest $request
+     * @return RedirectResponse|void
+     */
+    public function imgsProducts(ImportImgsRequest $request)
+    {
+        $files = $request->file('imgUp');
+
+        if (!$files) {
+            return;
+        }
+        foreach ($files as $file) {
+            $name = $file->getClientOriginalName();
+            $file->move(public_path() . '/uploads/', $name);
+        }
+
+        return back()->with('success', 'All good,
+        import of imgs successfully!');
     }
 }

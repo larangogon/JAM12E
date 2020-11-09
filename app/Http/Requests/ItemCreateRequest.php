@@ -29,6 +29,7 @@ class ItemCreateRequest extends FormRequest
             'description' => 'required|max:250',
             'stock'       => 'required|numeric',
             'price'       => 'required|numeric',
+            'barcode'     => 'required|numeric|min:13|unique:products',
             'img'         => 'required',
             'color'       => ['required','exists:colors,id'],
             'category'    => ['required','exists:categories,id'],

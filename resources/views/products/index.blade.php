@@ -85,6 +85,7 @@
                             <th>Descripción</th>
                             <th>precio</th>
                             <th>stock</th>
+                            <th>Codigo</th>
                             <th>Img</th>
                             <th>Opciones</th>
                             <th>X</th>
@@ -98,7 +99,9 @@
                                 <td class="v-align-middle text-truncate" style="max-width: 200px">{{$product->description}}</td>
                                 <td class="v-align-middle">$.{{number_format($product->price)}}</td>
                                 <td class="v-align-middle">{{$product->stock}}</td>
-                                <td class="v-align-middle"><img class="img img:hover"
+                                <td class="v-align-middle">{{$product->barcode}}</td>
+                                <td class="v-align-middle">
+                                    <img class="img img:hover"
                                          src="../uploads/{{$product->imagenes()->first()['name']}}"
                                          width="30" class="img-responsive">
                                 </td>

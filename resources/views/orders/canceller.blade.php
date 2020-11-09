@@ -38,37 +38,23 @@
                 <thead>
                 <tr class="table-primary">
                     <th scope="col">#</th>
-                    <th scope="col">Usuario</th>
                     <th >Estado</th>
-                    <th >RequestId</th>
-                    <th >InternalRef</th>
                     <th >ProcessUrl</th>
-                    <th >Documento</th>
-                    <th >Creado</th>
-                    <th >Orden</th>
+                    <th >Cancelado</th>
                     <th >Devuelto</th>
-                    <th >Admin</th>
-                    <th>Pagador</th></tr>
+                    <th >Gestor</th>
                 </thead>
                 <tbody>
                 @foreach($cancellers as $canceller)
                     <tr>
                         <td>{{$canceller->id}}</td>
-                        <td>{{$canceller->user_id}}</td>
                         <td>{{$canceller->status}}</td>
-                        <td>{{$canceller->requestId}}</td>
-                        <td class="v-align-middle text-truncate" style="max-width: 100px">
-                            {{$canceller->internalReference}}
-                        </td>
-                        <td class="v-align-middle text-truncate" style="max-width: 100px">
+                        <td class="v-align-middle text-truncate">
                             {{$canceller->processUrl}}
                         </td>
-                        <td>{{$canceller->document}}</td>
                         <td>{{$canceller->created_at}}</td>
-                        <td>{{$canceller->order_id}}</td>
-                        <td>$.{{number_format($canceller->amountReturn)}}</td>
-                        <td>{{$canceller->cancelled_by}}</td>
-                        <td>{{$canceller->name}}</td>
+                        <td>$.-{{number_format($canceller->amountReturn)}}</td>
+                        <td>{{$canceller->user->name}}{{$canceller->user->id}}</td>
                     </tr>
                 @endforeach
                 </tbody>

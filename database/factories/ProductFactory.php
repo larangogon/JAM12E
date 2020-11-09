@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 $factory->define(Product::class, function (Faker $faker) {
     return [
         'name'        => $faker->word,
+        'barcode'     => $faker->isbn13,
         'description' => $faker->sentence(5),
         'stock'       => $faker->numberBetween(1, 100),
         'price'       => $faker->numberBetween(10000, 200000),

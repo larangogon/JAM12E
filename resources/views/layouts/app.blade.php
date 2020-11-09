@@ -81,6 +81,33 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
+                    @auth
+                        <li class="nav-item dropdown">
+                            <ul class="navbar-nav ml-auto">
+                                <div class="container" class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <a class="navbar-brand" class="nav-link dropdown-toggle" href="{{ url('notifications') }}">
+                                        <i class="fas fa-bell"></i>
+                                        @auth
+                                            <span class="badge badge-primary">
+                                                {{(count(auth()->user()->notifications->where('read_at', null)))}}
+                                            </span>
+                                        @endauth
+                                    </a>
+                                </div>
+                            </ul>
+                        </li>
+                    @endauth
+                        @auth
+                        <li class="nav-item dropdown">
+                            <ul class="navbar-nav ml-auto">
+                                <div class="container" class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <a class="navbar-brand" class="nav-link dropdown-toggle" href="{{ url('messages') }}">
+                                        <i class="far fa-comment-dots"></i>
+                                    </a>
+                                </div>
+                            </ul>
+                        </li>
+                        @endauth
                      <li class="nav-item dropdown">
                         <div class="container">
                             <a class="navbar-brand" href="{{ url('/vitrina') }}">
@@ -171,6 +198,16 @@
                             @can('Administrator')
                                 <li class="nav-item">
                                     <a href="{{route('metrics.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-file-alt"></i>
+                                        <p>
+                                            Datos generales
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('Administrator')
+                                <li class="nav-item">
+                                    <a href="{{route('reports.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-alt"></i>
                                         <p>
                                             Reportes

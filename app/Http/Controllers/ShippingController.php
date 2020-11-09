@@ -26,7 +26,8 @@ class ShippingController extends Controller
     {
         $shipping->create($request->all());
 
-        return redirect()->back()
+        return redirect()
+            ->back()
             ->with('message', 'Los datos para tu envio se han guardado exitosamente!');
     }
 }

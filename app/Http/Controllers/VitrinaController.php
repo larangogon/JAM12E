@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Product;
+use App\Entities\Rating;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -54,6 +55,18 @@ class VitrinaController extends Controller
         $product->visits += 1;
         $product->save();
 
-        return view('vitrina/show', compact('product'));
+        $ratin = Rating::all()
+            ->where('rateable_id', '=', $id);
+
+        $total = $ratin->sum('score');
+
+
+
+
+
+        return view('vitrina/show', [
+            'product' => $product,
+            'total' => $total
+        ]);
     }
 }

@@ -40,12 +40,31 @@
                                     <td>{{$product->sizes->implode('name',', ')}}</strong></td>
                                 </tr>
                                 <tr>
+                                    <th>Creado por</th>
+                                    <td>{{$product->userCreate->name ?? __('no existe este registro')}}</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>Actualizado por</th>
+                                    <td>{{$product->userUpdate->name ?? __('no existe este registro')}}</strong></td>
+                                </tr>
+                                <tr>
                                     <th>Actualizado</th>
                                     <td>{{ $product->updated_at }}</strong></td>
                                 </tr>
                                 <tr>
                                     <th>Creado</th>
                                     <td>{{ $product->created_at }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Codigo
+                                    </th>
+                                    <td>
+                                        <div>
+                                            {!! DNS1D::getBarcodeHTML($product->barcode, 'CODE11') !!}
+                                        </div>
+                                        <h6>{{$product->barcode}}</h6>
+                                    </td>
                                 </tr>
                             </table>
                         </div>

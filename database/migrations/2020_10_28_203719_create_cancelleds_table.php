@@ -39,6 +39,11 @@ class CreateCancelledsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
+            $table->foreign('cancelled_by')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

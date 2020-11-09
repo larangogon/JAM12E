@@ -10,7 +10,15 @@ class MetricPayment extends Model
 {
     protected $table = 'metrics_payments';
 
-    protected $fillable = ['metric', 'primary_id', 'secondary_id', 'date', 'keyword', 'status_type', 'status'];
+    protected $fillable = [
+        'metric',
+        'primary_id',
+        'secondary_id',
+        'date',
+        'keyword',
+        'status_type',
+        'status'
+    ];
 
     /**
      * @

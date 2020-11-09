@@ -39,8 +39,7 @@ class ProcessP2p implements ShouldQueue
         if ($this->order->payment->status === PlaceToPay::PENDING) {
             $response = $orderD->requestP2P('getRequestinformation', $this->order);
 
-            foreach($response->payment as $payments)
-            {
+            foreach ($response->payment as $payments) {
                 $pay = $payments;
             }
 

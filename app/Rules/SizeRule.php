@@ -28,7 +28,10 @@ class SizeRule implements Rule
     {
         $values = explode(',', $value);
 
+        array_pop($values);
+
         $pase = true;
+
         foreach ($values as $value) {
             $size = Size::where('name', $value)->first();
 
@@ -48,6 +51,6 @@ class SizeRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Size does not exist in the database';
     }
 }

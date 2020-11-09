@@ -25,6 +25,27 @@
                 <h2>Nombre del producto: {{ $product->name }}
                     <a href="{{ route('vitrina.index') }}" class="btn btn-success btn-sm btn:hover">Volver</a>
                </h2></div>
+
+            {{--Start Rating--}}
+            @for ($i = 0; $i < 5; $i++)
+                @if (floor($total) - $i >= 1)
+                    {{--Full Start--}}
+                    <i class="fas fa-star text-warning"> </i>
+                @elseif ($total - $i > 0)
+                    {{--Half Start--}}
+                    <i class="fas fa-star-half-alt text-warning"> </i>
+                @else
+                    {{--Empty Start--}}
+                    <i class="far fa-star text-warning"> </i>
+                @endif
+            @endfor
+            {{--End Rating--}}
+            @if($total == 1)
+            ({{$total}} voto)
+            @else($total > 1)
+            ({{$total}} votos)
+            @endif
+
             </div>
               <div class="row">
                   <div class="col-md-4">
@@ -54,18 +75,39 @@
                               <th>Talla</th>
                               <td>{{$product->sizes->implode('name',', ')}}</strong></td>
                           </tr>
+                          <tr>
+                              <th>Calificacion</th>
+                              <td><form action="{{route('rate', $product) }}" method="POST">
+                                  @csrf
+                                      <lave>1</lave><input name="score" value="1" type="radio"/>
+                                      <lave>2</lave><input name="score" value="2" type="radio"/>
+                                      <lave>3</lave><input name="score" value="3" type="radio"/>
+                                      <lave>4</lave><input name="score" value="4" type="radio"/>
+                                      <lave>5</lave><input name="score" value="5" type="radio" checked="checked"/>
+                                      <button type="submit"  class="btn btn-primary btn-sm">Enviar</button>
+                                  </form>
+                              </td>
+                          </tr>
                       </table>
+                      </div>
+                      <div class="card">
+                          <div class="container">
+                              <div>
+                                  <br>
+                                  {!! DNS1D::getBarcodeHTML($product->barcode, 'CODE11') !!}
+                              </div>
+                              <h6>{{$product->barcode}}</h6>
+                          </div>
                       </div>
                   </div>
 
                   <div class="col-md-3">
                       <div class="card-body">
-                        <!-- Mostramos todas las imágenes pertenecientes a a este registro -->
-                        @foreach($product->imagenes as $img)
-                            <a data-fancybox="gallery" href="../../../uploads/{{ $img->name }}">
-                                <img class="img img:hover" src="../../../uploads/{{ $img->name }}" width="200"  class="img-fluid">
-                            </a>
-                        @endforeach
+                          @foreach($product->imagenes as $img)
+                              <a data-fancybox="gallery" href="../../../uploads/{{ $img->name }}">
+                                  <img class="img img:hover" src="../../../uploads/{{ $img->name }}" width="200"  class="img-fluid">
+                              </a>
+                          @endforeach
                       </div>
                   </div>
                   <div class="col-md-5">
@@ -83,6 +125,7 @@
                                         {{$message}}
                                         @enderror
                                         <input type="hidden" value="{{$product->id}}" name="products_id">
+                                        <input type="hidden" value="{{$product->categories[0]->id}}" name="category_id">
                                     </td>
                                 </tr>
 
@@ -126,6 +169,4 @@
           </div>
     </div>
 </div>
-
-
 @endsection

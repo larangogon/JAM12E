@@ -2,16 +2,14 @@
 
 namespace App\Jobs;
 
-use App\Entities\Report;
-use App\Entities\User;
-use App\Notifications\Export;
-use App\Notifications\FinishedExport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Notification;
+use App\Mail\SendEmailReport;
+use Illuminate\Support\Facades\Mail;
 
 class ProcessReport implements ShouldQueue
 {
@@ -20,30 +18,24 @@ class ProcessReport implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    /**
-     * Create a new job instance.
-     *
-     * @param Report $report
-     */
-    public function __construct()
-    {
+    protected $details;
+    protected $ordersx;
 
+    /**
+     * ProcessReport constructor.
+     * @param array $details
+     * @param Collection $ordersx
+     */
+    public function __construct(array $details, Collection $ordersx)
+    {
+        $this->details = $details;
+        $this->ordersx = $ordersx;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle(Report $report)
+    public function handle()
     {
-        dd($report->toArray());
-        $report->created_by = auth()->user()->id;
-        $report->save();
-        $admin = User::with('roles' == 'Administrator')->get();
-        dd($admin);
-        Notification::send($admin, new Export($report));
+        $email = new SendEmailReport($this->ordersx);
 
-        $user->notify(new FinishedExport());
+        Mail::to($this->details['email'])->send($email);
     }
 }

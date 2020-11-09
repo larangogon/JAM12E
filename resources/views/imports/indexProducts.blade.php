@@ -8,6 +8,12 @@
                     <p>{{session('success')}}</p>
                 </div>
             @endif
+            <h5>
+                Importar productos
+                <a href="{{ route('products.index') }}" class="btn btn-primary  btn-sm">
+                    Volver
+                </a>
+            </h5>
             <div class="row">
                 <div class="col-md-6">
                     <div class="card w-75">
@@ -15,23 +21,39 @@
                             <h5 class="card-title">
                                 Importar Productos
                             </h5>
-                            <p>
                             <form method="POST" action="{{route('importProducts')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
                                 </div>
-                                <button type="submit" class="btn btn-success btn-sm">
+                                <button type="submit" class="btn btn-success btn-block btn-sm">
                                     Importar
                                 </button>
                             </form>
-                            </p>
-                            <a href="{{ route('products.index') }}" class="btn btn-primary btn-block btn-sm">
-                                Volver
-                            </a>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="card w-75">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Importar imagenes
+                            </h5>
+                            <form method="POST" action="{{route('imgsProducts')}}" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <div>
+                                        <input name="imgUp[]" type="file" id="imgUp" multiple="multiple">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success btn-block btn-sm">
+                                    Importar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
                 <div class="col-sm-6">
                     @if (isset($errors) && $errors->any())
                         <div class="alert alert-danger">

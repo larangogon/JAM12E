@@ -24,7 +24,9 @@ class UsersExport implements FromCollection, WithMapping
     public function map($user): array
     {
         $roles = '';
-        foreach ($user->roles()->pluck('name') as $rol) {
+        foreach ($user
+                     ->roles()
+                     ->pluck('name') as $rol) {
             $roles .= $rol . ',';
         }
 

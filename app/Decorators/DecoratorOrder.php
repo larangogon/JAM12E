@@ -45,12 +45,13 @@ class DecoratorOrder implements InterfaceOrders
 
         foreach ($cart->products as $product) {
             $detail = Detail::create([
-                'order_id'   => $order->id,
-                'product_id' => $product->id,
-                'size_id'    => $product->pivot->size_id,
-                'color_id'   => $product->pivot->color_id,
-                'stock'      => $product->pivot->stock,
-                'total'      => $product->price * $product->pivot->stock,
+                'order_id'    => $order->id,
+                'product_id'  => $product->id,
+                'size_id'     => $product->pivot->size_id,
+                'category_id' => $product->pivot->category_id,
+                'color_id'    => $product->pivot->color_id,
+                'stock'       => $product->pivot->stock,
+                'total'       => $product->price * $product->pivot->stock,
             ]);
         }
 
@@ -82,9 +83,8 @@ class DecoratorOrder implements InterfaceOrders
 
         $order = Order::find($id);
 
-        if($order->payment == null){
-          $order = Order::find($id);
-
+        if ($order->payment == null) {
+            $order = Order::find($id);
         } elseif ($order->payment->status === PlaceToPay::PENDING) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
@@ -97,8 +97,7 @@ class DecoratorOrder implements InterfaceOrders
         } elseif ($order->payment->status === PlaceToPay::APPROVED) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
-            foreach($response->payment as $payments)
-            {
+            foreach ($response->payment as $payments) {
                 $pay = $payments;
             }
 

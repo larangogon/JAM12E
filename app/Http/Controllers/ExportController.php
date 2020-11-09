@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Order;
 use App\Exports\OrdersExport;
 use App\Exports\ProductsExport;
 use App\Exports\UsersExport;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 

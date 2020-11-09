@@ -27,7 +27,11 @@ class RuleColor implements Rule
     public function passes($attribute, $value)
     {
         $values = explode(',', $value);
+
+        array_pop($values);
+
         $pase = true;
+
         foreach ($values as $value) {
             $color = Color::where('name', $value)->first();
 

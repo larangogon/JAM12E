@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\Cancelled;
 use App\Entities\Order;
-use App\Entities\Payment;
-use App\Entities\Product;
 use App\Entities\Report;
-use App\Entities\User;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\RequestFilter;
+use App\Jobs\ProcessReportGeneral;
 use App\Jobs\ProcessReport;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ReportController extends Controller
 {
@@ -26,6 +25,26 @@ class ReportController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return View
+     */
+    public function index(Request $request): View
+    {
+        if ($request) {
+            $query = trim($request->get('search'));
+        }
+
+        $reports = Report::where('created_by', 'LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            ->paginate(6);
+
+        return view('reports.index', [
+            'reports' => $reports,
+            'search'  => $query
+        ]);
+    }
+
+    /**
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -36,119 +55,68 @@ class ReportController extends Controller
     }
 
     /**
-     * @return mixed
+     * @param RequestFilter $request
+     * @return RedirectResponse
      */
-    public function reportOrders()
+    public function reportOrders(RequestFilter $request)
     {
-        $now = new \DateTime();
+        $fechaInicio = date('Y-m-d', strtotime($request->get('fechaInicio')));
 
-        $visit = Product::orderBy('visits', 'desc')
-            ->take(4)->get(['name', 'id', 'visits']);
+        $fechaFinal = date('Y-m-d', strtotime($request->get('fechaFinal')));
 
-        $sales = Product::orderBy('sales', 'desc')
-            ->take(4)->get(['name', 'id', 'sales']);
+        $status = $request->get('status');
 
-        $hoy = Order::whereDate('created_at', '=', now()->format('Y-m-d'))->count();
-        $pay = Payment::whereDate('updated_at', '=', now()->format('Y-m-d'))->count();
-        $products = Product::whereDate('created_at', '>=', now()
-            ->subYears(1)
-            ->format('Y-m-d'))
-            ->count();
+        if ($fechaInicio > $fechaFinal) {
+            return redirect()->back()->with(
+                'success',
+                '...la fecha inicial es mayor que la final !'
+            );
+        }
 
-        $users = User::whereDate('created_at', '>=', now()
-            ->subYears(1000)
-            ->format('Y-m-d'))
-            ->count();
+        $ordersx = Order::whereBetween('created_at', [
+            $fechaInicio . ' 00:00:00', $fechaFinal . ' 23:59:29'])
+            ->where('status', $status)
+            ->get();
 
-        $payments = Payment::whereDate('updated_at', '>=', now()
-            ->subYears(1000)
-            ->format('Y-m-d'))
-            ->count();
+        if ($status = "all") {
+            $ordersx = Order::whereBetween('created_at', [
+                $fechaInicio . ' 00:00:00', $fechaFinal . ' 23:59:29'])
+                ->get();
+        }
 
-        $cancelled = Cancelled::whereDate('updated_at', '>=', now()
-            ->subYears(1000)
-            ->format('Y-m-d'))
-            ->count();
-
-        $pdf = \PDF::loadView('reports.orders',[
-            'hoy'       => $hoy,
-            'pay'       => $pay,
-            'visit'     => $visit,
-            'sales'     => $sales,
-            'now'       => $now,
-            'products'  => $products,
-            'users'     => $users,
-            'payments'  => $payments,
-            'cancelled' => $cancelled,]);
+        $details['email'] = 'johannitaarango2@gmail.com';
+        dispatch(new ProcessReport($details, $ordersx));
 
         $report = Report::create([
-            'file' => 'nbghjj',
+            'created_by' => auth()->user()->id,
+            'file' => 'Enviado_A_johannitaarango2@gmail.com',
         ]);
-        ProcessReport::dispatch($report);
-        Storage::disk('public')->put(date('Y-m-d-H-i-s').'-reports.orders',$pdf);
 
-        return $pdf->setPaper('a4', 'landscape')->download('orderpdf.pdf');
+        return redirect()->back()
+            ->with(
+                'success',
+                '...El reporte se ha generado, verifica tu correo !'
+            );
     }
 
     /**
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function reportAnual()
+    public function reportGeneral()
     {
-        $now = new \DateTime();
+        $details['email'] = 'johannitaarango2@gmail.com';
 
-        $visit = Product::orderBy('visits', 'desc')
-            ->take(4)->get(['name', 'id', 'visits']);
+        dispatch(new ProcessReportGeneral($details));
 
-        $sales = Product::orderBy('sales', 'desc')
-            ->take(4)->get(['name', 'id', 'sales']);
-
-        $hoy = Order::whereDate('created_at', '=', now()->format('Y-m-d'))->count();
-        $pay = Payment::whereDate('updated_at', '=', now()->format('Y-m-d'))->count();
-        $products = Product::whereDate('created_at', '>=', now()
-            ->subYears(1)
-            ->format('Y-m-d'))
-            ->count();
-
-        $users = User::whereDate('created_at', '>=', now()
-            ->subYears(1000)
-            ->format('Y-m-d'))
-            ->count();
-
-        $payments = Payment::whereDate('updated_at', '>=', now()
-            ->subYears(1000)
-            ->format('Y-m-d'))
-            ->count();
-
-        $cancelled = Cancelled::whereDate('updated_at', '>=', now()
-            ->subYears(1000)
-            ->format('Y-m-d'))
-            ->count();
-
-        $user = User::all();
-        $product = Product::all();
-        $order = Order::all();
-        $payment = Payment::where('created_at', '>=', now()->subYears(1))->get();
-
-        $pdf = \PDF::loadView('reports.reportAnual',[
-            'payment'   => $payment,
-            'product'   => $product,
-            'user'      => $user,
-            'order'     => $order,
-            'hoy'       => $hoy,
-            'pay'       => $pay,
-            'visit'     => $visit,
-            'sales'     => $sales,
-            'now'       => $now,
-            'products'  => $products,
-            'users'     => $users,
-            'payments'  => $payments,
-            'cancelled' => $cancelled,
+        $report = Report::create([
+            'created_by' => auth()->user()->id,
+            'file' => 'Enviado_A_johannitaarango2@gmail.com',
         ]);
 
-        ProcessReport::dispatch()->delay(now()->addMinutes(5));
-
-        Storage::disk('public')->put(date('Y-m-d-H-i-s').'reports.reportAnual',$pdf);
-        return $pdf->download('anualpdf.pdf');
+        return redirect()->back()
+            ->with(
+                'success',
+                '...El reporte se ha generado, verifica tu correo!'
+            );
     }
 }
