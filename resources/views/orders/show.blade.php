@@ -69,10 +69,10 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <div class="card-header ">Detalle de la compra</div>
-                        <table class="table">
+                        <table class="table table-sm">
                             <thead>
                             @foreach($order->details as $detail)
-                                <tr>
+                                <tr class="table-success">
                                     <th>Nombre</th>
                                     <th>Talla</th>
                                     <th>Color</th>

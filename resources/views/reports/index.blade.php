@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="card">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-sm">
                 <thead>
                 <tr class="bg-success">
                     <td scope="col">#</td>

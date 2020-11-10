@@ -9,7 +9,7 @@
                     Dettalle de la compra
                 </div>
             </h2>
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                         <tr>
                         <h5>
@@ -32,7 +32,7 @@
                     </thead>
                 </table>
 
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                         <tr>
                             <h5>
@@ -44,7 +44,7 @@
                         </tr>
                     <thead>
                         @foreach ($cart->products as $product)
-                        <tr>
+                        <tr class="table-success">
                             <td>
                                 <img src= "../uploads/{{$product->imagenes()->first()['name']}}"
                                      width="50" height="50"

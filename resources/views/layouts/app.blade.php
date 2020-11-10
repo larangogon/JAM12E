@@ -155,7 +155,7 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
                                 @else
                                 {{ Auth::user()->name }}
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a class="btn-session" href="{{ route('logout') }}" onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">
                                     Cerrar Sesión
                                 </a>
@@ -205,16 +205,32 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('Administrator')
                                 <li class="nav-item">
-                                    <a href="{{route('reports.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <a href="{{route('vitrina.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-alt"></i>
                                         <p>
-                                            Reportes
+                                            Vitrina
                                         </p>
                                     </a>
                                 </li>
+                            @can('Administrator')
+                            <li class="nav-item">
+                                <a href="{{route('reports.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="fas fa-file-alt"></i>
+                                    <p>
+                                        Reportes
+                                    </p>
+                                </a>
+                            </li>
                             @endcan
+                            <li class="nav-item">
+                                <a href="{{route('messages.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="fas fa-file-alt"></i>
+                                    <p>
+                                        Contactenos
+                                    </p>
+                                </a>
+                            </li>
 
                             @can('Administrator')
                                 <li class="nav-item has-treeview">
@@ -397,72 +413,7 @@
                                     @endif
                                 @endauth
                             </li>
-                            <li class="nav-item has-treeview">
-                              <a href="#" class="nav-link">
-                                  <i class="fas fa-shopping-bag"></i>
-                                  <p>Vitrina<i class="fas fa-angle-left right"></i></p>
-                              </a>
-                              <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
-                                  <li class="nav-item">
-                                      <a href="{{url('vitrina')}}"
-                                         class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
-                                          <i class="far fa-check-circle"></i>
-                                          <p>Todos los productos</p>
-                                      </a>
-                                  </li>
-                                  <li class="nav-item has-treeview">
-                                      <a href="#" class="nav-link">
-                                          <i class="fas fa-tshirt"></i>
-                                          <p>Moda<i class="fas fa-angle-left right"></i></p>
-                                      </a>
-                                      <ul class="nav nav-treeview">
-                                          <li class="nav-item">
-                                              <a href="#" class="nav-link">
-                                                  <form action="{{route('vitrina.index')}}" method="get">
-                                                      <input type="text" name="category" id="" value="Hombre" hidden>
-                                                      <button type="submit"  class="btn-dark btn-sm btn-block text-left"
-                                                              class="{{ Request::path() === 'hombre' ? 'nav-link active' : 'nav-link' }}">
-                                                          <i class="far fa-check-circle"></i>
-                                                          <p>Hombre</p>
-                                                      </button>
-                                                  </form>
-                                              </a>
-                                          </li>
-                                          <li class="nav-item">
-                                              <a href="#" class="nav-link" >
-                                                  <form action="{{route('vitrina.index')}}" method="get">
-                                                      <input type="text" name="category" id="" value="Mujer" hidden>
-                                                      <button type="submit"  class="btn-dark btn-sm btn-block text-left"
-                                                              class="{{ Request::path() === 'hombre' ? 'nav-link active' : 'nav-link' }}">
-                                                          <i class="far fa-check-circle"></i>
-                                                          <p>Mujer</p>
-                                                      </button>
-                                                  </form>
-                                              </a>
-                                          </li>
-                                      </ul>
-                                  <li class="nav-item has-treeview">
-                                      <a href="#" class="nav-link">
-                                          <i class="fas fa-home"></i>
-                                          <p>Hogar<i class="fas fa-angle-left right"></i></p>
-                                      </a>
-                                      <ul class="nav nav-treeview">
-                                          <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <form action="{{route('vitrina.index')}}" method="get">
-                                                    <input type="text" name="category" id="" value="Hogar" hidden>
-                                                    <button type="submit"  class="btn-dark btn-sm btn-block text-left"
-                                                        class="{{ Request::path() === 'hombre' ? 'nav-link active' : 'nav-link' }}">
-                                                        <i class="far fa-check-circle"></i>
-                                                        <p>Todo para tu hogar</p>
-                                                    </button>
-                                                </form>
-                                            </a>
-                                          </li>
-                                      </ul>
-                                  </li>
-                              </ul>
-                          </li>
+
                         </ul>
                     </nav>
                 </div>
@@ -474,13 +425,11 @@
                     @yield('content')
                 </section>
             </div>
-            <footer class="main-footer">
-                <strong>JAM Stores__<i class="fas fa-phone-alt"></i>+57 300 213 3568</strong>
-            </footer>
             <aside class="control-sidebar control-sidebar-dark">
             </aside>
         </div>
     </div>
 </body>
 
+@include('layouts.footerLayout')
 </html>

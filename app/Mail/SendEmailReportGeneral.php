@@ -8,7 +8,6 @@ use App\Entities\Order;
 use App\Entities\Payment;
 use App\Entities\Product;
 use App\Entities\Rating;
-use App\Entities\Report;
 use App\Entities\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -91,16 +90,12 @@ class SendEmailReportGeneral extends Mailable
 
         $rating = Rating::topRating()->get();
 
-        // talla mas vendida
         $sizeSales = Detail::sizeSales()->get();
 
-        // categoria mas vendida
         $categorySales = Detail::categorySales()->get();
 
-        //color mas vendido
         $colorSales = Detail::colorSales()->get();
 
-        //total de los 3 productos mas vendidos x cada uno
         $r = Detail::productSalesTotal()->get();
 
         $pdf = \PDF::loadView('reports.reportGeneral', [

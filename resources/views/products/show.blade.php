@@ -14,7 +14,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="container">
-                            <table class="table">
+                            <table class="table table-sm">
                                 <tr>
                                     <th>Descripcion</th>
                                     <td>{{ $product->description }}</td>

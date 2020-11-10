@@ -103,12 +103,10 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
                 break;
             }
 
-            $imagenUp = new Imagen();
-
-            $imagenUp->name       = $imagen;
-            $imagenUp->product_id = $product->id;
-
-            $imagenUp->save();
+            Imagen::updateOrCreate([
+                'name'       => $imagen,
+                'product_id' => $product->id
+            ]);
         }
     }
 

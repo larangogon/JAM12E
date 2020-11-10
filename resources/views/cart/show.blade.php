@@ -25,7 +25,7 @@
 <div class="container" style="margin-top: 5px">
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-9">
-            <h2><div class="row justify-content-center align-items-center">
+            <h2><div class="row justify-content-center align-items-center cur">
                     Carrito de compras
                 </div>
             </h2>

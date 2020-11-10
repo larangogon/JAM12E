@@ -53,7 +53,7 @@
         <p>El total de todas las ordenes es $.{{number_format($order->sum('total')) ?? __('no existe')}}. Hasta
             {{$now->format("F j, Y, g:i a")}}
         </p>
-        <table class="table table-hover table-bordered">
+        <table class="table  table-sm table-hover table-bordered">
             <thead>
             <tr class="table-primary">
                 <th scope="col">#</th>
