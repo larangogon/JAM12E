@@ -49,7 +49,6 @@ class ExportTest extends TestCase
             ->get('exportProducts');
 
         Excel::assertDownloaded('products.xlsx', function (ProductsExport $export) {
-            // Assert that the correct export is downloaded.
             return true;
         });
     }
@@ -66,7 +65,6 @@ class ExportTest extends TestCase
             ->get('exportUsers');
 
         Excel::assertDownloaded('users.xlsx', function (UsersExport $export) {
-            // Assert that the correct export is downloaded.
             return true;
         });
     }
@@ -83,7 +81,6 @@ class ExportTest extends TestCase
             ->get('exportOrders');
 
         Excel::assertDownloaded('orders.xlsx', function (OrdersExport $export) {
-            // Assert that the correct export is downloaded.
             return true;
         });
     }

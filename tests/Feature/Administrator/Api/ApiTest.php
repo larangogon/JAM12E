@@ -121,6 +121,7 @@ class ApiTest extends TestCase
             ->postJson(route('product.store'), [
                 'name'  => 'newApi',
                 'stock' => 56,
+                'barcode' => '12345567789',
                 'price' => 23456,
                 'description' => 'jdhfbgyebhsabfreahbfgy',
                 'color' => [Color::all()->random()->id],
