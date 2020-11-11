@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Message;
-use App\Entities\Report;
 use App\Entities\User;
 use App\Http\Requests\RequestMessage;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-class messagesController extends Controller
+class MessagesController extends Controller
 {
     /**
      * messagesController constructor.
@@ -20,7 +21,11 @@ class messagesController extends Controller
         $this->middleware('Status');
     }
 
-    public function index(Request $request)
+    /**
+     * @param Request $request
+     * @return View
+     */
+    public function index(Request $request): View
     {
         if ($request) {
             $query = trim($request->get('search'));
@@ -44,7 +49,11 @@ class messagesController extends Controller
         ]);
     }
 
-    public function Store(RequestMessage $request)
+    /**
+     * @param RequestMessage $request
+     * @return RedirectResponse
+     */
+    public function store(RequestMessage $request): RedirectResponse
     {
         $message = Message::create($request->all());
 
@@ -54,9 +63,9 @@ class messagesController extends Controller
 
     /**
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
         Message::destroy($id);
 

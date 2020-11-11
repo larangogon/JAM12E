@@ -31,30 +31,22 @@ class ProductsExport implements FromCollection, WithMapping, WithHeadings
     public function map($product): array
     {
         $colors = '';
-        foreach ($product
-                     ->colors()
-                     ->pluck('name') as $color) {
+        foreach ($product->colors()->pluck('name') as $color) {
             $colors .= $color . ',';
         }
 
         $categories = '';
-        foreach ($product
-                     ->categories()
-                     ->pluck('name') as $category) {
+        foreach ($product->categories()->pluck('name') as $category) {
             $categories .= $category . ',';
         }
 
         $sizes = '';
-        foreach ($product
-                     ->sizes()
-                     ->pluck('name') as $size) {
+        foreach ($product->sizes()->pluck('name') as $size) {
             $sizes .= $size . ',';
         }
 
         $imagenes = '';
-        foreach ($product
-                     ->imagenes()
-                     ->pluck('name') as $imagen) {
+        foreach ($product->imagenes()->pluck('name') as $imagen) {
             $imagenes .= $imagen . ',';
         }
 

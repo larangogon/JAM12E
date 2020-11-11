@@ -31,7 +31,7 @@ class SendEmailReport extends Mailable
             'order'     => $this->ordersx,
             ]);
 
-        Storage::disk('public')->put(date('Y-m-d-H-i-s').'reports.orders.pdf', $pdf);
+        Storage::disk('public')->put(date('Y-m-d-H-i-s') . 'reports.orders.pdf', $pdf);
 
         return $this->from('johannitaarango2@gmail.com')
         ->view('emails.report')
