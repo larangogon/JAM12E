@@ -118,7 +118,7 @@
                 <td>{{$users ?? __('no existe')}}</td>
             </tr>
             <tr>
-                <th>La suma total de los botos obtenidos por todos los productos es de </th>
+                <th>La suma total de los votos obtenidos por todos los productos es de </th>
                 <td>{{$ratinAllProducs ?? __('no existe')}}</td>
             </tr>
             <tr>

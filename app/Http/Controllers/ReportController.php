@@ -51,7 +51,8 @@ class ReportController extends Controller
     {
         $factura = Order::find($id);
         $pdf = \PDF::loadView('reports.show', compact('factura'));
-        return $pdf->download('factura.pdf');
+        return $pdf
+            ->download('factura.pdf');
     }
 
     /**

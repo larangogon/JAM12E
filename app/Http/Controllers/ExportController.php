@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Order;
+use App\Entities\Report;
 use App\Exports\OrdersExport;
 use App\Exports\ProductsExport;
 use App\Exports\ReportGeneralExport;
 use App\Exports\UsersExport;
+use App\Jobs\ProcessReportGeneralExcel;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -49,10 +51,23 @@ class ExportController extends Controller
     }
 
     /**
-     * @return BinaryFileResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function reportGeneralExport(): BinaryFileResponse
+    public function reportGeneralExport()
     {
-        return Excel::download(new ReportGeneralExport, 'reporte.xlsx');
+        $details['email'] = 'johannitaarango2@gmail.com';
+
+        dispatch(new ProcessReportGeneralExcel($details));
+
+        $report = Report::create([
+            'created_by' => auth()->user()->id,
+            'file' => 'Enviado_A_johannitaarango2@gmail.com',
+        ]);
+
+        return redirect()->back()
+            ->with(
+                'success',
+                '...El reporte se ha generado, verifica tu correo!'
+            );
     }
 }
