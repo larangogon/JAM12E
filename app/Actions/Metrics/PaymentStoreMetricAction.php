@@ -10,9 +10,9 @@ class PaymentStoreMetricAction
     public static function execute(Payment $payment): void
     {
         $metric = MetricPayment::firstOrCreate([
-            'status' => $payment->status,
+            'status'     => $payment->status,
             'primary_id' => $payment->order_id,
-            'date' => $payment->created_at->format('Y-m-d'),
+            'date'       => $payment->created_at->format('Y-m-d'),
         ]);
 
         $metric->total = ($metric->total ?? 0) + 1;

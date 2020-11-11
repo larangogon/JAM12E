@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Product;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -42,11 +43,19 @@ class CartController extends Controller
      */
     public function add(CartAddRequest $request): RedirectResponse
     {
+        $product = Product::where('id', '=', $request->products_id)
+            ->first();
+        if ($product->stock < $request->stock) {
+            return redirect()
+                ->back()
+                ->with('success', 'Lo sentimos, Excede la cantidad disponible, la cantidad maxima es de...'. $product->stock . '...de esta referencia');
+        }
         $this->carts->add($request);
+
 
         return redirect()
             ->back()
-            ->with('success', 'product added to cart succesfully');
+            ->with('success', 'Product added to cart succesfully');
     }
 
     /**

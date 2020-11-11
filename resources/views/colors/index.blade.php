@@ -9,11 +9,11 @@
                         Colores
                         @include('colors.modal')
                     </h2>
-                    <table class="table table-hover">
+                    <table class="table table-sm table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">
-                                    ID
+                                    #
                                 </th>
                                 <th scope="col">
                                     Nombre

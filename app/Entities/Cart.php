@@ -16,7 +16,7 @@ class Cart extends Model
     {
         return $this->belongsToMany('App\Entities\Product', 'in_carts')
             ->using(InCart::class)
-            ->withPivot('stock', 'color_id', 'size_id', 'id', 'product_id');
+            ->withPivot('stock', 'color_id', 'size_id', 'category_id', 'id', 'product_id');
     }
 
     /**

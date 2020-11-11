@@ -2,18 +2,17 @@
 
 @section('content')
 <div class="container">
-
   <div class="card">
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="dist/img/872a4654-3661-423d-8b04-a7719eb954ad.jpg" class="d-block w-100" alt="...">
+        <img src="dist/img/9e105d62-61fa-48da-8eb2-975471eeabb0.jpg" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="dist/img/872a4654-3661-423d-8b04-a7719eb954ad.jpg" class="d-block w-100" alt="...">
+        <img src="dist/img/a6e3ab95-2e1d-4980-ab96-ac073b5ef2d0.jpg" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="dist/img/872a4654-3661-423d-8b04-a7719eb954ad.jpg" class="d-block w-100" alt="...">
+        <img src="dist/img/3212f9f1-e842-4e9b-bc71-836406c1b0d5.jpg" class="d-block w-100" alt="...">
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -32,7 +31,7 @@
       <div class="row justify-content-center">
           <div class="col-md-8">
               <div class="card">
-                  <div class="card-header ">Dashboard</div>
+                  <div class="card-header ">Bienvenido</div>
 
                   <div class="card-body">
                       @if (session('status'))
@@ -40,7 +39,7 @@
                               {{ session('status') }}
                           </div>
                       @endif
-                      You are logged in {{auth()->user()->name}}!
+                      Estás conectado {{auth()->user()->name}}!
                   </div>
               </div>
           </div>
@@ -79,4 +78,62 @@
       </div>
     </div>
   </div>
+<br>
+<div class="row justify-content-center"><h3 class="cur">Productos mas visitados</h3></div>
+<br>
+<div class="d-flex flex-wrap justify-content-around">
+    @foreach($visit as $product  )
+        <div class="card cart:hover" style="width: 14rem; " >
+            <img src="../uploads/{{$product->imagenes()->first()['name']}}" style="width:100%"
+                 class= "card-img-top">
+            <div class="card-body">
+                <h6 class="card-title">{{$product->name}} <br>
+                    Precio: ${{number_format($product->price)}}
+                </h6>
+                <a href="{{route('vitrina.show', $product->id) }}">
+                    <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >Ver con detalle.</button>
+                </a>
+            </div>
+        </div>
+    @endforeach
+</div>
+<br>
+<div class="row justify-content-center"><h3 class="cur">Productos mas comprados</h3></div>
+<br>
+<div class="d-flex flex-wrap justify-content-around">
+    @foreach($sales as $product)
+        <div class="card cart:hover" style="width: 14rem; " >
+            <img src="../uploads/{{$product->imagenes()->first()['name']}}" style="width:100%"
+                 class= "card-img-top">
+            <div class="card-body">
+                <h6 class="card-title">{{$product->name}} <br>
+                    Precio: ${{number_format($product->price)}}
+                </h6>
+                <a href="{{route('vitrina.show', $product->id) }}">
+                    <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >Ver con detalle.</button>
+                </a>
+            </div>
+        </div>
+    @endforeach
+</div>
+<br>
+<div class="row justify-content-center"><h3 class="cur">Productos mejor calificados</h3></div>
+<br>
+<div class="d-flex flex-wrap justify-content-around">
+    @foreach($rating as $product)
+        <div class="card cart:hover" style="width: 14rem; " >
+            <img src="../uploads/{{$product->rateable->imagenes()->first()['name']}}" style="width:100%"
+                 class= "card-img-top">
+            <div class="card-body">
+                <h6 class="card-title">{{$product->rateable->name}} <br>
+                    Precio: ${{number_format($product->rateable->price)}}
+                </h6>
+                <a href="{{route('vitrina.show', $product->rateable->id) }}">
+                    <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >Ver con detalle.</button>
+                </a>
+            </div>
+        </div>
+    @endforeach
+</div>
+
 @endsection

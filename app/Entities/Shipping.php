@@ -10,10 +10,15 @@ class Shipping extends Model
     protected $table = 'shippings';
 
     protected $fillable = [
-        'name_recipient', 'phone_recipient',
-        'cellphone_recipient', 'document_recipient',
-        'address_recipient', 'email_recipient',
-        'country_recipient', 'city_recipient', 'order_id'
+        'name_recipient',
+        'phone_recipient',
+        'cellphone_recipient',
+        'document_recipient',
+        'address_recipient',
+        'email_recipient',
+        'country_recipient',
+        'city_recipient',
+        'order_id'
     ];
 
     /**

@@ -15,6 +15,7 @@ class OrdersExport implements FromQuery
      */
     public function query()
     {
-        return Order::query()->where('status', 'APPROVED');
+        return Order::query()
+            ->where('status', 'APPROVED');
     }
 }

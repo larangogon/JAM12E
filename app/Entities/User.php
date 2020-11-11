@@ -2,6 +2,8 @@
 
 namespace App\Entities;
 
+use App\Utils\CanBeRate;
+use App\Utils\CanRate;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -17,6 +19,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use HasApiTokens;
     use HasRoles;
+    use CanRate;
+    use CanBeRate;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +28,13 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'cellphone', 'document','address', 'phone'
+        'name',
+        'email',
+        'password',
+        'cellphone',
+        'document',
+        'address',
+        'phone'
     ];
 
     /**
@@ -58,7 +68,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function asignarRol($role): void
     {
-        $this->roles()->sync($role, false);
+        $this->roles()
+            ->sync($role, false);
     }
 
     /**
@@ -66,7 +77,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function tieneRol()
     {
-        return $this->roles->flatten()->pluck('name')->unique();
+        return $this->roles
+            ->flatten()
+            ->pluck('name')
+            ->unique();
     }
 
     /**
@@ -136,5 +150,37 @@ class User extends Authenticatable implements MustVerifyEmail
     public function productsUpdate(): HasMany
     {
         return $this->hasMany(Product::class, 'updated_by');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function cancellers(): HasMany
+    {
+        return $this->hasMany(Cancelled::class, 'cancelled_by');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class, 'created_by');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function messagesRecipient(): HasMany
+    {
+        return $this->hasMany(Message::class, 'recipient_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function messagesSender(): HasMany
+    {
+        return $this->hasMany(Message::class, 'sender_id');
     }
 }

@@ -16,9 +16,12 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('barcode')->default('2345234567856');
             $table->string('description');
             $table->string('price');
             $table->string('stock');
+            $table->unsignedBigInteger('visits')->default(0);
+            $table->unsignedBigInteger('sales')->default(0);
             $table->boolean('active')->default(false);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
@@ -31,9 +34,9 @@ class CreateProductsTable extends Migration
                 ->onDelete('cascade');
 
             $table->foreign('updated_by')
-                ->references('id')->
-                on('users')->
-                onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

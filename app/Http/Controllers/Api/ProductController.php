@@ -21,6 +21,7 @@ class ProductController extends Controller
     public function __construct(InterfaceApiProducts $products)
     {
         $this->products = $products;
+        $this->middleware('role:Administrator');
     }
 
     /**
@@ -42,7 +43,10 @@ class ProductController extends Controller
             $product->imagenes;
         }
 
-        return response()->json(['lista de procustos', $products, 'search',$query], 200);
+        return response()
+            ->json([
+                'lista de procustos', $products, 'search',$query
+            ], 200);
     }
 
     /**
@@ -83,7 +87,10 @@ class ProductController extends Controller
         $product->sizes;
         $product->imagenes;
 
-        return response()->json(['Produto', $product], 200);
+        return response()
+            ->json([
+                'Produto', $product
+            ], 200);
     }
 
     /**
@@ -120,8 +127,9 @@ class ProductController extends Controller
                 ->json('no se encontro el producto con este id', 404);
         }
 
-        return response()->json([
-            'status' => ($product) ? 'deleted' : 'failed'
+        return response()
+            ->json([
+                'status' => ($product) ? 'deleted' : 'failed'
         ]);
     }
 }

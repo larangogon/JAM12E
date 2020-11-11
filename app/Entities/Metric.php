@@ -8,7 +8,15 @@ use Illuminate\Support\Collection;
 
 class Metric extends Model
 {
-    protected $fillable = ['metric', 'primary_id', 'secondary_id', 'date', 'keyword', 'status_type', 'status'];
+    protected $fillable = [
+        'metric',
+        'primary_id',
+        'secondary_id',
+        'date',
+        'keyword',
+        'status_type',
+        'status'
+    ];
 
     /**
      * @param array|string|null $primaryId
@@ -27,9 +35,12 @@ class Metric extends Model
     public static function scopeFilterByPrimaryId(Builder $query, $primaryId): Builder
     {
         if (self::isFilteredByPrimaryId($primaryId)) {
-            $user = User::where('id', $primaryId['value'])->select('id')->first();
+            $user = User::where('id', $primaryId['value'])
+                ->select('id')
+                ->first();
 
-            return $query->where('primary_id', $user->id);
+            return $query
+                ->where('primary_id', $user->id);
         }
 
         return $query;
@@ -44,7 +55,8 @@ class Metric extends Model
         $data = [];
 
         foreach ($metrics as $metric) {
-            $data[$metric->status][$metric->date] = ($data[$metric->status][$metric->date] ?? 0) + $metric->total;
+            $data[$metric->status][$metric->date] = ($data[$metric->status]
+                    [$metric->date] ?? 0) + $metric->total;
         }
 
         return collect($data);

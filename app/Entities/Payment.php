@@ -9,9 +9,21 @@ class Payment extends Model
 {
     protected $guarded = [];
 
-    protected $fillable =
-        ['order_id', 'requestId', 'status', 'processUrl', 'amount', 'internalReference',
-        'internalReference', 'processUrl', 'message', 'document', 'name', 'email', 'mobile', 'locale'
+    protected $fillable = [
+        'order_id',
+        'requestId',
+        'status',
+        'processUrl',
+        'amount',
+        'internalReference',
+        'internalReference',
+        'processUrl',
+        'message',
+        'document',
+        'name',
+        'email',
+        'mobile',
+        'locale'
         ];
 
     protected $table = 'payments';

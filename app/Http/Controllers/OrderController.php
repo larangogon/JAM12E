@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Cancelled;
 use App\Entities\User;
 use App\Entities\Order;
 use Illuminate\View\View;
@@ -39,7 +40,7 @@ class OrderController extends Controller
         $this->order = new Order();
 
         return view('orders.index', [
-            'search'   => $search,
+            'search' => $search,
             'orders' => $this->order
                 ->search($search)
                 ->paginate(5)
@@ -152,5 +153,23 @@ class OrderController extends Controller
     public function complete(Request $request): RedirectResponse
     {
         return $this->orders->complete($request);
+    }
+
+    /**
+     * @param Request $request
+     * @return View
+     */
+    public function canceller(Request $request): View
+    {
+        $search = $request->get('search', null);
+
+        $this->canceller = new Cancelled();
+
+        return view('orders.canceller', [
+            'search'     => $search,
+            'cancellers' => $this->canceller
+                ->search($search)
+                ->paginate(5)
+        ]);
     }
 }

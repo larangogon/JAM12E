@@ -9,13 +9,26 @@ use Illuminate\Http\Request;
 class SizeApiController extends Controller
 {
     /**
+     * SizeApiController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('role:Administrator');
+    }
+
+    /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $sizes = Size::all(['id','name']);
+        $sizes = Size::all([
+            'id','name'
+        ]);
 
-        return response()->json(['lista de colores', $sizes], 200);
+        return response()
+            ->json([
+                'lista de colores', $sizes
+            ], 200);
     }
 
     /**
@@ -26,7 +39,9 @@ class SizeApiController extends Controller
     {
         $size = Size::create($request->all());
 
-        return response()->json([
-            'status' => ($size) ? 'created' : 'failed'], 200);
+        return response()
+            ->json([
+                'status' => ($size) ? 'created' : 'failed'
+            ], 200);
     }
 }

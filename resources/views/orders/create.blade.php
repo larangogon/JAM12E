@@ -9,52 +9,30 @@
                     Dettalle de la compra
                 </div>
             </h2>
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                         <tr>
                         <h5>
-                            <div class="row justify-content-center align-items-center">
-                                Datos del usuario
-                            </div>
+                            <div class="row justify-content-center align-items-center">Datos del usuario</div>
                         </h5>
-                            <th>
-                                Nombre
-                            </th>
-                            <th>
-                                Documento
-                            </th>
-                            <th>
-                                Direccion
-                            </th>
-                            <th>
-                                Celular
-                            </th>
-                            <th>
-                                Telefono
-                            </th>
+                            <th>Nombre</th>
+                            <th>Documento</th>
+                            <th>Direccion</th>
+                            <th>Celular</th>
+                            <th>Telefono</th>
                         </tr>
                     <thead>
                         <tr>
-                            <th class="v-align-middle">
-                                {{auth()->user()->name}}
-                            </th>
-                            <th class="v-align-middle">
-                                {{auth()->user()->document}}
-                            </th>
-                            <th class="v-align-middle">
-                                {{auth()->user()->address}}
-                            </th>
-                            <th class="v-align-middle">
-                                {{auth()->user()->phone}}
-                            </th>
-                            <th class="v-align-middle">
-                                {{auth()->user()->cellphone}}
-                            </th>
+                            <th class="v-align-middle">{{auth()->user()->name}}</th>
+                            <th class="v-align-middle">{{auth()->user()->document}}</th>
+                            <th class="v-align-middle">{{auth()->user()->address}}</th>
+                            <th class="v-align-middle">{{auth()->user()->phone}}</th>
+                            <th class="v-align-middle">{{auth()->user()->cellphone}}</th>
                         </tr>
                     </thead>
                 </table>
 
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                         <tr>
                             <h5>
@@ -66,30 +44,18 @@
                         </tr>
                     <thead>
                         @foreach ($cart->products as $product)
-                        <tr>
+                        <tr class="table-success">
                             <td>
                                 <img src= "../uploads/{{$product->imagenes()->first()['name']}}"
                                      width="50" height="50"
                                 />
                             </td>
-                            <th class="v-align-middle">
-                                {{$product->name }}
-                            </th>
-                            <th class="v-align-middle">
-                                {{$product->pivot->size->name}}
-                            </th>
-                            <th class="v-align-middle">
-                                {{$product->pivot->color->name}}
-                            </th>
-                            <th class="v-align-middle">
-                                ${{number_format($product->price) }}
-                            </th>
-                            <th class="v-align-middle">
-                                {{$product->pivot->stock }}
-                            </th>
-                            <th class="v-align-middle">
-                                ${{number_format($product->price * $product->pivot->stock)}}
-                            </th>
+                            <th class="v-align-middle">{{$product->name }}</th>
+                            <th class="v-align-middle">{{$product->pivot->size->name}}</th>
+                            <th class="v-align-middle">{{$product->pivot->color->name}}</th>
+                            <th class="v-align-middle">$.{{number_format($product->price) }}</th>
+                            <th class="v-align-middle">{{$product->pivot->stock }}</th>
+                            <th class="v-align-middle">$.{{number_format($product->price * $product->pivot->stock)}}</th>
                         </tr>
                         @endforeach
                     </thead>
@@ -101,8 +67,8 @@
                             <form action="{{route('orders.store')}}" method="post">
                                 @csrf
                                 <input type="hidden" name="cart_id" value="{{$cart->id}}">
-                                <button type="submit" class="btn btn-success btn-block text-left">
-                                    Pagar p2p
+                                <button type="submit" class="btn btn-dark btn-block text-left">
+                                    Generar pago
                                 </button>
                             </form>
                         </div>

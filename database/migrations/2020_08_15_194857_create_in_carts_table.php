@@ -19,6 +19,7 @@ class CreateInCartsTable extends Migration
             $table->unsignedBigInteger('product_id')->unsigned();
             $table->integer('cart_id')->unsigned();
             $table->unsignedBigInteger('color_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('size_id');
             $table->integer('stock');
 
@@ -37,11 +38,16 @@ class CreateInCartsTable extends Migration
             ->on('colors')
             ->onDelete('cascade');
 
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade');
+
             $table->foreign('size_id')
             ->references('id')
             ->on('sizes')
             ->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 <div>
     @switch($order->status)
         @case('pending_pay')
-                @switch($order->payment->status)
+                @switch($order->payment->status ?? __('no existe'))
                     @case('PENDING')
                         <h5>
                             <small>
@@ -119,7 +119,7 @@
 
 
             @case('APPROVED')
-                @switch($order->payment->status)
+                @switch($order->payment->status ?? __('no existe'))
                     @case('APPROVED')
                         @switch($order->shippingStatus)
                             @case('0')
@@ -159,7 +159,7 @@
 
 
             @case('REJECTED')
-                @switch($order->payment->status)
+                @switch($order->payment->status?? __('no existe'))
                     @case('REJECTED')
                         <h5>
                             <small>
@@ -224,7 +224,7 @@
 
 
         @case('PENDING')
-            @switch($order->payment->status)
+            @switch($order->payment->status?? __('no existe'))
                 @case('PENDING')
                     <h5>
                         <small>
@@ -268,4 +268,11 @@
             </a>
         @break
     @endswitch
+    @if($order->payment == null)
+            <h5>
+                <small>
+                    {{__('No hay pago para esta orden!!!')}}
+                </small>
+            </h5>
+        @endif
 </div>

@@ -227,7 +227,6 @@
                                     Podemos consultar rutas protegidas enviando el token que obtuvimos
                                     anteriormente al autenticarnos.
                                 </p>
-                                <p class="text">
                                     Si hacemos una petición <mark>PUT</mark> a la ruta de product,
                                     el id y con nuestro token, éste editara un producto.<br>
                                     <u>http://127.0.0.1:8000/api/auth/product/1</u><br>
@@ -260,7 +259,6 @@
                                         </tr>
                                     </table>
                                 </div>
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -297,6 +295,9 @@
                                         </tr>
                                         <tr><th>"price" = "324455",</th>
                                             <td><mark>campo requerido</mark></td>
+                                        </tr>
+                                        <tr><th>"barcode" = "324455656574",</th>
+                                            <td><mark>campo requerido,#,unico</mark></td>
                                         </tr>
                                         <tr><th>"stock" = "5",</th>
                                             <td><mark>campo requerido</mark></td>

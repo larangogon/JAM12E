@@ -37,13 +37,14 @@ class UserController extends Controller
     public function index(Request $request): View
     {
         $role = $request->get('role', null);
+
         $search   = $request->get('search', null);
 
         $this->user = new User();
 
         return view('users.index', [
-            'search'   => $search,
-            'users' => $this->user
+            'search' => $search,
+            'users'  => $this->user
                 ->role($role)
                 ->search($search)
                 ->paginate(5)

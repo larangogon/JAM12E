@@ -50,20 +50,32 @@ Route::post('orders/complete', 'OrderController@complete')->name('orders.complet
 Route::post('orders/reversePay', 'OrderController@reversePay')->name('orders.reversePay');
 Route::get('orders/{order}/shippingStatus')->uses('OrderController@shippingStatus')->name('orders.shippingStatus');
 
+Route::get('canceller')->uses('OrderController@canceller')->name('orders.canceller');
 Route::resource('shipping', 'ShippingController')->only(['create', 'store']);
 
 Route::get('exportUsers', 'ExportController@exportUsers')->name('exportUsers');
 Route::get('exportProducts', 'ExportController@exportProducts')->name('exportProducts');
 Route::get('exportOrders', 'ExportController@exportOrders')->name('exportOrders');
+Route::get('reportGeneralExport', 'ExportController@reportGeneralExport')->name('reportGeneralExport');
+
 
 Route::post('imports/import', 'ImportController@import')->name('import');
 Route::get('imports/index', 'ImportController@index')->name('imports.index');
 Route::get('imports/indexProducts', 'ImportController@indexProducts')->name('indexProducts');
 Route::post('imports/importProducts', 'ImportController@importProducts')->name('importProducts');
+Route::post('imports/imgsProducts', 'ImportController@imgsProducts')->name('imgsProducts');
 
-Route::get('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
-Route::get('/reportUsers-pdf', 'ReportController@reportProducts')->name('reportProducts');
-Route::resource('reports', 'ReportController')->only(['index', 'show']);
+Route::post('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
+Route::get('/reportGeneral-pdf', 'ReportController@reportGeneral')->name('reportGeneral');
+Route::resource('reports', 'ReportController')->only('show', 'index', 'destroy');
 
 Route::get('metrics', 'MetricController@index')->name('metrics.index');
 Route::get('metrics/{metric}', 'MetricController@show')->name('metrics.show');
+
+Route::post('products/{product}/rate', 'ProductRatingController@rate')->name('rate');
+Route::post('products/{product}/unrate', 'ProductRatingController@unrate')->name('unrate');
+
+Route::resource('notifications', 'NotificationController')->only('index');
+Route::post('/mark-as-read', 'NotificationController@markNotification')->name('markNotification');
+
+Route::resource('messages', 'messagesController')->only('index', 'store', 'destroy');

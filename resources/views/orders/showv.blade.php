@@ -12,7 +12,7 @@
                         </div>
                         <p class="card-text">
                             Orden creada: {{ $order->created_at }}
-                            Por un valor de: ${{number_format($order->total)}}
+                            Por un valor de: $.{{number_format($order->total)}}
                         </p>
                         <a href="{{route('orders.show', $order->id) }}">
                             <button type="button" class="btn btn-block btn-sm btn-dark">
@@ -24,7 +24,7 @@
             @endforeach
         </div>
     @else
-        <div class="card text-white bg-warning">
+        <div class="card-body">
             <h3>
                 <div class="row justify-content-center align-items-center">
                     Sorry, There are no orders

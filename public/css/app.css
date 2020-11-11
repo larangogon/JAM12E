@@ -10963,6 +10963,10 @@ a.text-dark:focus {
   background: black;
 }
 
+.btn-session {
+  color: white;
+}
+
 .btn-dark {
   border-color: black;
 }
@@ -10987,13 +10991,17 @@ a.text-dark:focus {
   background: green;
 }
 
+.cur {
+  font-family: "Underdog", cursive;
+}
+
 .btn-danger {
   background: red;
 }
 
 html,
 body {
-  background: url(/images/galactic_outflows_410_410.jpg?c641af91e73ac3ef365806262c4f0601);
+  background: black;
   color: black;
   font-family: "Nunito", sans-serif;
   font-weight: 200;
@@ -11042,5 +11050,76 @@ body {
 
 .m-b-md {
   margin-bottom: 30px;
+}
+
+footer {
+  left: 0px;
+  bottom: 0px;
+  height: 30px;
+  width: 100%;
+  font-family: "Underdog", cursive;
+}
+
+footert {
+  left: 0px;
+  bottom: 0px;
+  font-family: "Underdog", cursive;
+}
+
+.footers a {
+  color: #696969;
+}
+
+.footers p {
+  color: #696969;
+}
+
+.footers ul {
+  line-height: 30px;
+}
+
+#social-fb:hover {
+  color: #3B5998;
+  transition: all 0.001s;
+}
+
+#social-tw:hover {
+  color: #4099FF;
+  transition: all 0.001s;
+}
+
+#social-gp:hover {
+  color: #d34836;
+  transition: all 0.001s;
+}
+
+#social-em:hover {
+  color: #f39c12;
+  transition: all 0.001s;
+}
+
+.tool {
+  color: gainsboro;
+}
+
+.trs {
+  color: black;
+}
+
+#icono {
+  width: 20%;
+}
+
+.body {
+  background: black;
+  color: black;
+  font-family: "Nunito", sans-serif;
+  font-weight: 200;
+  height: 100vh;
+  margin: 0;
+}
+
+.bg-darkb {
+  background: black;
 }
 

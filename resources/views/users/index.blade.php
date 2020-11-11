@@ -27,8 +27,8 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ route('imports.index') }}">
-                                            <button type="button" class="btn btn-warning btn-block btn-sm float-right">
-                                                importar Usuarios
+                                            <button type="button" class="btn btn-dark btn-block btn-sm float-right">
+                                                Importar Usuarios
                                             </button>
                                         </a>
                                     </li>
@@ -52,10 +52,10 @@
                     </div>
                 @endif
             </h6>
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered table-sm">
                 <thead>
                 <tr class="table-primary">
-                    <th scope="col">ID</th>
+                    <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">document</th>
                     <th scope="col">Email</th>

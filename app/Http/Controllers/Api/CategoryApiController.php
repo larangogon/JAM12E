@@ -9,13 +9,24 @@ use Illuminate\Http\Request;
 class CategoryApiController extends Controller
 {
     /**
+     * CategoryApiController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('role:Administrator');
+    }
+
+    /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
         $categories = Category::all(['id','name']);
 
-        return response()->json(['lista de categorias', $categories], 200);
+        return response()
+            ->json([
+                'lista de categorias', $categories
+            ], 200);
     }
 
     /**
@@ -26,7 +37,9 @@ class CategoryApiController extends Controller
     {
         $category = Category::create($request->all());
 
-        return response()->json([
-            'status' => ($category) ? 'created' : 'failed'], 200);
+        return response()
+            ->json([
+            'status' => ($category) ? 'created' : 'failed'
+            ], 200);
     }
 }

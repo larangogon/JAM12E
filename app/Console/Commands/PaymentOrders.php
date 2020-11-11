@@ -35,8 +35,11 @@ class PaymentOrders extends Command
      */
     public function handle(Payment $payment)
     {
-        logger()->channel('stack')->info('se han actualizado los pagos pendientes');
-        $payments = Payment::where('status', 'PENDING')->get();
+        logger()->channel('stack')
+            ->info('se han actualizado los pagos pendientes');
+
+        $payments = Payment::where('status', 'PENDING')
+            ->get();
 
         foreach ($payments as $payment) {
             dispatch(new ProcessP2p($payment->order));

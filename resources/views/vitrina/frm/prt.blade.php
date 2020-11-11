@@ -5,6 +5,7 @@
         </div>
     @endif
   </h6>
+
 <div class="d-flex flex-wrap justify-content-around">
     @foreach($products as $product)
       <div class="card cart:hover" style="width: 14rem; " >
@@ -26,3 +27,4 @@
       {{$products->links()}}
     </div>
 </div>
+

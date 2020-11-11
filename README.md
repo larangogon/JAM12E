@@ -34,8 +34,4 @@
     -php artisan passport:install
     -php artisan serve
 - **Login.**
-<<<<<<< HEAD
     -(user: admin@example.com, password: 123).
-=======
-- (user: admin@example.com, password: 123).
->>>>>>> 7e85a196a1a75ee4a76a85dcab7a1733050d4868

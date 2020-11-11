@@ -118,6 +118,7 @@ class CrudProductsTest extends TestCase
             'name'  => 'new',
             'stock' => 56,
             'price' => 23456,
+            'barcode' => '12324345354565',
             'description' => 'jdhfbgyebhsabfreahbfgy',
             'color' => [Color::all()->random()->id],
             'size' => [Size::all()->random()->id],

@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Entities\Role;
 use App\Entities\User;
+use App\Rules\RoleRule;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
@@ -44,6 +45,7 @@ class UsersImport implements WithValidation, ToModel, WithBatchInserts
         $roles = explode(',', $row[9]);
 
         $count = count($roles);
+
         foreach ($roles as $key => $role) {
             if ($key == $count - 1) {
                 break;
@@ -53,10 +55,10 @@ class UsersImport implements WithValidation, ToModel, WithBatchInserts
         }
     }
 
-        /**
-         * @return string[]
-         */
-        public function rules(): array
+    /**
+     * @return string[]
+     */
+    public function rules(): array
     {
         return [
             '*.1' => 'required',
@@ -67,13 +69,14 @@ class UsersImport implements WithValidation, ToModel, WithBatchInserts
             '*.6' => ['required'],
             '*.7' => 'required',
             '*.8' => 'required',
+            '*.9' => [new RoleRule],
         ];
     }
 
-        /**
-         * @return int
-         */
-        public function batchSize(): int
+    /**
+     * @return int
+     */
+    public function batchSize(): int
     {
         return 1000;
     }

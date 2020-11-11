@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Utils\CanBeRate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,9 +11,23 @@ use Illuminate\Support\Facades\Cache;
 
 class Product extends Model
 {
+    use CanBeRate;
+
     protected $table = 'products';
 
-    protected $fillable = ['id', 'name', 'description', 'price', 'stock', 'active', 'created_by', 'updated_by'];
+    protected $fillable = [
+        'id',
+        'barcode',
+        'name',
+        'sales',
+        'description',
+        'price',
+        'stock',
+        'active',
+        'visits',
+        'created_by',
+        'updated_by'
+    ];
 
     /**
      * @return HasMany
@@ -49,7 +64,10 @@ class Product extends Model
      */
     public function tieneImagen()
     {
-        return $this->imagenes->flatten()->pluck('name')->unique();
+        return $this->imagenes
+            ->flatten()
+            ->pluck('name')
+            ->unique();
     }
 
     /**
@@ -109,7 +127,10 @@ class Product extends Model
      */
     public function tieneColor()
     {
-        return $this->colors->flatten()->pluck('name')->unique();
+        return $this->colors
+            ->flatten()
+            ->pluck('name')
+            ->unique();
     }
 
     /**
@@ -133,7 +154,10 @@ class Product extends Model
      */
     public function tieneCategory()
     {
-        return $this->categories->flatten()->pluck('name')->unique();
+        return $this->categories
+            ->flatten()
+            ->pluck('name')
+            ->unique();
     }
 
     /**
@@ -141,7 +165,8 @@ class Product extends Model
      */
     public function sizes(): BelongsToMany
     {
-        return $this->belongsToMany(Size::class)->withTimestamps();
+        return $this->belongsToMany(Size::class)
+            ->withTimestamps();
     }
 
     /**
@@ -157,7 +182,9 @@ class Product extends Model
      */
     public function tieneSize()
     {
-        return $this->sizes->flatten()->pluck('name')->unique();
+        return $this->sizes->flatten()
+            ->pluck('name')
+            ->unique();
     }
 
     /**

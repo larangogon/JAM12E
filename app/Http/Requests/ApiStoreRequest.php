@@ -25,6 +25,7 @@ class ApiStoreRequest extends FormRequest
     public function rules()
     {
         return [
+            'barcode'     => 'required|numeric|min:13|unique:products',
             'name'        => 'required|max:25',
             'description' => 'required|max:250',
             'stock'       => 'required|numeric',

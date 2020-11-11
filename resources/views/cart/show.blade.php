@@ -25,13 +25,13 @@
 <div class="container" style="margin-top: 5px">
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-9">
-            <h2><div class="row justify-content-center align-items-center">
+            <h2><div class="row justify-content-center align-items-center cur">
                     Carrito de compras
                 </div>
             </h2>
             <p>
                 <a href="{{ route('cart.remove')}}" class="btn btn-danger btn-sm">
-                    vaciar carrito
+                    Vaciar carrito
                 </a>
                 <a href="{{route('vitrina.index') }}" class="btn btn-primary btn-sm">
                     Seguir comprando

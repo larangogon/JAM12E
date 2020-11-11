@@ -7,6 +7,7 @@ use App\Entities\Color;
 use App\Entities\Imagen;
 use App\Entities\Product;
 use App\Entities\Category;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceProducts;
@@ -40,11 +41,12 @@ class ProductsController extends Controller
         $this->middleware('role:Guest');
 
         $query    = trim($request->get('search'));
+
         $products = Product::where('name', 'LIKE', '%' . $query . '%')
-                            ->orwhere('stock', 'LIKE', '%' . $query . '%')
-                            ->orwhere('id', 'LIKE', '%' . $query . '%')
-                            ->orderBy('id', 'asc')
-                            ->paginate(5);
+            ->orwhere('stock', 'LIKE', '%' . $query . '%')
+            ->orwhere('id', 'LIKE', '%' . $query . '%')
+            ->orderBy('id', 'asc')
+            ->paginate(5);
 
         return view('products.index', [
             'products' => $products,
@@ -88,9 +90,9 @@ class ProductsController extends Controller
      */
     public function show(int $id): View
     {
-        $products = Product::where('id', '=', $id)->firstOrFail();
+        $product = Product::where('id', '=', $id)->firstOrFail();
 
-        return view('products.show', compact('products'));
+        return view('products.show', compact('product'));
     }
 
     /**
