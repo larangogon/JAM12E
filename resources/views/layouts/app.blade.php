@@ -38,7 +38,7 @@
                 <!-- Left navbar links -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                        <a class="nav-link " data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                     </li>
                 </ul>
 
@@ -138,6 +138,7 @@
                      </li>
                  </ul>
             </nav>
+
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <a href="{{ url('/') }}" class="brand-link">
                     <img src="{{asset('dist/img/descarga (1).png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"

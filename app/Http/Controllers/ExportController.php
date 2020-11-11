@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entities\Order;
 use App\Exports\OrdersExport;
 use App\Exports\ProductsExport;
+use App\Exports\ReportGeneralExport;
 use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -45,5 +46,13 @@ class ExportController extends Controller
     public function exportOrders(): BinaryFileResponse
     {
         return Excel::download(new OrdersExport, 'orders.xlsx');
+    }
+
+    /**
+     * @return BinaryFileResponse
+     */
+    public function reportGeneralExport(): BinaryFileResponse
+    {
+        return Excel::download(new ReportGeneralExport, 'reporte.xlsx');
     }
 }

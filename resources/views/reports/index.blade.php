@@ -44,6 +44,21 @@
                 </div>
             </div>
             <div class="col-sm-4">
+                <div class="card border-success">
+                    <div class="card-body">
+                        <h5 class="card-title">Reporte en excel</h5>
+                        <p class="card-text">
+                            Reporte diario en excel.
+                        </p>
+                        <a href="{{ route('reportGeneralExport') }}">
+                            <button type="button" class="btn btn-block btn-success btn-sm float-right">
+                                Generar <i class="far fa-file-pdf"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
                 <div class="card border-primary">
                     <div class="card-body">
                         <h5 class="card-title">Reporte financiero</h5>

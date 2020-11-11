@@ -1,8 +1,8 @@
-<footer>
-    <section class="footers border  pt-3 pb-3 container-fluid">
-        <div class="row justify-content-end">
-            <div class="col-md-2 footers-one ">
-                <div class="footers-info md-3">
+<footert class="hold-transition sidebar-mini layout-fixed">
+    <section class="footers border  pt-2 pb-2 container-fluid">
+        <div class="row justify-content-end col-md-12" >
+            <div class="col-md-3 footers-one ">
+                <div class="footers-info md-1">
                     <p>Cras sociis natoque penatibus et magnis Lorem Ipsum tells about the compmany right now the best.</p>
                 </div>
                 <div class="social-icons">
@@ -65,10 +65,10 @@
     <section class="copyright border">
         <div class="container">
             <div class="row text-center">
-                <div class="col-md-12 pt-3">
+                <div class="col-md-12">
                     <p class="text-muted">© 2020 JAM12E. S.A.S.</p>
                 </div>
             </div>
         </div>
     </section>
-</footer>
+</footert>

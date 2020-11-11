@@ -11058,7 +11058,12 @@ footer {
   height: 30px;
   width: 100%;
   font-family: "Underdog", cursive;
-  background: black;
+}
+
+footert {
+  left: 0px;
+  bottom: 0px;
+  font-family: "Underdog", cursive;
 }
 
 .footers a {
