@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Order;
+use App\Entities\Product;
 use App\Entities\Report;
 use App\Http\Requests\RequestFilter;
 use App\Jobs\ProcessReportGeneral;
@@ -51,7 +52,8 @@ class ReportController extends Controller
     {
         $factura = Order::find($id);
         $pdf = \PDF::loadView('reports.show', compact('factura'));
-        return $pdf->download('factura.pdf');
+        return $pdf
+            ->download('factura.pdf');
     }
 
     /**
@@ -118,5 +120,17 @@ class ReportController extends Controller
                 'success',
                 '...El reporte se ha generado, verifica tu correo!'
             );
+    }
+
+    /**
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id): RedirectResponse
+    {
+        Report::destroy($id);
+
+        return Redirect()->back()
+            ->with('success', 'Eliminado Satisfactoriamente !');
     }
 }

@@ -83,7 +83,7 @@ class Detail extends Model
      */
     public function scopeSizeSales($query)
     {
-        $query->with('size','order')
+        $query->with('size', 'order')
             ->selectRaw('size_id, order_id, SUM(`total`) as total')
             ->groupBy('size_id', 'order_id')
             ->orderByDesc('total')
@@ -119,5 +119,4 @@ class Detail extends Model
             return $this->all();
         });
     }
-
 }

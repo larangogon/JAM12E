@@ -49,7 +49,7 @@
                     </div>
                 @endif
             </h6>
-            <table class="table table-hover table-bordered">
+            <table class="table table-sm table-hover table-bordered">
                 <thead>
                 <tr class="table-primary">
                     <th scope="col">#</th>

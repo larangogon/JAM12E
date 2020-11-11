@@ -8,7 +8,7 @@
                 <h2>Tallas del producto
                     @include('sizes.modal')
                 </h2>
-                <table class="table table-hover">
+                <table class="table table-sm table-hover">
                     <thead>
                         <tr>
                         <th scope="col">#</th>

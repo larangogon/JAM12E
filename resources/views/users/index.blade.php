@@ -52,7 +52,7 @@
                     </div>
                 @endif
             </h6>
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered table-sm">
                 <thead>
                 <tr class="table-primary">
                     <th scope="col">#</th>

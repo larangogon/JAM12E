@@ -15,6 +15,14 @@
             margin: 3cm 2cm 2cm;
         }
 
+         hr{
+             page-break-after: always;
+             border: none;
+             margin: 0;
+             padding: 0;
+         }
+
+
         header {
             position: fixed;
             top: 0cm;
@@ -46,10 +54,11 @@
         <br>
         <br>
         <h2>Reporte general</h2>
-        <h6><dv>{{$now->format("F j, Y, g:i a")}}</dv></h6>
+        <h6><div>{{$now->format("F j, Y, g:i a")}}</div></h6>
 
         <h5 class="card-title">Consumo</h5>
-        <table class="table">
+        <br>
+        <table class="table table-sm">
             <tr>
                 <th>Pagos cancelados hasta la fecha</th>
                 <td>{{$cancelled}}</td>
@@ -98,17 +107,18 @@
         <br>
 
 
-        <br><br><br><br><br><br><br><br><br><br><br>
+        <hr> <!-- Salto de página -->
 
+        <br><br><br><br><br><br><br><br>
         <h5 class="card-title">Genaral</h5>
         <br>
-        <table class="table">
+        <table class="table table-sm">
             <tr>
                 <th>Cantidad de usuarios registrados hasta hoy {{$now->format("F j, Y, g:i a")}}</th>
                 <td>{{$users ?? __('no existe')}}</td>
             </tr>
             <tr>
-                <th>La suma total de los botos obtenidos por todos los productos es de </th>
+                <th>La suma total de los votos obtenidos por todos los productos es de </th>
                 <td>{{$ratinAllProducs ?? __('no existe')}}</td>
             </tr>
             <tr>
@@ -116,11 +126,13 @@
                 <td>{{$products ?? __('no existe')}}</td>
             </tr>
         </table>
+        <br>
+        <br>
 
         <h5>* Los 4 productos mas vendidos hasta {{$now->format("F j, Y, g:i a")}}</h5>
         <div class="row">
             <div class="col-sm-8">
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -140,12 +152,14 @@
                 </table>
             </div>
         </div>
-        <br>
-        <br>
+
+        <hr> <!-- Salto de página -->
+
+        <br><br><br><br><br><br><br><br>
         <h5>* Los 4 productos mas vistos hasta {{$now->format("F j, Y, g:i a")}}</h5>
         <div class="row">
             <div class="col-sm-8">
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -165,12 +179,13 @@
                 </table>
             </div>
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br>
 
+        <br>
+        <br>
         <h5>* Los 4 productos mejor calificados hasta {{$now->format("F j, Y, g:i a")}}</h5>
         <div class="row">
             <div class="col-sm-8">
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -191,11 +206,13 @@
             </div>
         </div>
 
+        <hr> <!-- Salto de página -->
 
+        <br><br><br><br><br><br><br><br>
         <h5>* valor de los 3 productos mas vendidos (consolidado) {{$now->format("F j, Y, g:i a")}}</h5>
         <div class="row">
             <div class="col-sm-8">
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -208,7 +225,7 @@
                         <tr>
                             <th scope="row">{{$product->product->id ?? __('no existe')}}</th>
                             <td>{{$product->product->name ?? __('no existe')}}</td>
-                            <td>{{$product->total ?? __('no existe')}}</td>
+                            <td>${{number_format($product->total) ?? __('no existe')}}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -216,12 +233,12 @@
             </div>
         </div>
 
-        <br><br><br><br><br><br><br><br><br><br><br><br>
-
+        <br>
+        <br>
         <h5>* valor de las 3 tallas mas vendidas (consolidado) {{$now->format("F j, Y, g:i a")}}</h5>
         <div class="row">
             <div class="col-sm-8">
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -234,7 +251,7 @@
                         <tr>
                             <th scope="row">{{$size->size->id ?? __('no existe')}}</th>
                             <td>{{$size->size->name ?? __('no existe')}}</td>
-                            <td>{{$size->total ?? __('no existe')}}</td>
+                            <td>${{number_format($size->total) ?? __('no existe')}}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -242,10 +259,13 @@
             </div>
         </div>
 
+        <hr> <!-- Salto de página -->
+
+        <br><br><br><br><br><br><br><br>
         <h5>* valor de las 3 categorias mas vendidas  (consolidado) {{$now->format("F j, Y, g:i a")}}</h5>
         <div class="row">
             <div class="col-sm-8">
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -258,20 +278,20 @@
                         <tr>
                             <th scope="row">{{$category->category->id ?? __('no existe')}}</th>
                             <td>{{$category->category->name ?? __('no existe')}}</td>
-                            <td>{{$category->total ?? __('no existe')}}</td>
+                            <td>${{number_format($category->total) ?? __('no existe')}}</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <br>
+        <br>
 
         <h5>* valor de los 3 colores mas venditos (consolidado) {{$now->format("F j, Y, g:i a")}}</h5>
         <div class="row">
             <div class="col-sm-8">
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -284,7 +304,7 @@
                         <tr>
                             <th scope="row">{{$color->color->id ?? __('no existe')}}</th>
                             <td>{{$color->color->name ?? __('no existe')}}</td>
-                            <td>{{$color->total ?? __('no existe')}}</td>
+                            <td>${{number_format($color->total) ?? __('no existe')}}</td>
                         </tr>
                     @endforeach
                     </tbody>

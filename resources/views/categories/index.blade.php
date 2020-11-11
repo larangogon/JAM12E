@@ -6,10 +6,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 mx-auto">
-                <h2>Categorias de Productos
+                <h2>Categorias
                     @include('categories.modal')
                 </h2>
-                <table class="table table-hover">
+                <table class="table-sm table table-hover">
                     <thead>
                         <tr>
                             <th scope="col">

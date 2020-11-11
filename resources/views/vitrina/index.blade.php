@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
   <div>
       @if (session('success'))
           <div class="alert-default-success" role="alert">
@@ -10,5 +9,4 @@
       @endif
     @include('vitrina.frm.prt')
   </div>
-
 @endsection

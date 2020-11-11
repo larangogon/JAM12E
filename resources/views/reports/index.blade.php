@@ -44,6 +44,21 @@
                 </div>
             </div>
             <div class="col-sm-4">
+                <div class="card border-success">
+                    <div class="card-body">
+                        <h5 class="card-title">Reporte en excel</h5>
+                        <p class="card-text">
+                            Reporte diario en excel.
+                        </p>
+                        <a href="{{ route('reportGeneralExport') }}">
+                            <button type="button" class="btn btn-block btn-success btn-sm float-right">
+                                Generar <i class="far fa-file-pdf"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
                 <div class="card border-primary">
                     <div class="card-body">
                         <h5 class="card-title">Reporte financiero</h5>
@@ -56,7 +71,7 @@
             </div>
         </div>
         <div class="card">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-sm">
                 <thead>
                 <tr class="bg-success">
                     <td scope="col">#</td>
@@ -64,6 +79,7 @@
                     <td># admin</td>
                     <td>Datos del reporte</td>
                     <td>Fecha de creacion</td>
+                    <td>Eliminar</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,6 +90,15 @@
                         <td>{{$report->user->id}}</td>
                         <td>{{$report->file}}</td>
                         <td>{{$report->created_at}}</td>
+                        <td class="v-align-middle">
+                            <form action= "{{ route('reports.destroy',  $report->id)}}" method = "POST">
+                                @csrf
+                                @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"  role="button">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

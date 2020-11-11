@@ -39,8 +39,7 @@
                     <th>Enviado por</th>
                     <th>Enviado a</th>
                     <th>Mensaje</th>
-
-
+                    <th>Eliminar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,6 +49,15 @@
                         <td class="v-align-middle">{{$msg->senderId->name}}</td>
                         <td class="v-align-middle">{{$msg->recipientId->name}}</td>
                         <td class="v-align-middle">{{$msg->body}}</td>
+                        <td class="v-align-middle">
+                            <form action= "{{ route('messages.destroy',  $msg->id)}}" method = "POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"  role="button">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -66,10 +74,10 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="dist/img/872a4654-3661-423d-8b04-a7719eb954ad.jpg" class="d-block w-100" alt="10">
+                                    <img src="dist/img/151db71a-6864-46b4-8762-a7df6094ca81.jpg" class="d-block w-100" alt="10">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="dist/img/872a4654-3661-423d-8b04-a7719eb954ad.jpg" class="d-block w-100" alt="10">
+                                    <img src="dist/img/ede17403-d12a-4c92-b2d3-25f1cf3b0f62.jpg" class="d-block w-100" alt="10">
                                 </div>
                                 <div class="carousel-item">
                                     <img src="dist/img/872a4654-3661-423d-8b04-a7719eb954ad.jpg" class="d-block w-100" alt="10">

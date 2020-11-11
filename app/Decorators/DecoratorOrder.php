@@ -270,9 +270,10 @@ class DecoratorOrder implements InterfaceOrders
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|mixed
      * @throws \Exception
      */
-    public function reversePay(Request $request): void
+    public function reversePay(Request $request)
     {
         $order = Order::find($request->get('order'));
 

@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#addSize">Crear talla</button>
+<button type="button" class="btn btn-warning btn-sm float-right" data-toggle="modal" data-target="#addSize">Crear talla</button>
 
 {!! Form::open(['url' => 'sizes']) !!}
 {{ Form::token() }}

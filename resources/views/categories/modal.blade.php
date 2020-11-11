@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#addCategory">
+<button type="button" class="btn btn-warning btn-sm float-right" data-toggle="modal" data-target="#addCategory">
     Crear Categoria
 </button>
 
