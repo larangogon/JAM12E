@@ -23,6 +23,8 @@ class SendEmailReportGeneralExcel extends Mailable
             ->view('emails.report')
             ->attach(
                 Excel::download(new ReportGeneralExport, 'reporte.xlsx')
-                    ->getFile(), ['as' => 'report.xlsx']);
+                    ->getFile(),
+                ['as' => 'report.xlsx']
+            );
     }
 }

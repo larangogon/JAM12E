@@ -67,7 +67,7 @@ Route::post('imports/imgsProducts', 'ImportController@imgsProducts')->name('imgs
 
 Route::post('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
 Route::get('/reportGeneral-pdf', 'ReportController@reportGeneral')->name('reportGeneral');
-Route::resource('reports', 'ReportController')->only('show', 'index');
+Route::resource('reports', 'ReportController')->only('show', 'index', 'destroy');
 
 Route::get('metrics', 'MetricController@index')->name('metrics.index');
 Route::get('metrics/{metric}', 'MetricController@show')->name('metrics.show');
@@ -78,4 +78,4 @@ Route::post('products/{product}/unrate', 'ProductRatingController@unrate')->name
 Route::resource('notifications', 'NotificationController')->only('index');
 Route::post('/mark-as-read', 'NotificationController@markNotification')->name('markNotification');
 
-Route::resource('messages', 'messagesController')->only('index', 'store');
+Route::resource('messages', 'messagesController')->only('index', 'store', 'destroy');

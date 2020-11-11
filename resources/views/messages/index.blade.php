@@ -39,8 +39,7 @@
                     <th>Enviado por</th>
                     <th>Enviado a</th>
                     <th>Mensaje</th>
-
-
+                    <th>Eliminar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,6 +49,15 @@
                         <td class="v-align-middle">{{$msg->senderId->name}}</td>
                         <td class="v-align-middle">{{$msg->recipientId->name}}</td>
                         <td class="v-align-middle">{{$msg->body}}</td>
+                        <td class="v-align-middle">
+                            <form action= "{{ route('messages.destroy',  $msg->id)}}" method = "POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"  role="button">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

@@ -57,7 +57,7 @@
                           </tr>
                           <tr>
                               <th>Precio</th>
-                              <td>{{ $product->price }}</td>
+                              <td>${{number_format($product->price) }}</td>
                           </tr>
                           <tr>
                               <th>Stock</th>

@@ -79,6 +79,7 @@
                     <td># admin</td>
                     <td>Datos del reporte</td>
                     <td>Fecha de creacion</td>
+                    <td>Eliminar</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -89,6 +90,15 @@
                         <td>{{$report->user->id}}</td>
                         <td>{{$report->file}}</td>
                         <td>{{$report->created_at}}</td>
+                        <td class="v-align-middle">
+                            <form action= "{{ route('reports.destroy',  $report->id)}}" method = "POST">
+                                @csrf
+                                @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"  role="button">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

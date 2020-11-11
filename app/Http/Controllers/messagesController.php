@@ -51,4 +51,16 @@ class messagesController extends Controller
         return redirect()->back()
             ->with('success', 'Mensaje enviado');
     }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(int $id)
+    {
+        Message::destroy($id);
+
+        return Redirect()->back()
+            ->with('success', 'Eliminado Satisfactoriamente !');
+    }
 }
