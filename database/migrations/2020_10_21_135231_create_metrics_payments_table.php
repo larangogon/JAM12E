@@ -53,6 +53,6 @@ EOT;
      */
     public function down()
     {
-        Schema::dropIfExists('payment_metrics_payments');
+        Schema::dropIfExists('metrics_payments');
     }
 }
