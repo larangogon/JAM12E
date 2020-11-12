@@ -30,7 +30,6 @@
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
                             </select>
-
                         @endif
                     </div>
                     <div class="form-group">
