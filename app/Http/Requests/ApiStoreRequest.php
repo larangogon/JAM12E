@@ -31,9 +31,9 @@ class ApiStoreRequest extends FormRequest
             'stock'       => 'required|numeric',
             'price'       => 'required|numeric',
             'img'         => 'required',
-            'color'       => ['required'],
-            'category'    => ['required'],
-            'size'        => ['required']
+            'color'       => ['required','exists:colors,id'],
+            'category'    => ['required','exists:categories,id'],
+            'size'        => ['required','exists:sizes,id'],
         ];
     }
 
