@@ -2,10 +2,10 @@
 
 namespace App\Mail;
 
+use App\Entities\Report;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 
 class SendEmailReport extends Mailable
 {
@@ -23,12 +23,11 @@ class SendEmailReport extends Mailable
     public function build()
     {
         $now = new \DateTime();
+        $name = date('Y-m-d-H-i') . 'report.pdf';
         $pdf = \PDF::loadView('reports.orders', [
             'now'       => $now,
             'order'     => $this->ordersx,
-            ]);
-
-        Storage::disk('public')->put(date('Y-m-d-H-i-s') . 'reports.orders.pdf', $pdf);
+            ])->save(storage_path('app/reportOrder/') . $name);
 
         return $this->from('johannitaarango2@gmail.com')
         ->view('emails.report')

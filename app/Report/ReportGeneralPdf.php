@@ -82,19 +82,7 @@ class ReportGeneralPdf
 
         $rating = Rating::topRating()->get();
 
-        $sizeSales = Detail::sizeSales()->get();
-
-        $categorySales = Detail::categorySales()->get();
-
-        $colorSales = Detail::colorSales()->get();
-
-        $r = Detail::productSalesTotal()->get();
-
         return \PDF::loadView('reports.reportGeneral', [
-            'colorSales'     => $colorSales,
-            'categorySales'   => $categorySales,
-            'sizeSales'       => $sizeSales,
-            'r'               => $r,
             'ratinAllProducs' => $ratinAllProducs,
             'rating'          => $rating,
             'hoy'             => $hoy,

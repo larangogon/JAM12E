@@ -67,6 +67,7 @@
                     <td>Generado por Admin</td>
                     <td># admin</td>
                     <td>Datos del reporte</td>
+                    <td>Descargar</td>
                     <td>Fecha de creacion</td>
                     <td>Eliminar</td>
                 </tr>
@@ -78,6 +79,15 @@
                         <td>{{$report->user->name}}</td>
                         <td>{{$report->user->id}}</td>
                         <td>{{$report->file}}</td>
+                        <td>
+                            @if($report->name = 'Reporte_excel')
+                                {{$report->file}}
+                            @else
+                                <a href="#" class="btn-dark" target="_blank">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            @endif
+                        </td>
                         <td>{{$report->created_at}}</td>
                         <td class="v-align-middle">
                             <form action= "{{ route('reports.destroy',  $report->id)}}" method = "POST">

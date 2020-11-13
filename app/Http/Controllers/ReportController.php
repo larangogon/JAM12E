@@ -89,9 +89,11 @@ class ReportController extends Controller
         $details['email'] = 'johannitaarango2@gmail.com';
         dispatch(new ProcessReport($details, $ordersx));
 
+        $name = date('Y-m-d-H-i') . 'report.pdf';
         $report = Report::create([
             'created_by' => auth()->user()->id,
-            'file' => 'Enviado_A_johannitaarango2@gmail.com',
+            'file'       => $name,
+            'name'       => 'Reporte_order',
         ]);
 
         return redirect()->back()
@@ -110,9 +112,14 @@ class ReportController extends Controller
 
         dispatch(new ProcessReportGeneral($details));
 
+        $name = date('Y-m-d-H-i') . 'report.pdf';
+        $desp = 'Reporte_resumen';
+
         $report = Report::create([
+            'name'       => $desp,
             'created_by' => auth()->user()->id,
-            'file' => 'Enviado_A_johannitaarango2@gmail.com',
+            'file'       => $name,
+
         ]);
 
         return redirect()->back()

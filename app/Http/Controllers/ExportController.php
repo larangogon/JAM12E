@@ -61,7 +61,8 @@ class ExportController extends Controller
 
         $report = Report::create([
             'created_by' => auth()->user()->id,
-            'file' => 'Enviado_A_johannitaarango2@gmail.com',
+            'file'       => 'Enviado_A_johannitaarango2@gmail.com',
+            'name'       => 'Reporte_excel',
         ]);
 
         return redirect()->back()
