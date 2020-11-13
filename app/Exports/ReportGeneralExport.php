@@ -19,6 +19,9 @@ class ReportGeneralExport implements FromView, ShouldAutoSize
 {
     use Exportable;
 
+    /**
+     * @return View
+     */
     public function view(): View
     {
         $now = new \DateTime();

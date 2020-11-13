@@ -12,8 +12,8 @@
             {{$now->format("F j, Y, g:i a")}}
         </p>
 
-        <div class="card-deck">
-            <div class="card text-white bg-dark mb-2" style="max-width: 18rem;">
+        <div class="card-deck " >
+            <div class="card text-white bg-dark mb-2" style="max-width: 18rem;" >
                 <div class="card-body">
                     <h5 class="card-title">Consumo</h5>
                     <table class="table table-sm">

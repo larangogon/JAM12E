@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-md-5">
                         <div>
-                            <img src="dist/img/descarga (1).png"class="brand-image img-circle elevation-3"
+                            <img src="dist/img/descarga (1).png" class="brand-image img-circle elevation-3"
                                  style="opacity: .8">
                         </div>
                     </div>

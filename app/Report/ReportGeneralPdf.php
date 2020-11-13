@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\DB;
 
 class ReportGeneralPdf
 {
+    /**
+     * @return mixed
+     */
     public function view()
     {
         $now = new \DateTime();

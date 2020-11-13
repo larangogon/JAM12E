@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\InterfaceColors;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -21,7 +22,7 @@ class NotificationController extends Controller
     /**
      * @return View
      */
-    public function index()
+    public function index(): View
     {
         $notifications = auth()->user()->unreadNotifications;
 

@@ -4,6 +4,9 @@ namespace App\Observers;
 
 class ShippingObserver
 {
+    /**
+     * @param $shipping
+     */
     public function created($shipping)
     {
         logger()->channel('stack')->info(
@@ -18,6 +21,9 @@ class ShippingObserver
         );
     }
 
+    /**
+     * @param $shipping
+     */
     public function updated($shipping)
     {
         logger()->channel('stack')->info(

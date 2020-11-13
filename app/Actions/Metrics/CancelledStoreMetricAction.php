@@ -7,6 +7,9 @@ use App\Entities\MetricCancelled;
 
 class CancelledStoreMetricAction
 {
+    /**
+     * @param Cancelled $cancelled
+     */
     public static function execute(Cancelled $cancelled): void
     {
         $metric = MetricCancelled::firstOrCreate([

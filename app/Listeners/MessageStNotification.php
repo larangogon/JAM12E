@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\Notification;
 class MessageStNotification
 {
     /**
-     * MessageNotification constructor.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * @param $event
      */
     public function handle($event)

@@ -44,7 +44,7 @@ class VitrinaController extends Controller
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      * @return View
      */
     public function show(int $id): View
@@ -52,7 +52,9 @@ class VitrinaController extends Controller
         $product = Product::active()
             ->where('id', '=', $id)
             ->firstOrFail();
+
         $product->visits += 1;
+
         $product->save();
 
         $ratin = Rating::all()
@@ -60,13 +62,9 @@ class VitrinaController extends Controller
 
         $total = $ratin->sum('score');
 
-
-
-
-
         return view('vitrina/show', [
             'product' => $product,
-            'total' => $total
+            'total'   => $total
         ]);
     }
 }

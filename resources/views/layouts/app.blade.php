@@ -299,7 +299,8 @@
                             @can('Administrator')
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
-                                        <p><i class="far fa-file"></i> Ordenes</p>
+                                        <i class="fas fa-file-medical-alt"></i>
+                                        <p>Ordenes</p>
                                     </a>
                                     <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
                                         <li class="nav-item has-treeview">

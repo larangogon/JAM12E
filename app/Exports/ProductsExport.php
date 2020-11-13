@@ -66,6 +66,9 @@ class ProductsExport implements FromCollection, WithMapping, WithHeadings
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function headings(): array
     {
         return [

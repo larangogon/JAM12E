@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Order;
-use App\Entities\Product;
 use App\Entities\Report;
 use App\Http\Requests\RequestFilter;
 use App\Jobs\ProcessReportGeneral;
@@ -46,7 +45,8 @@ class ReportController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return mixed
      */
     public function show($id)
     {
@@ -60,7 +60,7 @@ class ReportController extends Controller
      * @param RequestFilter $request
      * @return RedirectResponse
      */
-    public function reportOrders(RequestFilter $request)
+    public function reportOrders(RequestFilter $request): RedirectResponse
     {
         $fechaInicio = date('Y-m-d', strtotime($request->get('fechaInicio')));
 
@@ -102,9 +102,9 @@ class ReportController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function reportGeneral()
+    public function reportGeneral(): RedirectResponse
     {
         $details['email'] = 'johannitaarango2@gmail.com';
 
