@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Tiendas JAM</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-    <script src="{{asset('js/app.js') }}" defer></script>
 
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{mix('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <style type="text/css">
 
         .bg-darkb{
@@ -31,7 +32,8 @@
             <div class="media">
                 <div class="row justify-content-center">
                     <div class="col-md-6">
-                        <div class="card text-white bg-darkb">
+                        <div class="card text-white bg-darkb elevation-3"
+                             style="opacity: .8">
                             <div class="card-body">
                                 <div>
                                     <h5>

@@ -16,7 +16,7 @@
 
     <header class="header content">
         <div class="header-video">
-            <video autoplay muted loop id="video"  height="1000" >
+            <video autoplay muted loop id="video"  height="710" >
                 <source src="dist/img/mp4.1.mp4" type="video/mp4">
                 Tu navecador no soporta videos en HTML5
             </video>

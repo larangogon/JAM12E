@@ -9,8 +9,10 @@
 <div class="d-flex flex-wrap justify-content-around">
     @foreach($products as $product)
       <div class="card cart:hover" style="width: 14rem; " >
-        <img src="../uploads/{{$product->imagenes()->first()['name']}}" style="width:100%"
-          class= "card-img-top">
+          <a href="{{route('vitrina.show', $product->id) }}">
+              <img src="../uploads/{{$product->imagenes()->first()['name']}}" style="width:100%"
+                   class= "card-img-top">
+          </a>
             <div class="card-body">
               <h6 class="card-title">{{$product->name}} <br>
                 Precio: ${{number_format($product->price)}}
