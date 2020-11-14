@@ -67,9 +67,9 @@
                     <td>Generado por Admin</td>
                     <td># admin</td>
                     <td>Datos del reporte</td>
-                    <td>Descargar</td>
+                    <td>X</td>
                     <td>Fecha de creacion</td>
-                    <td>Eliminar</td>
+                    <td>X</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -80,12 +80,18 @@
                         <td>{{$report->user->id}}</td>
                         <td>{{$report->file}}</td>
                         <td>
-                            @if($report->name = 'Reporte_excel')
-                                {{$report->file}}
+                            @if($report->file == 'Enviado_A_johannitaarango2@gmail.com')
+
                             @else
-                                <a href="#" class="btn-dark" target="_blank">
-                                    <i class="fas fa-download"></i>
-                                </a>
+                                <form action="{{route('rute') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{$report->file}}" name="file">
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm">
+                                        <i class="fas fa-cloud-download-alt"></i>
+                                    </button>
+                                </form>
+
+
                             @endif
                         </td>
                         <td>{{$report->created_at}}</td>

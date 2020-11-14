@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Order;
+use App\Entities\Product;
 use App\Entities\Report;
 use App\Http\Requests\RequestFilter;
 use App\Jobs\ProcessReportGeneral;
@@ -139,5 +140,19 @@ class ReportController extends Controller
 
         return Redirect()->back()
             ->with('success', 'Eliminado Satisfactoriamente !');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function rute(Request $request)
+    {
+        $file = $request->file;
+        $name = '/app/public/' . $file;
+
+        $rutaDeArchivo = storage_path() . $name;
+
+        return response()->download($rutaDeArchivo);
     }
 }

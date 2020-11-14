@@ -67,6 +67,7 @@ Route::post('imports/imgsProducts', 'ImportController@imgsProducts')->name('imgs
 
 Route::post('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
 Route::get('/reportGeneral-pdf', 'ReportController@reportGeneral')->name('reportGeneral');
+Route::post('/rute', 'ReportController@rute')->name('rute');
 Route::resource('reports', 'ReportController')->only('show', 'index', 'destroy');
 
 Route::get('metrics', 'MetricController@index')->name('metrics.index');

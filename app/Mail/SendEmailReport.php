@@ -27,7 +27,7 @@ class SendEmailReport extends Mailable
         $pdf = \PDF::loadView('reports.orders', [
             'now'       => $now,
             'order'     => $this->ordersx,
-            ])->save(storage_path('app/reportOrder/') . $name);
+            ])->save(storage_path('app/public/') . $name);
 
         return $this->from('johannitaarango2@gmail.com')
         ->view('emails.report')
