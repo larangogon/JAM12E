@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <h2>
-                        Producto Creados
+                        Usuarios Registrados
                     </h2>
                 </div>
                 <div class="col-md-4">
@@ -15,7 +15,9 @@
                             data-accordion="false">
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <p>Opciones Avanzadas</p>
+                                    <button class="btn btn-outline-secondary btn-sm btn-block">
+                                        Opciones Avanzadas
+                                    </button>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">

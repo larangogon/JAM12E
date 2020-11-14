@@ -43,7 +43,7 @@ class OrderController extends Controller
             'search' => $search,
             'orders' => $this->order
                 ->search($search)
-                ->paginate(5)
+                ->paginate(15)
         ]);
     }
 

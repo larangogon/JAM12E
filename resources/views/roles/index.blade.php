@@ -17,11 +17,16 @@
                     <div class="mt-3 mb-5">
                     <div class="row h-50">
                         <div class="col-3">
+                            <script>
+                                (function () {
+                                    document.getElementById('pushslider').click()
+                                })()
+                            </script>
                             <div class="nav flex-column nav-pills" id="v-pills-tap"
                                  role="tablist" aria-orientation="vertical">
                                 @foreach($roles as $key => $role)
 
-                                    <a class="nav-link" id="v-ills-home-tab" data-toggle="pill"
+                                    <a class="nav-link" id="pushslider"  id="v-ills-home-tab" data-toggle="pill"
                                        href="#{{$role->name}}" role="tab" aria-controls="{{$role->name}}" aria-selected="true">
                                         {{$role->name}}
                                     </a>
@@ -55,5 +60,6 @@
                 </div>
             </div>
         </div>
+
     @endcan
 @endsection

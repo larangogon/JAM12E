@@ -72,4 +72,15 @@ class MessagesController extends Controller
         return Redirect()->back()
             ->with('success', 'Eliminado Satisfactoriamente !');
     }
+
+    /**
+     * @param int $id
+     * @return View
+     */
+    public function show(int $id): View
+    {
+        $msg = Message::where('id', '=', $id)->firstOrFail();
+
+        return view('messages.show', compact('msg'));
+    }
 }

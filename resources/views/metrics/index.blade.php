@@ -13,7 +13,7 @@
         </p>
 
         <div class="card-deck " >
-            <div class="card text-white bg-dark mb-2" style="max-width: 18rem;" >
+            <div class="card tr mb-2" style="max-width: 18rem;" >
                 <div class="card-body">
                     <h5 class="card-title">Consumo</h5>
                     <table class="table table-sm">
@@ -32,26 +32,7 @@
                     </table>
                 </div>
             </div>
-            <div class="card text-white bg-primary mb-2" style="max-width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Consumo</h5>
-                    <table class="table table-sm">
-                        <tr>
-                            <th>Cantidad de ordenes generadas hoy</th>
-                            <td>{{$hoy}}</td>
-                        </tr>
-                        <tr>
-                            <th>Cantidad de pagos ejecutados hoy</th>
-                            <td>{{$pay}}</td>
-                        </tr>
-                        <tr>
-                            <th>Cantidad de pagos actualizados hasta la fecha</th>
-                            <td>{{$payments}}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="card text-white bg-gradient-success mb-2" style="max-width: 18rem;">
+            <div class="card tl mb-2" style="max-width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Productos mas vendidos</h5>
                     <p class="card-text">
@@ -75,7 +56,7 @@
                     </table>
                 </div>
             </div>
-            <div class="card text-white bg-danger mb-2" style="max-width: 18rem;">
+            <div class="card ts mb-2" style="max-width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Productos mas vistos</h5>
                     <p class="card-text">
@@ -99,6 +80,25 @@
                     </table>
                 </div>
             </div>
+            <div class="card tw mb-2" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Consumo</h5>
+                    <table class="table table-sm">
+                        <tr>
+                            <th>Cantidad de ordenes generadas hoy</th>
+                            <td>{{$hoy}}</td>
+                        </tr>
+                        <tr>
+                            <th>Cantidad de pagos ejecutados hoy</th>
+                            <td>{{$pay}}</td>
+                        </tr>
+                        <tr>
+                            <th>Cantidad de pagos actualizados hasta la fecha</th>
+                            <td>{{$payments}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -116,7 +116,7 @@
             <div class="col-sm-4">
                 <cancelled-metric inline-template>
                     <div>
-                        <div class="card">
+                        <div class="card tr">
                             <h5 class="card-header">Pagos cancelados</h5>
                             <div class="card-content">
                                 <div class="chart-container">

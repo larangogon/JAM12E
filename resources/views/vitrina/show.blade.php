@@ -23,32 +23,37 @@
         <div class="panel-heading">
             <div class="panel-title">
                 <h2>Nombre del producto: {{ $product->name }}
-                    <a href="{{ route('vitrina.index') }}" class="btn btn-success btn-sm btn:hover">Volver</a>
+                    <a href="{{ route('vitrina.index') }}" class="btn btn-outline-success btn-sm btn:hover">Volver</a>
                </h2></div>
-
-            {{--Start Rating--}}
-            @for ($i = 0; $i < 5; $i++)
-                @if (floor($total) - $i >= 1)
-                    {{--Full Start--}}
-                    <i class="fas fa-star text-warning"> </i>
-                @elseif ($total - $i > 0)
-                    {{--Half Start--}}
-                    <i class="fas fa-star-half-alt text-warning"> </i>
-                @else
-                    {{--Empty Start--}}
-                    <i class="far fa-star text-warning"> </i>
-                @endif
-            @endfor
-            {{--End Rating--}}
-            @if($total == 1)
-            ({{$total}} voto)
-            @else($total > 1)
-            ({{$total}} votos)
-            @endif
 
             </div>
               <div class="row">
                   <div class="col-md-4">
+                      <div class="card">
+                          <div class="container">
+
+                              {{--Start Rating--}}
+                              @for ($i = 0; $i < 5; $i++)
+                                  @if (floor($total) - $i >= 1)
+                                      {{--Full Start--}}
+                                      <i class="fas fa-star text-warning"> </i>
+                                  @elseif ($total - $i > 0)
+                                      {{--Half Start--}}
+                                      <i class="fas fa-star-half-alt text-warning"> </i>
+                                  @else
+                                      {{--Empty Start--}}
+                                      <i class="far fa-star text-warning"> </i>
+                                  @endif
+                              @endfor
+                              {{--End Rating--}}
+                              @if($total == 1)
+                                  ({{$total}} voto)
+                              @else($total > 1)
+                                  ({{$total}} votos)
+                              @endif
+
+                          </div>
+                      </div>
                       <div class="card">
                       <table class="table table-sm">
                           <tr>
