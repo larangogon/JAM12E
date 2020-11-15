@@ -48,6 +48,7 @@ Route::get('orders/{user}/orders', 'OrderController@showv')->name('orders.showv'
 Route::post('orders/resend', 'OrderController@resend')->name('orders.resend');
 Route::post('orders/complete', 'OrderController@complete')->name('orders.complete');
 Route::post('orders/reversePay', 'OrderController@reversePay')->name('orders.reversePay');
+Route::post('orders/paymentInStore', 'OrderController@paymentInStore')->name('orders.paymentInStore');
 Route::get('orders/{order}/shippingStatus')->uses('OrderController@shippingStatus')->name('orders.shippingStatus');
 
 Route::get('canceller')->uses('OrderController@canceller')->name('orders.canceller');
@@ -67,6 +68,7 @@ Route::post('imports/imgsProducts', 'ImportController@imgsProducts')->name('imgs
 
 Route::post('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
 Route::get('/reportGeneral-pdf', 'ReportController@reportGeneral')->name('reportGeneral');
+Route::post('/rute', 'ReportController@rute')->name('rute');
 Route::resource('reports', 'ReportController')->only('show', 'index', 'destroy');
 
 Route::get('metrics', 'MetricController@index')->name('metrics.index');
@@ -78,4 +80,6 @@ Route::post('products/{product}/unrate', 'ProductRatingController@unrate')->name
 Route::resource('notifications', 'NotificationController')->only('index');
 Route::post('/mark-as-read', 'NotificationController@markNotification')->name('markNotification');
 
-Route::resource('messages', 'MessagesController')->only('index', 'store', 'destroy');
+Route::resource('messages', 'MessagesController')->only('index', 'store', 'destroy', 'show');
+
+Route::resource('spendings', 'SpendingController');

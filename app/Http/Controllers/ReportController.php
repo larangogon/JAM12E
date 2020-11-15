@@ -46,7 +46,8 @@ class ReportController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return mixed
      */
     public function show($id)
     {
@@ -60,7 +61,7 @@ class ReportController extends Controller
      * @param RequestFilter $request
      * @return RedirectResponse
      */
-    public function reportOrders(RequestFilter $request)
+    public function reportOrders(RequestFilter $request): RedirectResponse
     {
         $fechaInicio = date('Y-m-d', strtotime($request->get('fechaInicio')));
 
@@ -89,9 +90,11 @@ class ReportController extends Controller
         $details['email'] = 'johannitaarango2@gmail.com';
         dispatch(new ProcessReport($details, $ordersx));
 
+        $name = date('Y-m-d-H-i') . 'report.pdf';
         $report = Report::create([
             'created_by' => auth()->user()->id,
-            'file' => 'Enviado_A_johannitaarango2@gmail.com',
+            'file'       => $name,
+            'name'       => 'Reporte_order',
         ]);
 
         return redirect()->back()
@@ -102,17 +105,22 @@ class ReportController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function reportGeneral()
+    public function reportGeneral(): RedirectResponse
     {
         $details['email'] = 'johannitaarango2@gmail.com';
 
         dispatch(new ProcessReportGeneral($details));
 
+        $name = date('Y-m-d-H-i') . 'report.pdf';
+        $desp = 'Reporte_resumen';
+
         $report = Report::create([
+            'name'       => $desp,
             'created_by' => auth()->user()->id,
-            'file' => 'Enviado_A_johannitaarango2@gmail.com',
+            'file'       => $name,
+
         ]);
 
         return redirect()->back()
@@ -132,5 +140,19 @@ class ReportController extends Controller
 
         return Redirect()->back()
             ->with('success', 'Eliminado Satisfactoriamente !');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function rute(Request $request)
+    {
+        $file = $request->file;
+        $name = '/app/public/' . $file;
+
+        $rutaDeArchivo = storage_path() . $name;
+
+        return response()->download($rutaDeArchivo);
     }
 }

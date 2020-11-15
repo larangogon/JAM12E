@@ -21,10 +21,18 @@
                         <form action= "{{ route('roles.destroy',  $role->id)}}" method = "POST">
                             @csrf
                             @method('DELETE')
-                            {{$role->name}}
-                            <button type="submit" class="btn btn-danger btn-sm float-right"  role="button" >
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
+                            <table class="table table-sm">
+                                <tr>
+                                    <th>{{$role->name}}</th>
+                                    <td>
+                                        <button type="submit" class="btn btn-danger btn-sm float-right"  role="button" >
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+
+
                         </form>
                     @endforeach
                 </form>
@@ -32,9 +40,6 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Cerrar
-                </button>
-                <button type="submit" class="btn btn-primary">
-                    Actualizar Rol
                 </button>
             </div>
         </div>

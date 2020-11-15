@@ -180,7 +180,16 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="#" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                    <p>
+                                        Puntos de atención
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{url('nosotros')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="fas fa-store"></i>
                                     <p>
                                         Quienes somos!
                                     </p>
@@ -208,7 +217,7 @@
                             @endcan
                                 <li class="nav-item">
                                     <a href="{{route('vitrina.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
-                                        <i class="fas fa-file-alt"></i>
+                                        <i class="fas fa-gifts"></i>
                                         <p>
                                             Vitrina
                                         </p>
@@ -226,7 +235,7 @@
                             @endcan
                             <li class="nav-item">
                                 <a href="{{route('messages.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
-                                    <i class="fas fa-file-alt"></i>
+                                    <i class="fas fa-comments"></i>
                                     <p>
                                         Contactenos
                                     </p>
@@ -290,7 +299,8 @@
                             @can('Administrator')
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
-                                        <p><i class="far fa-file"></i> Ordenes</p>
+                                        <i class="fas fa-file-medical-alt"></i>
+                                        <p>Ordenes</p>
                                     </a>
                                     <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
                                         <li class="nav-item has-treeview">
@@ -358,6 +368,17 @@
                                 </li>
                             @endcan
                             @can('Administrator')
+                                <li class="nav-item">
+                                    <a href="{{route('spendings.index')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-file-medical-alt"></i>
+                                        <p>
+                                            Gastos
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('Administrator')
                               <li class="nav-item has-treeview">
                                   <a href="#" class="nav-link">
                                       <i class="fas fa-wrench"></i>
@@ -414,6 +435,37 @@
                                     @endif
                                 @endauth
                             </li>
+                            @if (Route::has('login'))
+                                @auth
+                                <li class="nav-item">
+                                    <a href="/home" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-fingerprint"></i>
+                                        <p>
+                                            Home
+                                        </p>
+                                    </a>
+                                </li>
+                                @else
+                                <li class="nav-item">
+                                    <a href="login" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-users"></i>
+                                        <p>
+                                            Login
+                                        </p>
+                                    </a>
+                                </li>
+                                    @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a href="register" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                            <i class="fas fa-users"></i>
+                                            <p>
+                                                Register
+                                            </p>
+                                        </a>
+                                    </li>
+                                @endif
+                                @endauth
+                            @endif
 
                         </ul>
                     </nav>

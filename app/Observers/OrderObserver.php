@@ -30,7 +30,6 @@ class OrderObserver
 
                 $product->save();
 
-
                 if ($product->stock == '0') {
                     $product->active = '0';
                     $product->save();

@@ -17,6 +17,7 @@ class CreateReportsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->string('file');
+            $table->string('name')->default('reporte');
             $table->timestamps();
 
             $table->foreign('created_by')

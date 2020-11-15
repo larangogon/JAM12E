@@ -36,16 +36,6 @@ class CrudMessagesTest extends TestCase
         $this->cart->save();
     }
 
-    public function testIndex(): void
-    {
-        $response = $this->actingAs($this->user, 'web')
-            ->get(route('messages.index'));
-
-        $response
-            ->assertStatus(200)
-            ->assertViewIs('messages.index');
-    }
-
     public function testNotificationsIndex(): void
     {
         $response = $this->actingAs($this->user, 'web')

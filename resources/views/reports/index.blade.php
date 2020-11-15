@@ -18,14 +18,20 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-sm-4">
-                <div class="card border-warning">
+                <div class="card border-dark">
                     <div class="card-body">
-                        <h5 class="card-title">Reporte General</h5>
+                        <h5 class="card-title">Resumen General</h5>
                         <p class="card-text">
-                            Reporte con detalle de la tienda.
+                            Resumen con detalle de la tienda .
+                            <br>
+                            - Datos de ordenes, pagos y productos
+                            <br>
+                            - Detalle de consumo
+                            <br>
+                            - Estadistica de ordenes y pagos
                         </p>
                         <a href="{{ route('reportGeneral') }}">
-                            <button type="button" class="btn btn-block btn-warning btn-sm float-right">
+                            <button type="button" class="btn btn-block btn-dark btn-sm">
                                 Generar <i class="far fa-file-pdf"></i>
                             </button>
                         </a>
@@ -33,14 +39,18 @@
                 </div>
             </div>
             <div class="col-sm-4">
-                <div class="card border-success">
+                <div class="card border-dark">
                     <div class="card-body">
                         <h5 class="card-title">Reporte en excel</h5>
                         <p class="card-text">
                             Reporte diario en excel.
+                            <br>
+                            - Datos de ordenes, pagos, usuarios y productos
+                            <br>
+                            - Reporte para analisis administrativo
                         </p>
                         <a href="{{ route('reportGeneralExport') }}">
-                            <button type="button" class="btn btn-block btn-success btn-sm float-right">
+                            <button type="button" class="btn btn-block btn-dark btn-sm float-right">
                                 Generar <i class="far fa-file-pdf"></i>
                             </button>
                         </a>
@@ -48,11 +58,15 @@
                 </div>
             </div>
             <div class="col-sm-4">
-                <div class="card border-primary">
+                <div class="card border-dark">
                     <div class="card-body">
                         <h5 class="card-title">Reporte financiero</h5>
                         <p class="card-text">
-                            Reporte de ordenes.
+                            - Filtro de ordenes por fecha
+                            <br>
+                            - Filtro de ordenes por estado
+                            <br>
+                            - Informe de todas las ordenes con valor total de consumo
                         </p>
                         @include('reports.modal')
                     </div>
@@ -67,8 +81,9 @@
                     <td>Generado por Admin</td>
                     <td># admin</td>
                     <td>Datos del reporte</td>
+                    <td>X</td>
                     <td>Fecha de creacion</td>
-                    <td>Eliminar</td>
+                    <td>X</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -78,12 +93,27 @@
                         <td>{{$report->user->name}}</td>
                         <td>{{$report->user->id}}</td>
                         <td>{{$report->file}}</td>
+                        <td>
+                            @if($report->file == 'Enviado_A_johannitaarango2@gmail.com')
+
+                            @else
+                                <form action="{{route('rute') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{$report->file}}" name="file">
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm">
+                                        <i class="fas fa-cloud-download-alt"></i>
+                                    </button>
+                                </form>
+
+
+                            @endif
+                        </td>
                         <td>{{$report->created_at}}</td>
                         <td class="v-align-middle">
                             <form action= "{{ route('reports.destroy',  $report->id)}}" method = "POST">
                                 @csrf
                                 @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm"  role="button">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm"  role="button">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                             </form>

@@ -8,6 +8,15 @@
                 </div>
             @endif
         </h6>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         @if (session('success'))
             <div class="alert-default-success" role="alert">
                 <p>{{session('success')}}</p>
@@ -21,13 +30,14 @@
         </h2>
             @if(auth()->user()->hasRole('Administrator'))
 
-            <table class="table table-hover table-bordered">
+            <table class="table table-sm table-hover table-bordered">
                 <thead>
                 <tr class="table-primary">
                     <th scope="col">#</th>
                     <th>Enviado por</th>
                     <th>Enviado a</th>
                     <th>Mensaje</th>
+                    <th>ver</th>
                     <th>Eliminar</th>
                 </tr>
                 </thead>
@@ -37,7 +47,14 @@
                         <td class="v-align-middle">{{$msg->id}}</td>
                         <td class="v-align-middle">{{$msg->senderId->name}}</td>
                         <td class="v-align-middle">{{$msg->recipientId->name}}</td>
-                        <td class="v-align-middle">{{$msg->body}}</td>
+                        <td class="v-align-middle text-truncate" style="max-width: 200px" >{{$msg->body}}</td>
+                        <td class="v-align-middle">
+                            <a href="{{route('messages.show', $msg->id) }}">
+                                <button type="button" class="btn btn-dark btn-sm">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </a>
+                        </td>
                         <td class="v-align-middle">
                             <form action= "{{ route('messages.destroy',  $msg->id)}}" method = "POST">
                                 @csrf

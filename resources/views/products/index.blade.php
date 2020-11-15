@@ -35,9 +35,9 @@
                                     data-accordion="false">
                                     <li class="nav-item has-treeview">
                                         <a href="#" class="nav-link">
-                                            <p>
+                                            <button class="btn btn-outline-secondary btn-sm btn-block">
                                                 Opciones Avanzadas
-                                            </p>
+                                            </button>
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">

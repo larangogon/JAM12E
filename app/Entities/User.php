@@ -183,4 +183,20 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Message::class, 'sender_id');
     }
+
+    /**
+     * @return HasMany
+     */
+    public function spending(): HasMany
+    {
+        return $this->hasMany(Spending::class, 'created_by');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function spendingUpdate(): HasMany
+    {
+        return $this->hasMany(Spending::class, 'updated_by');
+    }
 }

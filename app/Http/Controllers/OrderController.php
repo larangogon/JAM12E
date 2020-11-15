@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\PlaceToPay;
 use App\Entities\Cancelled;
+use App\Entities\Cart;
+use App\Entities\Detail;
+use App\Entities\Payment;
 use App\Entities\User;
 use App\Entities\Order;
 use Illuminate\View\View;
@@ -43,7 +47,7 @@ class OrderController extends Controller
             'search' => $search,
             'orders' => $this->order
                 ->search($search)
-                ->paginate(5)
+                ->paginate(15)
         ]);
     }
 
@@ -171,5 +175,44 @@ class OrderController extends Controller
                 ->search($search)
                 ->paginate(5)
         ]);
+    }
+
+    public function paymentInStore(Request $request)
+    {
+        $cart = Cart::find($request->get('cart_id'));
+
+        $order = Order::create([
+            'user_id' => $cart->user_id,
+            'total'   => $cart->totalCarrito(),
+            'status'  => 'Aprovado en tienda',
+        ]);
+
+        foreach ($cart->products as $product) {
+            $detail = Detail::create([
+                'order_id'    => $order->id,
+                'product_id'  => $product->id,
+                'size_id'     => $product->pivot->size_id,
+                'category_id' => $product->pivot->category_id,
+                'color_id'    => $product->pivot->color_id,
+                'stock'       => $product->pivot->stock,
+                'total'       => $product->price * $product->pivot->stock,
+            ]);
+        }
+
+        $cart->products()->detach(null);
+
+        Payment::create([
+            'order_id'   => $order->id,
+            'status'     => 'Aprovado en tienda',
+            'base'       => 'tienda',
+            'message'    => 'pago generado en la tienda por el admin' . auth()->user()->id,
+            'document'   => $request->get('document'),
+            'name'       => $request->get('name'),
+            'email'      => $request->get('email'),
+            'mobile'     => $request->get('mobile'),
+            'amount'     => $order->total,
+            'totalStore' => $request->get('totalStore'),
+        ]);
+        return redirect('orders')->with('success', 'Orden creada exitosamente');
     }
 }

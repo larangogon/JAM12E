@@ -7,7 +7,6 @@ use App\Entities\Color;
 use App\Entities\Imagen;
 use App\Entities\Product;
 use App\Entities\Category;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceProducts;

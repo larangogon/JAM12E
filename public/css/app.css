@@ -10975,6 +10975,26 @@ a.text-dark:focus {
   background: url(/images/d16a267848036a50c0cd2bebe2ef8ff7.jpg?e232a13741c9f1868ca81b660b48d77b);
 }
 
+.tsl {
+  background: lightgrey;
+}
+
+.ts {
+  background: #d6d6d6;
+}
+
+.tw {
+  background: lightblue;
+}
+
+.tl {
+  background: #a1cbef;
+}
+
+.tr {
+  background: mistyrose;
+}
+
 .brand-link {
   background: url(/images/2d7922f7574bd895aee3fa8ad5cb5e0e.jpg?e60bdd23e9f715edd94c65a9f4b8c2d9);
 }

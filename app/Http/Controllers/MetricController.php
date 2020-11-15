@@ -16,11 +16,9 @@ use Illuminate\View\View;
 class MetricController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
      * @return View
      */
-    public function index()
+    public function index(): View
     {
         $now = new \DateTime();
 

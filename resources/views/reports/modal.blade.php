@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-info float-right btn-sm btn-block" data-toggle="modal" data-target="#filter">
+<button type="button" class="btn btn-dark btn-sm btn-block" data-toggle="modal" data-target="#filter">
     Filtrar
 </button>
 
