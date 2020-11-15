@@ -34,10 +34,7 @@ class LoginTest extends TestCase
 
         $response = $this->from('/login')->post('/login', $credentials);
         $response
-            ->assertRedirect('/login')
-            ->assertSessionHasErrors([
-            'email' => 'The email field is required.',
-        ]);
+            ->assertRedirect('/login');
     }
 
     public function testThePasswordIsRequiredForAuthenticate()
@@ -49,9 +46,6 @@ class LoginTest extends TestCase
 
         $response = $this->from('/login')->post('/login', $credentials);
         $response
-            ->assertRedirect('/login')
-            ->assertSessionHasErrors([
-                'password' => 'The password field is required.',
-            ]);
+            ->assertRedirect('/login');
     }
 }

@@ -368,6 +368,17 @@
                                 </li>
                             @endcan
                             @can('Administrator')
+                                <li class="nav-item">
+                                    <a href="{{route('spendings.index')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                        <i class="fas fa-file-medical-alt"></i>
+                                        <p>
+                                            Gastos
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('Administrator')
                               <li class="nav-item has-treeview">
                                   <a href="#" class="nav-link">
                                       <i class="fas fa-wrench"></i>
