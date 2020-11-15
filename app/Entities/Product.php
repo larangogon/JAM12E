@@ -87,7 +87,8 @@ class Product extends Model
     public function scopeSearch($query, $search)
     {
         if ($search) {
-            return $query->where('name', 'LIKE', "%$search%");
+            return $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('barcode', 'LIKE', "%$search%");
         }
     }
 

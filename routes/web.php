@@ -48,6 +48,7 @@ Route::get('orders/{user}/orders', 'OrderController@showv')->name('orders.showv'
 Route::post('orders/resend', 'OrderController@resend')->name('orders.resend');
 Route::post('orders/complete', 'OrderController@complete')->name('orders.complete');
 Route::post('orders/reversePay', 'OrderController@reversePay')->name('orders.reversePay');
+Route::post('orders/paymentInStore', 'OrderController@paymentInStore')->name('orders.paymentInStore');
 Route::get('orders/{order}/shippingStatus')->uses('OrderController@shippingStatus')->name('orders.shippingStatus');
 
 Route::get('canceller')->uses('OrderController@canceller')->name('orders.canceller');
