@@ -12,6 +12,17 @@ use Illuminate\View\View;
 class SpendingController extends Controller
 {
     /**
+     * SpendingController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('Status');
+        $this->middleware('verified');
+        $this->middleware('role:Administrator');
+    }
+
+    /**
      * @param Request $request
      * @return View
      */
