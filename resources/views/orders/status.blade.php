@@ -1,84 +1,99 @@
 <div>
     @switch($order->status)
+        @case('Aprovado en tienda')
+            <h5>
+                <small>
+                    {{__('El estado de tu pago es Aprovado')}}
+                </small>
+            </h5>
+            <small>
+                {{__('El pago fue ejecutado en la tienda fisica')}}
+            </small>
+            <a href="{{ route('reports.show', $order->id) }}">
+                <button type="button" class="btn btn-primary btn-block btn-sm ">
+                    Factura
+                </button>
+            </a>
+        @break
         @case('pending_pay')
-                @switch($order->payment->status ?? __('no existe'))
-                    @case('PENDING')
-                        <h5>
+            @switch($order->payment->status ?? __('no existe'))
+                @case('PENDING')
+                    <h5>
+                        <small>
+                            {{__('el estado de tu pago es PENDING')}}
+                        </small>
+                    </h5>
+                    <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
+                        Verificar el esado de tu orden
+                    </a>
+                @break
+
+                @case('APPROVED_PARTIAL')
+                    <h5>
+                        <small>
+                            {{__('el estado de tu pago es PENDING')}}
+                        </small>
+                    </h5>
+                    <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
+                        Verificar el esado de tu orden
+                    </a>
+                    <form action="{{route('orders.resend')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="order" value="{{$order->id}}">
+                        <p>
                             <small>
-                                {{__('el estado de tu pago es PENDING')}}
+                                {{__('reintenta tu pago!!')}}
                             </small>
-                        </h5>
-                        <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                            Verificar el esado de tu orden
+                        </p>
+                        <button class="btn btn-block btn-sm btn-primary" type="submit" >
+                            Reintentar Pago
+                        </button>
+                    </form>
+                @break
+
+                @case('FAILED')
+                    <h5>
+                        <small>
+                            {{__('el estado de tu pago es FAILED')}}
+                        </small>
+                    </h5>
+
+                    <form action="{{route('orders.resend')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="order" value="{{$order->id}}">
+                        <p>
+                            <small>
+                                {{__('reintenta tu pago!!')}}
+                            </small>
+                        </p>
+                        <a class= "btn btn-block btn-sm btn-primary" href="{{route('orders.resend',$order->payment->process_Url) }}">
+                            Reintentar Pago
                         </a>
-                    @break
+                    </form>
+                @break
 
-                    @case('APPROVED_PARTIAL')
-                        <h5>
+                @case('REJECTED')
+                    <h5>
+                        <small>
+                            {{__('El estado de tu pago es REJECTED')}}
+                        </small>
+                    </h5>
+                    <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
+                        Verificar el esado de tu orden
+                    </a>
+                   <form action="{{route('orders.resend')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="order" value="{{$order->id}}">
+                        <p>
                             <small>
-                                {{__('el estado de tu pago es PENDING')}}
+                                {{__('reintenta tu pago!!')}}
                             </small>
-                        </h5>
-                        <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                            Verificar el esado de tu orden
-                        </a>
-                        <form action="{{route('orders.resend')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="order" value="{{$order->id}}">
-                            <p>
-                                <small>
-                                    {{__('reintenta tu pago!!')}}
-                                </small>
-                            </p>
-                            <button class="btn btn-block btn-sm btn-primary" type="submit" >
-                                Reintentar Pago
-                            </button>
-                        </form>
-                    @break
-
-                    @case('FAILED')
-                        <h5>
-                            <small>
-                                {{__('el estado de tu pago es FAILED')}}
-                            </small>
-                        </h5>
-
-                        <form action="{{route('orders.resend')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="order" value="{{$order->id}}">
-                            <p>
-                                <small>
-                                    {{__('reintenta tu pago!!')}}
-                                </small>
-                            </p>
-                            <a class= "btn btn-block btn-sm btn-primary" href="{{route('orders.resend',$order->payment->process_Url) }}">
-                                Reintentar Pago
-                            </a>
-                        </form>
-                    @break
-
-                    @case('REJECTED')
-                        <h5>
-                            <small>
-                                {{__('El estado de tu pago es REJECTED')}}
-                            </small>
-                        </h5>
-                        <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                            Verificar el esado de tu orden
-                        </a>
-                       <form action="{{route('orders.resend')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="order" value="{{$order->id}}">
-                            <p>
-                                <small>
-                                    {{__('reintenta tu pago!!')}}
-                                </small>
-                            </p>
-                            <button class="btn btn-block btn-sm btn-primary" type="submit">
-                                Reintenta el pago
-                            </button>
-                        </form>
-                    @break
+                        </p>
+                        <button class="btn btn-block btn-sm btn-primary" type="submit">
+                            Reintenta el pago
+                        </button>
+                    </form>
+                @break
             @break
 
             @case('APPROVED')
@@ -150,6 +165,11 @@
                                     <small>
                                         {{__('* Orden Enviada y completada')}}
                                     </small>
+                                    <a href="{{ route('reports.show', $order->id) }}">
+                                        <button type="button" class="btn btn-primary btn-block btn-sm ">
+                                            Factura
+                                        </button>
+                                    </a>
                                 </h5>
                             @break
                         @endswitch

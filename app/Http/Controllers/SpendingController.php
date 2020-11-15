@@ -106,6 +106,5 @@ class SpendingController extends Controller
         Spending::destroy($id);
         return redirect('spendings')
             ->with('success', 'Eliminado Satisfactoriamente');
-
     }
 }

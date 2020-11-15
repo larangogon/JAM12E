@@ -23,7 +23,9 @@ class Payment extends Model
         'name',
         'email',
         'mobile',
-        'locale'
+        'locale',
+        'base',
+        'totalStore'
         ];
 
     protected $table = 'payments';

@@ -101,6 +101,13 @@
                                     </button>
                                 </a>
                             @endif
+                            @if($order->status == 'Aprovado en tienda')
+                                <a href="{{ route('reports.show', $order->id) }}">
+                                    <button type="button" class="btn btn-primary btn-sm ">
+                                        Factura
+                                    </button>
+                                </a>
+                            @endif
                         </td>
                         <td>
                             @if($order->status == 'APPROVED')

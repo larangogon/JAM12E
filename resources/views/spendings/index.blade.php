@@ -3,6 +3,11 @@
 @section('content')
     @can('Administrator')
         <div class="container">
+            @if (session('success'))
+                <div class="alert-default-success" role="alert">
+                    <p>{{session('success')}}</p>
+                </div>
+            @endif
             <h3>
                 Gastos
                 <a href="spendings/create">

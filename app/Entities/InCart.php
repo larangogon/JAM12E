@@ -12,12 +12,30 @@ class InCart extends Pivot
 
     protected $guarded = [];
 
+    protected $fillable = [
+        'stock',
+        'color_id',
+        'size_id',
+        'category_id',
+        'id',
+        'product_id',
+        'cart_id'
+    ];
+
     /**
      * @return BelongsTo
      */
     public function color(): BelongsTo
     {
         return $this->belongsTo(Color::class, 'color_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class, 'cart_id');
     }
 
     /**

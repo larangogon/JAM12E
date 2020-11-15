@@ -9,6 +9,7 @@ use App\Entities\Detail;
 use App\Entities\Payment;
 use App\Entities\User;
 use App\Entities\Order;
+use App\Jobs\ActualStockProduct;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceOrders;
@@ -180,7 +181,6 @@ class OrderController extends Controller
     public function paymentInStore(Request $request)
     {
         $cart = Cart::find($request->get('cart_id'));
-
         $order = Order::create([
             'user_id' => $cart->user_id,
             'total'   => $cart->totalCarrito(),
@@ -213,6 +213,9 @@ class OrderController extends Controller
             'amount'     => $order->total,
             'totalStore' => $request->get('totalStore'),
         ]);
+
+        dispatch(new ActualStockProduct($order));
+
         return redirect('orders')->with('success', 'Orden creada exitosamente');
     }
 }

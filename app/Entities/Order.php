@@ -13,6 +13,10 @@ class Order extends Model
 {
     use HasRoles;
 
+    protected $guarded = [];
+
+    protected $table = 'orders';
+
     protected $fillable = [
         'user_id',
         'id',
@@ -20,16 +24,12 @@ class Order extends Model
         'total'
     ];
 
-    protected $table = 'orders';
-
-    protected $guarded = [];
-
     /**
      * @return BelongsTo
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -53,7 +53,7 @@ class Order extends Model
      */
     public function getCacheOrder()
     {
-        return Cache::remember('Orders', now()->addDay(), function () {
+        return Cache::remember('orders', now()->addDay(), function () {
             return $this->all();
         });
     }

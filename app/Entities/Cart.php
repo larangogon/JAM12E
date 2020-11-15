@@ -9,14 +9,23 @@ use Illuminate\Support\Facades\Cache;
 
 class Cart extends Model
 {
+    protected $guarded = [];
+
+    protected $table = 'carts';
+
+    protected $fillable = [
+        'user_id',
+        'id'
+    ];
+
     /**
      * @return BelongsToMany
      */
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany('App\Entities\Product', 'in_carts')
+        return $this->belongsToMany(Product::class, 'in_carts')
             ->using(InCart::class)
-            ->withPivot('stock', 'color_id', 'size_id', 'category_id', 'id', 'product_id');
+            ->withPivot('stock', 'color_id', 'size_id', 'category_id', 'id', 'product_id', 'cart_id');
     }
 
     /**
@@ -32,7 +41,7 @@ class Cart extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
