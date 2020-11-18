@@ -25,7 +25,8 @@ class Payment extends Model
         'mobile',
         'locale',
         'base',
-        'totalStore'
+        'totalStore',
+        'expiration'
         ];
 
     protected $table = 'payments';

@@ -30,7 +30,7 @@ class CreatePaymentsTable extends Migration
             $table->float('amount', 14, 2)->nullable();
             $table->float('totalStore', 14, 2)->nullable();
             $table->unsignedBigInteger('order_id');
-
+            $table->string('expiration')->nullable();
 
             $table->foreign('order_id')
                 ->references('id')

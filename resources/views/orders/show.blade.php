@@ -39,6 +39,10 @@
                             <th>Correo</th>
                             <td>{{$order->user->email}}</td>
                         </tr>
+                        <tr>
+                            <th>Documento</th>
+                            <td>{{$order->user->document}}</td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -61,6 +65,18 @@
                             <th>Estado del pago</th>
                             <td>{{$order->payment->status ?? __('no existe')}}</td>
                         </tr>
+                        @if($order->status == 'APROVADO_T')
+                            <tr>
+                                <th>Expira</th>
+                                <td>{{$order->payment->expiration ?? ('Orden sin pago')}}</td>
+                            </tr>
+                        @endif
+                        @if($order->status == 'APPROVED')
+                            <tr>
+                                <th>Expira</th>
+                                <td>{{$order->payment->expiration ?? ('Orden sin pago')}}</td>
+                            </tr>
+                        @endif
                     </table>
                 </div>
             </div>

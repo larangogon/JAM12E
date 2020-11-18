@@ -62,6 +62,10 @@
                         <th>Estado del pago</th>
                         <td>{{$factura->payment->status}}</td>
                     </tr>
+                    <tr>
+                        <th>Expira</th>
+                        <td>{{$factura->payment->expiration ?? ('Orden sin pago')}}</td>
+                    </tr>
                     @if($factura->status == 'APPROVED')
                     <tr>
                         <th>Fecha del pago</th>
