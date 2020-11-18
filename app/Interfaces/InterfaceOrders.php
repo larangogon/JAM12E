@@ -2,6 +2,7 @@
 
 namespace App\Interfaces;
 
+use App\Http\Requests\RequestOrderStore;
 use Illuminate\Http\Request;
 
 interface InterfaceOrders
@@ -36,4 +37,10 @@ interface InterfaceOrders
      * @return mixed
      */
     public function complete(Request $request);
+
+    /**
+     * @param RequestOrderStore $request
+     * @return mixed
+     */
+    public function paymentInStore(RequestOrderStore $request);
 }

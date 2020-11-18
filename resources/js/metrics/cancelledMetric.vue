@@ -43,6 +43,7 @@ export default {
             const mapper = item => Number(item);
             return this.sum([
                 this.sum(Object.values(this.cancelledData['CANCELADO'] ?? [0]).map(mapper)),
+                this.sum(Object.values(this.cancelledData['CANCELADO_T'] ?? [0]).map(mapper)),
             ]);
         }
     },
@@ -132,6 +133,14 @@ export default {
                     'borderWidth': 2,
                     'backgroundColor': 'rgba(255, 99, 132, 0.6)',
                 },
+                {
+                    'label': 'CANCELADO_T',
+                    'data': Object.values(this.cancelledData['CANCELADO_T'] ?? [0]),
+                    'hidden': stringify([0]) === stringify(Object.values(this.cancelledData['CANCELADO_T'] ?? [0])),
+                    'borderColor': 'rgba(255, 206, 86)',
+                    'borderWidth': 2,
+                    'backgroundColor': 'rgba(255, 206, 86, 0.6)'
+                },
             ]
         },
         drawCancelledPie() {
@@ -145,17 +154,20 @@ export default {
                 'datasets': [{
                     data: [
                         this.sum(Object.values(this.cancelledData['CANCELADO'] ?? [0])),
+                        this.sum(Object.values(this.cancelledData['CANCELADO_T'] ?? [0])),
                     ],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
                     ],
                     borderColor: [
                         'rgba(255,99,132)',
+                        'rgba(255, 206, 86)',
                     ],
                     borderWidth: 2,
                 }],
                 'totals': this.total,
-                'labels': ['CANCELADO']
+                'labels': ['CANCELADO', 'CANCELADO_T']
             }
         },
     },

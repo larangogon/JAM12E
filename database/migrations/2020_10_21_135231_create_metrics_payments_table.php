@@ -18,7 +18,7 @@ class CreateMetricsPaymentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('date');
             $table->unsignedBigInteger('primary_id');
-            $table->enum('status', \App\Constants\Statuses::toArray());
+            $table->string('status')->default('PENDING');
             $table->integer('total')->default(0);
             $table->timestamps();
         });

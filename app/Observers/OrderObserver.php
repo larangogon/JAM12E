@@ -14,6 +14,16 @@ class OrderObserver
     /**
      * @param Order $order
      */
+    public function created(Order $order)
+    {
+        if ($order->status == 'APROVADO_T') {
+            event(new OrderIsCreated($order));
+        }
+    }
+
+    /**
+     * @param Order $order
+     */
     public function updated(Order $order)
     {
         event(new OrderIsCreated($order));

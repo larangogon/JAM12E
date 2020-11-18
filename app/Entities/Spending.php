@@ -16,7 +16,8 @@ class Spending extends Model
         'description',
         'total',
         'created_by',
-        'updated_by'
+        'updated_by',
+        'barcode'
     ];
 
     /**
@@ -33,5 +34,25 @@ class Spending extends Model
     public function userUpdate(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'barcode');
+    }
+
+    /**
+     * @param $query
+     */
+    public function scopeSpendinTotal($query)
+    {
+        $query->with('product')
+            ->selectRaw('barcode, SUM(`total`) as total')
+            ->groupBy('barcode')
+            ->orderByDesc('total')
+            ->limit(3);
     }
 }

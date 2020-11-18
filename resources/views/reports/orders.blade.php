@@ -2,13 +2,18 @@
 <html lang="es">
 <head>
     <style>
+        html {
+            margin: 0;
+        }
+
         @page {
             margin: 0cm 0cm;
             font-family: Arial;
         }
 
         body {
-            margin: 3cm 2cm 2cm;
+            font-family: "Times New Roman", serif;
+            margin: 45mm 8mm 2mm 8mm;
         }
 
        main{
@@ -45,7 +50,7 @@
     <div class="container">
         <br>
         <br>
-        <h2>Reporte general Financiero</h2>
+        <h2>Reporte de ordenes</h2>
         <br>
         <h6><dv>{{$now->format("F j, Y, g:i a")}}</dv></h6>
 
@@ -72,7 +77,7 @@
                     <td>{{$orde->status ?? __('no existe')}}</td>
                     <td>$.{{number_format($orde->total ?? __('no existe'))}}</td>
                     <td>{{$orde->payment->status ?? __('no existe pago')}}</td>
-                    <td>{{$orde->payment->updated_at ?? __('no existe pago')}}</td>
+                    <td>{{$orde->payment->updated_at->format("F j, Y") ?? __('no existe pago')}}</td>
                 </tr>
             @endforeach
             </tbody>

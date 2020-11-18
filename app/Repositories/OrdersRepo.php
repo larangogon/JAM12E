@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\RequestOrderStore;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceOrders;
 
@@ -46,6 +47,15 @@ class OrdersRepo implements InterfaceOrders
      * @param Request $request
      */
     public function complete(Request $request)
+    {
+        //
+    }
+
+    /**
+     * @param RequestOrderStore $request
+     * @return mixed|void
+     */
+    public function paymentInStore(RequestOrderStore $request)
     {
         //
     }

@@ -7,6 +7,8 @@ use App\Entities\Cart;
 use App\Entities\Order;
 use App\Entities\Detail;
 use App\Entities\Payment;
+use App\Http\Requests\RequestOrderStore;
+use App\Jobs\ActualStockProduct;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Constants\PlaceToPay;
@@ -37,6 +39,10 @@ class DecoratorOrder implements InterfaceOrders
         $this->ordersRepo->store($request);
 
         $cart = Cart::find($request->get('cart_id'));
+
+        if ($cart->totalCarrito() === 0) {
+            return redirect('vitrina')->with('success', 'Continue con su compra :)');
+        }
 
         $order = Order::create([
             'user_id' => $cart->user_id,
@@ -297,7 +303,7 @@ class DecoratorOrder implements InterfaceOrders
         'user_id'           => $order->user->id,
         'statusTransaction' => $order->payment->status,
         'requestId'         => $order->payment->requestId,
-        'internalReference' =>  $order->payment->internalReference,
+        'internalReference' => $order->payment->internalReference,
         'processUrl'        => $order->payment->processUrl,
         'message'           => $order->payment->message,
         'document'          => $order->payment->document,
@@ -335,5 +341,46 @@ class DecoratorOrder implements InterfaceOrders
         ]);
 
         return redirect()->away($processUrl)->send();
+    }
+
+    public function paymentInStore(RequestOrderStore $request)
+    {
+        $this->ordersRepo->paymentInStore($request);
+
+        $cart = Cart::find($request->get('cart_id'));
+        $order = Order::create([
+            'user_id' => $cart->user_id,
+            'total'   => $cart->totalCarrito(),
+            'status'  => 'APROVADO_T',
+        ]);
+
+        foreach ($cart->products as $product) {
+            $detail = Detail::create([
+                'order_id'    => $order->id,
+                'product_id'  => $product->id,
+                'size_id'     => $product->pivot->size_id,
+                'category_id' => $product->pivot->category_id,
+                'color_id'    => $product->pivot->color_id,
+                'stock'       => $product->pivot->stock,
+                'total'       => $product->price * $product->pivot->stock,
+            ]);
+        }
+
+        $cart->products()->detach(null);
+
+        Payment::create([
+            'order_id'   => $order->id,
+            'status'     => 'APROVADO_T',
+            'base'       => 'tienda',
+            'message'    => 'pago generado en la tienda por el admin' . auth()->user()->id,
+            'document'   => $request->get('document'),
+            'name'       => $request->get('name'),
+            'email'      => $request->get('email'),
+            'mobile'     => $request->get('mobile'),
+            'amount'     => $order->total,
+            'totalStore' => $request->get('totalStore'),
+        ]);
+
+        dispatch(new ActualStockProduct($order));
     }
 }

@@ -6,9 +6,11 @@ use App\Constants\PlaceToPay;
 use App\Entities\Cancelled;
 use App\Entities\Cart;
 use App\Entities\Detail;
+use App\Entities\Message;
 use App\Entities\Payment;
 use App\Entities\User;
 use App\Entities\Order;
+use App\Http\Requests\RequestOrderStore;
 use App\Jobs\ActualStockProduct;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -178,44 +180,36 @@ class OrderController extends Controller
         ]);
     }
 
-    public function paymentInStore(Request $request)
+    public function paymentInStore(RequestOrderStore $request)
     {
-        $cart = Cart::find($request->get('cart_id'));
-        $order = Order::create([
-            'user_id' => $cart->user_id,
-            'total'   => $cart->totalCarrito(),
-            'status'  => 'Aprovado en tienda',
-        ]);
-
-        foreach ($cart->products as $product) {
-            $detail = Detail::create([
-                'order_id'    => $order->id,
-                'product_id'  => $product->id,
-                'size_id'     => $product->pivot->size_id,
-                'category_id' => $product->pivot->category_id,
-                'color_id'    => $product->pivot->color_id,
-                'stock'       => $product->pivot->stock,
-                'total'       => $product->price * $product->pivot->stock,
-            ]);
-        }
-
-        $cart->products()->detach(null);
-
-        Payment::create([
-            'order_id'   => $order->id,
-            'status'     => 'Aprovado en tienda',
-            'base'       => 'tienda',
-            'message'    => 'pago generado en la tienda por el admin' . auth()->user()->id,
-            'document'   => $request->get('document'),
-            'name'       => $request->get('name'),
-            'email'      => $request->get('email'),
-            'mobile'     => $request->get('mobile'),
-            'amount'     => $order->total,
-            'totalStore' => $request->get('totalStore'),
-        ]);
-
-        dispatch(new ActualStockProduct($order));
+        $this->orders->paymentInStore($request);
 
         return redirect('orders')->with('success', 'Orden creada exitosamente');
+    }
+
+    public function cancellerOrderStore(Request $request)
+    {
+        $order = Order::find($request->get('order'));
+
+        $orderCancelled = Cancelled::create([
+            'user_id'           => $order->user->id,
+            'statusTransaction' => 'APROVADO_T',
+            'message'           => $order->payment->message,
+            'document'          => $order->payment->document,
+            'name'              => $order->payment->name,
+            'email'             => $order->payment->email,
+            'mobile'            => $order->payment->mobile,
+            'amountReturn'      => $order->payment->totalStore,
+            'order_id'          => $order->id,
+            'description'       => 'garantia',
+            'cancelled_by'      => auth()->user()->id,
+            'totalOrder'        => $order->total,
+            'status'            => 'CANCELADO_T'
+        ]);
+
+        Order::destroy($request->get('order'));
+
+        return Redirect()->back()
+            ->with('success', 'Eliminado Satisfactoriamente !');
     }
 }

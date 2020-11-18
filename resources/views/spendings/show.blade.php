@@ -20,7 +20,19 @@
                                     <td>{{ $spending->description }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Precio</th>
+                                    <th>Codigo del producto</th>
+                                    <td>{{ $spending->product->barcode ?? ('No es un gasto de insumos') }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Id del producto</th>
+                                    <td>{{ $spending->product->id ?? ('No es un gasto de insumos') }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nombre del producto</th>
+                                    <td>{{ $spending->product->name ?? ('No es un gasto de insumos') }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Gasto</th>
                                     <td>$.{{ number_format($spending->total) }}</td>
                                 </tr>
                                 <tr>

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\Order;
 use App\Entities\Report;
 use App\Exports\OrdersExport;
 use App\Exports\ProductsExport;
-use App\Exports\ReportGeneralExport;
 use App\Exports\UsersExport;
 use App\Jobs\ProcessReportGeneralExcel;
-use Illuminate\Http\Request;
+use App\Jobs\ProcessReportProductExcel;
+use Illuminate\Http\RedirectResponse;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -53,7 +52,7 @@ class ExportController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function reportGeneralExport()
+    public function reportGeneralExport(): RedirectResponse
     {
         $details['email'] = 'johannitaarango2@gmail.com';
 
@@ -61,7 +60,29 @@ class ExportController extends Controller
 
         $report = Report::create([
             'created_by' => auth()->user()->id,
-            'file'       => 'Enviado_A_johannitaarango2@gmail.com',
+            'file'       => 'Enviado al email johannitaarango2@gmail.com',
+            'name'       => 'Reporte_excel',
+        ]);
+
+        return redirect()->back()
+            ->with(
+                'success',
+                '...El reporte se ha generado, verifica tu correo!'
+            );
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function reportProductExport(): RedirectResponse
+    {
+        $details['email'] = 'johannitaarango2@gmail.com';
+
+        dispatch(new ProcessReportProductExcel($details));
+
+        $report = Report::create([
+            'created_by' => auth()->user()->id,
+            'file'       => 'Enviado al email johannitaarango2@gmail.com',
             'name'       => 'Reporte_excel',
         ]);
 

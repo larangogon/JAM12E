@@ -17,12 +17,12 @@
             @endif
         </div>
         <div class="row justify-content-center">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="card border-dark">
                     <div class="card-body">
                         <h5 class="card-title">Resumen General</h5>
                         <p class="card-text">
-                            Resumen con detalle de la tienda .
+                            Resumen con detalle de la tienda
                             <br>
                             - Datos de ordenes, pagos y productos
                             <br>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="card border-dark">
                     <div class="card-body">
                         <h5 class="card-title">Reporte en excel</h5>
@@ -57,7 +57,25 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
+                <div class="card border-dark">
+                    <div class="card-body">
+                        <h5 class="card-title">Reporte en excel de productos</h5>
+                        <p class="card-text">
+
+                            - Datos productos y ventas de los mismos
+                            <br>
+                            - Reporte para analisis administrativo
+                        </p>
+                        <a href="{{ route('reportProductExport') }}">
+                            <button type="button" class="btn btn-block btn-dark btn-sm float-right">
+                                Generar <i class="far fa-file-pdf"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
                 <div class="card border-dark">
                     <div class="card-body">
                         <h5 class="card-title">Reporte financiero</h5>
@@ -66,7 +84,7 @@
                             <br>
                             - Filtro de ordenes por estado
                             <br>
-                            - Informe de todas las ordenes con valor total de consumo
+                            - Informe de todas las ordenes con valor total de consumo y detalle de la misma
                         </p>
                         @include('reports.modal')
                     </div>
@@ -94,7 +112,7 @@
                         <td>{{$report->user->id}}</td>
                         <td>{{$report->file}}</td>
                         <td>
-                            @if($report->file == 'Enviado_A_johannitaarango2@gmail.com')
+                            @if($report->file == 'Enviado al email johannitaarango2@gmail.com')
 
                             @else
                                 <form action="{{route('rute') }}" method="POST">

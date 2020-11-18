@@ -19,6 +19,12 @@ class CreateSpendingsTable extends Migration
             $table->string('description');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('barcode')->unsigned()->nullable();
+
+            $table->foreign('barcode')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade');
             $table->timestamps();
 
             $table->foreign('created_by')

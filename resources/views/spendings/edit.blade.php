@@ -36,6 +36,12 @@
                             </label>
                             <input type="text" class="form-control" name="total" value="{{ $spending->total}}">
                         </div>
+                        <div class="form-group">
+                            <label for="total">
+                                Id del producto
+                            </label>
+                            <input type="text" class="form-control" name="total" value="{{ $spending->product ?? ('no es un gasto de insumo')}}">
+                        </div>
                         <button type="submit" class="btn btn-dark">
                             Generar
                         </button>

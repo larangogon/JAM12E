@@ -10,23 +10,6 @@
                     </h2>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-7">
-                    <form>
-                        <div class="form-group">
-                            <label>
-                                Desde:
-                                <input type="date" name="fecha_inicio"/>
-                            </label>
-                            <label>
-                                Hasta:
-                                <input type="date" name="fecha_final"/>
-                            </label>
-                            <button class="btn btn-success btn-sm">Filtrar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
             <h6>
                 @if($search)
                     <div class="alert alert-primary" role="alert">
@@ -50,7 +33,7 @@
                         <td>{{$canceller->id}}</td>
                         <td>{{$canceller->status}}</td>
                         <td class="v-align-middle text-truncate">
-                            {{$canceller->processUrl}}
+                            {{$canceller->processUrl ?? ('Pago cancelado desde la tienda fisica')}}
                         </td>
                         <td>{{$canceller->created_at}}</td>
                         <td>$.-{{number_format($canceller->amountReturn)}}</td>
