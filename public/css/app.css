@@ -10955,6 +10955,14 @@ a.text-dark:focus {
   background: url(/images/d16a267848036a50c0cd2bebe2ef8ff7.jpg?e232a13741c9f1868ca81b660b48d77b);
 }
 
+.btnp2p {
+  background-image: url(/images/placetopay-logo.svg?63fa51b5be656e1a3d3581fe176307cf);
+}
+
+.border {
+  border-bottom: black;
+}
+
 .dropdown-item {
   background: black;
 }
@@ -10973,10 +10981,6 @@ a.text-dark:focus {
 
 .sidebar {
   background: url(/images/d16a267848036a50c0cd2bebe2ef8ff7.jpg?e232a13741c9f1868ca81b660b48d77b);
-}
-
-.tsl {
-  background: lightgrey;
 }
 
 .ts {

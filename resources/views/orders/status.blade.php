@@ -1,6 +1,6 @@
 <div>
     @switch($order->status)
-        @case('Aprovado en tienda')
+        @case('APROVADO_T')
             <h5>
                 <small>
                     {{__('El estado de tu pago es Aprovado')}}

@@ -9,6 +9,7 @@ use App\Entities\Rating;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Tests\Unit\RatingTest;
 
 class HomeController extends Controller
@@ -35,7 +36,6 @@ class HomeController extends Controller
 
         $sales = Product::orderBy('sales', 'desc')
             ->take(4)->get(['name', 'id', 'sales','price']);
-
 
         return view('home', [
             'rating' => $rating,

@@ -10,7 +10,7 @@ class ShippingObserver
     public function created($shipping)
     {
         logger()->channel('stack')->info(
-            'se ha registrado un nuevo recipient_shipping',
+            'se ha registrado un nuevo dato para el envio',
             [
                 'name_recipient'      => $shipping->name_recipient,
                 'city_recipient'      => $shipping->city_recipient,
@@ -27,7 +27,7 @@ class ShippingObserver
     public function updated($shipping)
     {
         logger()->channel('stack')->info(
-            'se ha editado recipient_shipping',
+            'se ha editado un nuevo dato para el envio',
             [
                 'name_recipient' => $shipping->name_recipient,
                 'city_recipient' => $shipping->city_recipient

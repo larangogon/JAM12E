@@ -45,6 +45,7 @@ export default {
                 this.sum(Object.values(this.orderData['APPROVED'] ?? [0]).map(mapper)),
                 this.sum(Object.values(this.orderData['REJECTED'] ?? [0]).map(mapper)),
                 this.sum(Object.values(this.orderData['PENDING'] ?? [0]).map(mapper)),
+                this.sum(Object.values(this.orderData['APROVADO_T'] ?? [0]).map(mapper)),
             ]);
         }
     },
@@ -150,6 +151,14 @@ export default {
                     'borderWidth': 2,
                     'backgroundColor': 'rgba(255, 206, 86, 0.6)'
                 },
+                {
+                    'label': 'APROVADO_T',
+                    'data': Object.values(this.orderData['APROVADO_T'] ?? [0]),
+                    'hidden': stringify([0]) === stringify(Object.values(this.orderData['APROVADO_T'] ?? [0])),
+                    'borderColor': 'rgba(54, 162, 23)',
+                    'borderWidth': 2,
+                    'backgroundColor': 'rgba(54, 162, 23, 0.6)'
+                },
             ]
         },
         drawOrderPie() {
@@ -165,21 +174,24 @@ export default {
                         this.sum(Object.values(this.orderData['APPROVED'] ?? [0])),
                         this.sum(Object.values(this.orderData['REJECTED'] ?? [0])),
                         this.sum(Object.values(this.orderData['PENDING'] ?? [0])),
+                        this.sum(Object.values(this.orderData['APROVADO_T'] ?? [0])),
                     ],
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.6)',
                         'rgba(255, 99, 132, 0.6)',
                         'rgba(255, 206, 86, 0.6)',
+                        'rgba(54, 162, 23, 0.6)',
                     ],
                     borderColor: [
                         'rgba(54, 162, 235)',
                         'rgba(255,99,132)',
                         'rgba(255, 206, 86)',
+                        'rgba(54, 162, 23)',
                     ],
                     borderWidth: 2,
                 }],
                 'totals': this.total,
-                'labels': ['APPROVED', 'REJECTED', 'PENDING']
+                'labels': ['APPROVED', 'REJECTED', 'PENDING', 'APROVADO_T']
             }
         },
     },

@@ -30,7 +30,7 @@ class ActualStockProduct implements ShouldQueue
 
     public function handle()
     {
-        if ($this->order->status == 'Aprovado en tienda') {
+        if ($this->order->status == 'APROVADO_T') {
             foreach ($this->order->details as $details) {
                 $detail = $details->product_id;
 

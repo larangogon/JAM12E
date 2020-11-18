@@ -81,7 +81,7 @@ class ReportController extends Controller
             ->where('status', $status)
             ->get();
 
-        if ($status = "all") {
+        if ($status === "all") {
             $ordersx = Order::whereBetween('created_at', [
                 $fechaInicio . ' 00:00:00', $fechaFinal . ' 23:59:29'])
                 ->get();

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="margin-top: 5px">
+<div class="container " style="margin-top: 5px">
     <div class="card">
         <div class="card-body">
             <div class="row justify-content-center align-items-center">
@@ -65,13 +65,11 @@
 
                     <table align="right">
                         <th>
-                            <div class="badge badge-light text-wrap" style="width: 10rem;">
+                            <div class="badge badge-light text-wrap" style="width: 12rem;">
                                 <form action="{{route('orders.store')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="cart_id" value="{{$cart->id}}">
-                                    <button type="submit" class="btn btn-dark btn-block text-left">
-                                        Generar pago p2p
-                                    </button>
+                                    <button type="submit" class="btn btn-dark btn-block border text-left"> Pagar con PlaceToPay</button>
                                 </form>
                             </div>
                         </th>
@@ -134,6 +132,17 @@
                 </form>
             </div>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 @endcan
 @endsection

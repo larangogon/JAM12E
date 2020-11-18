@@ -1955,13 +1955,13 @@ __webpack_require__.r(__webpack_exports__);
       return Object.keys((_this$cancelledData = this.cancelledData[(_Object$keys$ = Object.keys(this.cancelledData)[0]) !== null && _Object$keys$ !== void 0 ? _Object$keys$ : 0]) !== null && _this$cancelledData !== void 0 ? _this$cancelledData : []);
     },
     total: function total() {
-      var _this$cancelledData$C;
+      var _this$cancelledData$C, _this$cancelledData$C2;
 
       var mapper = function mapper(item) {
         return Number(item);
       };
 
-      return this.sum([this.sum(Object.values((_this$cancelledData$C = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C !== void 0 ? _this$cancelledData$C : [0]).map(mapper))]);
+      return this.sum([this.sum(Object.values((_this$cancelledData$C = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C !== void 0 ? _this$cancelledData$C : [0]).map(mapper)), this.sum(Object.values((_this$cancelledData$C2 = this.cancelledData['CANCELADO_T']) !== null && _this$cancelledData$C2 !== void 0 ? _this$cancelledData$C2 : [0]).map(mapper))]);
     }
   },
   created: function created() {
@@ -2035,32 +2035,39 @@ __webpack_require__.r(__webpack_exports__);
       this.cancelledLineChart = new _charts_LineChart__WEBPACK_IMPORTED_MODULE_3__["default"]().drawLineChart('cancelledLine', this.labels, this.mapCancelledBarDataset(), this.cancelledLineChart, this.labelX, this.labelY);
     },
     mapCancelledBarDataset: function mapCancelledBarDataset() {
-      var _this$cancelledData$C2, _this$cancelledData$C3;
+      var _this$cancelledData$C3, _this$cancelledData$C4, _this$cancelledData$C5, _this$cancelledData$C6;
 
       return [{
         'label': 'CANCELADO',
-        'data': Object.values((_this$cancelledData$C2 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C2 !== void 0 ? _this$cancelledData$C2 : [0]),
-        'hidden': Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])([0]) === Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])(Object.values((_this$cancelledData$C3 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C3 !== void 0 ? _this$cancelledData$C3 : [0])),
+        'data': Object.values((_this$cancelledData$C3 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C3 !== void 0 ? _this$cancelledData$C3 : [0]),
+        'hidden': Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])([0]) === Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])(Object.values((_this$cancelledData$C4 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C4 !== void 0 ? _this$cancelledData$C4 : [0])),
         'borderColor': 'rgba(255, 99, 132)',
         'borderWidth': 2,
         'backgroundColor': 'rgba(255, 99, 132, 0.6)'
+      }, {
+        'label': 'CANCELADO_T',
+        'data': Object.values((_this$cancelledData$C5 = this.cancelledData['CANCELADO_T']) !== null && _this$cancelledData$C5 !== void 0 ? _this$cancelledData$C5 : [0]),
+        'hidden': Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])([0]) === Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])(Object.values((_this$cancelledData$C6 = this.cancelledData['CANCELADO_T']) !== null && _this$cancelledData$C6 !== void 0 ? _this$cancelledData$C6 : [0])),
+        'borderColor': 'rgba(255, 206, 86)',
+        'borderWidth': 2,
+        'backgroundColor': 'rgba(255, 206, 86, 0.6)'
       }];
     },
     drawCancelledPie: function drawCancelledPie() {
       this.cancelledPieChart = new _charts_PieChart__WEBPACK_IMPORTED_MODULE_2__["default"]().drawPieChart('cancelledPie', this.mapCancelledPieDataset(), this.cancelledPieChart);
     },
     mapCancelledPieDataset: function mapCancelledPieDataset() {
-      var _this$cancelledData$C4;
+      var _this$cancelledData$C7, _this$cancelledData$C8;
 
       return {
         'datasets': [{
-          data: [this.sum(Object.values((_this$cancelledData$C4 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C4 !== void 0 ? _this$cancelledData$C4 : [0]))],
-          backgroundColor: ['rgba(255, 99, 132, 0.6)'],
-          borderColor: ['rgba(255,99,132)'],
+          data: [this.sum(Object.values((_this$cancelledData$C7 = this.cancelledData['CANCELADO']) !== null && _this$cancelledData$C7 !== void 0 ? _this$cancelledData$C7 : [0])), this.sum(Object.values((_this$cancelledData$C8 = this.cancelledData['CANCELADO_T']) !== null && _this$cancelledData$C8 !== void 0 ? _this$cancelledData$C8 : [0]))],
+          backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(255, 206, 86, 0.6)'],
+          borderColor: ['rgba(255,99,132)', 'rgba(255, 206, 86)'],
           borderWidth: 2
         }],
         'totals': this.total,
-        'labels': ['CANCELADO']
+        'labels': ['CANCELADO', 'CANCELADO_T']
       };
     }
   }
@@ -2423,13 +2430,13 @@ __webpack_require__.r(__webpack_exports__);
       return Object.keys((_this$orderData = this.orderData[(_Object$keys$ = Object.keys(this.orderData)[0]) !== null && _Object$keys$ !== void 0 ? _Object$keys$ : 0]) !== null && _this$orderData !== void 0 ? _this$orderData : []);
     },
     total: function total() {
-      var _this$orderData$APPRO, _this$orderData$REJEC, _this$orderData$PENDI;
+      var _this$orderData$APPRO, _this$orderData$REJEC, _this$orderData$PENDI, _this$orderData$APROV;
 
       var mapper = function mapper(item) {
         return Number(item);
       };
 
-      return this.sum([this.sum(Object.values((_this$orderData$APPRO = this.orderData['APPROVED']) !== null && _this$orderData$APPRO !== void 0 ? _this$orderData$APPRO : [0]).map(mapper)), this.sum(Object.values((_this$orderData$REJEC = this.orderData['REJECTED']) !== null && _this$orderData$REJEC !== void 0 ? _this$orderData$REJEC : [0]).map(mapper)), this.sum(Object.values((_this$orderData$PENDI = this.orderData['PENDING']) !== null && _this$orderData$PENDI !== void 0 ? _this$orderData$PENDI : [0]).map(mapper))]);
+      return this.sum([this.sum(Object.values((_this$orderData$APPRO = this.orderData['APPROVED']) !== null && _this$orderData$APPRO !== void 0 ? _this$orderData$APPRO : [0]).map(mapper)), this.sum(Object.values((_this$orderData$REJEC = this.orderData['REJECTED']) !== null && _this$orderData$REJEC !== void 0 ? _this$orderData$REJEC : [0]).map(mapper)), this.sum(Object.values((_this$orderData$PENDI = this.orderData['PENDING']) !== null && _this$orderData$PENDI !== void 0 ? _this$orderData$PENDI : [0]).map(mapper)), this.sum(Object.values((_this$orderData$APROV = this.orderData['APROVADO_T']) !== null && _this$orderData$APROV !== void 0 ? _this$orderData$APROV : [0]).map(mapper))]);
     }
   },
   created: function created() {
@@ -2503,7 +2510,7 @@ __webpack_require__.r(__webpack_exports__);
       this.orderLineChart = new _charts_LineChart__WEBPACK_IMPORTED_MODULE_3__["default"]().drawLineChart('orderLine', this.labels, this.mapOrderBarDataset(), this.orderLineChart, this.labelX, this.labelY);
     },
     mapOrderBarDataset: function mapOrderBarDataset() {
-      var _this$orderData$APPRO2, _this$orderData$APPRO3, _this$orderData$REJEC2, _this$orderData$REJEC3, _this$orderData$PENDI2, _this$orderData$PENDI3;
+      var _this$orderData$APPRO2, _this$orderData$APPRO3, _this$orderData$REJEC2, _this$orderData$REJEC3, _this$orderData$PENDI2, _this$orderData$PENDI3, _this$orderData$APROV2, _this$orderData$APROV3;
 
       return [{
         'label': 'APPROVED',
@@ -2526,23 +2533,30 @@ __webpack_require__.r(__webpack_exports__);
         'borderColor': 'rgba(255, 206, 86)',
         'borderWidth': 2,
         'backgroundColor': 'rgba(255, 206, 86, 0.6)'
+      }, {
+        'label': 'APROVADO_T',
+        'data': Object.values((_this$orderData$APROV2 = this.orderData['APROVADO_T']) !== null && _this$orderData$APROV2 !== void 0 ? _this$orderData$APROV2 : [0]),
+        'hidden': Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])([0]) === Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])(Object.values((_this$orderData$APROV3 = this.orderData['APROVADO_T']) !== null && _this$orderData$APROV3 !== void 0 ? _this$orderData$APROV3 : [0])),
+        'borderColor': 'rgba(54, 162, 23)',
+        'borderWidth': 2,
+        'backgroundColor': 'rgba(54, 162, 23, 0.6)'
       }];
     },
     drawOrderPie: function drawOrderPie() {
       this.orderPieChart = new _charts_PieChart__WEBPACK_IMPORTED_MODULE_2__["default"]().drawPieChart('orderPie', this.mapOrderPieDataset(), this.orderPieChart);
     },
     mapOrderPieDataset: function mapOrderPieDataset() {
-      var _this$orderData$APPRO4, _this$orderData$REJEC4, _this$orderData$PENDI4;
+      var _this$orderData$APPRO4, _this$orderData$REJEC4, _this$orderData$PENDI4, _this$orderData$APROV4;
 
       return {
         'datasets': [{
-          data: [this.sum(Object.values((_this$orderData$APPRO4 = this.orderData['APPROVED']) !== null && _this$orderData$APPRO4 !== void 0 ? _this$orderData$APPRO4 : [0])), this.sum(Object.values((_this$orderData$REJEC4 = this.orderData['REJECTED']) !== null && _this$orderData$REJEC4 !== void 0 ? _this$orderData$REJEC4 : [0])), this.sum(Object.values((_this$orderData$PENDI4 = this.orderData['PENDING']) !== null && _this$orderData$PENDI4 !== void 0 ? _this$orderData$PENDI4 : [0]))],
-          backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 206, 86, 0.6)'],
-          borderColor: ['rgba(54, 162, 235)', 'rgba(255,99,132)', 'rgba(255, 206, 86)'],
+          data: [this.sum(Object.values((_this$orderData$APPRO4 = this.orderData['APPROVED']) !== null && _this$orderData$APPRO4 !== void 0 ? _this$orderData$APPRO4 : [0])), this.sum(Object.values((_this$orderData$REJEC4 = this.orderData['REJECTED']) !== null && _this$orderData$REJEC4 !== void 0 ? _this$orderData$REJEC4 : [0])), this.sum(Object.values((_this$orderData$PENDI4 = this.orderData['PENDING']) !== null && _this$orderData$PENDI4 !== void 0 ? _this$orderData$PENDI4 : [0])), this.sum(Object.values((_this$orderData$APROV4 = this.orderData['APROVADO_T']) !== null && _this$orderData$APROV4 !== void 0 ? _this$orderData$APROV4 : [0]))],
+          backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(54, 162, 23, 0.6)'],
+          borderColor: ['rgba(54, 162, 235)', 'rgba(255,99,132)', 'rgba(255, 206, 86)', 'rgba(54, 162, 23)'],
           borderWidth: 2
         }],
         'totals': this.total,
-        'labels': ['APPROVED', 'REJECTED', 'PENDING']
+        'labels': ['APPROVED', 'REJECTED', 'PENDING', 'APROVADO_T']
       };
     }
   }
@@ -2606,13 +2620,13 @@ __webpack_require__.r(__webpack_exports__);
       return Object.keys((_this$paymentData = this.paymentData[(_Object$keys$ = Object.keys(this.paymentData)[0]) !== null && _Object$keys$ !== void 0 ? _Object$keys$ : 0]) !== null && _this$paymentData !== void 0 ? _this$paymentData : []);
     },
     total: function total() {
-      var _this$paymentData$APP, _this$paymentData$REJ, _this$paymentData$PEN;
+      var _this$paymentData$APP, _this$paymentData$REJ, _this$paymentData$PEN, _this$paymentData$APR;
 
       var mapper = function mapper(item) {
         return Number(item);
       };
 
-      return this.sum([this.sum(Object.values((_this$paymentData$APP = this.paymentData['APPROVED']) !== null && _this$paymentData$APP !== void 0 ? _this$paymentData$APP : [0]).map(mapper)), this.sum(Object.values((_this$paymentData$REJ = this.paymentData['REJECTED']) !== null && _this$paymentData$REJ !== void 0 ? _this$paymentData$REJ : [0]).map(mapper)), this.sum(Object.values((_this$paymentData$PEN = this.paymentData['PENDING']) !== null && _this$paymentData$PEN !== void 0 ? _this$paymentData$PEN : [0]).map(mapper))]);
+      return this.sum([this.sum(Object.values((_this$paymentData$APP = this.paymentData['APPROVED']) !== null && _this$paymentData$APP !== void 0 ? _this$paymentData$APP : [0]).map(mapper)), this.sum(Object.values((_this$paymentData$REJ = this.paymentData['REJECTED']) !== null && _this$paymentData$REJ !== void 0 ? _this$paymentData$REJ : [0]).map(mapper)), this.sum(Object.values((_this$paymentData$PEN = this.paymentData['PENDING']) !== null && _this$paymentData$PEN !== void 0 ? _this$paymentData$PEN : [0]).map(mapper)), this.sum(Object.values((_this$paymentData$APR = this.paymentData['APROVADO_T']) !== null && _this$paymentData$APR !== void 0 ? _this$paymentData$APR : [0]).map(mapper))]);
     }
   },
   created: function created() {
@@ -2686,7 +2700,7 @@ __webpack_require__.r(__webpack_exports__);
       this.paymentLineChart = new _charts_LineChart__WEBPACK_IMPORTED_MODULE_3__["default"]().drawLineChart('paymentLine', this.labels, this.mapPaymentBarDataset(), this.paymentLineChart, this.labelX, this.labelY);
     },
     mapPaymentBarDataset: function mapPaymentBarDataset() {
-      var _this$paymentData$APP2, _this$paymentData$APP3, _this$paymentData$REJ2, _this$paymentData$REJ3, _this$paymentData$PEN2, _this$paymentData$PEN3;
+      var _this$paymentData$APP2, _this$paymentData$APP3, _this$paymentData$REJ2, _this$paymentData$REJ3, _this$paymentData$PEN2, _this$paymentData$PEN3, _this$paymentData$APR2, _this$paymentData$APR3;
 
       return [{
         'label': 'APPROVED',
@@ -2709,23 +2723,30 @@ __webpack_require__.r(__webpack_exports__);
         'borderColor': 'rgba(255, 206, 86)',
         'borderWidth': 2,
         'backgroundColor': 'rgba(255, 206, 86, 0.6)'
+      }, {
+        'label': 'APROVADO_T',
+        'data': Object.values((_this$paymentData$APR2 = this.paymentData['APROVADO_T']) !== null && _this$paymentData$APR2 !== void 0 ? _this$paymentData$APR2 : [0]),
+        'hidden': Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])([0]) === Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])(Object.values((_this$paymentData$APR3 = this.paymentData['APROVADO_T']) !== null && _this$paymentData$APR3 !== void 0 ? _this$paymentData$APR3 : [0])),
+        'borderColor': 'rgba(1,99, 16)',
+        'borderWidth': 2,
+        'backgroundColor': 'rgba(1,99, 16, 0.6)'
       }];
     },
     drawPaymentPie: function drawPaymentPie() {
       this.paymentPieChart = new _charts_PieChart__WEBPACK_IMPORTED_MODULE_2__["default"]().drawPieChart('paymentPie', this.mapPaymentPieDataset(), this.paymentPieChart);
     },
     mapPaymentPieDataset: function mapPaymentPieDataset() {
-      var _this$paymentData$APP4, _this$paymentData$REJ4, _this$paymentData$PEN4;
+      var _this$paymentData$APP4, _this$paymentData$REJ4, _this$paymentData$PEN4, _this$paymentData$APR4;
 
       return {
         'datasets': [{
-          data: [this.sum(Object.values((_this$paymentData$APP4 = this.paymentData['APPROVED']) !== null && _this$paymentData$APP4 !== void 0 ? _this$paymentData$APP4 : [0])), this.sum(Object.values((_this$paymentData$REJ4 = this.paymentData['REJECTED']) !== null && _this$paymentData$REJ4 !== void 0 ? _this$paymentData$REJ4 : [0])), this.sum(Object.values((_this$paymentData$PEN4 = this.paymentData['PENDING']) !== null && _this$paymentData$PEN4 !== void 0 ? _this$paymentData$PEN4 : [0]))],
-          backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 206, 86, 0.6)'],
-          borderColor: ['rgba(54, 162, 235)', 'rgba(255,99,132)', 'rgba(255, 206, 86)'],
+          data: [this.sum(Object.values((_this$paymentData$APP4 = this.paymentData['APPROVED']) !== null && _this$paymentData$APP4 !== void 0 ? _this$paymentData$APP4 : [0])), this.sum(Object.values((_this$paymentData$REJ4 = this.paymentData['REJECTED']) !== null && _this$paymentData$REJ4 !== void 0 ? _this$paymentData$REJ4 : [0])), this.sum(Object.values((_this$paymentData$PEN4 = this.paymentData['PENDING']) !== null && _this$paymentData$PEN4 !== void 0 ? _this$paymentData$PEN4 : [0])), this.sum(Object.values((_this$paymentData$APR4 = this.paymentData['APROVADO_T']) !== null && _this$paymentData$APR4 !== void 0 ? _this$paymentData$APR4 : [0]))],
+          backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(1,99, 16, 0.6)'],
+          borderColor: ['rgba(54, 162, 235)', 'rgba(255,99,132)', 'rgba(255, 206, 86)', 'rgba(1,99, 16)'],
           borderWidth: 2
         }],
         'totals': this.total,
-        'labels': ['APPROVED', 'REJECTED', 'PENDING']
+        'labels': ['APPROVED', 'REJECTED', 'PENDING', 'APROVADO_T']
       };
     }
   }

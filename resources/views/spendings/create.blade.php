@@ -35,6 +35,13 @@
                                     </label>
                                     <input type="text" class="form-control" name="total" placeholder="valor del gasto">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="total">
+                                        Id del producto
+                                    </label>
+                                    <input type="text" class="form-control" name="barcode" placeholder="codigo">
+                                </div>
                                 <button type="submit" class="btn btn-dark">
                                     Generar
                                 </button>

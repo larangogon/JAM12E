@@ -44,19 +44,50 @@ class UsersCrudTest extends TestCase
             ->assertViewIs('users.index');
     }
 
+    public function testCreate()
+    {
+        $response = $this->actingAs($this->user, 'web')
+            ->get(route('users.create'));
+
+        $response
+            ->assertViewIs('users.create')
+            ->assertStatus(200);
+    }
+
+    public function testEditView()
+    {
+        $users = User::create([
+            'name'              => 'carmen',
+            'phone'             => '123445',
+            'cellphone'         => '12445',
+            'document'          => '445566',
+            'address'           => 'car33767',
+            'email'             => 'carmen@hotmail.com',
+            'active'            => 1,
+            'email_verified_at' => now(),
+            'password'          => '123456',
+        ]);
+
+        $response = $this->actingAs($this->user, 'web')
+            ->get(route('users.edit', $users->id));
+
+        $response
+            ->assertStatus(200)
+            ->assertViewIs('users.edit');
+    }
+
     public function testUpdate()
     {
         $user = User::create([
-            'name'      => 'carmen',
-            'phone'     => '123445',
-            'cellphone' => '12445',
-            'document'  => '445566',
-            'address'   => 'car33767',
-            'email'     => 'carmen@hotmail.com',
-            'active'    => 1,
+            'name'              => 'carmen',
+            'phone'             => '123445',
+            'cellphone'         => '12445',
+            'document'          => '445566',
+            'address'           => 'car33767',
+            'email'             => 'carmen@hotmail.com',
+            'active'            => 1,
             'email_verified_at' => now(),
-            'password' => '123456',
-
+            'password'          => '123456',
         ]);
 
         $response = $this->actingAs($this->user)
@@ -68,7 +99,6 @@ class UsersCrudTest extends TestCase
                 'address'   => 'car33767',
                 'email'     => 'carmen@hotmail.com',
                 'active'    => 1,
-
             ]);
 
         $response
@@ -76,8 +106,32 @@ class UsersCrudTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->assertDatabaseHas('users', [
-            'id'  => $user->id,
+            'id'   => $user->id,
             'name' => 'carmelo'
+        ]);
+    }
+
+    public function testStore(): void
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->actingAs($this->user)
+            ->post(route('users.store'), [
+                'name'      => 'new',
+                'phone'     => '123445',
+                'cellphone' => '12445',
+                'document'  => '445566',
+                'address'   => 'car33767',
+                'email'     => 'carmen@hotmail.com',
+                'active'    => 1,
+            ]);
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+        $this->assertDatabaseHas('users', [
+            'name'  => 'new'
         ]);
     }
 }

@@ -22,7 +22,9 @@ class Cancelled extends Model
         'amountReturn',
         'order_id',
         'cancelled_by',
-        'totalOrder'
+        'totalOrder',
+        'description',
+        'status'
     ];
 
     protected $table = 'cancelleds';

@@ -19,6 +19,7 @@ class CreateCancelledsTable extends Migration
             $table->string('status')->default('CANCELADO');
             $table->unsignedBigInteger('user_id');
             $table->boolean('shippingStatus')->default(false);
+            $table->string('description')->nullable();
             $table->text('statusTransaction')->nullable();
             $table->string('requestId')->nullable();
             $table->string('internalReference')->nullable();

@@ -31,7 +31,7 @@
             <div class="col-md-6">
                 <table class="table table-sm">
                     <tr>
-                        <th>Nombre</th>
+                        <th>Vendedor</th>
                         <td>{{$factura->user->name}}</td>
                     </tr>
                     <tr>
@@ -39,29 +39,46 @@
                         <td>{{$factura->user->phone}}</td>
                     </tr>
                     <tr>
-                        <th>Celular</th>
-                        <td>{{$factura->user->cellphone}}</td>
-                    </tr>
-                    <tr>
-                        <th>Correo</th>
-                        <td>{{$factura->user->email}}</td>
-                    </tr>
-                    <tr>
                         <th>Total de la orden</th>
                         <td>$.{{number_format($factura->total)}}</td>
                     </tr>
                     <tr>
-                        <th>Estatus de la orden </th>
-                        <td>{{$factura->status}}</td>
+                        <th>Pagador </th>
+                        <td>{{$factura->payment->name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Celular</th>
+                        <td>{{$factura->payment->mobile}}</td>
+                    </tr>
+                    <tr>
+                        <th>Correo</th>
+                        <td>{{$factura->payment->email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Documento </th>
+                        <td>{{$factura->payment->document}}</td>
                     </tr>
                     <tr>
                         <th>Estado del pago</th>
                         <td>{{$factura->payment->status}}</td>
                     </tr>
+                    @if($factura->status == 'APPROVED')
                     <tr>
                         <th>Fecha del pago</th>
                         <td>{{$factura->payment->updated_at}}</td>
                     </tr>
+                    @else
+                        <tr>
+                            <th>Fecha del pago</th>
+                            <td>{{$factura->payment->created_at}}</td>
+                        </tr>
+                    @endif
+                    @if($factura->status == 'Aprovado en tienda')
+                    <tr>
+                        <th>Pago total recibido</th>
+                        <td>$.{{number_format($factura->payment->totalStore)}}</td>
+                    </tr>
+                        @endif
                 </table>
             </div>
         </div>

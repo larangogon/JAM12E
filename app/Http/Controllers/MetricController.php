@@ -51,14 +51,14 @@ class MetricController extends Controller
             ->count();
 
         return view('metrics.index')->with([
-            'hoy' => $hoy,
-            'pay' => $pay,
-            'visit' => $visit,
-            'sales' => $sales,
-            'now' => $now,
-            'products' => $products,
-            'users' => $users,
-            'payments' => $payments,
+            'hoy'       => $hoy,
+            'pay'       => $pay,
+            'visit'     => $visit,
+            'sales'     => $sales,
+            'now'       => $now,
+            'products'  => $products,
+            'users'     => $users,
+            'payments'  => $payments,
             'cancelled' => $cancelled,
         ]);
     }

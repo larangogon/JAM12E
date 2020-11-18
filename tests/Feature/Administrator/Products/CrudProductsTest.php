@@ -91,7 +91,7 @@ class CrudProductsTest extends TestCase
                 'name'  => 'nameup',
                 'stock' => $product->stock,
                 'color' => [Color::all()->random()->id],
-                'size' => [Size::all()->random()->id]
+                'size'  => [Size::all()->random()->id]
             ]);
 
         $response
@@ -99,7 +99,7 @@ class CrudProductsTest extends TestCase
             ->assertRedirect(route('products.index'));
 
         $this->assertDatabaseHas('products', [
-            'id'  => $product->id,
+            'id'   => $product->id,
             'name' => 'nameup'
         ]);
     }
@@ -134,4 +134,43 @@ class CrudProductsTest extends TestCase
             'name'  => 'new'
         ]);
     }
+
+    public function testCreate()
+    {
+        $response = $this->actingAs($this->user, 'web')
+            ->get(route('products.create'));
+
+        $response
+            ->assertViewIs('products.create')
+            ->assertStatus(200);
+    }
+
+    public function testEditView()
+    {
+        $this->seed([
+            \ColorSeeder::class,
+            \SizeSeeder::class,
+            \CategorySeeder::class,
+        ]);
+
+        $products = Product::create([
+            'name'        => 'new',
+            'stock'       => 56,
+            'price'       => 23456,
+            'barcode'     => '12324345354565',
+            'description' => 'jdhfbgyebhsabfreahbfgy',
+            'color'       => [Color::all()->random()->id],
+            'size'        => [Size::all()->random()->id],
+            'category'    => [Category::all()->random()->id],
+            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
+        ]);
+
+        $response = $this->actingAs($this->user, 'web')
+            ->get(route('products.edit', $products->id));
+
+        $response
+            ->assertStatus(200)
+            ->assertViewIs('products.edit');
+    }
+
 }
