@@ -41,8 +41,8 @@ class ReportProductsExport implements FromView, ShouldAutoSize, WithEvents
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class    => function(AfterSheet $event) {
-                $cellRange = 'A1:W1'; // All headers
+            AfterSheet::class => function (AfterSheet $event) {
+                $cellRange = 'A1:W1';
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14);
             },
         ];
