@@ -11,9 +11,9 @@ class ExpirationPayObserver
      */
     public function updated(Payment $payment)
     {
-        if ($payment->status === 'APPROVED')
-
+        if ($payment->status === 'APPROVED') {
             $payment->expiration = now()->addDays(30)->toDateString();
+        }
 
         $payment->save();
     }
@@ -23,9 +23,9 @@ class ExpirationPayObserver
      */
     public function created(Payment $payment)
     {
-        if ($payment->status === 'APROVADO_T')
-
+        if ($payment->status === 'APROVADO_T') {
             $payment->expiration = now()->addDays(30)->toDateString();
+        }
 
         $payment->save();
     }

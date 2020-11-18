@@ -172,5 +172,4 @@ class CrudProductsTest extends TestCase
             ->assertStatus(200)
             ->assertViewIs('products.edit');
     }
-
 }
