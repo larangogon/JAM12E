@@ -11,64 +11,64 @@
 <h5>Consumo</h5>
 <table class="table table-sm">
     <tr>
-        <th>Pagos cancelados</th>
-        <td>{{$cancelled}}</td>
+        <th><b>Pagos cancelados</b></th>
+        <td align="right">{{$cancelled}}</td>
     </tr>
     <tr>
-        <th>Ordenes generadas hoy</th>
-        <td>{{$hoy}}</td>
+        <th><b>Ordenes generadas hoy</b></th>
+        <td align="right">{{$hoy}}</td>
     </tr>
     <tr>
-        <th>Pagos generados hoy</th>
-        <td>{{$pay ?? __('no existe')}}</td>
+        <th><b>Pagos generados hoy</b></th>
+        <td align="right">{{$pay ?? __('no existe')}}</td>
     </tr>
     <tr>
-        <th>Pagos actualizados hoy</th>
-        <td>{{$payments ?? __('no existe')}}</td>
+        <th><b>Pagos actualizados hoy</b></th>
+        <td align="right">{{$payments ?? __('no existe')}}</td>
     </tr>
     <tr>
-        <th>Valor de la factura mas alto</th>
-        <td>$.{{$price ?? __('no existe')}}</td>
+        <th><b>Valor de la factura mas alto</b></th>
+        <td align="right">$.{{$price ?? __('no existe')}}</td>
     </tr>
     <tr>
-        <th>Ordenes aprovadas</th>
-        <td>{{$approved ?? __('no existe')}}</td>
+        <th><b>Ordenes aprovadas</b></th>
+        <td align="right">{{$approved ?? __('no existe')}}</td>
     </tr>
     <tr>
-        <th>Ordenes rechazadas</th>
-        <td>{{$rejected ?? __('no existe')}}</td>
+        <th><b>Ordenes rechazadas</b></th>
+        <td align="right">{{$rejected ?? __('no existe')}}</td>
     </tr>
     <tr>
-        <th>Total de todas las ordenes</th>
-        <td>$.{{$order->sum('total') ?? __('no existe')}}</td>
+        <th><b>Total de todas las ordenes</b></th>
+        <td align="right">$.{{$order->sum('total') ?? __('no existe')}}</td>
     </tr>
     <tr>
-        <th>Total facturas aprovadas</th>
-        <td>$.{{$sum ?? __('no existe')}}</td>
+        <th><b>Total facturas aprovadas</b></th>
+        <td align="right">$.{{$sum ?? __('no existe')}}</td>
     </tr>
     <tr>
-        <th>Total facturas rechazadas</th>
-        <td>$.{{$sumRechazada ?? __('no existe')}}</td>
+        <th><b>Total facturas rechazadas</b></th>
+        <td align="right">$.{{$sumRechazada ?? __('no existe')}}</td>
     </tr>
     <tr>
-        <th>Total facturas pendientes</th>
-        <td>$.{{$sumPending ?? __('no existe')}}</td>
+        <th><b>Total facturas pendientes</b></th>
+        <td align="right">$.{{$sumPending ?? __('no existe')}}</td>
     </tr>
 </table>
 <br>
 <h5>Registros</h5>
 <table>
     <tr>
-        <th>Usuarios registrados</th>
-        <td>{{$users ?? __('no existe')}}</td>
+        <th><b>Usuarios registrados</b></th>
+        <td align="right">{{$users ?? __('no existe')}}</td>
     </tr>
     <tr>
-        <th>Total votos</th>
-        <td>{{$ratinAllProducs ?? __('no existe')}}</td>
+        <th><b>Total votos</b></th>
+        <td align="right">{{$ratinAllProducs ?? __('no existe')}}</td>
     </tr>
     <tr>
-        <th>Productos creados</th>
-        <td>{{$products ?? __('no existe')}}</td>
+        <th><b>Productos creados</b></th>
+        <td align="right">{{$products ?? __('no existe')}}</td>
     </tr>
 </table>
 <br>
@@ -76,17 +76,17 @@
 <table>
     <thead>
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Cantidad de compras</th>
+        <th align="right"><b>#</b></th>
+        <th align="right"><b>Nombre</b></th>
+        <th align="right"><b>Cantidad de compras</b></th>
     </tr>
     </thead>
     <tbody>
     @foreach($sales as $product)
         <tr class="table-primary">
-            <td>{{$product->id ?? __('no existe')}}</td>
-            <td>{{$product->name ?? __('no existe')}}</td>
-            <td>{{$product->sales ?? __('no existe')}}</td>
+            <td align="right">{{$product->id ?? __('no existe')}}</td>
+            <td align="right">{{$product->name ?? __('no existe')}}</td>
+            <td align="right">{{$product->sales ?? __('no existe')}}</td>
         </tr>
     @endforeach
     </tbody>
@@ -96,17 +96,17 @@
 <table>
     <thead>
     <tr>
-        <th>#</th>
-        <th>Nombre</th>
-        <th>Cantidad de visitas</th>
+        <th align="right"><b>#</b></th>
+        <th align="right"><b>Nombre</b></th>
+        <th align="right"><b>Cantidad de visitas</b></th>
     </tr>
     </thead>
     <tbody>
     @foreach($visit as $product)
         <tr>
-            <th>{{$product->id ?? __('no existe')}}</th>
-            <th>{{$product->name ?? __('no existe')}}</th>
-            <th>{{$product->visits ?? __('no existe')}}</th>
+            <th align="right">{{$product->id ?? __('no existe')}}</th>
+            <th align="right">{{$product->name ?? __('no existe')}}</th>
+            <th align="right">{{$product->visits ?? __('no existe')}}</th>
         </tr>
     @endforeach
     </tbody>
@@ -116,17 +116,17 @@
 <table>
     <thead>
     <tr>
-        <th>#</th>
-        <th>Nombre</th>
-        <th>Cantidad de votos</th>
+        <th align="right"><b>#</b></th>
+        <th align="right"><b>Nombre</b></th>
+        <th align="right"><b>Cantidad de votos</b></th>
     </tr>
     </thead>
     <tbody>
     @foreach($rating as $product)
         <tr>
-            <th>{{$product->rateable->id ?? __('no existe')}}</th>
-            <th>{{$product->rateable->name ?? __('no existe')}}</th>
-            <th>{{$product->score ?? __('no existe')}}</th>
+            <th align="right">{{$product->rateable->id ?? __('no existe')}}</th>
+            <th align="right">{{$product->rateable->name ?? __('no existe')}}</th>
+            <th align="right">{{$product->score ?? __('no existe')}}</th>
         </tr>
     @endforeach
     </tbody>
@@ -136,17 +136,17 @@
 <table>
     <thead>
     <tr>
-        <th>Codigo</th>
-        <th>Nombre</th>
-        <th>Total</th>
+        <th align="right"><b>Codigo</b></th>
+        <th align="right"><b>Nombre</b></th>
+        <th align="right"><b>Total</b></th>
     </tr>
     </thead>
     <tbody>
     @foreach($gastos as $gasto)
         <tr>
-            <th>{{$gasto->product->barcode ?? __('Tienda')}}</th>
-            <th>{{$gasto->product->name ?? __('Gasto de tienda')}}</th>
-            <th>${{number_format($gasto->total) ?? __('no existe')}}</th>
+            <th align="right">{{$gasto->product->barcode ?? __('Tienda')}}</th>
+            <th align="right">{{$gasto->product->name ?? __('Gasto de tienda')}}</th>
+            <th align="right">${{number_format($gasto->total) ?? __('no existe')}}</th>
         </tr>
     @endforeach
     </tbody>
@@ -154,12 +154,12 @@
 <br>
 <table>
     <tr>
-        <th>Gato con valor mas alto</th>
-        <td>$.{{$gastoMax}}</td>
+        <th><b>Gato con valor mas alto</b></th>
+        <td align="right">$.{{$gastoMax}}</td>
     </tr>
     <tr>
-        <th>Descripcion de este gasto</th>
-        <td>{{$gastoDescrip}}</td>
+        <th><b>Descripcion de este gasto</b></th>
+        <td align="right">{{$gastoDescrip}}</td>
     </tr>
 </table>
 <br>
@@ -167,17 +167,17 @@
 <table>
     <thead>
     <tr>
-        <th>#</th>
-        <th>Nombre</th>
-        <th>Total</th>
+        <th align="right"><b>#</b></th>
+        <th align="right"><b>Nombre</b></th>
+        <th align="right"><b>Total</b></th>
     </tr>
     </thead>
     <tbody>
     @foreach($r as $product)
         <tr>
-            <th>{{$product->product->id ?? __('no existe')}}</th>
-            <th>{{$product->product->name ?? __('no existe')}}</th>
-            <th>${{number_format($product->total) ?? __('no existe')}}</th>
+            <th align="right">{{$product->product->id ?? __('no existe')}}</th>
+            <th align="right">{{$product->product->name ?? __('no existe')}}</th>
+            <th align="right">${{number_format($product->total) ?? __('no existe')}}</th>
         </tr>
     @endforeach
     </tbody>
@@ -187,17 +187,17 @@
 <table>
     <thead>
     <tr>
-        <th>#</th>
-        <th>Nombre</th>
-        <th>Total</th>
+        <th align="right"><b>#</b></th>
+        <th align="right"><b>Nombre</b></th>
+        <th align="right"><b>Total</b></th>
     </tr>
     </thead>
     <tbody>
     @foreach($sizeSales as $size)
         <tr>
-            <th>{{$size->size->id ?? __('no existe')}}</th>
-            <th>{{$size->size->name ?? __('no existe')}}</th>
-            <th>${{number_format($size->total) ?? __('no existe')}}</th>
+            <th align="right">{{$size->size->id ?? __('no existe')}}</th>
+            <th align="right">{{$size->size->name ?? __('no existe')}}</th>
+            <th align="right">${{number_format($size->total) ?? __('no existe')}}</th>
         </tr>
     @endforeach
     </tbody>
@@ -207,17 +207,17 @@
 <table>
     <thead>
     <tr>
-        <th>#</th>
-        <th>Nombre</th>
-        <th>Total</th>
+        <th align="right"><b>#</b></th>
+        <th align="right"><b>Nombre</b></th>
+        <th align="right"><b>Total</b></th>
     </tr>
     </thead>
     <tbody>
     @foreach($categorySales as $category)
         <tr>
-            <th>{{$category->category->id ?? __('no existe')}}</th>
-            <th>{{$category->category->name ?? __('no existe')}}</th>
-            <th>${{number_format($category->total) ?? __('no existe')}}</th>
+            <th align="right">{{$category->category->id ?? __('no existe')}}</th>
+            <th align="right">{{$category->category->name ?? __('no existe')}}</th>
+            <th align="right">${{number_format($category->total) ?? __('no existe')}}</th>
         </tr>
     @endforeach
     </tbody>
@@ -227,19 +227,21 @@
 <table>
     <thead>
     <tr>
-        <th>#</th>
-        <th>Nombre</th>
-        <th>Total</th>
+        <th align="right"><b>#</b></th>
+        <th align="right"><b>Nombre</b></th>
+        <th align="right"><b>Total</b></th>
     </tr>
     </thead>
     <tbody>
     @foreach($colorSales as $color)
         <tr>
-            <th>{{$color->color->id ?? __('no existe')}}</th>
-            <th>{{$color->color->name ?? __('no existe')}}</th>
-            <th>${{number_format($color->total) ?? __('no existe')}}</th>
+            <th align="right">{{$color->color->id ?? __('no existe')}}</th>
+            <th align="right">{{$color->color->name ?? __('no existe')}}</th>
+            <th align="right">${{number_format($color->total) ?? __('no existe')}}</th>
         </tr>
     @endforeach
     </tbody>
 </table>
+<br>
+<br>
 <br>
