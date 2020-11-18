@@ -25,8 +25,8 @@ class RequestMessage extends FormRequest
     public function rules()
     {
         return [
-            'body'  => 'required',
-            'sender_id' => 'required',
+            'body'         => 'required|max:200',
+            'sender_id'    => 'required',
             'recipient_id' => ['required'],
         ];
     }

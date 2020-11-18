@@ -137,6 +137,9 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
         return 1000;
     }
 
+    /**
+     * @return int
+     */
     public function startRow(): int
     {
         return 2;

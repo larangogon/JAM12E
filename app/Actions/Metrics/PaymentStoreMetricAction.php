@@ -7,6 +7,9 @@ use App\Entities\Payment;
 
 class PaymentStoreMetricAction
 {
+    /**
+     * @param Payment $payment
+     */
     public static function execute(Payment $payment): void
     {
         $metric = MetricPayment::firstOrCreate([

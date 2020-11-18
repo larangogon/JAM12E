@@ -26,9 +26,11 @@ class CreatePaymentsTable extends Migration
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();
             $table->string('locale')->nullable();
+            $table->string('base')->default('p2p')->nullable();
             $table->float('amount', 14, 2)->nullable();
+            $table->float('totalStore', 14, 2)->nullable();
             $table->unsignedBigInteger('order_id');
-
+            $table->string('expiration')->nullable();
 
             $table->foreign('order_id')
                 ->references('id')

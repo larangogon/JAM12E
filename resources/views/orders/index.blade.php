@@ -101,6 +101,13 @@
                                     </button>
                                 </a>
                             @endif
+                            @if($order->status == 'APROVADO_T')
+                                <a href="{{ route('reports.show', $order->id) }}">
+                                    <button type="button" class="btn btn-primary btn-sm ">
+                                        Factura
+                                    </button>
+                                </a>
+                            @endif
                         </td>
                         <td>
                             @if($order->status == 'APPROVED')
@@ -113,6 +120,15 @@
                                         </button>
                                     </form>
                                 @endif
+                            @endif
+                            @if($order->status == 'APROVADO_T')
+                                <form action="{{route('cancellerOrderStore')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="order" value="{{$order->id}}">
+                                    <button class="btn btn-sm btn-danger" onclick="return confirmarCancelar()" type="submit" >
+                                        <i class="fas fa-minus-circle"></i>
+                                    </button>
+                                </form>
                             @endif
                         </td>
                     </tr>

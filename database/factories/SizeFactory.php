@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Size::class, function (Faker $faker) {
     return [
-        'name' => $faker->randomElement(['XS', 'S', 'M', 'L', 'XL'])
+        'name' => $faker->randomElement(['XS', 'S', 'M', 'L', 'XL', 'U'])
     ];
 });

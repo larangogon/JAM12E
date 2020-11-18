@@ -4,6 +4,9 @@ namespace App\Observers;
 
 class UserObserver
 {
+    /**
+     * @param $user
+     */
     public function created($user)
     {
         logger()->channel('stack')->info('se ha creado un usuario', [
@@ -12,6 +15,9 @@ class UserObserver
         ]);
     }
 
+    /**
+     * @param $user
+     */
     public function updated($user)
     {
         logger()->channel('stack')->info('se ha editado un usuario', [

@@ -8,6 +8,10 @@ use Illuminate\Support\Collection;
 
 class PaymentMetricBehaviour implements MetricContract
 {
+    /**
+     * @param array $filters
+     * @return Collection
+     */
     public function read(array $filters): Collection
     {
         $primary = $filters['primary'] ?? null;

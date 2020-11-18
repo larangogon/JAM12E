@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\ProcessReportGeneralExcel;
 use Illuminate\Console\Command;
 
 class ReportExcel extends Command
@@ -31,12 +32,15 @@ class ReportExcel extends Command
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return int
+     * @return void
      */
     public function handle()
     {
-        return 0;
+        logger()->channel('stack')
+            ->info('se ha enviado el reporte diario en excel');
+
+        $details['email'] = 'johannitaarango2@gmail.com';
+
+        dispatch(new ProcessReportGeneralExcel($details));
     }
 }

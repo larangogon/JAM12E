@@ -16,11 +16,9 @@ use Illuminate\View\View;
 class MetricController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
      * @return View
      */
-    public function index()
+    public function index(): View
     {
         $now = new \DateTime();
 
@@ -53,14 +51,14 @@ class MetricController extends Controller
             ->count();
 
         return view('metrics.index')->with([
-            'hoy' => $hoy,
-            'pay' => $pay,
-            'visit' => $visit,
-            'sales' => $sales,
-            'now' => $now,
-            'products' => $products,
-            'users' => $users,
-            'payments' => $payments,
+            'hoy'       => $hoy,
+            'pay'       => $pay,
+            'visit'     => $visit,
+            'sales'     => $sales,
+            'now'       => $now,
+            'products'  => $products,
+            'users'     => $users,
+            'payments'  => $payments,
             'cancelled' => $cancelled,
         ]);
     }

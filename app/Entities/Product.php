@@ -13,6 +13,8 @@ class Product extends Model
 {
     use CanBeRate;
 
+    protected $guarded = [];
+
     protected $table = 'products';
 
     protected $fillable = [
@@ -87,7 +89,8 @@ class Product extends Model
     public function scopeSearch($query, $search)
     {
         if ($search) {
-            return $query->where('name', 'LIKE', "%$search%");
+            return $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('barcode', 'LIKE', "%$search%");
         }
     }
 
@@ -219,5 +222,13 @@ class Product extends Model
     public function userUpdate(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function barcode(): HasMany
+    {
+        return $this->hasMany(Spending::class, 'barcode');
     }
 }

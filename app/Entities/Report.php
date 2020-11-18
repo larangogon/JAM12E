@@ -9,7 +9,8 @@ class Report extends Model
 {
     protected $fillable = [
         'created_by',
-        'file'
+        'file',
+        'name'
     ];
 
     protected $table = 'reports';

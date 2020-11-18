@@ -2,20 +2,25 @@
 
 namespace App\Providers;
 
+use App\Entities\Cancelled;
 use App\Entities\Message;
 use App\Entities\Order;
 use App\Entities\User;
 use App\Entities\Product;
 use App\Entities\Payment;
 use App\Entities\Shipping;
+use App\Events\CancelledIsCreated;
 use App\Events\MessageCreate;
 use App\Events\OrderIsCreated;
 use App\Events\PaymentIsCreated;
 use App\Events\ProductCreate;
 use App\Listeners\MessageStNotification;
 use App\Listeners\ProductExhaustedNotification;
+use App\Listeners\StoreCancelledInMetrics;
 use App\Listeners\StoreOrderInMetrics;
 use App\Listeners\StorePaymentInMetrics;
+use App\Observers\CancelledMetricObserver;
+use App\Observers\ExpirationPayObserver;
 use App\Observers\MessagesObserver;
 use App\Observers\OrderObserver;
 use App\Observers\PaymentMetricObserver;
@@ -51,6 +56,9 @@ class EventServiceProvider extends ServiceProvider
         PaymentIsCreated::class => [
             StorePaymentInMetrics::class,
         ],
+        CancelledIsCreated::class => [
+            StoreCancelledInMetrics::class,
+        ],
     ];
 
     /**
@@ -63,11 +71,13 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
 
         Payment::observe(PaymentMetricObserver::class);
+        Cancelled::observe(CancelledMetricObserver::class);
         Order::observe(OrderObserver::class);
         User::observe(UserObserver::class);
         Shipping::observe(ShippingObserver::class);
         Payment::observe(PaymentObserver::class);
         Product::observe(ProductsObserver::class);
         Message::observe(MessagesObserver::class);
+        Payment::observe(ExpirationPayObserver::class);
     }
 }

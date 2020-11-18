@@ -8,6 +8,7 @@ use App\Entities\Order;
 use App\Entities\Payment;
 use App\Entities\Product;
 use App\Entities\Rating;
+use App\Entities\Spending;
 use App\Entities\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,9 @@ class ReportGeneralExport implements FromView, ShouldAutoSize
 {
     use Exportable;
 
+    /**
+     * @return View
+     */
     public function view(): View
     {
         $now = new \DateTime();
@@ -93,8 +97,16 @@ class ReportGeneralExport implements FromView, ShouldAutoSize
 
         $r = Detail::productSalesTotal()->get();
 
+        $gastos = Spending::spendinTotal()->get();
+        $gastoMax = DB::table('spendings')->max('total');
+        $gastoDescrip = DB::table('spendings')->max('description');
+
+
         return view('reports.reportExcel', [
-            'colorSales'     => $colorSales,
+            'gastoDescrip'    => $gastoDescrip,
+            'gastoMax'        => $gastoMax,
+            'gastos'          => $gastos,
+            'colorSales'      => $colorSales,
             'categorySales'   => $categorySales,
             'sizeSales'       => $sizeSales,
             'r'               => $r,

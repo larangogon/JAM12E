@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(category::class, function (Faker $faker) {
     return [
-        'name' => $faker->randomElement(['Hombre', 'Mujer', 'Hogar', 'Niño', 'Accesorios'])
+        'name' => $faker->randomElement(['Hombre', 'Mujer', 'Hogar', 'Niño', 'Accesorios', 'Zapatos'])
     ];
 });

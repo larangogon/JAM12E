@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-info float-right btn-sm btn-block" data-toggle="modal" data-target="#filter">
+<button type="button" class="btn btn-dark btn-sm btn-block" data-toggle="modal" data-target="#filter">
     Filtrar
 </button>
 
@@ -43,6 +43,7 @@
                                 <option value="APPROVED">Aprovadas</option>
                                 <option value="PENDING">Pendientes</option>
                                 <option value="REJECTED">Rechazadas</option>
+                                <option value="APROVADO_T">Aprovados en tienda</option>
                                 <option value="all">Todos los estados</option>
                             </select>
                         </div>

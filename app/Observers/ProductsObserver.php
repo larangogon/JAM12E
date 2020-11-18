@@ -6,6 +6,9 @@ use App\Events\ProductCreate;
 
 class ProductsObserver
 {
+    /**
+     * @param $product
+     */
     public function created($product)
     {
         logger()->channel('stack')->info('se ha creado un producto', [
@@ -16,6 +19,9 @@ class ProductsObserver
         ]);
     }
 
+    /**
+     * @param $product
+     */
     public function updated($product)
     {
         if ($product->stock == '0') {

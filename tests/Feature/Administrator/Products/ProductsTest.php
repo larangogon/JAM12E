@@ -75,6 +75,6 @@ class ProductsTest extends TestCase
 
         $response = $this->get('/categories');
 
-        $response->assertStatus(200, $response->getStatusCode());
+        $response->assertStatus(200);
     }
 }

@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\PlaceToPay;
 use App\Entities\Cancelled;
+use App\Entities\Cart;
+use App\Entities\Detail;
+use App\Entities\Message;
+use App\Entities\Payment;
 use App\Entities\User;
 use App\Entities\Order;
+use App\Http\Requests\RequestOrderStore;
+use App\Jobs\ActualStockProduct;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Interfaces\InterfaceOrders;
@@ -43,7 +50,7 @@ class OrderController extends Controller
             'search' => $search,
             'orders' => $this->order
                 ->search($search)
-                ->paginate(5)
+                ->paginate(15)
         ]);
     }
 
@@ -171,5 +178,38 @@ class OrderController extends Controller
                 ->search($search)
                 ->paginate(5)
         ]);
+    }
+
+    public function paymentInStore(RequestOrderStore $request)
+    {
+        $this->orders->paymentInStore($request);
+
+        return redirect('orders')->with('success', 'Orden creada exitosamente');
+    }
+
+    public function cancellerOrderStore(Request $request)
+    {
+        $order = Order::find($request->get('order'));
+
+        $orderCancelled = Cancelled::create([
+            'user_id'           => $order->user->id,
+            'statusTransaction' => 'APROVADO_T',
+            'message'           => $order->payment->message,
+            'document'          => $order->payment->document,
+            'name'              => $order->payment->name,
+            'email'             => $order->payment->email,
+            'mobile'            => $order->payment->mobile,
+            'amountReturn'      => $order->payment->totalStore,
+            'order_id'          => $order->id,
+            'description'       => 'garantia',
+            'cancelled_by'      => auth()->user()->id,
+            'totalOrder'        => $order->total,
+            'status'            => 'CANCELADO_T'
+        ]);
+
+        Order::destroy($request->get('order'));
+
+        return Redirect()->back()
+            ->with('success', 'Eliminado Satisfactoriamente !');
     }
 }
