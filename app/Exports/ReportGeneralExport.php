@@ -98,7 +98,9 @@ class ReportGeneralExport implements FromView, ShouldAutoSize
         $r = Detail::productSalesTotal()->get();
 
         $gastos = Spending::spendinTotal()->get();
+
         $gastoMax = DB::table('spendings')->max('total');
+
         $gastoDescrip = DB::table('spendings')->max('description');
 
 
