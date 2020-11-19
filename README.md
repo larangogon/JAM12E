@@ -29,3 +29,8 @@
    * -php artisan serve
 - **Login.**
     -(user: admin@example.com, password: 123).
+    
+## API
+ - **Enter the browser:**
+   * -http://127.0.0.1:8000/docs/api-docs.json
+   * -or http://127.0.0.1:8000/api/documentation

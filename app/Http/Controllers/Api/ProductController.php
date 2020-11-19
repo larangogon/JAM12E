@@ -25,6 +25,41 @@ class ProductController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *      path="/api/auth/product",
+     *      operationId="index",
+     *      tags={"Products all"},
+     *      summary="Get list of products",
+     *      description="Returns list of products",
+     * security={
+     *    {"passport": {}},
+     *    },
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     * @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *  )
+     */
+    /**
      * @param Request $request
      * @return JsonResponse
      */
@@ -49,6 +84,114 @@ class ProductController extends Controller
             ], 200);
     }
 
+
+    /**
+     * @OA\Post (
+     *      path="/api/auth/product/",
+     *      operationId="store",
+     *      tags={"Product store"},
+     * security={
+     *  {"passport": {}},
+     *   },
+     *      summary="Create one product",
+     *      description="Returns product",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      ),
+     *     @OA\Parameter(
+     *       name="name",
+     *       in="query",
+     *       required=true,
+     *       @OA\Schema(
+     *           type="integer"
+     *      )
+     *    ),
+     *    @OA\Parameter(
+     *       name="description",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *    ),
+     *    @OA\Parameter(
+     *       name="stock",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *    ),
+     *    @OA\Parameter(
+     *       name="img",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *    @OA\Parameter(
+     *      name="price",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *    @OA\Parameter(
+     *      name="color",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *    @OA\Parameter(
+     *      name="category",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *    @OA\Parameter(
+     *      name="size",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *    @OA\Parameter(
+     *      name="barcode",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     * @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *  )
+     */
     /**
      * @param ApiStoreRequest $request
      * @return JsonResponse
@@ -67,6 +210,41 @@ class ProductController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/auth/product/{id}",
+     *      operationId="show",
+     *      tags={"Product show"},
+     * security={
+     *  {"passport": {}},
+     *   },
+     *      summary="Get one product",
+     *      description="Returns product",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     * @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *  )
+     */
     /**
      * @param $id
      * @return JsonResponse
@@ -94,6 +272,81 @@ class ProductController extends Controller
     }
 
     /**
+     * @OA\Put (
+     *      path="/api/auth/product/{id}",
+     *      operationId="update",
+     *      tags={"Product update"},
+     * security={
+     *  {"passport": {}},
+     *   },
+     *      summary="Update one product",
+     *      description="Returns product update",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      ),
+     *     @OA\Parameter(
+     *       name="name",
+     *       in="query",
+     *       required=true,
+     *       @OA\Schema(
+     *           type="integer"
+     *      )
+     *    ),
+     *    @OA\Parameter(
+     *       name="stock",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *    ),
+     *    @OA\Parameter(
+     *      name="color",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *    @OA\Parameter(
+     *      name="category",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *    @OA\Parameter(
+     *      name="size",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     * @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *  )
+     */
+    /**
      * @param ApiUpdateRequest $request
      * @param int $id
      * @return JsonResponse
@@ -114,6 +367,41 @@ class ProductController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Delete (
+     *      path="/api/auth/product/{id}",
+     *      operationId="destroy",
+     *      tags={"Product destroy"},
+     * security={
+     *  {"passport": {}},
+     *   },
+     *      summary="Destroy product",
+     *      description="Returns delete product",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     * @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *  )
+     */
     /**
      * @param $id
      * @return JsonResponse

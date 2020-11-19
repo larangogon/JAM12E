@@ -17,4 +17,4 @@ mix.js([
 
 mix.sass(
     'resources/sass/app.scss'
-, 'public/css');
+    , 'public/css');

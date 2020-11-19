@@ -1,6 +1,7 @@
 import orderMetric from "./metrics/orderMetric";
 import paymentMetric from "./metrics/paymentMetric";
 import cancelledMetric from "./metrics/cancelledMetric";
+import { SwaggerUIBundle, SwaggerUIStandalonePreset } from "swagger-ui-dist"
 
 require('./bootstrap');
 
@@ -15,7 +16,4 @@ const app = new Vue({
 });
 
 const compiler = require('vue-template-compiler')
-
-
-
 
