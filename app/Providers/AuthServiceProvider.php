@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\Response;
 use Laravel\Passport\Passport;
@@ -52,5 +53,8 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Passport::routes();
+        Passport::tokensExpireIn(Carbon::now()->addDays(15));
+
+        Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
     }
 }

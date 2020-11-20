@@ -7,6 +7,7 @@ use App\Http\Requests\ApiStoreRequest;
 use App\Http\Requests\ApiUpdateRequest;
 use App\Interfaces\Api\InterfaceApiProducts;
 use App\Entities\Product;
+use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -30,10 +31,10 @@ class ProductController extends Controller
      *      operationId="index",
      *      tags={"Products all"},
      *      summary="Get list of products",
+     *      security={
+     *      {"passport": {}},
+     *      },
      *      description="Returns list of products",
-     * security={
-     *    {"passport": {}},
-     *    },
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -87,54 +88,54 @@ class ProductController extends Controller
 
     /**
      * @OA\Post (
-     *      path="/api/auth/product/",
+     *      path="/api/auth/product",
      *      operationId="store",
      *      tags={"Product store"},
-     * security={
-     *  {"passport": {}},
-     *   },
+     *      security={
+     *      {"passport": {}},
+     *      },
      *      summary="Create one product",
      *      description="Returns product",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *      ),
+     *
      *     @OA\Parameter(
      *       name="name",
      *       in="query",
+     *       example="camisa",
      *       required=true,
      *       @OA\Schema(
-     *           type="integer"
+     *           type="string"
      *      )
      *    ),
      *    @OA\Parameter(
      *       name="description",
      *      in="query",
+     *     example="camisa negra",
      *      required=true,
      *      @OA\Schema(
-     *           type="integer"
+     *           type="string"
      *      )
      *    ),
      *    @OA\Parameter(
      *       name="stock",
      *      in="query",
+     *     example="65",
      *      required=true,
      *      @OA\Schema(
-     *           type="integer"
+     *           type="string"
      *      )
      *    ),
      *    @OA\Parameter(
      *       name="img",
+     *       example="25d9ff9761d6173ecc340d2f5e6d6088.jpg",
      *      in="query",
      *      required=true,
      *      @OA\Schema(
-     *           type="integer"
+     *           type="string"
      *      )
      *   ),
      *    @OA\Parameter(
      *      name="price",
+     *      example="145900",
      *      in="query",
      *      required=true,
      *      @OA\Schema(
@@ -144,6 +145,7 @@ class ProductController extends Controller
      *    @OA\Parameter(
      *      name="color",
      *      in="query",
+     *      example="1",
      *      required=true,
      *      @OA\Schema(
      *           type="integer"
@@ -152,14 +154,16 @@ class ProductController extends Controller
      *    @OA\Parameter(
      *      name="category",
      *      in="query",
+     *      example="1",
      *      required=true,
      *      @OA\Schema(
      *           type="integer"
      *      )
      *   ),
      *    @OA\Parameter(
-     *      name="size",
-     *      in="query",
+     *      name="query",
+     *      example="1",
+     *      in="path",
      *      required=true,
      *      @OA\Schema(
      *           type="integer"
@@ -168,11 +172,18 @@ class ProductController extends Controller
      *    @OA\Parameter(
      *      name="barcode",
      *      in="query",
+     *      example="1756636373495564",
      *      required=true,
      *      @OA\Schema(
-     *           type="integer"
+     *           type="string"
      *      )
      *   ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      ),
      *      ),
      *      @OA\Response(
      *          response=401,
@@ -220,6 +231,14 @@ class ProductController extends Controller
      *   },
      *      summary="Get one product",
      *      description="Returns product",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="integer"
+     *      )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -281,31 +300,37 @@ class ProductController extends Controller
      *   },
      *      summary="Update one product",
      *      description="Returns product update",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *      ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         example="1",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="integer"
+     *      )
+     *     ),
      *     @OA\Parameter(
      *       name="name",
      *       in="query",
+     *       example="camiseta",
      *       required=true,
      *       @OA\Schema(
-     *           type="integer"
+     *           type="string"
      *      )
      *    ),
      *    @OA\Parameter(
      *       name="stock",
      *      in="query",
+     *      example="54",
      *      required=true,
      *      @OA\Schema(
-     *           type="integer"
+     *           type="string"
      *      )
      *    ),
      *    @OA\Parameter(
      *      name="color",
      *      in="query",
+     *      example="1",
      *      required=true,
      *      @OA\Schema(
      *           type="integer"
@@ -314,6 +339,7 @@ class ProductController extends Controller
      *    @OA\Parameter(
      *      name="category",
      *      in="query",
+     *      example="1",
      *      required=true,
      *      @OA\Schema(
      *           type="integer"
@@ -322,12 +348,19 @@ class ProductController extends Controller
      *    @OA\Parameter(
      *      name="size",
      *      in="query",
+     *      example="1",
      *      required=true,
      *      @OA\Schema(
      *           type="integer"
      *      )
      *   ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
      *      ),
+     *     ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
@@ -377,6 +410,15 @@ class ProductController extends Controller
      *   },
      *      summary="Destroy product",
      *      description="Returns delete product",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         example="1",
+     *         @OA\Schema(
+     *           type="integer"
+     *      )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -388,10 +430,10 @@ class ProductController extends Controller
      *          response=401,
      *          description="Unauthenticated",
      *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
+     *  @OA\Response(
+     *      response=403,
+     *      description="Forbidden"
+     *    ),
      * @OA\Response(
      *      response=400,
      *      description="Bad Request"

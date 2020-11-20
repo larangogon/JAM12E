@@ -41,7 +41,7 @@ class DecoratorOrder implements InterfaceOrders
         $cart = Cart::find($request->get('cart_id'));
 
         if ($cart->totalCarrito() === 0) {
-            return redirect('vitrina')->with('success', 'Continue con su compra :)');
+            return redirect('vitrina')->with('success', 'Continue con su compra');
         }
 
         $order = Order::create([
@@ -61,10 +61,9 @@ class DecoratorOrder implements InterfaceOrders
             ]);
         }
 
-        $cart->products()->detach(null);
+        $cart->products()->detach();
 
         $response = $this->requestP2P('create', $order);
-
         $processUrl = $response->processUrl;
         $requestId  = $response->requestId;
 
@@ -74,6 +73,7 @@ class DecoratorOrder implements InterfaceOrders
             'requestId'  => $requestId,
             'status'     => PlaceToPay::PENDING,
             ]);
+
         return redirect()->away($processUrl)->send();
     }
 
@@ -203,8 +203,8 @@ class DecoratorOrder implements InterfaceOrders
                     'user'   => auth()->id(),
                     'order'  => $order->id
                 ]),
-                "ipAddress" => "127.0.0.1",
-                "userAgent" => "PlacetoPay Sandbox"
+                "ipAddress" => request()->getClientIp(),
+                "userAgent" => request()->userAgent()
             ];
 
             $res = $client->post(

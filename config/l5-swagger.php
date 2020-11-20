@@ -5,20 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                /*
-        |--------------------------------------------------------------------------
-        | Edit to set the api's title
-        |--------------------------------------------------------------------------
-        */
-                \App\Http\Middleware\EncryptCookies::class,
-                \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-                \Illuminate\Session\Middleware\StartSession::class,
-                \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-                \App\Http\Middleware\VerifyCsrfToken::class,
-                \Illuminate\Routing\Middleware\SubstituteBindings::class,
-                \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
-                'auth',
-                'title' => 'API products JAM12E',
+                'title' => 'L5 Swagger UI',
             ],
 
             'routes' => [
@@ -111,13 +98,13 @@ return [
                 /*
                  * Examples of Security schemes
                 */
+                /*
                 'api_key_security_example' => [ // Unique name of security
                     'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'A short description for security scheme',
                     'name' => 'api_key', // The name of the header or query parameter to be used.
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
-
                 'oauth2_security_example' => [ // Unique name of security
                     'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'A short description for oauth2 security scheme.',
@@ -129,9 +116,9 @@ return [
                         'write:projects' => 'modify projects in your account',
                     ]
                 ],
+                */
 
-
-                 //Open API 3.0 support
+                /* Open API 3.0 support
                 'passport' => [ // Unique name of security
                     'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Laravel passport oauth2 security.',
@@ -146,9 +133,10 @@ return [
                         ],
                     ],
                 ],
-
+                */
             ],
-            'security' => [// Open API 3.0 support
+            'security' => [
+                // Open API 3.0 support
                 'passport' => [ // Unique name of security
                     'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Laravel passport oauth2 security.',
@@ -163,14 +151,14 @@ return [
                         ],
                     ],
                 ],
-                ],
             ],
+        ],
 
         /*
          * Set this to `true` in development mode so that docs would be regenerated on each request
          * Set this to `false` to disable swagger generation on production
         */
-        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', false),
+        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', true),
 
         /*
          * Set this to `true` to generate a copy of documentation in yaml format
@@ -205,8 +193,8 @@ return [
         /*
          * Uncomment to add constants which can be used in annotations
          */
-        'constants' => [
-        'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
-         ],
+        // 'constants' => [
+        // 'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
+        // ],
     ],
 ];

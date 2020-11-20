@@ -17,6 +17,41 @@ class ColorApiController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *      path="/api/auth/color",
+     *      operationId="index",
+     *      tags={"Colors all"},
+     *      summary="Get list of colors",
+     *      security={
+     *      {"passport": {}},
+     *      },
+     *      description="Returns list of colors",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     * @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *  )
+     */
+    /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()

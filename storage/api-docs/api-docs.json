@@ -14,11 +14,81 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000",
-            "description": "Demo API Server"
+            "url": "http://127.0.0.1:8000/",
+            "description": "API APIJAM12E"
         }
     ],
     "paths": {
+        "/api/auth/category": {
+            "get": {
+                "tags": [
+                    "Category all"
+                ],
+                "summary": "Get list of categories",
+                "description": "Returns list of categories",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/color": {
+            "get": {
+                "tags": [
+                    "Colors all"
+                ],
+                "summary": "Get list of colors",
+                "description": "Returns list of colors",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
         "/api/auth/product": {
             "get": {
                 "tags": [
@@ -52,9 +122,7 @@
                         "passport": []
                     }
                 ]
-            }
-        },
-        "/api/auth/product/": {
+            },
             "post": {
                 "tags": [
                     "Product store"
@@ -62,6 +130,89 @@
                 "summary": "Create one product",
                 "description": "Returns product",
                 "operationId": "store",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "camisa"
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "camisa negra"
+                    },
+                    {
+                        "name": "stock",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "65"
+                    },
+                    {
+                        "name": "img",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "25d9ff9761d6173ecc340d2f5e6d6088.jpg"
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "145900"
+                    },
+                    {
+                        "name": "color",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "query",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "barcode",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "1756636373495564"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -97,6 +248,16 @@
                 "summary": "Get one product",
                 "description": "Returns product",
                 "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -130,6 +291,62 @@
                 "summary": "Update one product",
                 "description": "Returns product update",
                 "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "camiseta"
+                    },
+                    {
+                        "name": "stock",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "54"
+                    },
+                    {
+                        "name": "color",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -163,6 +380,52 @@
                 "summary": "Destroy product",
                 "description": "Returns delete product",
                 "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/size": {
+            "get": {
+                "tags": [
+                    "Sizes all"
+                ],
+                "summary": "Get list of sizes",
+                "description": "Returns list of sizes",
+                "operationId": "index",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -266,7 +529,7 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     },
                     {
@@ -274,7 +537,7 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     },
                     {
@@ -335,35 +598,17 @@
     },
     "components": {
         "securitySchemes": {
-            "api_key_security_example": {
-                "type": "apiKey",
-                "description": "A short description for security scheme",
-                "name": "api_key",
-                "in": "header"
-            },
-            "oauth2_security_example": {
+            "oauth2": {
                 "type": "oauth2",
-                "description": "A short description for oauth2 security scheme.",
-                "flow": "implicit",
-                "authorizationUrl": "http://example.com/auth",
-                "scopes": {
-                    "read:projects": "read your projects",
-                    "write:projects": "modify projects in your account"
-                }
-            },
-            "passport": {
-                "type": "oauth2",
-                "description": "Laravel passport oauth2 security.",
+                "name": "oauth2",
                 "in": "header",
-                "scheme": "https",
                 "flows": {
-                    "password": {
-                        "authorizationUrl": "http://localhost/oauth/authorize",
-                        "tokenUrl": "http://localhost/oauth/token",
-                        "refreshUrl": "http://localhost/token/refresh",
-                        "scopes": []
+                    "clientCredentials": {
+                        "tokenUrl": "/oauth/token",
+                        "scopes": {}
                     }
-                }
+                },
+                "scheme": "http"
             }
         }
     },

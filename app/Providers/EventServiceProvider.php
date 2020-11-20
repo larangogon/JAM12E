@@ -20,10 +20,8 @@ use App\Listeners\StoreCancelledInMetrics;
 use App\Listeners\StoreOrderInMetrics;
 use App\Listeners\StorePaymentInMetrics;
 use App\Observers\CancelledMetricObserver;
-use App\Observers\ExpirationPayObserver;
 use App\Observers\MessagesObserver;
 use App\Observers\OrderObserver;
-use App\Observers\PaymentMetricObserver;
 use App\Observers\UserObserver;
 use App\Observers\ShippingObserver;
 use App\Observers\PaymentObserver;
@@ -70,7 +68,6 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        Payment::observe(PaymentMetricObserver::class);
         Cancelled::observe(CancelledMetricObserver::class);
         Order::observe(OrderObserver::class);
         User::observe(UserObserver::class);
@@ -78,6 +75,5 @@ class EventServiceProvider extends ServiceProvider
         Payment::observe(PaymentObserver::class);
         Product::observe(ProductsObserver::class);
         Message::observe(MessagesObserver::class);
-        Payment::observe(ExpirationPayObserver::class);
     }
 }

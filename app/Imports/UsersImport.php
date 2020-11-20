@@ -69,7 +69,7 @@ class UsersImport implements WithValidation, ToModel, WithBatchInserts
             '*.6' => ['required'],
             '*.7' => 'required',
             '*.8' => 'required',
-            '*.9' => [new RoleRule],
+            '*.9' => [new RoleRule()],
         ];
     }
 

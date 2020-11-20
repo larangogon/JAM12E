@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Entities\Payment;
+use App\Events\PaymentIsCreated;
 
 class PaymentObserver
 {
@@ -19,18 +20,26 @@ class PaymentObserver
 
         $order->save();
 
+        event(new PaymentIsCreated($payment));
+
         logger()->channel('stack')->info('se ha editado un pago', [
             'status' => $payment->status, 'order' => $payment->order,
         ]);
+
+        if ($payment->status === 'APPROVED') {
+            $payment->expiration = now()->addDays(30)->toDateString();
+        }
+
+        $payment->save();
     }
 
-    /**
-     * @param $payment
-     */
-    public function created($payment)
+    public function created(Payment $payment)
     {
-        logger()->channel('stack')->info('se ha creado un pago', [
-            'status' => $payment->status, 'order' => $payment->order,
-        ]);
+        if ($payment->status == 'APROVADO_T') {
+            event(new PaymentIsCreated($payment));
+
+            $payment->expiration = now()->addDays(30)->toDateString();
+        }
+        $payment->save();
     }
 }

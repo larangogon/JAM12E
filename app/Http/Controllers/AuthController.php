@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entities\User;
 use App\Http\Requests\ApiAuthLogin;
 use App\Http\Requests\AuthApiRequest;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +65,7 @@ class AuthController extends Controller
      **/
     /**
      * @param ApiAuthLogin $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse|object
      */
     public function login(ApiAuthLogin $request)
     {
@@ -94,7 +95,7 @@ class AuthController extends Controller
                     $tokenResult->token->expires_at
                 )
                     ->toDateTimeString(),
-                ]);
+            ]);
     }
 
     /**
@@ -149,7 +150,7 @@ class AuthController extends Controller
      *      in="query",
      *      required=true,
      *      @OA\Schema(
-     *           type="integer"
+     *           type="string"
      *      )
      *   ),
      *    @OA\Parameter(
@@ -157,7 +158,7 @@ class AuthController extends Controller
      *      in="query",
      *      required=true,
      *      @OA\Schema(
-     *           type="integer"
+     *           type="string"
      *      )
      *   ),
      *    @OA\Parameter(
@@ -243,5 +244,21 @@ class AuthController extends Controller
         $success['token'] =  $user->createToken('authToken')->accessToken;
         $success['name'] =  $user->name;
         return response()->json(['success' => $success])->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    /**
+     * @param Request $request
+     * @return \string[][]
+     */
+    public function autorize(Request $request)
+    {
+        $auth = [
+            $clientId = "4",
+            $clientSecret = "GUUmCY7dz4wrHaVc7vb4AaD2Izi8tkwaXwxAS4Ka"
+        ];
+
+        return [
+            'login' => $auth,
+        ];
     }
 }
