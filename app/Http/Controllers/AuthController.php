@@ -5,33 +5,67 @@ namespace App\Http\Controllers;
 use App\Entities\User;
 use App\Http\Requests\ApiAuthLogin;
 use App\Http\Requests\AuthApiRequest;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
     /**
-     * @param AuthApiRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function signup(AuthApiRequest $request)
-    {
-        $user = new User([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-
-        $user->save();
-
-        return response()->json([
-            'message' => 'Successfully created user!'], 201);
-    }
-
+     * @OA\Post(
+     ** path="/api/auth/login",
+     *   tags={"Login"},
+     *   summary="Login",
+     *   operationId="login",
+     *
+     *   @OA\Parameter(
+     *      name="email",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *      name="password",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="string"
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     /**
      * @param ApiAuthLogin $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse|object
      */
     public function login(ApiAuthLogin $request)
     {
@@ -61,7 +95,7 @@ class AuthController extends Controller
                     $tokenResult->token->expires_at
                 )
                     ->toDateTimeString(),
-                ]);
+            ]);
     }
 
     /**
@@ -86,5 +120,145 @@ class AuthController extends Controller
     {
         return response()
             ->json($request->user());
+    }
+
+    /**
+     * @OA\Post(
+     ** path="/api/auth/signup",
+     *   tags={"Register"},
+     *   summary="Register",
+     *   operationId="register",
+     *
+     *  @OA\Parameter(
+     *      name="name",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="email",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *       name="address",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *    @OA\Parameter(
+     *       name="cellphone",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *    @OA\Parameter(
+     *       name="document",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *     @OA\Parameter(
+     *       name="phone",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *      name="password",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *      @OA\Parameter(
+     *      name="password_confirmation",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
+    /**
+     * @param AuthApiRequest $request
+     * @return \Illuminate\Http\JsonResponse|object
+     */
+    public function signup(AuthApiRequest $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'      => 'required',
+            'email'     => 'required|email|unique:users',
+            'address'   => 'required',
+            'document'  => 'required',
+            'cellphone' => 'required',
+            'phone'     => 'required',
+            'password'  => 'required|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+        $user = User::create($input);
+        $success['token'] =  $user->createToken('authToken')->accessToken;
+        $success['name'] =  $user->name;
+        return response()->json(['success' => $success])->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    /**
+     * @param Request $request
+     * @return \string[][]
+     */
+    public function autorize(Request $request)
+    {
+        $auth = [
+            $clientId = "4",
+            $clientSecret = "GUUmCY7dz4wrHaVc7vb4AaD2Izi8tkwaXwxAS4Ka"
+        ];
+
+        return [
+            'login' => $auth,
+        ];
     }
 }

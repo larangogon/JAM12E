@@ -33,7 +33,7 @@ class ImportController extends Controller
     {
         $file = $request->file('file')->store('import');
 
-        $import = new UsersImport;
+        $import = new UsersImport();
 
         $import->import($file);
 
@@ -61,7 +61,7 @@ class ImportController extends Controller
     {
         $file = $request->file('file')->store('import');
 
-        $import = new ProductsImport;
+        $import = new ProductsImport();
 
         $import->import($file);
 

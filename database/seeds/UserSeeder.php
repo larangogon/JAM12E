@@ -29,11 +29,6 @@ class UserSeeder extends Seeder
         $user = User::find(1);
         $user->assignRole('Administrator');
 
-        $this->cart =  new Cart();
-
-        $this->cart->user_id = $user->id;
-        $this->cart->save();
-
         factory(User::class, 10)->create();
     }
 }

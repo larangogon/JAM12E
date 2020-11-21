@@ -69,7 +69,7 @@
                                 <form action="{{route('orders.store')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="cart_id" value="{{$cart->id}}">
-                                    <button type="submit" class="btn btn-dark btn-block border text-left"> Pagar con PlaceToPay</button>
+                                    <button type="submit" class="btn btn-dark btn-block text-left"> Pagar con PlaceToPay</button>
                                 </form>
                             </div>
                         </th>

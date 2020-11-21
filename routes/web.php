@@ -84,3 +84,16 @@ Route::post('/mark-as-read', 'NotificationController@markNotification')->name('m
 Route::resource('messages', 'MessagesController')->only('index', 'store', 'destroy', 'show');
 
 Route::resource('spendings', 'SpendingController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+

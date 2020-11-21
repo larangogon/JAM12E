@@ -2,6 +2,8 @@
 
 namespace App\Observers;
 
+use App\Entities\Cart;
+
 class UserObserver
 {
     /**
@@ -9,18 +11,12 @@ class UserObserver
      */
     public function created($user)
     {
-        logger()->channel('stack')->info('se ha creado un usuario', [
-            'id'   => $user->id,
-            'name' => $user->name,
-        ]);
-    }
+        $this->cart = new Cart();
 
-    /**
-     * @param $user
-     */
-    public function updated($user)
-    {
-        logger()->channel('stack')->info('se ha editado un usuario', [
+        $this->cart->user_id = $user->id;
+        $this->cart->save();
+
+        logger()->channel('stack')->info('se ha creado un usuario', [
             'id'   => $user->id,
             'name' => $user->name,
         ]);

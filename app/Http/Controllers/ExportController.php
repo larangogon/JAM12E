@@ -30,7 +30,7 @@ class ExportController extends Controller
      */
     public function exportUsers(): BinaryFileResponse
     {
-        return Excel::download(new UsersExport, 'users.xlsx');
+        return Excel::download(new UsersExport(), 'users.xlsx');
     }
 
     /**
@@ -38,7 +38,7 @@ class ExportController extends Controller
      */
     public function exportProducts(): BinaryFileResponse
     {
-        return Excel::download(new ProductsExport, 'products.xlsx');
+        return Excel::download(new ProductsExport(), 'products.xlsx');
     }
 
     /**
@@ -46,7 +46,7 @@ class ExportController extends Controller
      */
     public function exportOrders(): BinaryFileResponse
     {
-        return Excel::download(new OrdersExport, 'orders.xlsx');
+        return Excel::download(new OrdersExport(), 'orders.xlsx');
     }
 
     /**
