@@ -39,7 +39,7 @@ class ProductsController extends Controller
     {
         $this->middleware('role:Guest');
 
-        $query    = trim($request->get('search'));
+        $query = trim($request->get('search'));
 
         $products = Product::where('name', 'LIKE', '%' . $query . '%')
             ->orwhere('stock', 'LIKE', '%' . $query . '%')

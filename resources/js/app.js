@@ -15,7 +15,3 @@ const app = new Vue({
 });
 
 const compiler = require('vue-template-compiler')
-
-
-
-

@@ -31,8 +31,8 @@ class RoleController extends Controller
      */
     public function index(): View
     {
-        $roles = Role::all();
-        $permissions = Permission::all();
+        $roles = Role::all(['id','name']);
+        $permissions = Permission::all(['id','name']);
 
         return view('roles.index', [
             'roles'       => $roles,
