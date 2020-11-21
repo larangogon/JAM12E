@@ -68,13 +68,13 @@
                         @if($order->status == 'APROVADO_T')
                             <tr>
                                 <th>Expira</th>
-                                <td>{{$order->payment->expiration ?? ('Orden sin pago')}}</td>
+                                <td>{{$order->payment->expiration ?? ('Procesando informacion...')}}</td>
                             </tr>
                         @endif
                         @if($order->status == 'APPROVED')
                             <tr>
                                 <th>Expira</th>
-                                <td>{{$order->payment->expiration ?? ('Orden sin pago')}}</td>
+                                <td>{{$order->payment->expiration ?? ('Procesando informacion...')}}</td>
                             </tr>
                         @endif
                     </table>

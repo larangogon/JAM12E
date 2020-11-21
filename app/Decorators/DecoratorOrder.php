@@ -189,7 +189,7 @@ class DecoratorOrder implements InterfaceOrders
                 'auth' => $this->authP2P(),
                 'payment' => [
                     "reference"   => $order->id,
-                    "description" => "pruebas p2p",
+                    "description" => "Pago realizado con numero de orden_" . $order->id,
                     "amount"      => [
                         "currency" => "COP",
                         "total"    => $order->total,
@@ -294,13 +294,14 @@ class DecoratorOrder implements InterfaceOrders
         $order->update([
             'processUrl' => $processUrl,
             'requestId'  => $requestId,
-            'status'     => $status,
+            'status'     => 'Cancelado',
             "message"    => $message,
             "amount"     => $amount,
         ]);
 
         $orderCancelled = Cancelled::create([
         'user_id'           => $order->user->id,
+        'status'            => 'CACELADO',
         'statusTransaction' => $order->payment->status,
         'requestId'         => $order->payment->requestId,
         'internalReference' => $order->payment->internalReference,
