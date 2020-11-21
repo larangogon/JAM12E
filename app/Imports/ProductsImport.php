@@ -122,9 +122,9 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
             '*.4'  => ['required', 'numeric'],
             '*.5'  => ['required', 'numeric'],
             '*.6'  => ['required'],
-            '*.7'  => ['required', new RuleColor],
-            '*.8'  => ['required', new SizeRule],
-            '*.9'  => ['required', new CategoryRule],
+            '*.7'  => ['required', new RuleColor()],
+            '*.8'  => ['required', new SizeRule()],
+            '*.9'  => ['required', new CategoryRule()],
             '*.10' => ['required'],
         ];
     }

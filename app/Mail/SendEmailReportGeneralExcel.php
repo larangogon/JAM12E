@@ -22,7 +22,7 @@ class SendEmailReportGeneralExcel extends Mailable
         return $this->from('johannitaarango2@gmail.com')
             ->view('emails.report')
             ->attach(
-                Excel::download(new ReportGeneralExport, 'reporte.xlsx')
+                Excel::download(new ReportGeneralExport(), 'reporte.xlsx')
                     ->getFile(),
                 ['as' => 'report.xlsx']
             );

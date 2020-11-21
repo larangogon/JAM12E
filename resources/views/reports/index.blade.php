@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Resumen General</h5>
                         <p class="card-text">
-                            Resumen con detalle de la tienda
+                            Resumen con detalle
                             <br>
                             - Datos de ordenes, pagos y productos
                             <br>
