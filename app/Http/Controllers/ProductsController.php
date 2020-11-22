@@ -123,7 +123,7 @@ class ProductsController extends Controller
         $this->products->update($request, $product);
 
         return redirect('/products')
-            ->with('success', 'producto Editado Satisfactoriamente');
+            ->with('success', 'Producto Editado Satisfactoriamente');
     }
 
     /**

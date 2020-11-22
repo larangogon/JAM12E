@@ -12,8 +12,7 @@ class LoginTest extends TestCase
     public function testItVisitPageOfLogin()
     {
         $this->get('/login')
-            ->assertStatus(200)
-            ->assertSee('Login');
+            ->assertStatus(200);
     }
     public function testNotAuthenticateToAUserWithCredentialsInvalid()
     {

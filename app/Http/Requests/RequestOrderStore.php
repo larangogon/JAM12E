@@ -25,11 +25,11 @@ class RequestOrderStore extends FormRequest
     public function rules()
     {
         return [
-            'document'   => 'required',
+            'document'   => 'required|numeric',
             'name'       => 'required',
-            'email'      => 'required',
+            'email'      => 'required|email',
             'mobile'     => 'required',
-            'totalStore' => 'required',
+            'totalStore' => 'required|numeric',
         ];
     }
 }

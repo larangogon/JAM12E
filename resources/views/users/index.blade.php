@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <h2>
-                        Usuarios Registrados
+                        {!! trans('messages.Registered Users') !!}
                     </h2>
                 </div>
                 <div class="col-md-4">
@@ -16,28 +16,28 @@
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <button class="btn btn-outline-secondary btn-sm btn-block">
-                                        Opciones Avanzadas
+                                        {!! trans('messages.Advanced Options') !!}
                                     </button>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="{{ route('exportUsers') }}">
                                             <button type="button" class="btn btn-primary btn-sm btn-block float-right">
-                                                Exportar Usuarios
+                                                {!! trans('messages.Export Users') !!}
                                             </button>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ route('imports.index') }}">
                                             <button type="button" class="btn btn-dark btn-block btn-sm float-right">
-                                                Importar Usuarios
+                                                {!! trans('messages.Import Users') !!}
                                             </button>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="users/create">
                                             <button type="button" class="btn btn-success btn-sm btn-block float-right">
-                                                Agregar Usuario
+                                                {!! trans('messages.Add User') !!}
                                             </button>
                                         </a>
                                     </li>
@@ -58,11 +58,11 @@
                 <thead>
                 <tr class="table-primary">
                     <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">document</th>
+                    <th scope="col">{!! trans('messages.Name') !!} </th>
+                    <th scope="col">{!! trans('messages.Document') !!}</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Rol</th>
-                    <th scope="col">Opciones</th>
+                    <th scope="col">{!! trans('messages.Role') !!}</th>
+                    <th scope="col">{!! trans('messages.Options') !!}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -77,12 +77,12 @@
                             <form action= "{{ route('users.active',  $user->id)}}" method = "POST">
                                 <a href="{{route('users.show', $user->id) }}">
                                     <button type="button" class="btn btn-dark btn-sm">
-                                        Ver
+                                        {!! trans('messages.Show') !!}
                                     </button>
                                 </a>
                                 <a href="{{ route('users.edit', $user->id) }}">
                                     <button type="button" class="btn btn-primary btn-sm">
-                                        Editar
+                                        {!! trans('messages.Edit') !!}
                                     </button>
                                 </a>
                                 @csrf

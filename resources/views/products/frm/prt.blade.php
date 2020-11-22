@@ -1,7 +1,7 @@
 @if ( !empty ( $products->id) )
     <div class="card">
         <div class="card-header">
-            Editar Producto {{ $products->name }}
+            {!! trans('messages.Edit product') !!} {{ $products->name }}
         </div>
         <div class="container">
             <input type="hidden" value="{{auth()->user()->id}}" name="updated_by">
@@ -9,7 +9,7 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="name" class="negrita">
-                            Nombre:
+                            {!! trans('messages.Name') !!}
                         </label>
                         <div>
                             <input class="form-control" placeholder="products" required="required"
@@ -19,7 +19,7 @@
 
                     <div class="form-group">
                         <label for="description" class="negrita">
-                            Descripción:
+                            {!! trans('messages.Description') !!}
                         </label>
                         <div>
                             <textarea class="form-control" placeholder="description"
@@ -31,7 +31,7 @@
 
                     <div class="form-group">
                         <label for="price" class="negrita">
-                            Precio:
+                            {!! trans('messages.Price') !!}
                         </label>
                         <div>
                             <input class="form-control" placeholder="4.500" required="required"
@@ -43,11 +43,11 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="stock" class="negrita">
-                            Selecciona una categoria
+                            {!! trans('messages.Select a category') !!}
                         </label>
                         <select name="category" class="form-control">
                             <option selected disabled>
-                                elige una categoria para este producto
+                                {!! trans('messages.Select a category') !!}
                             </option>
                             @foreach ($categories as $category )
                                 @if($products->tieneCategory()->contains($category->name))
@@ -64,7 +64,7 @@
 
                     <div class="form-group">
                         <label for="stock" class="negrita">
-                            Selecciona un color
+                            {!! trans('messages.Select a color') !!}
                         </label>
                         <div class="list-group-scr">
                             @foreach  ($colors as $key => $color)
@@ -96,7 +96,7 @@
 
                     <div class="form-group">
                         <label for="stock" class="negrita">
-                            Selecciona una talla:
+                            {!! trans('messages.Select a size') !!}
                         </label>
                         <div>
                         @foreach  ($sizes as $key => $size)
@@ -114,18 +114,18 @@
 
                     <div class="form-group">
                         <label for="img" class="negrita">
-                            Selecciona una imagen:
+                            {!! trans('messages.Select a image') !!}
                         </label>
                         <div>
                             <input name="img[]" type="file" id="img" multiple="multiple">
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">
-                        Guardar
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        {!! trans('messages.Save') !!}
                     </button>
-                    <a href="{{ route('products.index') }}" class="btn btn-secondary">
-                        Cancelar
+                    <a href="{{ route('products.index') }}" class="btn btn-sm btn-dark">
+                        {!! trans('messages.Cancel') !!}
                     </a>
                 </div>
             </div>
@@ -134,9 +134,9 @@
 @else
     <div class="card">
         <div class="card-header">
-            Crear Producto
+            {!! trans('messages.Create product') !!}
             <a href="{{ route('products.index') }}" class="btn btn-success btn-sm float-right">
-                Cancelar
+                {!! trans('messages.Cancel') !!}
             </a>
         </div>
         <div class="container">
@@ -145,7 +145,7 @@
                 <div class="col-sm-3">
                     <div class="form-group">
                         <label for="name" class="negrita">
-                            Nombre:
+                            {!! trans('messages.Name') !!}:
                         </label>
                         <div>
                             <input class="form-control" placeholder="producto" required="required"
@@ -154,7 +154,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description" class="negrita">
-                            Descripción:
+                            {!! trans('messages.Description') !!}
                         </label>
                         <div>
                             <textarea name="description" placeholder="description"  class="form-control"
@@ -164,7 +164,7 @@
                     </div>
                     <div class="form-group">
                         <label for="price" class="negrita">
-                            Precio:
+                            {!! trans('messages.Price') !!}
                         </label>
                         <div>
                             <input class="form-control" placeholder="price" required="required"
@@ -211,11 +211,11 @@
                 @enderror
                     <div class="form-group">
                         <label for="stock" class="negrita">
-                            Selecciona una categoria:
+                            {!! trans('messages.Select a category') !!}:
                         </label>
                         <select name="category[]" class="form-control">
                             <option selected disabled>
-                                elige una categoria para este producto
+                                {!! trans('messages.Select a category') !!}
                             </option>
                             @foreach ($categories as $category )
                                 <option value="{{ $category->id}}">
@@ -230,7 +230,7 @@
 
                     <div class="form-group">
                         <label for="carcode" class="negrita">
-                            Codigo de barras:
+                            {!! trans('messages.Code') !!}
                         </label>
                         <div>
                             <input class="form-control" placeholder="barcode" required="required"
@@ -240,7 +240,7 @@
 
                     <div class="form-group">
                         <label for="img" class="negrita">
-                            Selecciona una imagen:
+                            {!! trans('messages.Select a image') !!}
                         </label>
                         <div>
                             <input name="img[]" type="file" id="img" multiple="multiple">
@@ -254,7 +254,7 @@
 
             </div>
             <button type="submit" class="btn btn-block btn-primary btn-sm">
-                Guardar
+                {!! trans('messages.Save') !!}
             </button>
 
         </div>

@@ -27,7 +27,7 @@ class UserEditFormRequest extends FormRequest
             'name'      => 'required|min:2|max:30',
             'phone'     => 'required',
             'cellphone' => 'required',
-            'document'  => 'required',
+            'document'  => 'required|numeric',
             'address'   => 'required'
         ];
     }

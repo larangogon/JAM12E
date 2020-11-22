@@ -3,15 +3,15 @@
         @case('APROVADO_T')
             <h5>
                 <small>
-                    {{__('El estado de tu pago es Aprovado')}}
+                    {!! trans('messages.The status of your payment is Approved') !!}
                 </small>
             </h5>
             <small>
-                {{__('El pago fue ejecutado en la tienda fisica')}}
+                {!! trans('messages.The payment was executed in the physical store') !!}
             </small>
             <a href="{{ route('reports.show', $order->id) }}">
                 <button type="button" class="btn btn-primary btn-block btn-sm ">
-                    Factura
+                    {!! trans('messages.Invoice') !!}
                 </button>
             </a>
         @break
@@ -20,35 +20,36 @@
                 @case('PENDING')
                     <h5>
                         <small>
-                            {{__('el estado de tu pago es PENDING')}}
+                            {!! trans('messages.The status of your payment is Pending') !!}
                         </small>
                     </h5>
                     <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                        Verificar el esado de tu orden
+                        {!! trans('messages.Check the status of your order') !!}
                     </a>
                 @break
 
                 @case('APPROVED_PARTIAL')
                     <h5>
                         <small>
-                            {{__('el estado de tu pago es PENDING')}}
+                            {!! trans('messages.Check the status of your order') !!}
                         </small>
                     </h5>
                     <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                        Verificar el esado de tu orden
+                        {!! trans('messages.Check the status of your order') !!}
                     </a>
                     <form action="{{route('orders.resend')}}" method="post">
                         @csrf
                         <input type="hidden" name="order" value="{{$order->id}}">
                         <p>
                             <small>
-                                {{__('reintenta tu pago!!')}}
+                                {!! trans('messages.Retry Payment') !!}
                             </small>
                         </p>
                         <button class="btn btn-block btn-sm btn-primary" type="submit" >
-                            Reintentar Pago
+                            {!! trans('messages.Retry Payment') !!}
                         </button>
                     </form>
+
                 @break
 
                 @case('FAILED')
@@ -63,11 +64,11 @@
                         <input type="hidden" name="order" value="{{$order->id}}">
                         <p>
                             <small>
-                                {{__('reintenta tu pago!!')}}
+                                {!! trans('messages.Retry Payment') !!}
                             </small>
                         </p>
                         <a class= "btn btn-block btn-sm btn-primary" href="{{route('orders.resend',$order->payment->process_Url) }}">
-                            Reintentar Pago
+                            {!! trans('messages.Retry Payment') !!}
                         </a>
                     </form>
                 @break
@@ -75,22 +76,22 @@
                 @case('REJECTED')
                     <h5>
                         <small>
-                            {{__('El estado de tu pago es REJECTED')}}
+                            {!! trans('messages.The status of your payment is Rejected') !!}
                         </small>
                     </h5>
                     <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                        Verificar el esado de tu orden
+                        {!! trans('messages.Check the status of your order') !!}
                     </a>
                    <form action="{{route('orders.resend')}}" method="post">
                         @csrf
                         <input type="hidden" name="order" value="{{$order->id}}">
                         <p>
                             <small>
-                                {{__('reintenta tu pago!!')}}
+                                {!! trans('messages.Retry Payment') !!}
                             </small>
                         </p>
                         <button class="btn btn-block btn-sm btn-primary" type="submit">
-                            Reintenta el pago
+                            {!! trans('messages.Retry Payment') !!}
                         </button>
                     </form>
                 @break
@@ -99,23 +100,23 @@
             @case('APPROVED')
                 <h5>
                     <small>
-                        {{__('el estado de tu pago es APROVADO!!')}}
+                        {!! trans('messages.The status of your payment is Approved') !!}
                     </small>
                 </h5>
                 <a class="btn btn-block btn-sm btn-dark"
                     href="{{route('orders.show', $order->id) }}">
-                    Verificar el esado de tu orden
+                    {!! trans('messages.Check the status of your order') !!}
                 </a>
                         @switch($order->shippingStatus)
                             @case('0')
                                 <p><small>
-                                        {{__('Orden en proceso de envio!!')}}
+                                        {!! trans('messages.Order in shipping process') !!}
                                     </small>
                                 </p>
                                 <div>
                                     <h5>
                                         <small>
-                                            {{__('*Completa los datos de envio!!')}}
+                                            {!! trans('messages.Complete the shipping information') !!}
                                         </small>
                                     </h5>
                                 </div>
@@ -123,7 +124,7 @@
                             @case('1')
                                 <p>
                                     <small>
-                                        {{__('Orden completada-enviada')}}
+                                        {!! trans('messages.Order submitted and completed') !!}
                                     </small>
                                 </p>
                             @break
@@ -140,12 +141,12 @@
                             @case('0')
                             <h5>
                                 <small>
-                                    {{__('El estado de tu pago es Aprovado!!')}}
+                                    {!! trans('messages.The status of your payment is Approved') !!}
                                 </small>
                             </h5>
                                 <p>
                                     <small>
-                                        {{__('Orden en proceso de envio!!')}}
+                                        {!! trans('messages.Order in shipping process ') !!}
                                     </small>
                                 </p>
                                 @include('orders.modal')
@@ -153,21 +154,21 @@
                             @case('1')
                                 <h5>
                                     <small>
-                                        {{__('El estado de tu orden es:')}}
+                                        {!! trans('messages.The status of your order is') !!}
                                     </small>
                                 </h5>
                                 <h5>
                                     <small>
-                                        {{__('* Orden Aprovada')}}
+                                        {!! trans('messages.Order Approved') !!}
                                     </small>
                                 </h5>
                                 <h5>
                                     <small>
-                                        {{__('* Orden Enviada y completada')}}
+                                        {!! trans('messages.Order submitted and completed') !!}
                                     </small>
                                     <a href="{{ route('reports.show', $order->id) }}">
                                         <button type="button" class="btn btn-primary btn-block btn-sm ">
-                                            Factura
+                                            {!! trans('messages.Invoice') !!}
                                         </button>
                                     </a>
                                 </h5>
@@ -183,22 +184,22 @@
                     @case('REJECTED')
                         <h5>
                             <small>
-                                {{__('El estado de tu pago esta rechazado')}}
+                                {!! trans('messages.The status of your payment is Rejected') !!}
                             </small>
                         </h5>
                         <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                            Verificar el esado de tu orden
+                            {!! trans('messages.Check the status of your order') !!}
                         </a>
                        <form action="{{route('orders.resend')}}" method="post">
                             @csrf
                             <input type="hidden" name="order" value="{{$order->id}}">
                             <p>
                                 <small>
-                                    {{__('reintenta tu pago!!')}}
+                                    {!! trans('messages.Retry Payment') !!}
                                 </small>
                             </p>
                             <button class="btn btn-block btn-sm btn-primary" type="submit">
-                                Reintentar Pago
+                                {!! trans('messages.Retry Payment') !!}
                             </button>
                         </form>
                     @break
@@ -214,7 +215,7 @@
                         </small>
                     </h5>
                     <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                        Verificar el esado de tu orden
+                        {!! trans('messages.Check the status of your order') !!}
                     </a>
                     <form action="{{route('orders.complete')}}" method="post">
                         @csrf
@@ -232,11 +233,11 @@
             @default
             <h5>
                 <small>
-                    {{__('Verifica el estado de tu orden')}}
+                    {!! trans('messages.Check the status of your order') !!}
                 </small>
             </h5>
             <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                Verificar el esado de tu orden
+                {!! trans('messages.Check the status of your order') !!}
             </a>
             @break
             @endswitch
@@ -248,11 +249,11 @@
                 @case('PENDING')
                     <h5>
                         <small>
-                            {{__('El estado de tu pago esta pendiente..Verifica el estado de tu ordern!!')}}
+                            {!! trans('messages.The status of your payment is Pending') !!}{!! trans('messages.Check the status of your order') !!}
                         </small>
                     </h5>
                     <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                        Verificar el esado de tu orden
+                        {!! trans('messages.Check the status of your order') !!}
                     </a>
                 @break
                 @case('APPROVED')
@@ -262,17 +263,17 @@
                         </small>
                     </h5>
                     <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                        Verificar el esado de tu orden
+                        {!! trans('messages.Check the status of your order') !!}
                     </a>
                 @break
             @default
             <h5>
                 <small>
-                    {{__('Verifica el estado de tu orden')}}
+                    {!! trans('messages.Check the status of your order') !!}
                 </small>
             </h5>
             <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                Verificar el esado de tu orden
+                {!! trans('messages.Check the status of your order') !!}
             </a>
             @break
             @endswitch
@@ -280,11 +281,11 @@
         @default
             <h5>
                 <small>
-                    {{__('Verifica el estado de tu orden')}}
+                    {!! trans('messages.Check the status of your order') !!}
                 </small>
             </h5>
             <a class="btn btn-block btn-sm btn-dark" href="{{route('orders.show', $order->id) }}">
-                Verificar el esado de tu orden
+                {!! trans('messages.Check the status of your order') !!}
             </a>
         @break
     @endswitch

@@ -23,10 +23,10 @@ class OrderObserver
      */
     public function updated(Order $order)
     {
-        event(new OrderIsCreated($order));
-
         if ($order->status === 'APPROVED') {
             OrderActuality::dispatch($order)->delay(now()->addMinutes(1));
         }
+
+        event(new OrderIsCreated($order));
     }
 }

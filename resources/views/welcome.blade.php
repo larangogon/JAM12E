@@ -24,12 +24,12 @@
                 @if (Route::has('login'))
                     <div class="top-right links">
                         @auth
-                            <a href="{{ url('/home') }}"><button type="button" class="btn btn-dark">Home</button></a>
+                            <a href="{{ url('/home') }}"><button type="button" class="btn btn-dark">{!! trans('messages.Home') !!}</button></a>
                         @else
-                            <a href="{{ route('login') }}"><button type="button" class="btn btn-primary">Login</button></a>
+                            <a href="{{ route('login') }}"><button type="button" class="btn btn-primary">{!! trans('messages.Login') !!}</button></a>
 
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}"><button type="button" class="btn btn-danger">Register</button></a>
+                                <a href="{{ route('register') }}"><button type="button" class="btn btn-danger">{!! trans('messages.RegisterU') !!}</button></a>
                             @endif
                         @endauth
                     </div>

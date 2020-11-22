@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3>Editar usuarios: {{ $user->name }}</h3>
+                    <h3>{!! trans('messages.Edit user') !!}: {{ $user->name }}</h3>
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -22,47 +22,37 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="name">
-                                        Nombre
+                                        {!! trans('messages.Name') !!}
                                     </label>
-                                    <input type="text" class="form-control"
-                                           name="name" value="{{ $user->name}}"
-                                           placeholder ="escribe tu nombre">
+                                    <input type="text" class="form-control" name="name" value="{{ $user->name}}" placeholder ="escribe tu nombre">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="phone">Telefono
-                                    </label>
-                                    <input type="text" class="form-control"
-                                           name="phone" value="{{ $user->phone}}"
-                                           placeholder ="escribe tu phone">
+                                    <label for="phone">{!! trans('messages.Phone') !!}</label>
+                                    <input type="text" class="form-control" name="phone" value="{{ $user->phone}}" placeholder ="escribe tu phone">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="cellphone">
-                                        Celular
+                                        {!! trans('messages.Cell phone') !!}
                                     </label>
-                                    <input type="text" class="form-control"
-                                           name="cellphone" value="{{ $user->cellphone}}"
-                                           placeholder ="escribe tu cellphone">
+                                    <input type="text" class="form-control" name="cellphone" value="{{ $user->cellphone}}" placeholder ="escribe tu cellphone">
                                 </div>
                             </div>
 
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="document">
-                                        Documento
+                                        {!! trans('messages.Document') !!}
                                     </label>
-                                    <input type="text" class="form-control"
-                                           name="document" value="{{ $user->document}}"
-                                           placeholder ="escribe tu document">
+                                    <input type="text" class="form-control" name="document" value="{{ $user->document}}" placeholder ="escribe tu document">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="address">
-                                        Direccion
+                                        {!! trans('messages.Direction') !!}
                                     </label>
-                                    <input type="text" class="form-control" name="address"
-                                           value="{{ $user->address}}" placeholder ="escribe tu address">
+                                    <input type="text" class="form-control" name="address" value="{{ $user->address}}" placeholder ="escribe tu address">
                                 </div>
 
                                 <div class="form-group">
@@ -78,12 +68,10 @@
                             <div class="col-sm-4">
 
                                 <div class="form-group">
-                                  <label for="email">
-                                      Rol
-                                  </label>
+                                  <label for="email">{!! trans('messages.Role') !!}</label>
                                     <select name="rol" class="form-control">
                                         <option selected disabled>
-                                            Elige un rol para este usuario
+                                            {!! trans('messages.Choose a role for this user') !!}
                                         </option>
                                         @foreach($roles as $role)
                                             @if($user->tieneRol()->contains($role->name))
@@ -100,15 +88,15 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-primary btn-sm">
-                                    Guardar cambios
+                                    {!! trans('messages.Save Changes') !!}
                                 </button>
 
                                 <button type="reset" class="btn btn-danger btn-sm">
-                                    Cancelar
+                                    {!! trans('messages.Cancel') !!}
                                 </button>
 
                                 <a href="{{ route('users.index') }}" class="btn btn-dark btn-sm">
-                                    Volver
+                                    {!! trans('messages.Return') !!}
                                 </a>
                             </div>
                         </div>

@@ -94,7 +94,8 @@ class ReportController extends Controller
         $report = Report::create([
             'created_by' => auth()->user()->id,
             'file'       => $name,
-            'name'       => 'Reporte_order',
+            'type'       => 'PDF',
+            'name'       => 'Reporte ordenes',
         ]);
 
         return redirect()->back()
@@ -114,11 +115,12 @@ class ReportController extends Controller
         dispatch(new ProcessReportGeneral($details));
 
         $name = date('Y-m-d-H-i') . 'report.pdf';
-        $desp = 'Reporte_resumen';
+        $desp = 'Resumen General';
 
         $report = Report::create([
             'name'       => $desp,
             'created_by' => auth()->user()->id,
+            'type'       => 'PDF',
             'file'       => $name,
 
         ]);

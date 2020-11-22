@@ -6,7 +6,6 @@ use App\Entities\Cart;
 use App\Entities\Report;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CrudReportTest extends TestCase
@@ -51,6 +50,7 @@ class CrudReportTest extends TestCase
         $report = Report::create([
             'created_by' => 1,
             'file' => 'Enviado_A_johannitaarango2@gmail.com',
+            'type' => 'Excel'
         ]);
 
         $response = $this->actingAs($this->user)

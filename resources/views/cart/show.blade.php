@@ -26,28 +26,28 @@
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-9">
             <h2><div class="row justify-content-center align-items-center cur">
-                    Carrito de compras
+                    {!! trans('messages.Shopping cart') !!}
                 </div>
             </h2>
             <p>
                 <a href="{{ route('cart.remove')}}" class="btn btn-danger btn-sm">
-                    Vaciar carrito
+                    {!! trans('messages.Empty cart') !!}
                 </a>
                 <a href="{{route('vitrina.index') }}" class="btn btn-primary btn-sm">
-                    Seguir comprando
+                    {!! trans('messages.Keep buying') !!}
                 </a>
             </p>
             <table class="table">
                 <thead>
                     <tr class="thead-dark">
-                        <th>Imagen</th>
-                        <th>Producto</th>
-                        <th>talla</th>
-                        <th>color</th>
-                        <th>Precio unitario</th>
-                        <th>Cantidad</th>
-                        <th>Precio total</th>
-                        <th>Opciones</th>
+                        <th>{!! trans('messages.Image') !!}</th>
+                        <th>{!! trans('messages.Product') !!}</th>
+                        <th>{!! trans('messages.Size') !!}</th>
+                        <th>Color</th>
+                        <th>{!! trans('messages.Unit price') !!}</th>
+                        <th>{!! trans('messages.Quantity') !!}</th>
+                        <th>{!! trans('messages.Total price') !!}</th>
+                        <th>{!! trans('messages.Options') !!}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -108,11 +108,11 @@
                 <th>
                     <div class="badge badge-light text-wrap">
                         <h5>
-                            Total con IVA ${{$cart->valorCarrito()}}
+                            {!! trans('messages.Total with IVA') !!} ${{$cart->valorCarrito()}}
                         </h5>
                         <a href="{{route('orders.create', $product->id) }}">
                           <button type="button" class="btn btn-success btn-block text-left">
-                              Continuar con la compra
+                              {!! trans('messages.Continue with the purchase') !!}
                           </button>
                         </a>
                     </div>
@@ -124,12 +124,12 @@
                 <div class="card-body">
                     <h3>
                         <div class="row justify-content-center align-items-center">
-                             Sorry, There are no products in the cart
+                            {!! trans('messages.Sorry, There are no products in the cart') !!}
                         </div>
                     </h3>
                     <div class="row justify-content-center align-items-center">
                         <a href="{{route('vitrina.index') }}" class="btn btn-outline-primary">
-                            Seguir comprando
+                            {!! trans('messages.Keep buying') !!}
                         </a>
                     </div>
                 </div>

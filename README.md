@@ -34,3 +34,43 @@
  - **Enter the browser:**
    * -http://127.0.0.1:8000/docs/api-docs.json
    * -or http://127.0.0.1:8000/api/documentation
+   
+ - **User registration:**
+ * -We make a POST request and register a user with their data.
+   http://127.0.0.1:8000/api/auth/signup
+   
+- **Login of a user:**
+* -We make a POST request and register a user with their data.http://127.0.0.1:8000/api/auth/signup
+
+- **Auth:**
+* -We can query protected routes by sending the token that we obtained earlier.
+    
+- **Logout:**
+* -If we make a GET request to the logout path with our token, it will be invalidated.
+http://127.0.0.1:8000/api/auth/logout
+     
+- **All product:**
+ * -We can query protected routes by sending the token that we obtained earlier when authenticating.
+If we make a GET request to the product route and with our token, the list of products that is stored in the database will be displayed.
+http://127.0.0.1:8000/api/auth/product
+
+- **Show product:**
+* -See detail of a single product
+We can query protected routes by sending the token that we obtained earlier when authenticating.
+If we make a GET request to the product path plus the product id and with our token, we will see the product information with the required id.
+http://127.0.0.1:8000/api/auth/product/1
+   
+- **Delete a product:**
+* -We can query protected routes by sending the token that we obtained earlier when authenticating.
+  If we make a DELETE request to the product path plus the product id and with our token, this product will be eliminated.
+  http://127.0.0.1:8000/api/auth/product/1
+      
+- **Edit product:**
+* -We can query protected routes by sending the token that we obtained earlier when authenticating.
+    If we make a PUT request to the product path, the id and with our token, it will edit a product.
+    http://127.0.0.1:8000/api/auth/product/1
+- **Create product:**
+* -We can query protected routes by sending the token that we obtained earlier when authenticating.
+   If we make a POST request to the logout path with our token, it will be invalidated.
+   http://127.0.0.1:8000/api/auth/product/
+

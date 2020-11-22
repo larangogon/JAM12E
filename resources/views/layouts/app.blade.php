@@ -136,6 +136,25 @@
                             </div>
                         </ul>
                      </li>
+                    <li>
+                        <ul class="navbar-nav ml-auto">
+                            <div class="container" class="collapse navbar-collapse" id="navbarSupportedContent">
+                                @if (config('locale.status') && count(config('locale.languages')) > 1)
+                                    <div class="top-right links">
+                                        @foreach (array_keys(config('locale.languages')) as $lang)
+                                            @if ($lang != App::getLocale())
+                                                <a  href="{!! route('lang.swap', $lang) !!}">
+                                                    <span class="badge badge-danger">
+                                                     {!! $lang !!} <small>{!! $lang !!}</small>
+                                                    </span>
+                                                </a>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
+                        </ul>
+                    </li>
                  </ul>
             </nav>
 
@@ -158,7 +177,7 @@
                                 {{ Auth::user()->name }}
                                 <a class="btn-session" href="{{ route('logout') }}" onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">
-                                    Cerrar Sesión
+                                    {!! trans('messages.Cerrar Sesión') !!}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
@@ -175,7 +194,7 @@
                                 <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
-                                        Inicio
+                                        {!! trans('messages.Start') !!}
                                     </p>
                                 </a>
                             </li>
@@ -183,7 +202,7 @@
                                 <a href="#" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="fas fa-map-marked-alt"></i>
                                     <p>
-                                        Puntos de atención
+                                        {!! trans('messages.Puntos de atención') !!}
                                     </p>
                                 </a>
                             </li>
@@ -191,7 +210,7 @@
                                 <a href="{{url('nosotros')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="fas fa-store"></i>
                                     <p>
-                                        Quienes somos!
+                                        {!! trans('messages.Quienes somos!') !!}
                                     </p>
                                 </a>
                             </li>
@@ -200,7 +219,7 @@
                                     <a href="{{route('nosotros.indexApi')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-medical-alt"></i>
                                         <p>
-                                            Como consumir nuestra API!
+                                            {!! trans('messages.Como consumir nuestra API!') !!}
                                         </p>
                                     </a>
                                 </li>
@@ -210,7 +229,7 @@
                                     <a href="{{route('metrics.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-alt"></i>
                                         <p>
-                                            Datos generales
+                                            {!! trans('messages.Datos generales') !!}
                                         </p>
                                     </a>
                                 </li>
@@ -219,7 +238,7 @@
                                     <a href="{{route('vitrina.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-gifts"></i>
                                         <p>
-                                            Vitrina
+                                            {!! trans('messages.Vitrina') !!}
                                         </p>
                                     </a>
                                 </li>
@@ -228,7 +247,7 @@
                                 <a href="{{route('reports.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="fas fa-file-alt"></i>
                                     <p>
-                                        Reportes
+                                        {!! trans('messages.Reportes') !!}
                                     </p>
                                 </a>
                             </li>
@@ -237,7 +256,7 @@
                                 <a href="{{route('messages.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="fas fa-comments"></i>
                                     <p>
-                                        Contactenos
+                                        {!! trans('messages.Contact Us') !!}
                                     </p>
                                 </a>
                             </li>
@@ -246,7 +265,7 @@
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
                                         <i class="fas fa-shopping-bag"></i>
-                                        <p>Usuarios<i class="fas fa-angle-left right"></i></p>
+                                        <p>{!! trans('messages.UsersT') !!}<i class="fas fa-angle-left right"></i></p>
                                     </a>
                                     <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
                                         <li class="nav-item has-treeview">
@@ -254,7 +273,7 @@
                                                class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                                 <i class="far fa-check-circle"></i>
                                                 <p>
-                                                    Todos usuarios
+                                                    {!! trans('messages.Users all') !!}
                                                 </p>
                                             </a>
                                         </li>
@@ -263,7 +282,7 @@
                                                class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
                                                 <i class="nav-icon fas fa-users"></i>
                                                 <p>
-                                                    Empleados
+                                                    {!! trans('messages.Empleados') !!}
                                                 </p>
                                             </a>
                                             <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
@@ -274,7 +293,8 @@
                                                             <input type="text" name="role" id="" value="Administrator" hidden>
                                                             <button type="submit"  class="btn-dark btn-sm btn-block text-left">
                                                                 <i class="far fa-check-circle"></i>
-                                                                <p>Administrator</p>
+                                                                <p>
+                                                                    {!! trans('messages.Administrator') !!}</p>
                                                             </button>
                                                         </form>
                                                     </a>
@@ -286,7 +306,8 @@
                                                             <input type="text" name="role" id="" value="Guest" hidden>
                                                             <button type="submit"  class="btn-dark btn-sm btn-block text-left">
                                                                 <i class="far fa-check-circle"></i>
-                                                                <p>Guest</p>
+                                                                <p>
+                                                                    {!! trans('messages.Guest') !!}</p>
                                                             </button>
                                                         </form>
                                                     </a>
@@ -300,20 +321,20 @@
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
                                         <i class="fas fa-file-medical-alt"></i>
-                                        <p>Ordenes</p>
+                                        <p>{!! trans('messages.Orders') !!}</p>
                                     </a>
                                     <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
                                         <li class="nav-item has-treeview">
                                             <a href="{{url('orders')}}"
                                                class="{{ Request::path() === 'orders' ? 'nav-link active' : 'nav-link' }}">
                                                 <i class="far fa-check-circle"></i>
-                                                <p>Todas la ordenes</p>
+                                                <p>{!! trans('messages.Orders all') !!}</p>
                                             </a>
                                         </li>
                                         <li class="nav-item has-treeview">
                                             <a href="#" class="nav-link">
                                                 <i class="fas fa-sort"></i>
-                                                <p>Filtro por estado</p>
+                                                <p>{!! trans('messages.Filtro por estado') !!}</p>
                                             </a>
                                             <ul class="nav nav-treeview" cass="nav nav-pills flex-column">
                                                 <li class="nav-item has-treeview">
@@ -323,7 +344,7 @@
                                                             <button type="submit"  class="btn-dark btn-sm btn-block text-left"
                                                                     class="{{ Request::path() === 'approved' ? 'nav-link active' : 'nav-link' }}">
                                                                 <i class="far fa-check-circle"></i>
-                                                                <p>Aprovadas</p>
+                                                                <p>{!! trans('messages.Aprovadas') !!}</p>
                                                             </button>
                                                         </form>
                                                     </a>
@@ -335,7 +356,7 @@
                                                             <button type="submit"  class="btn-dark btn-sm btn-block text-left"
                                                                     class="{{ Request::path() === 'approved' ? 'nav-link active' : 'nav-link' }}">
                                                                 <i class="far fa-check-circle"></i>
-                                                                <p>Rechazadas</p>
+                                                                <p>{!! trans('messages.Rechazadas') !!}</p>
                                                             </button>
                                                         </form>
                                                     </a>
@@ -347,7 +368,7 @@
                                                             <button type="submit"  class="btn-dark btn-sm btn-block text-left"
                                                                     class="{{ Request::path() === 'approved' ? 'nav-link active' : 'nav-link' }}">
                                                                 <i class="far fa-check-circle"></i>
-                                                                <p>Pendientes</p>
+                                                                <p>{!! trans('messages.Pendientes') !!}</p>
                                                             </button>
                                                         </form>
                                                     </a>
@@ -362,7 +383,7 @@
                                     <a href="{{route('orders.canceller')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-medical-alt"></i>
                                         <p>
-                                            Pagos cancelados
+                                            {!! trans('messages.Pagos cancelados') !!}
                                         </p>
                                     </a>
                                 </li>
@@ -372,7 +393,7 @@
                                     <a href="{{route('spendings.index')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-medical-alt"></i>
                                         <p>
-                                            Gastos
+                                            {!! trans('messages.Gastos') !!}
                                         </p>
                                     </a>
                                 </li>
@@ -382,28 +403,28 @@
                               <li class="nav-item has-treeview">
                                   <a href="#" class="nav-link">
                                       <i class="fas fa-wrench"></i>
-                                      <p>Crear herramientas<i class="fas fa-angle-left right"></i></p>
+                                      <p>{!! trans('messages.Crear herramientas') !!}<i class="fas fa-angle-left right"></i></p>
                                   </a>
                                   <ul class="nav nav-treeview">
                                       <li class="nav-item">
                                           <a href="{{url('categories')}}"
                                              class="{{ Request::path() === 'categories' ? 'nav-link active' : 'nav-link' }}">
                                               <i class="fas fa-wrench"></i>
-                                              <p>Categories</p>
+                                              <p>{!! trans('messages.Categories') !!}</p>
                                           </a>
                                       </li>
                                       <li class="nav-item">
                                           <a href="{{url('colors')}}"
                                               class="{{ Request::path() === 'colors' ? 'nav-link active' : 'nav-link' }}">
                                               <i class="fas fa-wrench"></i>
-                                              <p>Colors</p>
+                                              <p>{!! trans('messages.Colors') !!}</p>
                                           </a>
                                       </li>
                                       <li class="nav-item">
                                           <a href="{{url('sizes')}}"
                                              class="{{ Request::path() === 'sizes' ? 'nav-link active' : 'nav-link' }}">
                                               <i class="fas fa-wrench"></i>
-                                              <p>Sizes</p>
+                                              <p>{!! trans('messages.Sizes') !!}</p>
                                           </a>
                                       </li>
                                       <li class="nav-item">
@@ -420,7 +441,7 @@
                                     <a href="{{url('products')}}"
                                         class="{{ Request::path() === 'products' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-warehouse"></i>
-                                        <p>Bodega de productos</p>
+                                        <p>{!! trans('messages.Bodega de productos') !!}</p>
                                     </a>
                                 </li>
                             @endcan
@@ -430,7 +451,7 @@
                                 <a href="{{route('orders.showv', auth()->id())}}"
                                    class="{{ Request::path() === 'clients' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="fas fa-cash-register"></i>
-                                    <p>Historial de compra</p>
+                                    <p>{!! trans('messages.Your purchase history') !!}</p>
                                 </a>
                                     @endif
                                 @endauth
@@ -441,7 +462,7 @@
                                     <a href="/home" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-fingerprint"></i>
                                         <p>
-                                            Home
+                                            {!! trans('messages.Home') !!}
                                         </p>
                                     </a>
                                 </li>
@@ -450,7 +471,7 @@
                                     <a href="login" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-users"></i>
                                         <p>
-                                            Login
+                                            {!! trans('messages.Login') !!}
                                         </p>
                                     </a>
                                 </li>
@@ -459,7 +480,7 @@
                                         <a href="register" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                             <i class="fas fa-users"></i>
                                             <p>
-                                                Register
+                                                {!! trans('messages.RegisterU') !!}
                                             </p>
                                         </a>
                                     </li>

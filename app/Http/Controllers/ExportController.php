@@ -9,6 +9,7 @@ use App\Exports\UsersExport;
 use App\Jobs\ProcessReportGeneralExcel;
 use App\Jobs\ProcessReportProductExcel;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -58,10 +59,12 @@ class ExportController extends Controller
 
         dispatch(new ProcessReportGeneralExcel($details));
 
+        $name = date('Y-m-d-H-i') . 'reporte.xlsx';
         $report = Report::create([
             'created_by' => auth()->user()->id,
-            'file'       => 'Enviado al email johannitaarango2@gmail.com',
-            'name'       => 'Reporte_excel',
+            'file'       => $name,
+            'type'       => 'Excel',
+            'name'       => 'Reporte en excel',
         ]);
 
         return redirect()->back()
@@ -80,10 +83,12 @@ class ExportController extends Controller
 
         dispatch(new ProcessReportProductExcel($details));
 
+        $name = date('Y-m-d-H-i') . 'reporte.xlsx';
         $report = Report::create([
             'created_by' => auth()->user()->id,
-            'file'       => 'Enviado al email johannitaarango2@gmail.com',
-            'name'       => 'Reporte_excel',
+            'file'       => $name,
+            'type'       => 'Excel',
+            'name'       => 'Reporte en excel de productos',
         ]);
 
         return redirect()->back()
@@ -91,5 +96,19 @@ class ExportController extends Controller
                 'success',
                 '...El reporte se ha generado, verifica tu correo!'
             );
+    }
+
+    /**
+     * @param Request $request
+     * @return BinaryFileResponse
+     */
+    public function ruteExcel(Request $request)
+    {
+        $file = $request->file;
+        $name = '/app/' . $file;
+
+        $rutaDeArchivo = storage_path() . $name;
+
+        return response()->download($rutaDeArchivo);
     }
 }

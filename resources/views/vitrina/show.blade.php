@@ -22,8 +22,8 @@
     <div class="content-box-large">
         <div class="panel-heading">
             <div class="panel-title">
-                <h2>Nombre del producto: {{ $product->name }}
-                    <a href="{{ route('vitrina.index') }}" class="btn btn-outline-success btn-sm btn:hover">Volver</a>
+                <h2>{!! trans('messages.Product name') !!}: {{ $product->name }}
+                    <a href="{{ route('vitrina.index') }}" class="btn btn-outline-success btn-sm btn:hover">{!! trans('messages.Return') !!}</a>
                </h2></div>
 
             </div>
@@ -57,11 +57,11 @@
                       <div class="card">
                       <table class="table table-sm">
                           <tr>
-                              <th>Descripcion</th>
+                              <th>{!! trans('messages.Description') !!}</th>
                               <td>{{ $product->description }}</td>
                           </tr>
                           <tr>
-                              <th>Precio</th>
+                              <th>{!! trans('messages.Price') !!}</th>
                               <td>${{number_format($product->price) }}</td>
                           </tr>
                           <tr>
@@ -73,15 +73,15 @@
                               <td>{{$product->colors->implode('name',', ')}}</td>
                           </tr>
                           <tr>
-                              <th>Categoria</th>
+                              <th>{!! trans('messages.Category') !!}</th>
                               <td>{{$product->categories->implode('name',', ')}}</td>
                           </tr>
                           <tr>
-                              <th>Talla</th>
+                              <th>{!! trans('messages.Size') !!}</th>
                               <td>{{$product->sizes->implode('name',', ')}}</strong></td>
                           </tr>
                           <tr>
-                              <th>Calificacion</th>
+                              <th>{!! trans('messages.Qualification') !!}</th>
                               <td><form action="{{route('rate', $product) }}" method="POST">
                                   @csrf
                                       <lave>1</lave><input name="score" value="1" type="radio"/>
@@ -89,7 +89,7 @@
                                       <lave>3</lave><input name="score" value="3" type="radio"/>
                                       <lave>4</lave><input name="score" value="4" type="radio"/>
                                       <lave>5</lave><input name="score" value="5" type="radio" checked="checked"/>
-                                      <button type="submit"  class="btn btn-primary btn-sm">Enviar</button>
+                                      <button type="submit"  class="btn btn-primary btn-sm">{!! trans('messages.Send') !!}</button>
                                   </form>
                               </td>
                           </tr>
@@ -120,10 +120,10 @@
                         <form action="{{route('cart/add') }}" method="POST">
                         @csrf
 
-                        <h2>Datos para tu compra</h2>
+                        <h2>{!! trans('messages.Details for your purchase') !!}</h2>
                             <table class="table">
                                 <tr>
-                                    <th>Elige una cantidad</th>
+                                    <th>{!! trans('messages.Choose a quantity') !!}</th>
                                     <td>
                                         <input type="number" placeholder="0" name="stock" min="1" max="100">
                                         @error('stock')
@@ -135,10 +135,10 @@
                                 </tr>
 
                                 <tr>
-                                    <th>Selecciona un color</th>
+                                    <th>{!! trans('messages.Select a color') !!}</th>
                                     <td>
                                         <select name="color_id" class="form-control">
-                                            <option selected disabled>elige un color</option>
+                                            <option selected disabled>{!! trans('messages.Select a color') !!}</option>
                                             @foreach ($product->colors as $color )
                                                 <option value="{{ $color->id}}">{{$color->name}}</option>
                                             @endforeach
@@ -151,10 +151,10 @@
                                 </tr>
 
                                 <tr>
-                                    <th>Selecciona una talla</th>
+                                    <th>{!! trans('messages.Select a size') !!}</th>
                                     <td>
                                         <select name="size_id" class="form-control">
-                                            <option selected disabled>Elige una talla</option>
+                                            <option selected disabled>{!! trans('messages.Select a size') !!}</option>
                                             @foreach ($product->sizes as $size )
                                                 <option value="{{ $size->id}}">{{$size->name}}</option>
                                             @endforeach
@@ -166,7 +166,7 @@
                                 </tr>
                             </table>
                             <button type="submit" class="btn btn-block btn-sm btn-primary">
-                                Agregar al Carrito
+                                {!! trans('messages.Add to cart') !!}
                             </button>
                     </form>
                   </div>

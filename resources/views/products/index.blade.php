@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h2>
-                                Producto Creados
+                                {!! trans('messages.Created Product') !!}
                             </h2>
                         </div>
                         @can('opciones.avanzadas')
@@ -36,30 +36,28 @@
                                     <li class="nav-item has-treeview">
                                         <a href="#" class="nav-link">
                                             <button class="btn btn-outline-secondary btn-sm btn-block">
-                                                Opciones Avanzadas
+                                                {!! trans('messages.Advanced Options') !!}
                                             </button>
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
                                                 <a href="{{ route('exportProducts') }}">
-                                                    <button type="button"
-                                                            class="btn btn-primary btn-sm btn-block float-right">
-                                                        Exportar Productos
+                                                    <button type="button" class="btn btn-primary btn-sm btn-block float-right">
+                                                        {!! trans('messages.Export Products') !!}
                                                     </button>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('indexProducts') }}">
-                                                    <button type="button"
-                                                            class="btn btn-dark btn-block btn-sm float-right">
-                                                        Importar Productos
+                                                    <button type="button" class="btn btn-dark btn-block btn-sm float-right">
+                                                        {!! trans('messages.Import Products') !!}
                                                     </button>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="products/create">
                                                     <button type="button" class="btn btn-success btn-sm btn-block float-right">
-                                                        Agregar Producto
+                                                        {!! trans('messages.Add Product') !!}
                                                     </button>
                                                 </a>
                                             </li>
@@ -81,13 +79,13 @@
                         <thead>
                         <tr class="table-primary">
                             <th scope="col">#</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>precio</th>
-                            <th>stock</th>
-                            <th>Codigo</th>
+                            <th>{!! trans('messages.Name') !!}</th>
+                            <th>{!! trans('messages.Description') !!}</th>
+                            <th>{!! trans('messages.Price') !!}</th>
+                            <th>Stock</th>
+                            <th>{!! trans('messages.Code') !!}</th>
                             <th>Img</th>
-                            <th>Opciones</th>
+                            <th>Opciones{!! trans('messages.Options') !!}</th>
                             <th>X</th>
                         </tr>
                         </thead>

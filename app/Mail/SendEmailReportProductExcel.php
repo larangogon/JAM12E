@@ -18,10 +18,12 @@ class SendEmailReportProductExcel extends Mailable
      */
     public function build()
     {
+        $name = date('Y-m-d-H-i') . 'reporte.xlsx';
+        Excel::store(new ReportProductsExport(), $name);
         return $this->from('johannitaarango2@gmail.com')
             ->view('emails.report')
             ->attach(
-                Excel::download(new ReportProductsExport, 'reporteProduct.xlsx')
+                Excel::download(new ReportProductsExport(), 'reporteProduct.xlsx')
                     ->getFile(),
                 ['as' => 'reporteProduct.xlsx']
             );
