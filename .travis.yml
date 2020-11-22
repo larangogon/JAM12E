@@ -13,7 +13,7 @@ git:
   depth: 3
 before_install:
   - cp .env.testing .env
-  - sudo mysql -e 'create database testing_laravel;'
+  - sudo mysql -e 'CREATE DATABASE `testing_laravel`;'
 before_script:
   - composer self-update
   - composer install --prefer-dist --optimize-autoloader --no-interaction
