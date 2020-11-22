@@ -60,12 +60,14 @@ Route::get('exportProducts', 'ExportController@exportProducts')->name('exportPro
 Route::get('exportOrders', 'ExportController@exportOrders')->name('exportOrders');
 Route::get('reportGeneralExport', 'ExportController@reportGeneralExport')->name('reportGeneralExport');
 Route::get('reportProductExport', 'ExportController@reportProductExport')->name('reportProductExport');
+Route::post('/ruteExcel', 'ExportController@ruteExcel')->name('ruteExcel');
 
 Route::post('imports/import', 'ImportController@import')->name('import');
 Route::get('imports/index', 'ImportController@index')->name('imports.index');
 Route::get('imports/indexProducts', 'ImportController@indexProducts')->name('indexProducts');
 Route::post('imports/importProducts', 'ImportController@importProducts')->name('importProducts');
 Route::post('imports/imgsProducts', 'ImportController@imgsProducts')->name('imgsProducts');
+
 
 Route::post('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
 Route::get('/reportGeneral-pdf', 'ReportController@reportGeneral')->name('reportGeneral');
@@ -85,15 +87,4 @@ Route::resource('messages', 'MessagesController')->only('index', 'store', 'destr
 
 Route::resource('spendings', 'SpendingController');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');

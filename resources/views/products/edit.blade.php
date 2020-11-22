@@ -40,12 +40,12 @@
                                             @csrf
                                             <img src="../../../uploads/{{ $img->name }}" width="200" class="img-fluid">
                                             <button type="submit" class="btn btn-danger btn-sm">
-                                                Eliminar
+                                                {!! trans('messages.Destroy') !!}
                                             </button>
                                         </form>
                                     @endforeach
                                 @else
-                                Aún no se ha cargado una imagen para este producto
+                                    {!! trans('messages.An image has not been uploaded for this product yet') !!}
                             @endif
                         </div>
                     </div>

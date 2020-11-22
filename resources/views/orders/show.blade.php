@@ -8,7 +8,7 @@
     @endif
     <div class="row justify-content-center">
         <h2>
-            Order generada N# {{$order->id}}
+            {!! trans('messages.Generated order') !!} N# {{$order->id}}
         </h2>
     </div>
     <div class="container">
@@ -24,23 +24,23 @@
                 <div class="card-body">
                     <table class="table table-sm">
                         <tr>
-                            <th>Nombre</th>
+                            <th>{!! trans('messages.Name') !!}</th>
                             <td>{{$order->user->name}}</td>
                         </tr>
                         <tr>
-                            <th>Telefono</th>
+                            <th>{!! trans('messages.Phone') !!}</th>
                             <td>{{$order->user->phone}}</td>
                         </tr>
                         <tr>
-                            <th>Celular</th>
+                            <th>{!! trans('messages.Cell phone') !!}</th>
                             <td>{{$order->user->cellphone}}</td>
                         </tr>
                         <tr>
-                            <th>Correo</th>
+                            <th>Email</th>
                             <td>{{$order->user->email}}</td>
                         </tr>
                         <tr>
-                            <th>Documento</th>
+                            <th>{!! trans('messages.Document') !!}</th>
                             <td>{{$order->user->document}}</td>
                         </tr>
                     </table>
@@ -50,30 +50,30 @@
                 <div class="card-body">
                     <table class="table table-sm">
                         <tr>
-                            <th># Orden</th>
+                            <th># {!! trans('messages.Order') !!}</th>
                             <td>{{$order->id}}</td>
                         </tr>
                         <tr>
-                            <th>Total de la orden</th>
+                            <th>{!! trans('messages.Order total') !!}</th>
                             <td>{{$order->total}}</td>
                         </tr>
                         <tr>
-                            <th>Estado de la orden </th>
+                            <th>{!! trans('messages.Order status') !!} </th>
                             <td>{{$order->status}}</td>
                         </tr>
                         <tr>
-                            <th>Estado del pago</th>
+                            <th>{!! trans('messages.Payment status') !!}</th>
                             <td>{{$order->payment->status ?? __('no existe')}}</td>
                         </tr>
                         @if($order->status == 'APROVADO_T')
                             <tr>
-                                <th>Expira</th>
+                                <th>{!! trans('messages.Expires') !!}</th>
                                 <td>{{$order->payment->expiration ?? ('Procesando informacion...')}}</td>
                             </tr>
                         @endif
                         @if($order->status == 'APPROVED')
                             <tr>
-                                <th>Expira</th>
+                                <th>{!! trans('messages.Expires') !!}</th>
                                 <td>{{$order->payment->expiration ?? ('Procesando informacion...')}}</td>
                             </tr>
                         @endif
@@ -84,15 +84,15 @@
         <div class="row justify-content-end">
             <div class="col-md-8">
                 <div class="card-body">
-                    <div class="card-header ">Detalle de la compra</div>
+                    <div class="card-header ">{!! trans('messages.Purchase detail') !!}</div>
                         <table class="table table-sm">
                             <thead>
                             @foreach($order->details as $detail)
                                 <tr class="table-success">
-                                    <th>Nombre</th>
-                                    <th>Talla</th>
+                                    <th>{!! trans('messages.Name') !!}</th>
+                                    <th>{!! trans('messages.Size') !!}</th>
                                     <th>Color</th>
-                                    <th>Cantidad</th>
+                                    <th>{!! trans('messages.Quantity') !!}</th>
                                     <th>subtotal</th>
                                 </tr>
                             <thead>

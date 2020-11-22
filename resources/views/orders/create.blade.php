@@ -8,20 +8,20 @@
                 <div class="col-sm-8">
                 <h2>
                     <div class="row justify-content-center align-items-center">
-                        Dettalle de la compra
+                        {!! trans('messages.Purchase detail') !!}
                     </div>
                 </h2>
                     <table class="table table-sm">
                         <thead>
                             <tr>
                             <h5>
-                                <div class="row justify-content-center align-items-center">Datos del usuario</div>
+                                <div class="row justify-content-center align-items-center">{!! trans('messages.User data') !!}</div>
                             </h5>
-                                <th>Nombre</th>
-                                <th>Documento</th>
-                                <th>Direccion</th>
-                                <th>Celular</th>
-                                <th>Telefono</th>
+                                <th>{!! trans('messages.Name') !!}</th>
+                                <th>{!! trans('messages.Document') !!}</th>
+                                <th>{!! trans('messages.Direction') !!}</th>
+                                <th>{!! trans('messages.Cell phone') !!}</th>
+                                <th>{!! trans('messages.Phone') !!}</th>
                             </tr>
                         <thead>
                             <tr>
@@ -40,7 +40,7 @@
                                 <h5>
                                     <div class="row justify-content-center align-items-center">
                                         @auth {{auth()->user()->cart->productsCount()}}
-                                        @endauth Producto(s) con un total de ${{$cart->valorCarrito()}}
+                                        @endauth {!! trans('messages.Product (s) with a total of') !!} ${{$cart->valorCarrito()}}
                                     </div>
                                 </h5>
                             </tr>
@@ -69,7 +69,7 @@
                                 <form action="{{route('orders.store')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="cart_id" value="{{$cart->id}}">
-                                    <button type="submit" class="btn btn-dark btn-block text-left"> Pagar con PlaceToPay</button>
+                                    <button type="submit" class="btn btn-dark btn-block text-left">{!! trans('messages.Pay with PlaceToPay') !!}</button>
                                 </form>
                             </div>
                         </th>
@@ -82,10 +82,10 @@
 @can('Administrator')
     <div class="container">
         <div class="card">
-            <h5 class="card-header">Generar pago en tienda</h5>
+            <h5 class="card-header">{!! trans('messages.Generate payment in store') !!}</h5>
             <div class="card-body">
                 <div class="alert alert-danger" role="alert">
-                    Pago autorizado por tienda con usuario presete!
+                    {!! trans('messages.Authorized payment per store with user presete!') !!}
                 </div>
                 <form action="{{route('orders.paymentInStore')}}" method="post">
                     @csrf
@@ -94,13 +94,13 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="name">
-                                    Nombre
+                                    {!! trans('messages.Name') !!}
                                 </label>
                                 <input type="text" class="form-control" name="name" placeholder="nombre pagador">
                             </div>
                             <div class="form-group">
                                 <label for="document">
-                                    Documento
+                                    {!! trans('messages.Document') !!}
                                 </label>
                                 <input type="text" class="form-control" name="document" placeholder="documento pagador">
                             </div>
@@ -114,7 +114,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="mobile">
-                                    Mobil
+                                    {!! trans('messages.Cell phone') !!}
                                 </label>
                                 <input type="text" class="form-control" name="mobile" placeholder="mobil pagador">
                             </div>
@@ -125,7 +125,7 @@
                                 <input type="text" class="form-control" name="totalStore" placeholder="totalStore pagador">
                             </div>
                             <button type="submit" class="btn btn-dark">
-                                Generar pago en la tienda
+                                {!! trans('messages.Generate payment in store') !!}
                             </button>
                         </div>
                     </div>

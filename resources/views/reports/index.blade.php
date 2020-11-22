@@ -96,6 +96,7 @@
                 <thead>
                 <tr class="bg-success">
                     <td scope="col">#</td>
+                    <td>Reporte</td>
                     <td>Generado por Admin</td>
                     <td># admin</td>
                     <td>Datos del reporte</td>
@@ -108,12 +109,20 @@
                 @foreach($reports as $report)
                     <tr>
                         <td>{{$report->id}}</td>
+                        <td>{{$report->name}}</td>
                         <td>{{$report->user->name}}</td>
                         <td>{{$report->user->id}}</td>
                         <td>{{$report->file}}</td>
                         <td>
-                            @if($report->file == 'Enviado al email johannitaarango2@gmail.com')
+                            @if($report->type == 'Excel')
 
+                                <form action="{{route('ruteExcel') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{$report->file}}" name="file">
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm">
+                                        <i class="fas fa-cloud-download-alt"></i>
+                                    </button>
+                                </form>
                             @else
                                 <form action="{{route('rute') }}" method="POST">
                                     @csrf
@@ -122,7 +131,6 @@
                                         <i class="fas fa-cloud-download-alt"></i>
                                     </button>
                                 </form>
-
 
                             @endif
                         </td>

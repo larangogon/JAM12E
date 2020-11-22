@@ -48,14 +48,14 @@ class CartController extends Controller
         if ($product->stock < $request->stock) {
             return redirect()
                 ->back()
-                ->with('success', 'Exceeds available quantity');
+                ->with('success', 'Excede la cantidad disponible');
         }
         $this->carts->add($request);
 
 
         return redirect()
             ->back()
-            ->with('success', 'Product added to cart succesfully');
+            ->with('success', 'Producto agregado al carrito con éxito');
     }
 
     /**

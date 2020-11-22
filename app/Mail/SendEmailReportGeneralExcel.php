@@ -19,6 +19,9 @@ class SendEmailReportGeneralExcel extends Mailable
      */
     public function build()
     {
+        $name = date('Y-m-d-H-i') . 'reporte.xlsx';
+        Excel::store(new ReportGeneralExport(), $name);
+
         return $this->from('johannitaarango2@gmail.com')
             ->view('emails.report')
             ->attach(

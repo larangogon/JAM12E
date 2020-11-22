@@ -30,7 +30,7 @@
       <div class="row justify-content-center">
           <div class="col-md-8">
               <div class="card">
-                  <div class="card-header ">Bienvenido</div>
+                  <div class="card-header ">{!! trans('messages.Bienvenido') !!} </div>
 
                   <div class="card-body">
                       @if (session('status'))
@@ -38,7 +38,7 @@
                               {{ session('status') }}
                           </div>
                       @endif
-                      Estás conectado {{auth()->user()->name}}!
+                          {!! trans('messages.Welcome') !!} {{auth()->user()->name}}!
                   </div>
               </div>
           </div>
@@ -78,7 +78,7 @@
     </div>
   </div>
 <br>
-<div class="row justify-content-center"><h3 class="cur">Productos mas visitados</h3></div>
+<div class="row justify-content-center"><h3 class="cur">{!! trans('messages.Productos mas visitados') !!}</h3></div>
 <br>
 <div class="d-flex flex-wrap justify-content-around">
     @foreach($visit as $product  )
@@ -87,17 +87,17 @@
                  class= "card-img-top">
             <div class="card-body">
                 <h6 class="card-title">{{$product->name}} <br>
-                    Precio: ${{number_format($product->price)}}
+                    {!! trans('messages.Price') !!}: ${{number_format($product->price)}}
                 </h6>
                 <a href="{{route('vitrina.show', $product->id) }}">
-                    <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >Ver con detalle.</button>
+                    <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >{!! trans('messages.See in detail') !!}</button>
                 </a>
             </div>
         </div>
     @endforeach
 </div>
 <br>
-<div class="row justify-content-center"><h3 class="cur">Productos mas comprados</h3></div>
+<div class="row justify-content-center"><h3 class="cur">{!! trans('messages.Productos mas comprados') !!}</h3></div>
 <br>
 <div class="d-flex flex-wrap justify-content-around">
     @foreach($sales as $product)
@@ -106,17 +106,17 @@
                  class= "card-img-top">
             <div class="card-body">
                 <h6 class="card-title">{{$product->name}} <br>
-                    Precio: ${{number_format($product->price)}}
+                    {!! trans('messages.Price') !!}: ${{number_format($product->price)}}
                 </h6>
                 <a href="{{route('vitrina.show', $product->id) }}">
-                    <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >Ver con detalle.</button>
+                    <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >{!! trans('messages.See in detail') !!}</button>
                 </a>
             </div>
         </div>
     @endforeach
 </div>
 <br>
-<div class="row justify-content-center"><h3 class="cur">Productos mejor calificados</h3></div>
+<div class="row justify-content-center"><h3 class="cur">{!! trans('messages.Productos mejor calificados') !!}</h3></div>
 <br>
 <div class="d-flex flex-wrap justify-content-around">
     @foreach($rating as $product)
@@ -125,10 +125,10 @@
                  class= "card-img-top">
             <div class="card-body">
                 <h6 class="card-title">{{$product->rateable->name}} <br>
-                    Precio: ${{number_format($product->rateable->price)}}
+                    {!! trans('messages.Price') !!}: ${{number_format($product->rateable->price)}}
                 </h6>
                 <a href="{{route('vitrina.show', $product->rateable->id) }}">
-                    <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >Ver con detalle.</button>
+                    <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >{!! trans('messages.See in detail') !!}</button>
                 </a>
             </div>
         </div>

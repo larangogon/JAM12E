@@ -349,6 +349,11 @@ class DecoratorOrder implements InterfaceOrders
         $this->ordersRepo->paymentInStore($request);
 
         $cart = Cart::find($request->get('cart_id'));
+
+        if ($cart->totalCarrito() === 0) {
+            return redirect('vitrina')->with('success', 'Continue con su compra');
+        }
+
         $order = Order::create([
             'user_id' => $cart->user_id,
             'total'   => $cart->totalCarrito(),
@@ -380,6 +385,7 @@ class DecoratorOrder implements InterfaceOrders
             'mobile'     => $request->get('mobile'),
             'amount'     => $order->total,
             'totalStore' => $request->get('totalStore'),
+            'expiration' => now()->addDays(30)->toDateString()
         ]);
 
         dispatch(new ActualStockProduct($order));

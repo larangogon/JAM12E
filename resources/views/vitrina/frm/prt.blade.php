@@ -15,10 +15,10 @@
           </a>
             <div class="card-body">
               <h6 class="card-title">{{$product->name}} <br>
-                Precio: ${{number_format($product->price)}}
+                  {!! trans('messages.Price') !!}: ${{number_format($product->price)}}
               </h6>
                 <a href="{{route('vitrina.show', $product->id) }}">
-                  <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >Ver con detalle.</button>
+                  <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >{!! trans('messages.See in detail') !!}</button>
                 </a>
             </div>
       </div>

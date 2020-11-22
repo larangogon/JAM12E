@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <h2>
-                        Ordenes
+                        {!! trans('messages.Orders') !!}
                     </h2>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="col-md-12">
                     <a href="{{ route('exportOrders') }}">
                         <button type="button" class="btn btn-dark btn-sm float-right">
-                            Exportar
+                            {!! trans('messages.Export') !!}
                         </button>
                     </a>
                 </div>
@@ -53,15 +53,15 @@
                 <thead>
                 <tr class="table-primary">
                     <th scope="col">#</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">{!! trans('messages.User') !!}</th>
+                    <th scope="col">{!! trans('messages.Estatus') !!}</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Detalle</th>
-                    <th scope="col">Pago</th>
-                    <th scope="col">Actualizado</th>
-                    <th scope="col">Envio</th>
-                    <th scope="col">Factura</th>
-                    <th scope="col">Eliminar</th>
+                    <th scope="col">{!! trans('messages.Detail') !!}</th>
+                    <th scope="col">{!! trans('messages.Payment') !!}</th>
+                    <th scope="col">{!! trans('messages.Updated') !!}</th>
+                    <th scope="col">{!! trans('messages.Shipping') !!}</th>
+                    <th scope="col">{!! trans('messages.Invoice') !!}</th>
+                    <th scope="col">{!! trans('messages.Destroy') !!}</th>
                 </tr>
                 </thead>
                 <tbody>

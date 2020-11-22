@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+                    <div class="card-header">{!! trans('messages.Register') !!}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.store') }}">
@@ -15,7 +15,7 @@
                                 <tr>
                                     <td>
                                         <div class="form-group row">
-                                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                                            <label for="name" class="col-md-4 col-form-label text-md-right">{!! trans('messages.Name') !!}</label>
 
                                             <div class="col-md-6">
                                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -28,7 +28,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+                                            <label for="phone" class="col-md-4 col-form-label text-md-right">{!! trans('messages.Phone') !!}</label>
                                             <div class="col-md-6">
                                                 <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
                                                 @error('phone')
@@ -40,7 +40,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="cellphone" class="col-md-4 col-form-label text-md-right">{{ __('Celular') }}</label>
+                                            <label for="cellphone" class="col-md-4 col-form-label text-md-right">{!! trans('messages.Cell phone') !!}</label>
                                             <div class="col-md-6">
                                                 <input id="cellphone" type="text" class="form-control @error('cellphone') is-invalid @enderror" name="cellphone" value="{{ old('cellphone') }}" required autocomplete="cellphone" autofocus>
                                                 @error('cellphone')
@@ -51,7 +51,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="document" class="col-md-4 col-form-label text-md-right">{{ __('Documento') }}</label>
+                                            <label for="document" class="col-md-4 col-form-label text-md-right">{!! trans('messages.Document') !!}</label>
                                             <div class="col-md-6">
                                                 <input id="document" type="text" class="form-control @error('document') is-invalid @enderror" name="document" value="{{ old('document') }}" required autocomplete="document" autofocus>
                                                 @error('document')
@@ -65,7 +65,7 @@
                                     <td>
 
                                         <div class="form-group row">
-                                            <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Direccion') }}</label>
+                                            <label for="address" class="col-md-4 col-form-label text-md-right">{!! trans('messages.Direction') !!}</label>
                                             <div class="col-md-6">
                                                 <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
                                                 @error('address')
@@ -89,7 +89,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="rol" class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
+                                            <label for="rol" class="col-md-4 col-form-label text-md-right">{!! trans('messages.Role') !!}</label>
                                             <div class="col-md-6">
                                                 <select name="rol" class="form-control">
                                                     <option selected disabled>elige un rol para este usuario</option>
@@ -106,7 +106,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                                            <label for="password" class="col-md-4 col-form-label text-md-right">{!! trans('messages.Password') !!}</label>
 
                                             <div class="col-md-6">
                                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -120,7 +120,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
+                                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{!! trans('messages.Confirm Password') !!}</label>
 
                                             <div class="col-md-6">
                                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">

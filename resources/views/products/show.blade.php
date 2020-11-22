@@ -4,9 +4,9 @@
     @can('Administrator')
         <div class="container">
             <div class="panel-title">
-                <h2>Nombre del producto: {{ $product->name }}
+                <h2>{!! trans('messages.Product name') !!}: {{ $product->name }}
                     <a href="{{ route('products.index') }}" class="btn btn-outline-success  btn-sm">
-                        Volver
+                        {!! trans('messages.Return') !!}
                     </a>
                 </h2>
             </div>
@@ -16,11 +16,11 @@
                         <div class="container">
                             <table class="table table-sm">
                                 <tr>
-                                    <th>Descripcion</th>
+                                    <th>{!! trans('messages.Description') !!}</th>
                                     <td>{{ $product->description }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Precio</th>
+                                    <th>{!! trans('messages.Price') !!}</th>
                                     <td>{{ $product->price }}</td>
                                 </tr>
                                 <tr>
@@ -32,32 +32,32 @@
                                     <td>{{$product->colors->implode('name',', ')}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Categoria</th>
+                                    <th>{!! trans('messages.Category') !!}</th>
                                     <td>{{$product->categories->implode('name',', ')}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Talla</th>
+                                    <th>{!! trans('messages.Size') !!}</th>
                                     <td>{{$product->sizes->implode('name',', ')}}</strong></td>
                                 </tr>
                                 <tr>
-                                    <th>Creado por</th>
+                                    <th>{!! trans('messages.Created by') !!}</th>
                                     <td>{{$product->userCreate->name ?? __('no existe este registro')}}</strong></td>
                                 </tr>
                                 <tr>
-                                    <th>Actualizado por</th>
+                                    <th>{!! trans('messages.Updated by') !!}</th>
                                     <td>{{$product->userUpdate->name ?? __('no existe este registro')}}</strong></td>
                                 </tr>
                                 <tr>
-                                    <th>Actualizado</th>
+                                    <th>{!! trans('messages.Updated') !!}</th>
                                     <td>{{ $product->updated_at }}</strong></td>
                                 </tr>
                                 <tr>
-                                    <th>Creado</th>
+                                    <th>{!! trans('messages.Created') !!}</th>
                                     <td>{{ $product->created_at }}</strong></td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        Codigo
+                                        {!! trans('messages.Code') !!}
                                     </th>
                                     <td>
                                         <div>

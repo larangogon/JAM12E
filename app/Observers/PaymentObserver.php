@@ -21,20 +21,17 @@ class PaymentObserver
 
         $order->save();
 
-        event(new PaymentIsCreated($payment));
-
         if ($payment->status === 'APPROVED') {
             PayActuality::dispatch($payment)->delay(now()->addMinutes(1));
         }
+
+        event(new PaymentIsCreated($payment));
     }
 
     public function created(Payment $payment)
     {
         if ($payment->status === 'APROVADO_T') {
             event(new PaymentIsCreated($payment));
-
-            $payment->expiration = now()->addDays(30)->toDateString();
         }
-        $payment->save();
     }
 }

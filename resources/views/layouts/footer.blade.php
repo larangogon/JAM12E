@@ -15,28 +15,28 @@
             <div class="col-xs-12 col-sm-6 col-md-2 footers-two">
                 <h5 class="tool">Essentials </h5>
                 <ul class="list-unstyled">
-                    <li><a id="social-fb" href="{{ url('nosotros') }}">Quienes Somos</a></li>
-                    <li><a id="social-fb" href="{{ route('login') }}">Login</a></li>
-                    <li><a id="social-fb"href="{{ route('register') }}">Registrate</a></li>
-                    <li><a id="social-fb" href="{{ url('/home') }}">Inicio</a></li>
-                    <li><a id="social-fb" href="{{ url('vitrina') }}">Store</a></li>
+                    <li><a id="social-fb" href="{{ url('nosotros') }}">{!! trans('messages.About us') !!}</a></li>
+                    <li><a id="social-fb" href="{{ route('login') }}">{!! trans('messages.Login') !!}</a></li>
+                    <li><a id="social-fb"href="{{ route('register') }}">{!! trans('messages.RegisterU') !!}</a></li>
+                    <li><a id="social-fb" href="{{ url('/home') }}">{!! trans('messages.Start') !!}</a></li>
+                    <li><a id="social-fb" href="{{ url('vitrina') }}">{!! trans('messages.Store') !!}</a></li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-2 footers-three">
                 <h5 class="tool">Information </h5>
                 <ul class="list-unstyled">
-                    <li><a id="social-tw" href="{{url('messages')}}">Contactenos</a></li>
-                    <li><a id="social-tw" href="{{url('vitrina')}}">Tienda</a></li>
+                    <li><a id="social-tw" href="{{url('messages')}}">{!! trans('messages.Contact Us') !!}</a></li>
+                    <li><a id="social-tw" href="{{url('vitrina')}}">{!! trans('messages.Store') !!}</a></li>
                     <li><a id="social-tw" href="#">Videos</a></li>
                     <li>
                         @auth
                             @if(count(auth()->user()->orders))
-                                <a id="social-tw" href="{{route('orders.showv', auth()->id())}}">Tu historial de compra</a>
+                                <a id="social-tw" href="{{route('orders.showv', auth()->id())}}">{!! trans('messages.Your purchase history') !!}</a>
                             @endif
                         @endauth
 
                     </li>
-                    <li><a href="{{url('nosotros/indexApi')}}">Nuestra Api</a></li>
+                    <li><a href="{{url('nosotros/indexApi')}}">JAM Api</a></li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-2 footers-four">
@@ -52,11 +52,11 @@
             <div class="col-xs-12 col-sm-6 col-md-2 footers-five">
                 <h5 class="tool">Company </h5>
                 <ul class="list-unstyled">
-                    <li><a id="social-em" href="{{url('messages')}}">Felicitaciones</a></li>
-                    <li><a id="social-em" href="{{url('messages')}}">Sugerencias</a></li>
-                    <li><a id="social-em" href="{{url('messages')}}">Quejas</a></li>
-                    <li><a id="social-em" href="{{url('messages')}}">Reclamos</a></li>
-                    <li><a id="social-em" href="{{url('messages')}}">Peticiones</a></li>
+                    <li><a id="social-em" href="{{url('messages')}}">{!! trans('messages.Congratulations') !!}</a></li>
+                    <li><a id="social-em" href="{{url('messages')}}">{!! trans('messages.Suggestions') !!}</a></li>
+                    <li><a id="social-em" href="{{url('messages')}}">{!! trans('messages.Complaints') !!}</a></li>
+                    <li><a id="social-em" href="{{url('messages')}}">{!! trans('messages.Claims') !!}</a></li>
+                    <li><a id="social-em" href="{{url('messages')}}">{!! trans('messages.Petitions') !!}</a></li>
                 </ul>
             </div>
 
