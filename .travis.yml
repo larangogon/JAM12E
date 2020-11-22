@@ -19,7 +19,7 @@ before_script:
   - composer install --prefer-dist --optimize-autoloader --no-interaction
   - npm install
 script:
-  - php artisan migrate --seed --force
+  - php artisan migrate
   - php artisan test
 notifications:
   email:
