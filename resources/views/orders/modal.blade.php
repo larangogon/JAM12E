@@ -1,13 +1,13 @@
 @if($order->shipping)
 <button type="button" class="btn btn-primary btn-sm btn-block float-right" data-toggle="modal" data-target="#addshipping">
-    Datos del envio
+    {!! trans('messages.Datos del envio') !!}
 </button>
 <small>
     {{__('Genera factura de tu compra')}}
 </small>
 <a href="{{ route('reports.show', $order->id) }}">
     <button type="button" class="btn btn-success btn-block btn-sm float-right">
-        Generar factura
+        {!! trans('messages.Invoice') !!}
     </button>
 </a>
 
@@ -15,12 +15,12 @@
     <div>
         <h5>
             <small>
-                {{__('*Completa los datos de envio!!')}}
+                {!! trans('messages.Complete the shipping information') !!}
             </small>
         </h5>
     </div>
     <button type="button" class="btn btn-primary btn-sm btn-block float-right" data-toggle="modal" data-target="#addshipping">
-        Formulario para el envio
+        {!! trans('messages.Formulario para el envio') !!}
     </button>
 @endif
 
@@ -31,7 +31,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    Datos de envio
+                    {!! trans('messages.Datos del envio') !!}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -42,19 +42,19 @@
                 @if($order->shipping)
                     <table class="table">
                         <tr>
-                            <th>Nombre</th>
+                            <th>{!! trans('messages.Name') !!}</th>
                             <td>{{$order->shipping->name_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>N Documento</th>
+                            <th>{!! trans('messages.Document') !!}</th>
                             <td>{{$order->shipping->document_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>Telefono y celular</th>
+                            <th>{!! trans('messages.Phone') !!}, {!! trans('messages.Cell phone') !!}</th>
                             <td>{{$order->shipping->phone_recipient}}-{{$order->shipping->cellphone_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>Dirreccion</th>
+                            <th>{!! trans('messages.Direction') !!}</th>
                             <td>{{$order->shipping->address_recipient}}</td>
                         </tr>
                         <tr>
@@ -62,11 +62,11 @@
                             <td>{{$order->shipping->email_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>Pais</th>
+                            <th>{!! trans('messages.Country') !!}</th>
                             <td>{{$order->shipping->country_recipient}}</td>
                         </tr>
                         <tr>
-                            <th>Ciudad</th>
+                            <th>{!! trans('messages.City') !!}</th>
                             <td>{{$order->shipping->city_recipient}}</td>
                         </tr>
                     </table>
@@ -86,7 +86,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Cerrar
+                    {!! trans('messages.Return') !!}
                 </button>
             </div>
         </div>

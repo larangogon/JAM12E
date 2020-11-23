@@ -45,6 +45,35 @@ class CrudReportTest extends TestCase
             ->assertViewIs('reports.index');
     }
 
+    public function testReportGeneral(): void
+    {
+        $response = $this->actingAs($this->user, 'web')
+            ->get(route('reportGeneral'));
+
+        $response
+            ->assertStatus(302);
+    }
+
+    public function testReportOrders(): void
+    {
+        $fechaInicio = date('Y-m-d', strtotime('2020-11-21'));
+
+        $fechaFinal = date('Y-m-d', strtotime('2020-11-22'));
+
+        $status = 'APPROVED';
+
+        $response = $this->actingAs($this->user, 'web')
+            ->post(route('reportOrders')
+                , [
+                    'fechaFinal' => $fechaInicio,
+                    'fechaInicio' => $fechaFinal,
+                    'status' => $status,
+                ]);
+
+        $response
+            ->assertStatus(302);
+    }
+
     public function testDestroy(): void
     {
         $report = Report::create([

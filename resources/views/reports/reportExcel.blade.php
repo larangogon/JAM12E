@@ -173,7 +173,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($r as $product)
+    @foreach($productosMasVendidos as $product)
         <tr>
             <th align="right">{{$product->product->id ?? __('no existe')}}</th>
             <th align="right">{{$product->product->name ?? __('no existe')}}</th>
@@ -238,6 +238,26 @@
             <th align="right">{{$color->color->id ?? __('no existe')}}</th>
             <th align="right">{{$color->color->name ?? __('no existe')}}</th>
             <th align="right">${{number_format($color->total) ?? __('no existe')}}</th>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
+<br>
+<h5>Usuarios con valor de compra mas alto</h5>
+<table>
+    <thead>
+    <tr>
+        <th align="right"><b>#</b></th>
+        <th align="right"><b>Nombre</b></th>
+        <th align="right"><b>Total</b></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($userTotalComprasMasAltas as $user)
+        <tr>
+            <th align="right">{{$user->user->id ?? __('no existe')}}</th>
+            <th align="right">{{$user->user->name ?? __('no existe')}}</th>
+            <th align="right">${{number_format($user->total) ?? __('no existe')}}</th>
         </tr>
     @endforeach
     </tbody>

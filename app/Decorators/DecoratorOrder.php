@@ -46,7 +46,8 @@ class DecoratorOrder implements InterfaceOrders
 
         $order = Order::create([
             'user_id' => $cart->user_id,
-            'total'   => $cart->totalCarrito()
+            'total'   => $cart->totalCarrito(),
+            'status'  => 'PENDING'
         ]);
 
         foreach ($cart->products as $product) {

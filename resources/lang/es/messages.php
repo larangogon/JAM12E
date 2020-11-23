@@ -145,7 +145,16 @@ return [
     'Colors' => 'Colores',
     'Sizes' => 'Tallas',
     'Bodega de productos' => 'Bodega de productos',
-    'UsersT' => 'Usuarios'
+    'UsersT' => 'Usuarios',
+    'Agregar datos para el envio' => 'Agregar datos para el envio',
+    'City' => 'Ciudad',
+    'Pais' => 'Pais',
+    'Datos del envio' => 'Datos del envio',
+    'Formulario para el envio' => 'Formulario para el envio',
+    'HomeCategory' => 'Hogar',
+    'Man' => 'Hombre',
+    'Woman' =>  'Mujer',
+    'search' => 'buscador'
 
 
 

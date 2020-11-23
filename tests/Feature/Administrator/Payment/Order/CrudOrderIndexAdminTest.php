@@ -2,10 +2,20 @@
 
 namespace Tests\Feature\Administrator\Payment\Order;
 
+use App\Constants\PlaceToPay;
 use App\Entities\Cart;
+use App\Entities\Category;
+use App\Entities\Color;
+use App\Entities\Detail;
+use App\Entities\InCart;
+use App\Entities\Order;
+use App\Entities\Payment;
+use App\Entities\Product;
+use App\Entities\Size;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class CrudOrderIndexAdminTest extends TestCase
@@ -43,5 +53,160 @@ class CrudOrderIndexAdminTest extends TestCase
             ->assertStatus(200)
             ->assertViewHas(['orders', 'search'])
             ->assertViewIs('orders.index');
+    }
+
+    public function testShowv(): void
+    {
+        $response = $this->actingAs($this->user)
+            ->get(route('orders.showv' , $this->user->id));
+
+        $response
+            ->assertStatus(200)
+            ->assertViewHas(['orders'])
+            ->assertViewIs('orders.showv');
+    }
+
+    public function testStore(): void
+    {
+        $this->withoutExceptionHandling();
+        $this->color = factory(Color::class)->create();
+        $this->size = factory(Size::class)->create();
+        $this->category = factory(Category::class)->create();
+        $this->product = factory(Product::class)->create();
+
+        $inCart = InCart::create([
+            'stock' => 23,
+            'color_id' => $this->color->id,
+            'size_id' => $this->size->id,
+            'category_id' => $this->category->id,
+            'product_id' => $this->product->id,
+            'cart_id' =>  $this->cart->id
+
+        ]);
+
+        $response = $this->actingAs($this->user)
+            ->post(route('orders.store'), [
+                'cart_id' =>  $this->cart->id
+            ]);
+
+        $response
+            ->assertStatus(302);
+
+        $this->assertDatabaseHas('orders', [
+            'user_id' => $this->cart->user_id,
+        ]);
+    }
+
+    public function testStoreTotalNull(): void
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->actingAs($this->user)
+            ->post(route('orders.store'), [
+                'cart_id' =>  $this->cart->id
+            ]);
+
+        $response
+            ->assertStatus(302)
+        ->assertRedirect('vitrina');
+
+    }
+
+    public function testUpdate()
+    {
+        $this->withoutExceptionHandling();
+        $this->color = factory(Color::class)->create();
+        $this->size = factory(Size::class)->create();
+        $this->category = factory(Category::class)->create();
+        $this->product = factory(Product::class)->create();
+
+        $inCart = InCart::create([
+            'stock' => 23,
+            'color_id' => $this->color->id,
+            'size_id' => $this->size->id,
+            'category_id' => $this->category->id,
+            'product_id' => $this->product->id,
+            'cart_id' =>  $this->cart->id
+
+        ]);
+
+        $order = Order::create([
+            'user_id' => $this->cart->user_id,
+            'total'   => $this->cart->totalCarrito()
+        ]);
+
+        foreach ($this->cart->products as $product) {
+            $detail = Detail::create([
+                'order_id'    => $order->id,
+                'product_id'  => $product->id,
+                'size_id'     => $product->pivot->size_id,
+                'category_id' => $product->pivot->category_id,
+                'color_id'    => $product->pivot->color_id,
+                'stock'       => $product->pivot->stock,
+                'total'       => $product->price * $product->pivot->stock,
+            ]);
+        }
+
+        Payment::create([
+            'order_id'   => $order->id,
+            'processUrl' => "https://test.placetopay.com/redirection/session/429524/47a34d65abeee316e36f882d3757a355",
+            'requestId'  => '429524',
+            'status'     => PlaceToPay::PENDING,
+        ]);
+
+
+        $response = $this->actingAs($this->user)
+            ->put(route('orders.update', $order->id), [
+                'status'  => PlaceToPay::APPROVED,
+            ]);
+
+        $response
+            ->assertStatus(200);
+
+        $this->assertDatabaseHas('payments', [
+            'id'   => $order->id,
+            'status'   => 'APPROVED',
+        ]);
+    }
+
+    public function testPayInStore()
+    {
+        $this->withoutExceptionHandling();
+        $this->color = factory(Color::class)->create();
+        $this->size = factory(Size::class)->create();
+        $this->category = factory(Category::class)->create();
+        $this->product = factory(Product::class)->create();
+
+        $inCart = InCart::create([
+            'stock' => 23,
+            'color_id' => $this->color->id,
+            'size_id' => $this->size->id,
+            'category_id' => $this->category->id,
+            'product_id' => $this->product->id,
+            'cart_id' =>  $this->cart->id
+
+        ]);
+        $response = $this->actingAs($this->user)
+            ->post(route('orders.paymentInStore'), [
+                'cart_id' =>  $this->cart->id,
+                'name' => 'Ana',
+                'document' => '123456789',
+                'email' => 'admin@example.com',
+                'mobile' => '23456789',
+                'totalStore' => '2345678'
+
+            ]);
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect(route('orders.index'));
+
+        $this->assertDatabaseHas('payments', [
+            'name' => 'Ana',
+            'document' => '123456789',
+            'email' => 'admin@example.com',
+            'mobile' => '23456789',
+            'totalStore' => '2345678'
+        ]);
     }
 }

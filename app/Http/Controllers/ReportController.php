@@ -91,6 +91,7 @@ class ReportController extends Controller
         dispatch(new ProcessReport($details, $ordersx));
 
         $name = date('Y-m-d-H-i') . 'report.pdf';
+
         $report = Report::create([
             'created_by' => auth()->user()->id,
             'file'       => $name,
