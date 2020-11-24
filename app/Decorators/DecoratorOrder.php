@@ -288,21 +288,20 @@ class DecoratorOrder implements InterfaceOrders
 
         $requestId  = $order->payment->requestId;
         $processUrl = $order->payment->processUrl;
-        $status     = $response->status->status;
         $message    = $response->status->message;
         $amount     = $response->payment->amount->from->total;
 
         $order->update([
             'processUrl' => $processUrl,
             'requestId'  => $requestId,
-            'status'     => 'Cancelado',
+            'status'     => 'CANCELADO',
             "message"    => $message,
             "amount"     => $amount,
         ]);
 
         $orderCancelled = Cancelled::create([
         'user_id'           => $order->user->id,
-        'status'            => 'CACELADO',
+        'status'            => 'CANCELADO',
         'statusTransaction' => $order->payment->status,
         'requestId'         => $order->payment->requestId,
         'internalReference' => $order->payment->internalReference,

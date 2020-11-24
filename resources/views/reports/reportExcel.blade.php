@@ -28,7 +28,7 @@
     </tr>
     <tr>
         <th><b>Valor de la factura mas alto</b></th>
-        <td align="right">$.{{$price ?? __('no existe')}}</td>
+        <td align="right">$.{{number_format($price) ?? __('no existe')}}</td>
     </tr>
     <tr>
         <th><b>Ordenes aprovadas</b></th>
@@ -40,19 +40,19 @@
     </tr>
     <tr>
         <th><b>Total de todas las ordenes</b></th>
-        <td align="right">$.{{$order->sum('total') ?? __('no existe')}}</td>
+        <td align="right">$.{{number_format($order->sum('total')) ?? __('no existe')}}</td>
     </tr>
     <tr>
         <th><b>Total facturas aprovadas</b></th>
-        <td align="right">$.{{$sum ?? __('no existe')}}</td>
+        <td align="right">$.{{number_format($sum) ?? __('no existe')}}</td>
     </tr>
     <tr>
         <th><b>Total facturas rechazadas</b></th>
-        <td align="right">$.{{$sumRechazada ?? __('no existe')}}</td>
+        <td align="right">$.{{number_format($sumRechazada) ?? __('no existe')}}</td>
     </tr>
     <tr>
         <th><b>Total facturas pendientes</b></th>
-        <td align="right">$.{{$sumPending ?? __('no existe')}}</td>
+        <td align="right">$.{{number_format($sumPending) ?? __('no existe')}}</td>
     </tr>
 </table>
 <br>

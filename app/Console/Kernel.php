@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         PaymentOrders::class,
+        ReportExcel::class
     ];
 
     /**
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('payment:orders')->everyMinute();
+        $schedule->command('report:excel')->daily();
     }
 
     /**
