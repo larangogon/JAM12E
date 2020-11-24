@@ -6,11 +6,14 @@ use App\Entities\Cancelled;
 use App\Entities\Order;
 use App\Entities\Payment;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class ReportExcelDaily implements FromView, ShouldAutoSize
+class ReportExcelDaily implements FromView, ShouldAutoSize, WithEvents
 {
     use Exportable;
 
@@ -39,7 +42,9 @@ class ReportExcelDaily implements FromView, ShouldAutoSize
                 ->format('Y-m-d'))
             ->count();
 
-        $orderlist = Order::where('status', '=', 'APPROVED')->get();
+        $orderlist = Order::select(DB::raw('*'))
+            ->whereRaw('Date(created_at) = CURDATE()')
+            ->get();
 
         $cancel = Cancelled::whereDate('updated_at', '=', now()->format('Y-m-d'))->count();
 
@@ -53,5 +58,15 @@ class ReportExcelDaily implements FromView, ShouldAutoSize
             'rechazadas' => $rechazadas
 
         ]);
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function (AfterSheet $event) {
+                $cellRange = 'A1:W1';
+                $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14);
+            },
+        ];
     }
 }

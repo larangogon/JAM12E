@@ -41,7 +41,7 @@
         <tr>
             <th align="right">{{$order->id ?? __('Tienda')}}</th>
             <th align="right">{{$order->status ?? __('Gasto de tienda')}}</th>
-            <th align="right">${{number_format($gasto->total) ?? __('no existe')}}</th>
+            <th align="right">${{number_format($order->total) ?? __('no existe')}}</th>
         </tr>
     @endforeach
     </tbody>
