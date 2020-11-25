@@ -72,7 +72,7 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->document}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->roles->implode('name',', ')}}</td>
+                        <td>{{trans($user->roles->implode('name',', '))}}</td>
                         <td>
                             <form action= "{{ route('users.active',  $user->id)}}" method = "POST">
                                 <a href="{{route('users.show', $user->id) }}">

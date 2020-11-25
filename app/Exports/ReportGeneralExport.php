@@ -95,7 +95,7 @@ class ReportGeneralExport implements FromView, ShouldAutoSize
 
         $colorSales = Detail::colorSales()->get();
 
-        $r = Detail::productSalesTotal()->get();
+        $productosMasVendidos = Detail::productSalesTotal()->get();
 
         $gastos = Spending::spendinTotal()->get();
 
@@ -103,15 +103,18 @@ class ReportGeneralExport implements FromView, ShouldAutoSize
 
         $gastoDescrip = DB::table('spendings')->max('description');
 
+        $userTotalComprasMasAltas = Order::userSales()->get();
+
 
         return view('reports.reportExcel', [
+            'userTotalComprasMasAltas'  => $userTotalComprasMasAltas,
             'gastoDescrip'    => $gastoDescrip,
             'gastoMax'        => $gastoMax,
             'gastos'          => $gastos,
             'colorSales'      => $colorSales,
             'categorySales'   => $categorySales,
             'sizeSales'       => $sizeSales,
-            'r'               => $r,
+            'productosMasVendidos' => $productosMasVendidos,
             'ratinAllProducs' => $ratinAllProducs,
             'rating'          => $rating,
             'hoy'             => $hoy,

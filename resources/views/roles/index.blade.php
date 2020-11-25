@@ -28,7 +28,7 @@
 
                                     <a class="nav-link" id="pushslider"  id="v-ills-home-tab" data-toggle="pill"
                                        href="#{{$role->name}}" role="tab" aria-controls="{{$role->name}}" aria-selected="true">
-                                        {{$role->name}}
+                                        {{trans($role->name)}}
                                     </a>
                                 @endforeach
                             </div>

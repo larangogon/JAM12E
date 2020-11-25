@@ -104,7 +104,7 @@ return [
     'Order Approved' => '* Order Approved',
     'The status of your order is' => 'The status of your order is:',
     'Order submitted and completed' => '* Order submitted and completed',
-    'Complete the shipping information' => '*Completa los datos de envio!!',
+    'Complete the shipping information' => '*Complete the shipping information!!',
     'About us' => 'About us',
     'Login' => 'Login',
     'RegisterU' => 'Register',
@@ -130,6 +130,7 @@ return [
     'Reportes' => 'Reports',
     'Users' => 'Users',
     'Users all' => 'Users all',
+    'Orders all' => 'Orders all',
     'Empleados' => 'Empleados',
     'Administrator' => 'Administrators',
     'Guest' => 'Guest',
@@ -144,7 +145,16 @@ return [
     'Colors' => 'Colors',
     'Sizes' => 'Sizes',
     'Bodega de productos' => 'Warehouse of products',
-    'UsersT' => 'Users'
+    'UsersT' => 'Users',
+    'Agregar datos para el envio' => 'Add data for shipping',
+    'City' => 'City',
+    'Pais' => 'Country',
+    'Datos del envio' => 'Ship info',
+    'Formulario para el envio' => 'Form for submission',
+    'HomeCategory' => 'Home',
+    'Man' => 'Man',
+    'Woman' =>  'Woman',
+    'search' => 'search'
 
 
 

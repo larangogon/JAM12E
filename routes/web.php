@@ -88,3 +88,7 @@ Route::resource('messages', 'MessagesController')->only('index', 'store', 'destr
 Route::resource('spendings', 'SpendingController');
 
 Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+
+Route::get('/phpinfo', function () {
+    phpinfo();
+});

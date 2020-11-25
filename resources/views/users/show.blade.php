@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                             <th>{!! trans('messages.Role') !!}</th>
-                            <td>{{$user->roles->implode('name',', ')}}</td>
+                            <td>{{trans($user->roles->implode('name',', '))}}</td>
                         </tr>
                         <tr>
                             <th>{!! trans('messages.Updated') !!}</th>

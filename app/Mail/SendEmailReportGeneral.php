@@ -92,6 +92,7 @@ class SendEmailReportGeneral extends Mailable
 
         $name = date('Y-m-d-H-i') . 'report.pdf';
 
+
         $pdf = \PDF::loadView('reports.reportGeneral', [
             'ratinAllProducs' => $ratinAllProducs,
             'rating'          => $rating,

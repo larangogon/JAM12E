@@ -81,7 +81,7 @@ class ProductController extends Controller
 
         return response()
             ->json([
-                'lista de procustos', $products, 'search',$query
+                'lista de productos', $products, 'search',$query
             ], 200);
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\ProcessReportGeneralExcel;
+use App\Jobs\ProcessReportExcelDaily;
 use Illuminate\Console\Command;
 
 class ReportExcel extends Command
@@ -41,6 +41,6 @@ class ReportExcel extends Command
 
         $details['email'] = 'johannitaarango2@gmail.com';
 
-        dispatch(new ProcessReportGeneralExcel($details));
+        dispatch(new ProcessReportExcelDaily($details));
     }
 }

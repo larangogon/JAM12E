@@ -27,9 +27,9 @@ class ApiUpdateRequest extends FormRequest
         return [
             'name'     => 'required|max:25',
             'stock'    => 'required|integer|min:0',
-            'color'    => ['required','exists:colors,id'],
-            'category' => ['required','exists:categories,id'],
-            'size'     => ['required','exists:sizes,id'],
+            'color'    => ['exists:colors,id'],
+            'category' => ['exists:categories,id'],
+            'size'     => ['exists:sizes,id'],
         ];
     }
 

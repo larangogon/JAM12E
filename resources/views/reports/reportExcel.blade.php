@@ -28,7 +28,7 @@
     </tr>
     <tr>
         <th><b>Valor de la factura mas alto</b></th>
-        <td align="right">$.{{$price ?? __('no existe')}}</td>
+        <td align="right">$.{{number_format($price) ?? __('no existe')}}</td>
     </tr>
     <tr>
         <th><b>Ordenes aprovadas</b></th>
@@ -40,19 +40,19 @@
     </tr>
     <tr>
         <th><b>Total de todas las ordenes</b></th>
-        <td align="right">$.{{$order->sum('total') ?? __('no existe')}}</td>
+        <td align="right">$.{{number_format($order->sum('total')) ?? __('no existe')}}</td>
     </tr>
     <tr>
         <th><b>Total facturas aprovadas</b></th>
-        <td align="right">$.{{$sum ?? __('no existe')}}</td>
+        <td align="right">$.{{number_format($sum) ?? __('no existe')}}</td>
     </tr>
     <tr>
         <th><b>Total facturas rechazadas</b></th>
-        <td align="right">$.{{$sumRechazada ?? __('no existe')}}</td>
+        <td align="right">$.{{number_format($sumRechazada) ?? __('no existe')}}</td>
     </tr>
     <tr>
         <th><b>Total facturas pendientes</b></th>
-        <td align="right">$.{{$sumPending ?? __('no existe')}}</td>
+        <td align="right">$.{{number_format($sumPending) ?? __('no existe')}}</td>
     </tr>
 </table>
 <br>
@@ -173,7 +173,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($r as $product)
+    @foreach($productosMasVendidos as $product)
         <tr>
             <th align="right">{{$product->product->id ?? __('no existe')}}</th>
             <th align="right">{{$product->product->name ?? __('no existe')}}</th>
@@ -238,6 +238,26 @@
             <th align="right">{{$color->color->id ?? __('no existe')}}</th>
             <th align="right">{{$color->color->name ?? __('no existe')}}</th>
             <th align="right">${{number_format($color->total) ?? __('no existe')}}</th>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
+<br>
+<h5>Usuarios con valor de compra mas alto</h5>
+<table>
+    <thead>
+    <tr>
+        <th align="right"><b>#</b></th>
+        <th align="right"><b>Nombre</b></th>
+        <th align="right"><b>Total</b></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($userTotalComprasMasAltas as $user)
+        <tr>
+            <th align="right">{{$user->user->id ?? __('no existe')}}</th>
+            <th align="right">{{$user->user->name ?? __('no existe')}}</th>
+            <th align="right">${{number_format($user->total) ?? __('no existe')}}</th>
         </tr>
     @endforeach
     </tbody>

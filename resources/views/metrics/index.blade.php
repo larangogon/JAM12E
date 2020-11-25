@@ -116,7 +116,7 @@
             <div class="col-sm-4">
                 <cancelled-metric inline-template>
                     <div>
-                        <div class="card tr">
+                        <div class="card">
                             <h5 class="card-header">Pagos cancelados</h5>
                             <div class="card-content">
                                 <div class="chart-container">
@@ -128,18 +128,16 @@
                 </cancelled-metric>
             </div>
             <div class="col-sm-4">
-                <payment-metric inline-template>
-                    <div>
-                        <div class="card">
-                            <h5 class="card-header">Estado de pagos</h5>
-                            <div class="card-content">
-                                <div class="chart-container">
-                                    <canvas id="paymentBar" height="200"></canvas>
-                                </div>
+                <order-metric inline-template>
+                    <div class="card">
+                        <h5 class="card-header">Estado final del pago</h5>
+                        <div class="card-content">
+                            <div class="chart-container">
+                                <canvas id="orderLine" height="200"></canvas>
                             </div>
                         </div>
                     </div>
-                </payment-metric>
+                </order-metric>
             </div>
         </div>
         </div>

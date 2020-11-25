@@ -117,4 +117,16 @@ class Order extends Model
                 ->where('created_at', 'LIKE', "%$fechaFinal%");
         }
     }
+
+    /**
+     * @param $query
+     */
+    public function scopeUserSales($query)
+    {
+        $query->with('user')
+            ->selectRaw('user_id, SUM(`total`) as total')
+            ->groupBy('user_id')
+            ->orderByDesc('total')
+            ->limit(3);
+    }
 }

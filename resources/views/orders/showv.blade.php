@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="card-body text-primary">
                             Estado de tu orden N {{$order->id}}
-                           : {{$order->status}}
+                           : {{trans($order->status)}}
                         </div>
                         <p class="card-text">
                             Orden creada: {{ $order->created_at }}

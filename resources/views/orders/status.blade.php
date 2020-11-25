@@ -146,7 +146,7 @@
                             </h5>
                                 <p>
                                     <small>
-                                        {!! trans('messages.Order in shipping process ') !!}
+                                        {!! trans('messages.Order in shipping process') !!}
                                     </small>
                                 </p>
                                 @include('orders.modal')

@@ -12,13 +12,11 @@ use App\Entities\Shipping;
 use App\Events\CancelledIsCreated;
 use App\Events\MessageCreate;
 use App\Events\OrderIsCreated;
-use App\Events\PaymentIsCreated;
 use App\Events\ProductCreate;
 use App\Listeners\MessageStNotification;
 use App\Listeners\ProductExhaustedNotification;
 use App\Listeners\StoreCancelledInMetrics;
 use App\Listeners\StoreOrderInMetrics;
-use App\Listeners\StorePaymentInMetrics;
 use App\Observers\CancelledMetricObserver;
 use App\Observers\MessagesObserver;
 use App\Observers\OrderObserver;
@@ -26,7 +24,6 @@ use App\Observers\UserObserver;
 use App\Observers\ShippingObserver;
 use App\Observers\PaymentObserver;
 use App\Observers\ProductsObserver;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -50,9 +47,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         OrderIsCreated::class => [
             StoreOrderInMetrics::class,
-        ],
-        PaymentIsCreated::class => [
-            StorePaymentInMetrics::class,
         ],
         CancelledIsCreated::class => [
             StoreCancelledInMetrics::class,
