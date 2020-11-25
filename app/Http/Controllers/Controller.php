@@ -23,7 +23,7 @@ use Illuminate\Routing\Controller as BaseController;
  *
  * @OA\Server(
  *     description="API APIJAM12E",
- *     url="http://127.0.0.1:8000/"
+ *     url="http://127.0.0.1:8000"
  * )
  *
  */
@@ -37,9 +37,9 @@ use Illuminate\Routing\Controller as BaseController;
  *
  *       securityScheme="oauth2",
  *     in="header",
- *     type="oauth2",
+ *     type="http",
  *     name="oauth2",
- *     scheme="http",
+ *     scheme="bearer",
  * )
  */
 class Controller extends BaseController

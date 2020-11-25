@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000/",
+            "url": "http://127.0.0.1:8000",
             "description": "API APIJAM12E"
         }
     ],
@@ -599,7 +599,7 @@
     "components": {
         "securitySchemes": {
             "oauth2": {
-                "type": "oauth2",
+                "type": "http",
                 "name": "oauth2",
                 "in": "header",
                 "flows": {
@@ -608,7 +608,7 @@
                         "scopes": {}
                     }
                 },
-                "scheme": "http"
+                "scheme": "bearer"
             }
         }
     },
@@ -617,7 +617,7 @@
             "type": "oauth2",
             "description": "Laravel passport oauth2 security.",
             "in": "header",
-            "scheme": "https",
+            "scheme": "bearer",
             "flows": {
                 "password": {
                     "authorizationUrl": "http://localhost/oauth/authorize",
