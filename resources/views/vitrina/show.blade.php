@@ -47,9 +47,9 @@
                               @endfor
                               {{--End Rating--}}
                               @if($total == 1)
-                                  ({{$total}} voto)
+                                  ({{$total}} Promedio)
                               @else($total > 1)
-                                  ({{$total}} votos)
+                                  ({{$total}} Promedio)
                               @endif
 
                           </div>

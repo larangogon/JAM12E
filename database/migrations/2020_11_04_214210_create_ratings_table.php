@@ -17,6 +17,7 @@ class CreateRatingsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('votos');
             $table->float('score', 9, 2);
             $table->timestamps();
 

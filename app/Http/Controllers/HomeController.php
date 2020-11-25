@@ -37,7 +37,6 @@ class HomeController extends Controller
         $sales = Product::orderBy('sales', 'desc')
             ->take(4)->get(['name', 'id', 'sales','price']);
 
-
         return view('home', [
             'rating' => $rating,
             'visit'  => $visit,

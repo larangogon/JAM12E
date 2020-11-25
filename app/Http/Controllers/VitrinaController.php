@@ -57,10 +57,10 @@ class VitrinaController extends Controller
 
         $product->save();
 
-        $ratin = Rating::all()
+        $rating = Rating::all()
             ->where('rateable_id', '=', $id);
 
-        $total = $ratin->sum('score');
+        $total = $rating->sum('votos');
 
         return view('vitrina/show', [
             'product' => $product,
