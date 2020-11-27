@@ -32,6 +32,10 @@ class OrderActuality implements ShouldQueue
     {
         if ($this->order->status === 'APPROVED') {
             foreach ($this->order->details as $details) {
+
+                $details->check = 'vendido';
+                $details->save();
+
                 $detail = $details->product_id;
 
                 $product = Product::where('id', '=', $detail)

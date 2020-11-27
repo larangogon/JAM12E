@@ -22,7 +22,7 @@ use Illuminate\Routing\Controller as BaseController;
  * ),
  *
  * @OA\Server(
- *     description="API APIJAM12E",
+ *     description="API JAM12E",
  *     url="http://127.0.0.1:8000"
  * )
  *
@@ -30,15 +30,15 @@ use Illuminate\Routing\Controller as BaseController;
 /**
  * @OA\SecurityScheme(
  *     @OA\Flow(
- *         flow="clientCredentials",
+ *         flow="password",
  *         tokenUrl="/oauth/token",
- *         scopes={}
+ *         authorizationUrl="/oauth/authorize",
+ *         scopes={*}
  *     ),
  *
- *       securityScheme="oauth2",
+ *     securityScheme="passport",
  *     in="header",
- *     type="http",
- *     name="oauth2",
+ *     type="oauth2",
  *     scheme="bearer",
  * )
  */

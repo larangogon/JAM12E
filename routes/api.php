@@ -16,3 +16,4 @@ Route::group(['prefix' => 'auth'], function () {
         Route::apiResource('size', 'Api\SizeApiController');
     });
 });
+

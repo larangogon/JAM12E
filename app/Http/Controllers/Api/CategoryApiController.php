@@ -23,7 +23,7 @@ class CategoryApiController extends Controller
      *      tags={"Category all"},
      *      summary="Get list of categories",
      *      security={
-     *      {"passport": {}},
+     *      {"passport": {*}},
      *      },
      *      description="Returns list of categories",
      *      @OA\Response(

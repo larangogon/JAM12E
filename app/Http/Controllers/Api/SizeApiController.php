@@ -23,7 +23,7 @@ class SizeApiController extends Controller
      *      tags={"Sizes all"},
      *      summary="Get list of sizes",
      *      security={
-     *      {"passport": {}},
+     *      {"passport": {*}},
      *      },
      *      description="Returns list of sizes",
      *      @OA\Response(

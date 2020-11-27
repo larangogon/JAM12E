@@ -72,7 +72,7 @@
     </tr>
 </table>
 <br>
-<h5>Productos mas vendidos</h5>
+<h5>Productos mayor intencion de compra</h5>
 <table>
     <thead>
     <tr>
@@ -118,7 +118,7 @@
     <tr>
         <th align="right"><b>#</b></th>
         <th align="right"><b>Nombre</b></th>
-        <th align="right"><b>Cantidad de votos</b></th>
+        <th align="right"><b>Score</b></th>
     </tr>
     </thead>
     <tbody>

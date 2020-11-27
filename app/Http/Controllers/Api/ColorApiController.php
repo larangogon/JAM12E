@@ -23,7 +23,7 @@ class ColorApiController extends Controller
      *      tags={"Colors all"},
      *      summary="Get list of colors",
      *      security={
-     *      {"passport": {}},
+     *      {"passport": {*}},
      *      },
      *      description="Returns list of colors",
      *      @OA\Response(

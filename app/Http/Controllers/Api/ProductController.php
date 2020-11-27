@@ -7,7 +7,6 @@ use App\Http\Requests\ApiStoreRequest;
 use App\Http\Requests\ApiUpdateRequest;
 use App\Interfaces\Api\InterfaceApiProducts;
 use App\Entities\Product;
-use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -92,7 +91,7 @@ class ProductController extends Controller
      *      operationId="store",
      *      tags={"Product store"},
      *      security={
-     *      {"passport": {}},
+     *      {"passport": {*}},
      *      },
      *      summary="Create one product",
      *      description="Returns product",
@@ -161,9 +160,9 @@ class ProductController extends Controller
      *      )
      *   ),
      *    @OA\Parameter(
-     *      name="query",
+     *      name="size",
      *      example="1",
-     *      in="path",
+     *      in="query",
      *      required=true,
      *      @OA\Schema(
      *           type="integer"
@@ -227,7 +226,7 @@ class ProductController extends Controller
      *      operationId="show",
      *      tags={"Product show"},
      * security={
-     *  {"passport": {}},
+     *  {"passport": {*}},
      *   },
      *      summary="Get one product",
      *      description="Returns product",
@@ -286,7 +285,7 @@ class ProductController extends Controller
 
         return response()
             ->json([
-                'Produto', $product
+                'Producto', $product
             ], 200);
     }
 
@@ -296,7 +295,7 @@ class ProductController extends Controller
      *      operationId="update",
      *      tags={"Product update"},
      * security={
-     *  {"passport": {}},
+     *  {"passport": {*}},
      *   },
      *      summary="Update one product",
      *      description="Returns product update",
@@ -331,7 +330,6 @@ class ProductController extends Controller
      *      name="color",
      *      in="query",
      *      example="1",
-     *      required=true,
      *      @OA\Schema(
      *           type="integer"
      *      )
@@ -340,7 +338,6 @@ class ProductController extends Controller
      *      name="category",
      *      in="query",
      *      example="1",
-     *      required=true,
      *      @OA\Schema(
      *           type="integer"
      *      )
@@ -349,7 +346,6 @@ class ProductController extends Controller
      *      name="size",
      *      in="query",
      *      example="1",
-     *      required=true,
      *      @OA\Schema(
      *           type="integer"
      *      )
@@ -406,7 +402,7 @@ class ProductController extends Controller
      *      operationId="destroy",
      *      tags={"Product destroy"},
      * security={
-     *  {"passport": {}},
+     *  {"passport": {*}},
      *   },
      *      summary="Destroy product",
      *      description="Returns delete product",

@@ -31,13 +31,12 @@
                   <div class="col-md-4">
                       <div class="card">
                           <div class="container">
-
                               {{--Start Rating--}}
                               @for ($i = 0; $i < 5; $i++)
-                                  @if (floor($total) - $i >= 1)
+                                  @if (floor($promediox) - $i >= 1)
                                       {{--Full Start--}}
                                       <i class="fas fa-star text-warning"> </i>
-                                  @elseif ($total - $i > 0)
+                                  @elseif ($promediox - $i > 0)
                                       {{--Half Start--}}
                                       <i class="fas fa-star-half-alt text-warning"> </i>
                                   @else
@@ -46,12 +45,11 @@
                                   @endif
                               @endfor
                               {{--End Rating--}}
-                              @if($total == 1)
-                                  ({{$total}} Promedio)
+                              @if($promedio == 1)
+                                  {{$promedio}} voto
                               @else($total > 1)
-                                  ({{$total}} Promedio)
+                                  {{$promedio}} votos
                               @endif
-
                           </div>
                       </div>
                       <div class="card">
