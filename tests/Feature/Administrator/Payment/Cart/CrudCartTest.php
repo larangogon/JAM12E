@@ -86,6 +86,7 @@ class CrudCartTest extends TestCase
             'stock' =>  '23',
             'color_id' => $this->color->id,
             'size_id' => $this->size->id,
+            'category_id'=> $this->category->id
         ]);
     }
 
