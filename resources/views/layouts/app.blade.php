@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+
     <script src="{{ asset('dist/js/adminlte.js') }}"></script>
     <script src="{{asset('js/app.js') }}" defer></script>
 
@@ -25,7 +26,6 @@
     <link href="{{asset('dist/css/adminlte.min.css') }}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{mix('css/app.css') }}" rel="stylesheet">
-
 
 </head>
 

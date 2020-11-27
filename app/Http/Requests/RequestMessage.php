@@ -27,7 +27,7 @@ class RequestMessage extends FormRequest
         return [
             'body'         => 'required|max:200',
             'sender_id'    => 'required',
-            'recipient_id' => ['required'],
+            'recipient_id' => 'required',
         ];
     }
 }

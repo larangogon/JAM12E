@@ -24,7 +24,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{route('messages.storeResponse')}}" method="POST">
+                        <form action="{{route('messages.store')}}" method="POST">
                             @csrf
                             <input type="hidden" value="{{auth()->user()->id}}" name="sender_id">
                             <input type="hidden" value="{{$msg->sender_id}}" name="recipient_id">

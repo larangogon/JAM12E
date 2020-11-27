@@ -18,7 +18,7 @@ class ColorApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/auth/color",
+     *      path="/api/auth/color",
      *      operationId="index",
      *      tags={"Colors all"},
      *      summary="Get list of colors",

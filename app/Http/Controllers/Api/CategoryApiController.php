@@ -18,7 +18,7 @@ class CategoryApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/auth/category",
+     *      path="/api/auth/category",
      *      operationId="index",
      *      tags={"Category all"},
      *      summary="Get list of categories",

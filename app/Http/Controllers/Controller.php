@@ -23,7 +23,7 @@ use Illuminate\Routing\Controller as BaseController;
  *
  * @OA\Server(
  *     description="API JAM12E",
- *     url=L5_SWAGGER_CONST_HOST,
+ *     url="http://127.0.0.1:8000"
  * )
  *
  */

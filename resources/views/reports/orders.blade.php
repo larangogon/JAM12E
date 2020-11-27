@@ -26,8 +26,8 @@
             left: 0cm;
             right: 0cm;
             height: 1cm;
-            background-color: #2a0927;
-            color: white;
+            background-color: lightskyblue;
+            color: black;
             text-align: center;
             line-height: 30px;
         }
@@ -39,17 +39,13 @@
     <div class="container">
         <h6>
             <div class="clearfix">
-                <div>Empresa</div>
-                <div>NIT 98764553, <br> Codigo 123000000083736</div>
-                <div>xxxx@gmail.com</div>
+                <div></div>
             </div>
         </h6>
     </div>
 </header>
 <main>
     <div class="container">
-        <br>
-        <br>
         <h2>Reporte de ordenes</h2>
         <br>
         <h6><dv>{{$now->format("F j, Y, g:i a")}}</dv></h6>

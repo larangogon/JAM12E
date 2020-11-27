@@ -26,12 +26,12 @@ class ProductController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/auth/product",
+     *      path="/api/auth/product",
      *      operationId="index",
      *      tags={"Products all"},
      *      summary="Get list of products",
      *      security={
-     *      {"passport": {*}},
+     *      {"passport": {}},
      *      },
      *      description="Returns list of products",
      *      @OA\Response(
@@ -87,7 +87,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Post (
-     *      path="/auth/product",
+     *      path="/api/auth/product",
      *      operationId="store",
      *      tags={"Product store"},
      *      security={
@@ -222,7 +222,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/auth/product/{id}",
+     *      path="/api/auth/product/{id}",
      *      operationId="show",
      *      tags={"Product show"},
      * security={
@@ -291,7 +291,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Put (
-     *      path="/auth/product/{id}",
+     *      path="/api/auth/product/{id}",
      *      operationId="update",
      *      tags={"Product update"},
      * security={
@@ -398,7 +398,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Delete (
-     *      path="/auth/product/{id}",
+     *      path="/api/auth/product/{id}",
      *      operationId="destroy",
      *      tags={"Product destroy"},
      * security={

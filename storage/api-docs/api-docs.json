@@ -14,12 +14,12 @@
     },
     "servers": [
         {
-            "url": "127.0.0.1:8000",
+            "url": "http://127.0.0.1:8000",
             "description": "API JAM12E"
         }
     ],
     "paths": {
-        "/auth/category": {
+        "/api/auth/category": {
             "get": {
                 "tags": [
                     "Category all"
@@ -54,7 +54,7 @@
                 ]
             }
         },
-        "/auth/color": {
+        "/api/auth/color": {
             "get": {
                 "tags": [
                     "Colors all"
@@ -89,7 +89,7 @@
                 ]
             }
         },
-        "/auth/product": {
+        "/api/auth/product": {
             "get": {
                 "tags": [
                     "Products all"
@@ -240,7 +240,7 @@
                 ]
             }
         },
-        "/auth/product/{id}": {
+        "/api/auth/product/{id}": {
             "get": {
                 "tags": [
                     "Product show"
@@ -415,7 +415,7 @@
                 ]
             }
         },
-        "/auth/size": {
+        "/api/auth/size": {
             "get": {
                 "tags": [
                     "Sizes all"
@@ -450,7 +450,7 @@
                 ]
             }
         },
-        "/auth/login": {
+        "/api/auth/login": {
             "post": {
                 "tags": [
                     "Login"
@@ -497,7 +497,7 @@
                 }
             }
         },
-        "/auth/signup": {
+        "/api/auth/signup": {
             "post": {
                 "tags": [
                     "Register"

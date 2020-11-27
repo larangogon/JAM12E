@@ -18,7 +18,7 @@ class SizeApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/auth/size",
+     *      path="/api/auth/size",
      *      operationId="index",
      *      tags={"Sizes all"},
      *      summary="Get list of sizes",
