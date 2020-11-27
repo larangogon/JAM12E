@@ -83,4 +83,27 @@ class MessagesController extends Controller
 
         return view('messages.show', compact('msg'));
     }
+
+    /**
+     * @param int $id
+     * @return View
+     */
+    public function response(int $id): View
+    {
+        $msg = Message::where('id', '=', $id)->firstOrFail();
+
+        return view('messages.response', compact('msg'));
+    }
+
+    /**
+     * @param RequestMessage $request
+     * @return RedirectResponse
+     */
+    public function storeResponse(RequestMessage $request): RedirectResponse
+    {
+        $message = Message::create($request->all());
+
+        return redirect()->back()
+            ->with('success', 'Mensaje enviado');
+    }
 }

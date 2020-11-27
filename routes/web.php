@@ -84,6 +84,8 @@ Route::resource('notifications', 'NotificationController')->only('index');
 Route::post('/mark-as-read', 'NotificationController@markNotification')->name('markNotification');
 
 Route::resource('messages', 'MessagesController')->only('index', 'store', 'destroy', 'show');
+Route::get('messages/response/{id}', 'MessagesController@response')->name('messages.response');
+Route::post('messages/storeResponse', 'MessagesController@storeResponse')->name('messages.storeResponse');
 
 Route::resource('spendings', 'SpendingController');
 

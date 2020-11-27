@@ -38,6 +38,7 @@
                     <th>Enviado a</th>
                     <th>Mensaje</th>
                     <th>ver</th>
+                    <th>Responder</th>
                     <th>Eliminar</th>
                 </tr>
                 </thead>
@@ -54,6 +55,13 @@
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </a>
+                        </td>
+                        <td class="v-align-middle">
+                            <form action= "{{ route('messages.response',  $msg->id)}}">
+                                <button type="submit" class="btn btn-success btn-sm"  role="button">
+                                    Responder
+                                </button>
+                            </form>
                         </td>
                         <td class="v-align-middle">
                             <form action= "{{ route('messages.destroy',  $msg->id)}}" method = "POST">
