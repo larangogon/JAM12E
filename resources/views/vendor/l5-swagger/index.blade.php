@@ -71,6 +71,10 @@
 window.onload = function() {
   // Build a system
   const ui = SwaggerUIBundle({
+      tagsSorter: 'alpha',
+      operationsSorter: 'alpha',
+      docExpansion: 'list',
+      filter: true,
     dom_id: '#swagger-ui',
 
     url: "{!! $urlToDocs !!}",

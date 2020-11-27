@@ -25,7 +25,7 @@
             top: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 3cm;
+            height: 1cm;
             background-color: #2a0927;
             color: white;
             text-align: center;
@@ -65,7 +65,6 @@
                 <th scope="col">Usuario</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Total</th>
-                <th scope="col">Pago</th>
                 <th scope="col">Actualizado</th>
             </tr>
             </thead>
@@ -76,8 +75,7 @@
                     <td>{{$orde->user->name ?? __('no existe')}}</td>
                     <td>{{$orde->status ?? __('no existe')}}</td>
                     <td>$.{{number_format($orde->total ?? __('no existe'))}}</td>
-                    <td>{{$orde->payment->status ?? __('no existe pago')}}</td>
-                    <td>{{$orde->payment->updated_at->format("F j, Y") ?? __('no existe pago')}}</td>
+                    <td>{{$orde->updated_at->format("F j, Y") ?? __('no existe')}}</td>
                 </tr>
             @endforeach
             </tbody>

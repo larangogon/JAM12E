@@ -18,12 +18,12 @@ class ColorApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/auth/color",
+     *      path="/auth/color",
      *      operationId="index",
      *      tags={"Colors all"},
      *      summary="Get list of colors",
      *      security={
-     *      {"passport": {}},
+     *      {"passport": {*}},
      *      },
      *      description="Returns list of colors",
      *      @OA\Response(

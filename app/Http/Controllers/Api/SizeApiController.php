@@ -18,12 +18,12 @@ class SizeApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/auth/size",
+     *      path="/auth/size",
      *      operationId="index",
      *      tags={"Sizes all"},
      *      summary="Get list of sizes",
      *      security={
-     *      {"passport": {}},
+     *      {"passport": {*}},
      *      },
      *      description="Returns list of sizes",
      *      @OA\Response(

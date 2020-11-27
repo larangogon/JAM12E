@@ -14,12 +14,12 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000",
-            "description": "API APIJAM12E"
+            "url": "127.0.0.1:8000",
+            "description": "API JAM12E"
         }
     ],
     "paths": {
-        "/api/auth/category": {
+        "/auth/category": {
             "get": {
                 "tags": [
                     "Category all"
@@ -54,7 +54,7 @@
                 ]
             }
         },
-        "/api/auth/color": {
+        "/auth/color": {
             "get": {
                 "tags": [
                     "Colors all"
@@ -89,7 +89,7 @@
                 ]
             }
         },
-        "/api/auth/product": {
+        "/auth/product": {
             "get": {
                 "tags": [
                     "Products all"
@@ -195,8 +195,8 @@
                         "example": "1"
                     },
                     {
-                        "name": "query",
-                        "in": "path",
+                        "name": "size",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -240,7 +240,7 @@
                 ]
             }
         },
-        "/api/auth/product/{id}": {
+        "/auth/product/{id}": {
             "get": {
                 "tags": [
                     "Product show"
@@ -322,7 +322,6 @@
                     {
                         "name": "color",
                         "in": "query",
-                        "required": true,
                         "schema": {
                             "type": "integer"
                         },
@@ -331,7 +330,6 @@
                     {
                         "name": "category",
                         "in": "query",
-                        "required": true,
                         "schema": {
                             "type": "integer"
                         },
@@ -340,7 +338,6 @@
                     {
                         "name": "size",
                         "in": "query",
-                        "required": true,
                         "schema": {
                             "type": "integer"
                         },
@@ -418,7 +415,7 @@
                 ]
             }
         },
-        "/api/auth/size": {
+        "/auth/size": {
             "get": {
                 "tags": [
                     "Sizes all"
@@ -453,7 +450,7 @@
                 ]
             }
         },
-        "/api/auth/login": {
+        "/auth/login": {
             "post": {
                 "tags": [
                     "Login"
@@ -500,7 +497,7 @@
                 }
             }
         },
-        "/api/auth/signup": {
+        "/auth/signup": {
             "post": {
                 "tags": [
                     "Register"
@@ -598,12 +595,12 @@
     },
     "components": {
         "securitySchemes": {
-            "oauth2": {
-                "type": "http",
-                "name": "oauth2",
+            "passport": {
+                "type": "oauth2",
                 "in": "header",
                 "flows": {
-                    "clientCredentials": {
+                    "password": {
+                        "authorizationUrl": "/oauth/authorize",
                         "tokenUrl": "/oauth/token",
                         "scopes": {}
                     }

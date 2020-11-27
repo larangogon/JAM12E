@@ -130,7 +130,7 @@
         <br>
         <br>
 
-        <h5>* Los 4 productos mas vendidos hasta {{$now->format("F j, Y, g:i a")}}</h5>
+        <h5>* Los 4 productos mayor intencion de compra {{$now->format("F j, Y, g:i a")}}</h5>
         <div class="row">
             <div class="col-sm-8">
                 <table class="table table-sm">
@@ -191,7 +191,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">nombre</th>
-                        <th scope="col">cantidad de votos</th>
+                        <th scope="col">score</th>
                     </tr>
                     </thead>
                     <tbody>

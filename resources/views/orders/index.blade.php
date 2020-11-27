@@ -78,7 +78,7 @@
                                 </button>
                             </a>
                         </td>
-                        <td>{{trans($order->payment->status) ?? __('no existe')}}</td>
+                        <td>{{trans($order->payment->status ?? __('no existe'))}}</td>
                         <td>{{$order->payment->updated_at ?? __('no existe')}}</td>
 
 

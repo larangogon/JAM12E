@@ -45,9 +45,9 @@ class VitrinaController extends Controller
 
     /**
      * @param int $id
-     * @return View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View
      */
-    public function show(int $id): View
+    public function show(int $id)
     {
         $product = Product::active()
             ->where('id', '=', $id)
@@ -57,14 +57,23 @@ class VitrinaController extends Controller
 
         $product->save();
 
-        $rating = Rating::all()
+        $ratin = Rating::all()
             ->where('rateable_id', '=', $id);
 
-        $total = $rating->sum('votos');
+        $total = $ratin->sum('score');
+        $promedio = $ratin->count('qualifiqier_type');
+
+        if($total){
+            $promediox = $total / $promedio;
+        }else{
+            $promediox = $total;
+        }
 
         return view('vitrina/show', [
-            'product' => $product,
-            'total'   => $total
+            'product'   => $product,
+            'promedio'  => $promedio,
+            'total'     => $total,
+            'promediox' => $promediox
         ]);
     }
 }

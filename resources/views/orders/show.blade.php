@@ -63,7 +63,7 @@
                         </tr>
                         <tr>
                             <th>{!! trans('messages.Payment status') !!}</th>
-                            <td>{{trans($order->payment->status) ?? __('no existe')}}</td>
+                            <td>{{trans($order->payment->status ?? __('no existe'))}}</td>
                         </tr>
                         @if($order->status == 'APROVADO_T')
                             <tr>

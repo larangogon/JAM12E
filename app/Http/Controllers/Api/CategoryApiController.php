@@ -18,12 +18,12 @@ class CategoryApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/auth/category",
+     *      path="/auth/category",
      *      operationId="index",
      *      tags={"Category all"},
      *      summary="Get list of categories",
      *      security={
-     *      {"passport": {}},
+     *      {"passport": {*}},
      *      },
      *      description="Returns list of categories",
      *      @OA\Response(

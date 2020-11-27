@@ -20,15 +20,19 @@
      * -mysql -u root
      * -use jam
      * -call metrics_generate('2020-10-20', '2021-01-11');
-     * -call payment_metrics_generate('2020-10-20', '2021-01-11');
      * -call cancelled_metrics_generate('2020-10-20', '2021-01-11');
-      -exit
+     * -exit
 - **To finish and deploy the application, run the command:**
    * -php artisan optimize:clear
    * -php artisan passport:install
    * -php artisan serve
 - **Login.**
-    -(user: admin@example.com, password: 123).
+    * -(user: admin@example.com, password: 123).
+   
+- **Job and commands**
+   * -php artisan queue:work
+   * -php artisan payment:orders
+   * -php artisan report:excel
     
 ## API
  - **Enter the browser:**
