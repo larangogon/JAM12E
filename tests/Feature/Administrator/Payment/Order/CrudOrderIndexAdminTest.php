@@ -58,7 +58,7 @@ class CrudOrderIndexAdminTest extends TestCase
     public function testShowv(): void
     {
         $response = $this->actingAs($this->user)
-            ->get(route('orders.showv' , $this->user->id));
+            ->get(route('orders.showv', $this->user->id));
 
         $response
             ->assertStatus(200)
@@ -109,7 +109,6 @@ class CrudOrderIndexAdminTest extends TestCase
         $response
             ->assertStatus(302)
         ->assertRedirect('vitrina');
-
     }
 
     public function testUpdate()

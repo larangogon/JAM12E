@@ -16,7 +16,6 @@ class OrderSeeder extends Seeder
 
             if ($order->status === 'APPROVED') {
                 Detail::inRandomOrder()->each(function ($detail) {
-
                     $detail->check = 'vendido';
                     $detail->save();
                 });

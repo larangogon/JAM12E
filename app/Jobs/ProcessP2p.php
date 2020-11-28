@@ -39,7 +39,7 @@ class ProcessP2p implements ShouldQueue
         if ($this->order->payment->status === PlaceToPay::PENDING) {
             $response = $orderD->requestP2P('getRequestinformation', $this->order);
 
-            if ($response->payment === null){
+            if ($response->payment === null) {
                 $status = $response->status->status;
 
                 $this->order->payment->update([
@@ -47,9 +47,7 @@ class ProcessP2p implements ShouldQueue
                 ]);
                 return logger()->channel('stack')
                     ->info('pago pendiente con numero de orden-' . $this->order->id);
-
-            } elseif ($response->payment[0]->status->status  !== "APPROVED"){
-
+            } elseif ($response->payment[0]->status->status  !== "APPROVED") {
                 $status = $response->payment[0]->status->status;
 
                 $this->order->payment->update([
@@ -58,7 +56,7 @@ class ProcessP2p implements ShouldQueue
 
                 return logger()->channel('stack')
                     ->info('ordenes con estado pendiente o rechazadas en proceso');
-            } elseif ($response->payment[0]->status->status  === "APPROVED"){
+            } elseif ($response->payment[0]->status->status  === "APPROVED") {
                 foreach ($response->payment as $payments) {
                     $pay = $payments;
                 }
@@ -84,9 +82,7 @@ class ProcessP2p implements ShouldQueue
                     'mobile'            => $payermobile,
                     'locale'            => $locale,
                 ]);
-
             }
-
         }
     }
 }

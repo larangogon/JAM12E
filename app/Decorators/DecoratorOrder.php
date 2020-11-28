@@ -344,6 +344,10 @@ class DecoratorOrder implements InterfaceOrders
         return redirect()->away($processUrl)->send();
     }
 
+    /**
+     * @param RequestOrderStore $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed
+     */
     public function paymentInStore(RequestOrderStore $request)
     {
         $this->ordersRepo->paymentInStore($request);

@@ -38,11 +38,11 @@ class PaymentOrders extends Command
         logger()->channel('stack')
             ->info('se han actualizado los pagos pendientes');
 
-            $payments = Payment::where('status', 'PENDING')
+        $payments = Payment::where('status', 'PENDING')
                 ->get();
 
-            foreach ($payments as $payment) {
-                dispatch(new ProcessP2p($payment->order));
-            }
+        foreach ($payments as $payment) {
+            dispatch(new ProcessP2p($payment->order));
         }
+    }
 }

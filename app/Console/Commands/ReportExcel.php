@@ -34,7 +34,7 @@ class ReportExcel extends Command
     /**
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         logger()->channel('stack')
             ->info('se ha enviado el reporte diario en excel');
