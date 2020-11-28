@@ -14,8 +14,8 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000/",
-            "description": "API APIJAM12E"
+            "url": "http://127.0.0.1:8000",
+            "description": "API JAM12E"
         }
     ],
     "paths": {
@@ -195,8 +195,8 @@
                         "example": "1"
                     },
                     {
-                        "name": "query",
-                        "in": "path",
+                        "name": "size",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -322,7 +322,6 @@
                     {
                         "name": "color",
                         "in": "query",
-                        "required": true,
                         "schema": {
                             "type": "integer"
                         },
@@ -331,7 +330,6 @@
                     {
                         "name": "category",
                         "in": "query",
-                        "required": true,
                         "schema": {
                             "type": "integer"
                         },
@@ -340,7 +338,6 @@
                     {
                         "name": "size",
                         "in": "query",
-                        "required": true,
                         "schema": {
                             "type": "integer"
                         },
@@ -598,17 +595,17 @@
     },
     "components": {
         "securitySchemes": {
-            "oauth2": {
+            "passport": {
                 "type": "oauth2",
-                "name": "oauth2",
                 "in": "header",
                 "flows": {
-                    "clientCredentials": {
+                    "password": {
+                        "authorizationUrl": "/oauth/authorize",
                         "tokenUrl": "/oauth/token",
                         "scopes": {}
                     }
                 },
-                "scheme": "http"
+                "scheme": "bearer"
             }
         }
     },
@@ -617,7 +614,7 @@
             "type": "oauth2",
             "description": "Laravel passport oauth2 security.",
             "in": "header",
-            "scheme": "https",
+            "scheme": "bearer",
             "flows": {
                 "password": {
                     "authorizationUrl": "http://localhost/oauth/authorize",

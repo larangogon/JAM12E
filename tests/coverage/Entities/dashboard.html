@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\laragon\www\JAM12E\app\Entities</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">C:\laragon\www\JAM12E\app</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Entities</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Cancelled.php.html#8">App\Entities\Cancelled</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Metric.php.html#9">App\Entities\Metric</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Size.php.html#9">App\Entities\Size</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Shipping.php.html#8">App\Entities\Shipping</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Role.php.html#9">App\Entities\Role</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Report.php.html#8">App\Entities\Report</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MetricPayment.php.html#9">App\Entities\MetricPayment</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MetricCancelled.php.html#9">App\Entities\MetricCancelled</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InCart.php.html#9">App\Entities\InCart</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Imagen.php.html#8">App\Entities\Imagen</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#9">App\Entities\Detail</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Color.php.html#9">App\Entities\Color</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#9">App\Entities\Category</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Spending.php.html#8">App\Entities\Spending</a></td><td class="text-right">11%</td></tr>
+       <tr><td><a href="Order.php.html#13">App\Entities\Order</a></td><td class="text-right">16%</td></tr>
+       <tr><td><a href="Cart.php.html#10">App\Entities\Cart</a></td><td class="text-right">46%</td></tr>
+       <tr><td><a href="Message.php.html#9">App\Entities\Message</a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="User.php.html#17">App\Entities\User</a></td><td class="text-right">55%</td></tr>
+       <tr><td><a href="Product.php.html#12">App\Entities\Product</a></td><td class="text-right">56%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Order.php.html#13">App\Entities\Order</a></td><td class="text-right">127</td></tr>
+       <tr><td><a href="Product.php.html#12">App\Entities\Product</a></td><td class="text-right">75</td></tr>
+       <tr><td><a href="User.php.html#17">App\Entities\User</a></td><td class="text-right">46</td></tr>
+       <tr><td><a href="Metric.php.html#9">App\Entities\Metric</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="MetricCancelled.php.html#9">App\Entities\MetricCancelled</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="MetricPayment.php.html#9">App\Entities\MetricPayment</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Cart.php.html#10">App\Entities\Cart</a></td><td class="text-right">17</td></tr>
+       <tr><td><a href="Cancelled.php.html#8">App\Entities\Cancelled</a></td><td class="text-right">12</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Cancelled.php.html#35"><abbr title="App\Entities\Cancelled::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#230"><abbr title="App\Entities\Product::barcode">barcode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cancelled.php.html#45"><abbr title="App\Entities\Cancelled::scopeSearch">scopeSearch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Order.php.html#31"><abbr title="App\Entities\Order::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Order.php.html#55"><abbr title="App\Entities\Order::getCacheOrder">getCacheOrder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Order.php.html#65"><abbr title="App\Entities\Order::shipping">shipping</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Order.php.html#88"><abbr title="App\Entities\Order::scopeStatus">scopeStatus</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Order.php.html#101"><abbr title="App\Entities\Order::scopeFechaInicio">scopeFechaInicio</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Order.php.html#114"><abbr title="App\Entities\Order::scopeFechaFinal">scopeFechaFinal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Order.php.html#125"><abbr title="App\Entities\Order::scopeUserSales">scopeUserSales</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#67"><abbr title="App\Entities\Product::tieneImagen">tieneImagen</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#196"><abbr title="App\Entities\Product::carts">carts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#204"><abbr title="App\Entities\Product::getCacheProducts">getCacheProducts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#214"><abbr title="App\Entities\Product::userCreate">userCreate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#222"><abbr title="App\Entities\Product::userUpdate">userUpdate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Report.php.html#22"><abbr title="App\Entities\Report::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MetricPayment.php.html#28"><abbr title="App\Entities\MetricPayment::isFilteredByPrimaryId">isFilteredByPrimaryId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Role.php.html#18"><abbr title="App\Entities\Role::getCacheRoles">getCacheRoles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Shipping.php.html#27"><abbr title="App\Entities\Shipping::order">order</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Size.php.html#16"><abbr title="App\Entities\Size::products">products</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Size.php.html#24"><abbr title="App\Entities\Size::getCacheSizes">getCacheSizes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Spending.php.html#26"><abbr title="App\Entities\Spending::userCreate">userCreate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Spending.php.html#34"><abbr title="App\Entities\Spending::userUpdate">userUpdate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Spending.php.html#50"><abbr title="App\Entities\Spending::scopeSpendinTotal">scopeSpendinTotal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#105"><abbr title="App\Entities\User::getCacheUser">getCacheUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#142"><abbr title="App\Entities\User::products">products</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#150"><abbr title="App\Entities\User::productsUpdate">productsUpdate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#158"><abbr title="App\Entities\User::cancellers">cancellers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#166"><abbr title="App\Entities\User::reports">reports</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#182"><abbr title="App\Entities\User::messagesSender">messagesSender</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#190"><abbr title="App\Entities\User::spending">spending</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MetricPayment.php.html#38"><abbr title="App\Entities\MetricPayment::scopeFilterByPrimaryId">scopeFilterByPrimaryId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MetricPayment.php.html#53"><abbr title="App\Entities\MetricPayment::readThreeLevelsMetric">readThreeLevelsMetric</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MetricCancelled.php.html#54"><abbr title="App\Entities\MetricCancelled::readThreeLevelsMetric">readThreeLevelsMetric</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#29"><abbr title="App\Entities\Detail::color">color</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#87"><abbr title="App\Entities\Detail::scopeSizeSales">scopeSizeSales</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#74"><abbr title="App\Entities\Detail::scopeCategorySales">scopeCategorySales</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#61"><abbr title="App\Entities\Detail::scopeColorSales">scopeColorSales</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#53"><abbr title="App\Entities\Detail::product">product</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#45"><abbr title="App\Entities\Detail::size">size</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#37"><abbr title="App\Entities\Detail::category">category</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Color.php.html#25"><abbr title="App\Entities\Color::getCacheColor">getCacheColor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MetricCancelled.php.html#37"><abbr title="App\Entities\MetricCancelled::scopeFilterByPrimaryId">scopeFilterByPrimaryId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Color.php.html#16"><abbr title="App\Entities\Color::products">products</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#24"><abbr title="App\Entities\Category::getCacheCategories">getCacheCategories</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Category.php.html#16"><abbr title="App\Entities\Category::products">products</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cart.php.html#76"><abbr title="App\Entities\Cart::getCacheCart">getCacheCart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cart.php.html#50"><abbr title="App\Entities\Cart::valorCarrito">valorCarrito</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cart.php.html#42"><abbr title="App\Entities\Cart::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Cart.php.html#34"><abbr title="App\Entities\Cart::productsCount">productsCount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#100"><abbr title="App\Entities\Detail::scopeProductSalesTotal">scopeProductSalesTotal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#113"><abbr title="App\Entities\Detail::order">order</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Detail.php.html#121"><abbr title="App\Entities\Detail::getCacheInCarts">getCacheInCarts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InCart.php.html#60"><abbr title="App\Entities\InCart::products">products</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="MetricCancelled.php.html#27"><abbr title="App\Entities\MetricCancelled::isFilteredByPrimaryId">isFilteredByPrimaryId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Metric.php.html#53"><abbr title="App\Entities\Metric::readThreeLevelsMetric">readThreeLevelsMetric</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Metric.php.html#35"><abbr title="App\Entities\Metric::scopeFilterByPrimaryId">scopeFilterByPrimaryId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Metric.php.html#25"><abbr title="App\Entities\Metric::isFilteredByPrimaryId">isFilteredByPrimaryId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Message.php.html#41"><abbr title="App\Entities\Message::getCacheMessages">getCacheMessages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Imagen.php.html#21"><abbr title="App\Entities\Imagen::product">product</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InCart.php.html#68"><abbr title="App\Entities\InCart::getCacheInCarts">getCacheInCarts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InCart.php.html#52"><abbr title="App\Entities\InCart::category">category</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InCart.php.html#44"><abbr title="App\Entities\InCart::size">size</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InCart.php.html#36"><abbr title="App\Entities\InCart::cart">cart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="InCart.php.html#28"><abbr title="App\Entities\InCart::color">color</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="User.php.html#198"><abbr title="App\Entities\User::spendingUpdate">spendingUpdate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Product.php.html#46"><abbr title="App\Entities\Product::asignarImagen">asignarImagen</abbr></a></td><td class="text-right">20%</td></tr>
+       <tr><td><a href="User.php.html#128"><abbr title="App\Entities\User::scopeRole">scopeRole</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Product.php.html#89"><abbr title="App\Entities\Product::scopeSearch">scopeSearch</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Product.php.html#101"><abbr title="App\Entities\Product::scopeCategory">scopeCategory</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="User.php.html#117"><abbr title="App\Entities\User::scopeSearch">scopeSearch</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Order.php.html#75"><abbr title="App\Entities\Order::scopeSearch">scopeSearch</abbr></a></td><td class="text-right">66%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Product.php.html#46"><abbr title="App\Entities\Product::asignarImagen">asignarImagen</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Cancelled.php.html#45"><abbr title="App\Entities\Cancelled::scopeSearch">scopeSearch</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="MetricPayment.php.html#38"><abbr title="App\Entities\MetricPayment::scopeFilterByPrimaryId">scopeFilterByPrimaryId</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Order.php.html#114"><abbr title="App\Entities\Order::scopeFechaFinal">scopeFechaFinal</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Order.php.html#101"><abbr title="App\Entities\Order::scopeFechaInicio">scopeFechaInicio</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Order.php.html#88"><abbr title="App\Entities\Order::scopeStatus">scopeStatus</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Cart.php.html#50"><abbr title="App\Entities\Cart::valorCarrito">valorCarrito</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="MetricPayment.php.html#53"><abbr title="App\Entities\MetricPayment::readThreeLevelsMetric">readThreeLevelsMetric</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="MetricPayment.php.html#28"><abbr title="App\Entities\MetricPayment::isFilteredByPrimaryId">isFilteredByPrimaryId</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="MetricCancelled.php.html#54"><abbr title="App\Entities\MetricCancelled::readThreeLevelsMetric">readThreeLevelsMetric</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="MetricCancelled.php.html#37"><abbr title="App\Entities\MetricCancelled::scopeFilterByPrimaryId">scopeFilterByPrimaryId</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="MetricCancelled.php.html#27"><abbr title="App\Entities\MetricCancelled::isFilteredByPrimaryId">isFilteredByPrimaryId</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Metric.php.html#53"><abbr title="App\Entities\Metric::readThreeLevelsMetric">readThreeLevelsMetric</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Metric.php.html#35"><abbr title="App\Entities\Metric::scopeFilterByPrimaryId">scopeFilterByPrimaryId</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Metric.php.html#25"><abbr title="App\Entities\Metric::isFilteredByPrimaryId">isFilteredByPrimaryId</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Product.php.html#89"><abbr title="App\Entities\Product::scopeSearch">scopeSearch</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Product.php.html#101"><abbr title="App\Entities\Product::scopeCategory">scopeCategory</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="User.php.html#128"><abbr title="App\Entities\User::scopeRole">scopeRole</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Order.php.html#75"><abbr title="App\Entities\Order::scopeSearch">scopeSearch</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="User.php.html#117"><abbr title="App\Entities\User::scopeSearch">scopeSearch</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 7.0.10</a> using <a href="https://secure.php.net/" target="_top">PHP 7.2.19</a> with <a href="https://xdebug.org/">Xdebug 2.9.8</a> and <a href="https://phpunit.de/">PHPUnit 8.5.8</a> at Fri Nov 27 18:28:19 -05 2020.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js" type="text/javascript"></script>
+  <script src="../_js/d3.min.js" type="text/javascript"></script>
+  <script src="../_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([13,0,2,0,0,1,3,0,0,0,0,2], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([66,0,0,1,0,0,3,2,0,0,0,28], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,3,"<a href=\"Cancelled.php.html#8\">App\\Entities\\Cancelled<\/a>"],[46.666666666666664,8,"<a href=\"Cart.php.html#10\">App\\Entities\\Cart<\/a>"],[0,2,"<a href=\"Category.php.html#9\">App\\Entities\\Category<\/a>"],[0,2,"<a href=\"Color.php.html#9\">App\\Entities\\Color<\/a>"],[0,10,"<a href=\"Detail.php.html#9\">App\\Entities\\Detail<\/a>"],[0,1,"<a href=\"Imagen.php.html#8\">App\\Entities\\Imagen<\/a>"],[0,6,"<a href=\"InCart.php.html#9\">App\\Entities\\InCart<\/a>"],[50,3,"<a href=\"Message.php.html#9\">App\\Entities\\Message<\/a>"],[0,6,"<a href=\"Metric.php.html#9\">App\\Entities\\Metric<\/a>"],[0,6,"<a href=\"MetricCancelled.php.html#9\">App\\Entities\\MetricCancelled<\/a>"],[0,6,"<a href=\"MetricPayment.php.html#9\">App\\Entities\\MetricPayment<\/a>"],[16.666666666666664,14,"<a href=\"Order.php.html#13\">App\\Entities\\Order<\/a>"],[100,1,"<a href=\"Payment.php.html#8\">App\\Entities\\Payment<\/a>"],[56.86274509803921,25,"<a href=\"Product.php.html#12\">App\\Entities\\Product<\/a>"],[100,3,"<a href=\"Rating.php.html#8\">App\\Entities\\Rating<\/a>"],[0,1,"<a href=\"Report.php.html#8\">App\\Entities\\Report<\/a>"],[0,1,"<a href=\"Role.php.html#9\">App\\Entities\\Role<\/a>"],[0,1,"<a href=\"Shipping.php.html#8\">App\\Entities\\Shipping<\/a>"],[0,2,"<a href=\"Size.php.html#9\">App\\Entities\\Size<\/a>"],[11.11111111111111,4,"<a href=\"Spending.php.html#8\">App\\Entities\\Spending<\/a>"],[55.55555555555556,18,"<a href=\"User.php.html#17\">App\\Entities\\User<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"Cancelled.php.html#35\">App\\Entities\\Cancelled::user<\/a>"],[0,2,"<a href=\"Cancelled.php.html#45\">App\\Entities\\Cancelled::scopeSearch<\/a>"],[100,1,"<a href=\"Cart.php.html#24\">App\\Entities\\Cart::products<\/a>"],[0,1,"<a href=\"Cart.php.html#34\">App\\Entities\\Cart::productsCount<\/a>"],[0,1,"<a href=\"Cart.php.html#42\">App\\Entities\\Cart::user<\/a>"],[0,2,"<a href=\"Cart.php.html#50\">App\\Entities\\Cart::valorCarrito<\/a>"],[100,2,"<a href=\"Cart.php.html#63\">App\\Entities\\Cart::totalCarrito<\/a>"],[0,1,"<a href=\"Cart.php.html#76\">App\\Entities\\Cart::getCacheCart<\/a>"],[0,1,"<a href=\"Category.php.html#16\">App\\Entities\\Category::products<\/a>"],[0,1,"<a href=\"Category.php.html#24\">App\\Entities\\Category::getCacheCategories<\/a>"],[0,1,"<a href=\"Color.php.html#16\">App\\Entities\\Color::products<\/a>"],[0,1,"<a href=\"Color.php.html#25\">App\\Entities\\Color::getCacheColor<\/a>"],[0,1,"<a href=\"Detail.php.html#29\">App\\Entities\\Detail::color<\/a>"],[0,1,"<a href=\"Detail.php.html#37\">App\\Entities\\Detail::category<\/a>"],[0,1,"<a href=\"Detail.php.html#45\">App\\Entities\\Detail::size<\/a>"],[0,1,"<a href=\"Detail.php.html#53\">App\\Entities\\Detail::product<\/a>"],[0,1,"<a href=\"Detail.php.html#61\">App\\Entities\\Detail::scopeColorSales<\/a>"],[0,1,"<a href=\"Detail.php.html#74\">App\\Entities\\Detail::scopeCategorySales<\/a>"],[0,1,"<a href=\"Detail.php.html#87\">App\\Entities\\Detail::scopeSizeSales<\/a>"],[0,1,"<a href=\"Detail.php.html#100\">App\\Entities\\Detail::scopeProductSalesTotal<\/a>"],[0,1,"<a href=\"Detail.php.html#113\">App\\Entities\\Detail::order<\/a>"],[0,1,"<a href=\"Detail.php.html#121\">App\\Entities\\Detail::getCacheInCarts<\/a>"],[0,1,"<a href=\"Imagen.php.html#21\">App\\Entities\\Imagen::product<\/a>"],[0,1,"<a href=\"InCart.php.html#28\">App\\Entities\\InCart::color<\/a>"],[0,1,"<a href=\"InCart.php.html#36\">App\\Entities\\InCart::cart<\/a>"],[0,1,"<a href=\"InCart.php.html#44\">App\\Entities\\InCart::size<\/a>"],[0,1,"<a href=\"InCart.php.html#52\">App\\Entities\\InCart::category<\/a>"],[0,1,"<a href=\"InCart.php.html#60\">App\\Entities\\InCart::products<\/a>"],[0,1,"<a href=\"InCart.php.html#68\">App\\Entities\\InCart::getCacheInCarts<\/a>"],[100,1,"<a href=\"Message.php.html#25\">App\\Entities\\Message::recipientId<\/a>"],[100,1,"<a href=\"Message.php.html#33\">App\\Entities\\Message::senderId<\/a>"],[0,1,"<a href=\"Message.php.html#41\">App\\Entities\\Message::getCacheMessages<\/a>"],[0,2,"<a href=\"Metric.php.html#25\">App\\Entities\\Metric::isFilteredByPrimaryId<\/a>"],[0,2,"<a href=\"Metric.php.html#35\">App\\Entities\\Metric::scopeFilterByPrimaryId<\/a>"],[0,2,"<a href=\"Metric.php.html#53\">App\\Entities\\Metric::readThreeLevelsMetric<\/a>"],[0,2,"<a href=\"MetricCancelled.php.html#27\">App\\Entities\\MetricCancelled::isFilteredByPrimaryId<\/a>"],[0,2,"<a href=\"MetricCancelled.php.html#37\">App\\Entities\\MetricCancelled::scopeFilterByPrimaryId<\/a>"],[0,2,"<a href=\"MetricCancelled.php.html#54\">App\\Entities\\MetricCancelled::readThreeLevelsMetric<\/a>"],[0,2,"<a href=\"MetricPayment.php.html#28\">App\\Entities\\MetricPayment::isFilteredByPrimaryId<\/a>"],[0,2,"<a href=\"MetricPayment.php.html#38\">App\\Entities\\MetricPayment::scopeFilterByPrimaryId<\/a>"],[0,2,"<a href=\"MetricPayment.php.html#53\">App\\Entities\\MetricPayment::readThreeLevelsMetric<\/a>"],[0,1,"<a href=\"Order.php.html#31\">App\\Entities\\Order::user<\/a>"],[100,1,"<a href=\"Order.php.html#39\">App\\Entities\\Order::details<\/a>"],[100,1,"<a href=\"Order.php.html#47\">App\\Entities\\Order::payment<\/a>"],[0,1,"<a href=\"Order.php.html#55\">App\\Entities\\Order::getCacheOrder<\/a>"],[0,1,"<a href=\"Order.php.html#65\">App\\Entities\\Order::shipping<\/a>"],[66.66666666666666,2,"<a href=\"Order.php.html#75\">App\\Entities\\Order::scopeSearch<\/a>"],[0,2,"<a href=\"Order.php.html#88\">App\\Entities\\Order::scopeStatus<\/a>"],[0,2,"<a href=\"Order.php.html#101\">App\\Entities\\Order::scopeFechaInicio<\/a>"],[0,2,"<a href=\"Order.php.html#114\">App\\Entities\\Order::scopeFechaFinal<\/a>"],[0,1,"<a href=\"Order.php.html#125\">App\\Entities\\Order::scopeUserSales<\/a>"],[100,1,"<a href=\"Payment.php.html#37\">App\\Entities\\Payment::order<\/a>"],[100,1,"<a href=\"Product.php.html#37\">App\\Entities\\Product::imagenes<\/a>"],[20,4,"<a href=\"Product.php.html#46\">App\\Entities\\Product::asignarImagen<\/a>"],[0,1,"<a href=\"Product.php.html#67\">App\\Entities\\Product::tieneImagen<\/a>"],[100,1,"<a href=\"Product.php.html#79\">App\\Entities\\Product::scopeActive<\/a>"],[50,2,"<a href=\"Product.php.html#89\">App\\Entities\\Product::scopeSearch<\/a>"],[50,2,"<a href=\"Product.php.html#101\">App\\Entities\\Product::scopeCategory<\/a>"],[100,1,"<a href=\"Product.php.html#115\">App\\Entities\\Product::colors<\/a>"],[100,1,"<a href=\"Product.php.html#123\">App\\Entities\\Product::asignarColor<\/a>"],[100,1,"<a href=\"Product.php.html#131\">App\\Entities\\Product::tieneColor<\/a>"],[100,1,"<a href=\"Product.php.html#142\">App\\Entities\\Product::categories<\/a>"],[100,1,"<a href=\"Product.php.html#150\">App\\Entities\\Product::asignarCategory<\/a>"],[100,1,"<a href=\"Product.php.html#158\">App\\Entities\\Product::tieneCategory<\/a>"],[100,1,"<a href=\"Product.php.html#169\">App\\Entities\\Product::sizes<\/a>"],[100,1,"<a href=\"Product.php.html#178\">App\\Entities\\Product::asignarSize<\/a>"],[100,1,"<a href=\"Product.php.html#186\">App\\Entities\\Product::tieneSize<\/a>"],[0,1,"<a href=\"Product.php.html#196\">App\\Entities\\Product::carts<\/a>"],[0,1,"<a href=\"Product.php.html#204\">App\\Entities\\Product::getCacheProducts<\/a>"],[0,1,"<a href=\"Product.php.html#214\">App\\Entities\\Product::userCreate<\/a>"],[0,1,"<a href=\"Product.php.html#222\">App\\Entities\\Product::userUpdate<\/a>"],[0,1,"<a href=\"Product.php.html#230\">App\\Entities\\Product::barcode<\/a>"],[100,1,"<a href=\"Rating.php.html#14\">App\\Entities\\Rating::rateable<\/a>"],[100,1,"<a href=\"Rating.php.html#19\">App\\Entities\\Rating::qualifier<\/a>"],[100,1,"<a href=\"Rating.php.html#27\">App\\Entities\\Rating::scopeTopRating<\/a>"],[0,1,"<a href=\"Report.php.html#22\">App\\Entities\\Report::user<\/a>"],[0,1,"<a href=\"Role.php.html#18\">App\\Entities\\Role::getCacheRoles<\/a>"],[0,1,"<a href=\"Shipping.php.html#27\">App\\Entities\\Shipping::order<\/a>"],[0,1,"<a href=\"Size.php.html#16\">App\\Entities\\Size::products<\/a>"],[0,1,"<a href=\"Size.php.html#24\">App\\Entities\\Size::getCacheSizes<\/a>"],[0,1,"<a href=\"Spending.php.html#26\">App\\Entities\\Spending::userCreate<\/a>"],[0,1,"<a href=\"Spending.php.html#34\">App\\Entities\\Spending::userUpdate<\/a>"],[100,1,"<a href=\"Spending.php.html#42\">App\\Entities\\Spending::product<\/a>"],[0,1,"<a href=\"Spending.php.html#50\">App\\Entities\\Spending::scopeSpendinTotal<\/a>"],[100,1,"<a href=\"User.php.html#61\">App\\Entities\\User::roles<\/a>"],[100,1,"<a href=\"User.php.html#69\">App\\Entities\\User::asignarRol<\/a>"],[100,1,"<a href=\"User.php.html#78\">App\\Entities\\User::tieneRol<\/a>"],[100,1,"<a href=\"User.php.html#89\">App\\Entities\\User::cart<\/a>"],[100,1,"<a href=\"User.php.html#97\">App\\Entities\\User::orders<\/a>"],[0,1,"<a href=\"User.php.html#105\">App\\Entities\\User::getCacheUser<\/a>"],[66.66666666666666,2,"<a href=\"User.php.html#117\">App\\Entities\\User::scopeSearch<\/a>"],[50,2,"<a href=\"User.php.html#128\">App\\Entities\\User::scopeRole<\/a>"],[0,1,"<a href=\"User.php.html#142\">App\\Entities\\User::products<\/a>"],[0,1,"<a href=\"User.php.html#150\">App\\Entities\\User::productsUpdate<\/a>"],[0,1,"<a href=\"User.php.html#158\">App\\Entities\\User::cancellers<\/a>"],[0,1,"<a href=\"User.php.html#166\">App\\Entities\\User::reports<\/a>"],[100,1,"<a href=\"User.php.html#174\">App\\Entities\\User::messagesRecipient<\/a>"],[0,1,"<a href=\"User.php.html#182\">App\\Entities\\User::messagesSender<\/a>"],[0,1,"<a href=\"User.php.html#190\">App\\Entities\\User::spending<\/a>"],[0,1,"<a href=\"User.php.html#198\">App\\Entities\\User::spendingUpdate<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

@@ -1,4 +1,3 @@
-
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -18,7 +17,7 @@
                     <tr>
                         <td>
                             <div class="form-group">
-                                <label for="name_recipient" class="negrita">Nombre de quien recibe:</label>
+                                <label for="name_recipient" class="negrita">{!! trans('messages.Name') !!}</label>
                                 <div>
                                     <input class="form-control" placeholder="name_recipient" required="required" name="name_recipient" type="text"
                                     id="name_recipient">
@@ -26,7 +25,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="phone_recipient" class="negrita">Telefono:</label>
+                                <label for="phone_recipient" class="negrita">{!! trans('messages.Phone') !!}</label>
                                 <div>
                                     <input class="form-control" placeholder="phone_recipient" required="required" name="phone_recipient" type="text"
                                     id="phone_recipient">
@@ -34,7 +33,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="cellphone_recipient" class="negrita">Celular:</label>
+                                <label for="cellphone_recipient" class="negrita">{!! trans('messages.Cell phone') !!}</label>
                                 <div>
                                     <input class="form-control" placeholder="cellphone_recipient" required="required" name="cellphone_recipient" type="text"
                                     id="cellphone_recipient">
@@ -42,7 +41,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="document_recipient" class="negrita">Documento de identidad:</label>
+                                <label for="document_recipient" class="negrita">{!! trans('messages.Document') !!}</label>
                                 <div>
                                     <input class="form-control" placeholder="document_recipient" required="required" name="document_recipient" type="text"
                                     id="document_recipient">
@@ -54,7 +53,7 @@
                         <td>
 
                             <div class="form-group">
-                                <label for="address_recipient" class="negrita">Direccion de envio:</label>
+                                <label for="address_recipient" class="negrita">{!! trans('messages.Direction') !!}</label>
                                 <div>
                                     <input class="form-control" placeholder="address_recipient" required="required" name="address_recipient" type="text"
                                     id="address_recipient">
@@ -71,7 +70,7 @@
 
 
                             <div class="form-group">
-                                <label for="country_recipient" class="negrita">Pais:</label>
+                                <label for="country_recipient" class="negrita">{!! trans('messages.Pais') !!}</label>
                                 <div>
                                     <input class="form-control" placeholder="country_recipient" required="required" name="country_recipient" type="text"
                                     id="country_recipient">
@@ -79,7 +78,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="city_recipient" class="negrita">Ciudad:</label>
+                                <label for="city_recipient" class="negrita">{!! trans('messages.City') !!}</label>
                                 <div>
                                     <input class="form-control" placeholder="city_recipient" required="required" name="city_recipient" type="text"
                                     id="city_recipient">
@@ -89,7 +88,7 @@
                             <input type="hidden" value="{{$order->id}}" name="order_id">
 
                             <button type="submit" class="btn btn-block btn-sm btn-primary">
-                                Agregar datos para el envio
+                                {!! trans('messages.Agregar datos para el envio') !!}
                             </button>
                         </td>
                     </tr>

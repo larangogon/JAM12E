@@ -19,6 +19,7 @@ class CreateDetailsTable extends Migration
             $table->unsignedBigInteger('product_id')->unsigned();
             $table->unsignedBigInteger('color_id');
             $table->unsignedBigInteger('size_id');
+            $table->string('check')->default('null check');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('order_id');
 

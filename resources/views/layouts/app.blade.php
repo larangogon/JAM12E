@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+
     <script src="{{ asset('dist/js/adminlte.js') }}"></script>
     <script src="{{asset('js/app.js') }}" defer></script>
 
@@ -25,7 +26,6 @@
     <link href="{{asset('dist/css/adminlte.min.css') }}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{mix('css/app.css') }}" rel="stylesheet">
-
 
 </head>
 
@@ -45,7 +45,7 @@
                 <!-- SEARCH FORM -->
                 <form class="form-inline ml-3">
                     <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar"  name="search" type="search" placeholder="Search"
+                        <input class="form-control form-control-navbar"  name="search" type="search" placeholder={!! trans('messages.search') !!}
                             aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-navbar" type="submit">
@@ -59,7 +59,7 @@
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <form action="{{route('vitrina.index')}}" method="get">
                                 <label for=""></label><input type="text" name="category" id="" value="Hogar" hidden>
-                                <button type="submit" class="btn btn-link">Hogar</button>
+                                <button type="submit" class="btn btn-link">{!! trans('messages.HomeCategory') !!}</button>
                             </form>
                         </a>
                     </li>
@@ -67,7 +67,7 @@
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <form action="{{route('vitrina.index')}}" method="get">
                                 <input type="text" name="category" id="" value="Hombre" hidden>
-                                <button type="submit" class="btn btn-link">Hombre</button>
+                                <button type="submit" class="btn btn-link">{!! trans('messages.Man') !!}</button>
                             </form>
                         </a>
                     </li>
@@ -75,7 +75,7 @@
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <form action="{{route('vitrina.index')}}" method="get">
                                 <input type="text" name="category" id="" value="Mujer" hidden>
-                                <button type="submit" class="btn btn-link">Mujer</button>
+                                <button type="submit" class="btn btn-link">{!! trans('messages.Woman') !!}</button>
                             </form>
                         </a>
                     </li>

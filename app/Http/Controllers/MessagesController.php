@@ -49,6 +49,20 @@ class MessagesController extends Controller
         ]);
     }
 
+    public function create(): View
+    {
+        $users = User::where('id', '!=', auth()->id())->get();
+
+        $admins = User::whereHas('roles', function ($query) {
+            $query->where('name', 'Administrator');
+        })->get();
+
+        return view('messages.create', [
+            'users'    => $users,
+            'admins'   => $admins,
+        ]);
+    }
+
     /**
      * @param RequestMessage $request
      * @return RedirectResponse
@@ -57,7 +71,7 @@ class MessagesController extends Controller
     {
         $message = Message::create($request->all());
 
-        return redirect()->back()
+        return redirect('messages')
             ->with('success', 'Mensaje enviado');
     }
 
@@ -83,4 +97,16 @@ class MessagesController extends Controller
 
         return view('messages.show', compact('msg'));
     }
+
+    /**
+     * @param int $id
+     * @return View
+     */
+    public function response(int $id): View
+    {
+        $msg = Message::where('id', '=', $id)->firstOrFail();
+
+        return view('messages.response', compact('msg'));
+    }
+
 }

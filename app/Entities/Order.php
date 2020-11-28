@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
 
 class Order extends Model
@@ -116,5 +117,17 @@ class Order extends Model
             return $query
                 ->where('created_at', 'LIKE', "%$fechaFinal%");
         }
+    }
+
+    /**
+     * @param $query
+     */
+    public function scopeUserSales($query)
+    {
+        $query->with('user')
+            ->selectRaw('user_id, SUM(`total`) as total')
+            ->groupBy('user_id')
+            ->orderByDesc('total')
+            ->limit(3);
     }
 }

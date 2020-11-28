@@ -52,7 +52,6 @@ class CartController extends Controller
         }
         $this->carts->add($request);
 
-
         return redirect()
             ->back()
             ->with('success', 'Producto agregado al carrito con éxito');

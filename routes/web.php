@@ -83,8 +83,13 @@ Route::post('products/{product}/unrate', 'ProductRatingController@unrate')->name
 Route::resource('notifications', 'NotificationController')->only('index');
 Route::post('/mark-as-read', 'NotificationController@markNotification')->name('markNotification');
 
-Route::resource('messages', 'MessagesController')->only('index', 'store', 'destroy', 'show');
+Route::resource('messages', 'MessagesController')->only('index', 'store', 'destroy', 'show', 'create');
+Route::get('messages/response/{id}', 'MessagesController@response')->name('messages.response');
 
 Route::resource('spendings', 'SpendingController');
 
 Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+
+Route::get('/phpinfo', function () {
+    phpinfo();
+});

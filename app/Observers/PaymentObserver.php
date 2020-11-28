@@ -24,8 +24,6 @@ class PaymentObserver
         if ($payment->status === 'APPROVED') {
             PayActuality::dispatch($payment)->delay(now()->addMinutes(1));
         }
-
-        event(new PaymentIsCreated($payment));
     }
 
     public function created(Payment $payment)
