@@ -108,5 +108,4 @@ class MessagesController extends Controller
 
         return view('messages.response', compact('msg'));
     }
-
 }

@@ -63,9 +63,9 @@ class VitrinaController extends Controller
         $total = $ratin->sum('score');
         $promedio = $ratin->count('qualifiqier_type');
 
-        if($total){
+        if ($total) {
             $promediox = $total / $promedio;
-        }else{
+        } else {
             $promediox = $total;
         }
 

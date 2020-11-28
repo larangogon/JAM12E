@@ -32,7 +32,6 @@ class OrderActuality implements ShouldQueue
     {
         if ($this->order->status === 'APPROVED') {
             foreach ($this->order->details as $details) {
-
                 $details->check = 'vendido';
                 $details->save();
 

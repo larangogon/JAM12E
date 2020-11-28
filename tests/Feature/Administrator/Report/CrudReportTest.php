@@ -63,8 +63,7 @@ class CrudReportTest extends TestCase
         $status = 'APPROVED';
 
         $response = $this->actingAs($this->user, 'web')
-            ->post(route('reportOrders')
-                , [
+            ->post(route('reportOrders'), [
                     'fechaFinal' => $fechaInicio,
                     'fechaInicio' => $fechaFinal,
                     'status' => $status,

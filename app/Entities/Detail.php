@@ -61,7 +61,7 @@ class Detail extends Model
     public function scopeColorSales($query)
     {
         $query->with('color')
-            ->where('check' ,'=', 'vendido')
+            ->where('check', '=', 'vendido')
             ->selectRaw('color_id, SUM(`total`) as total')
             ->groupBy('color_id')
             ->orderByDesc('total')
@@ -74,7 +74,7 @@ class Detail extends Model
     public function scopeCategorySales($query)
     {
         $query->with('category')
-            ->where('check' ,'=', 'vendido')
+            ->where('check', '=', 'vendido')
             ->selectRaw('category_id, SUM(`total`) as total')
             ->groupBy('category_id')
             ->orderByDesc('total')
@@ -87,7 +87,7 @@ class Detail extends Model
     public function scopeSizeSales($query)
     {
         $query->with('size', 'order')
-            ->where('check' ,'=', 'vendido')
+            ->where('check', '=', 'vendido')
             ->selectRaw('size_id, order_id, SUM(`total`) as total')
             ->groupBy('size_id', 'order_id')
             ->orderByDesc('total')
@@ -100,7 +100,7 @@ class Detail extends Model
     public function scopeProductSalesTotal($query)
     {
         $query->with('product')
-            ->where('check' ,'=', 'vendido')
+            ->where('check', '=', 'vendido')
             ->selectRaw('product_id, SUM(`total`) as total')
             ->groupBy('product_id')
             ->orderByDesc('total')
