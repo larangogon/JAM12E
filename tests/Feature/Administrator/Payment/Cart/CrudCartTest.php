@@ -62,34 +62,6 @@ class CrudCartTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testadd(): void
-    {
-        $this->withoutMiddleware();
-        $this->product = factory(Product::class)->create();
-        $this->color   = factory(Color::class)->create();
-        $this->size    = factory(Size::class)->create();
-        $this->category   = factory(Category::class)->create();
-
-        $response = $this->actingAs($this->user)
-            ->post(route('cart/add'),[
-                'products_id' => $this->product->id,
-                'stock' =>  '23',
-                'color_id' => $this->color->id,
-                'size_id' => $this->size->id,
-                'category_id'=> $this->category->id
-            ]);
-
-        $response
-            ->assertStatus(302);
-
-        $this->assertDatabaseHas('in_carts', [
-            'stock' =>  '23',
-            'color_id' => $this->color->id,
-            'size_id' => $this->size->id,
-            'category_id'=> $this->category->id
-        ]);
-    }
-
     public function testRemove(): void
     {
         $this->withoutMiddleware();
