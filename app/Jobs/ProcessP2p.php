@@ -55,7 +55,7 @@ class ProcessP2p implements ShouldQueue
                 ]);
 
                 return logger()->channel('stack')
-                    ->info('ordenes con estado pendiente o rechazadas en proceso');
+                    ->info('orden con estado pendiente o rechazada en proceso');
             } elseif ($response->payment[0]->status->status  === "APPROVED") {
                 foreach ($response->payment as $payments) {
                     $pay = $payments;

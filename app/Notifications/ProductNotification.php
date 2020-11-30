@@ -43,8 +43,8 @@ class ProductNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id'   => $this->product->id,
-            'name' => $this->product->name,
+            'id'    => $this->product->id,
+            'name'  => $this->product->name,
             'stock' => $this->product->stock,
         ];
     }
