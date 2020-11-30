@@ -137,8 +137,8 @@ class OrderController extends Controller
     {
         $this->orders->reversePay($request);
 
-        return redirect('vitrina')
-            ->with('success', ' el pago se  ha revertido exitosamente!');
+        return redirect('canceller')
+            ->with('success', ' El pago se  ha revertido exitosamente!');
     }
 
     /**
@@ -189,7 +189,7 @@ class OrderController extends Controller
             'mobile'            => $order->payment->mobile,
             'amountReturn'      => $order->payment->totalStore,
             'order_id'          => $order->id,
-            'description'       => 'garantia',
+            'description'       => 'Garantia',
             'cancelled_by'      => auth()->user()->id,
             'totalOrder'        => $order->total,
             'status'            => 'CANCELADO_T'

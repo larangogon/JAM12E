@@ -3,6 +3,11 @@
 @section('content')
     @can('Administrator')
         <div class="container">
+            @if (session('success'))
+                <div class="alert-default-success" role="alert">
+                    <p>{{session('success')}}</p>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-md-8">
                     <h2>
@@ -36,7 +41,7 @@
                             {{$canceller->processUrl ?? ('Pago cancelado desde la tienda fisica')}}
                         </td>
                         <td>{{$canceller->created_at}}</td>
-                        <td>$.-{{number_format($canceller->amountReturn)}}</td>
+                        <td>$.{{number_format($canceller->amountReturn)}}</td>
                         <td>{{$canceller->user->name}}{{$canceller->user->id}}</td>
                     </tr>
                 @endforeach

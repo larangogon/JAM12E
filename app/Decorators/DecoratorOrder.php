@@ -286,33 +286,20 @@ class DecoratorOrder implements InterfaceOrders
 
         $response = $this->requestP2P('reverse', $order);
 
-        $requestId  = $order->payment->requestId;
-        $processUrl = $order->payment->processUrl;
-        $message    = $response->status->message;
-        $amount     = $response->payment->amount->from->total;
-
-        $order->update([
-            'processUrl' => $processUrl,
-            'requestId'  => $requestId,
-            'status'     => 'CANCELADO',
-            "message"    => $message,
-            "amount"     => $amount,
-        ]);
-
         $orderCancelled = Cancelled::create([
         'user_id'           => $order->user->id,
         'status'            => 'CANCELADO',
-        'statusTransaction' => $order->payment->status,
+        'statusTransaction' => $response->status->status,
         'requestId'         => $order->payment->requestId,
         'internalReference' => $order->payment->internalReference,
         'processUrl'        => $order->payment->processUrl,
-        'message'           => $order->payment->message,
+        'message'           => $response->status->message,
         'document'          => $order->payment->document,
         'name'              => $order->payment->name,
         'email'             => $order->payment->email,
         'mobile'            => $order->payment->mobile,
         'locale'            => $order->payment->locale,
-        'amountReturn'      => $order->payment->amount,
+        'amountReturn'      => $response->payment->amount->from->total,
         'order_id'          => $order->id,
         'cancelled_by'      => auth()->user()->id,
         'totalOrder'        => $order->total,
