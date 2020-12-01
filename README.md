@@ -25,6 +25,7 @@
 - **To finish and deploy the application, run the command:**
    * -php artisan optimize:clear
    * -php artisan passport:install
+   * -php artisan storage:link
    * -php artisan serve
 - **Login.**
     * -(user: admin@example.com, password: 123).
