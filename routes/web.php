@@ -19,76 +19,129 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified', 'Status');
-Route::resource('users', 'UserController');
-Route::get('users/{user}/active')->uses('UserController@active')->name('users.active');
+Route::get('/home', 'HomeController@index')
+    ->name('home')
+    ->middleware('verified', 'Status');
 
-Route::resource('roles', 'RoleController')->only(['index', 'store', 'update', 'destroy']);
+Route::resource('users', 'UserController');
+Route::get('users/{user}/active')
+    ->uses('UserController@active')
+    ->name('users.active');
+
+Route::resource('roles', 'RoleController')
+    ->only(['index', 'store', 'update', 'destroy']);
 
 Route::resource('products', 'ProductsController');
-Route::get('products/{product}/active')->uses('ProductsController@active')->name('products.active');
-Route::get('products/destroyimagen/{imagen_id}/{product_id}', 'ProductsController@destroyimagen')->name('products/destroyimagen');
+Route::get('products/{product}/active')
+    ->uses('ProductsController@active')
+    ->name('products.active');
+Route::get('products/destroyimagen/{imagen_id}/{product_id}')
+    ->uses( 'ProductsController@destroyimagen')
+    ->name('products/destroyimagen');
 
-Route::resource('vitrina', 'VitrinaController')->only(['index', 'show']);
-Route::resource('nosotros', 'NosotrosController')->only('index');
-Route::get('nosotros/indexApi', 'NosotrosController@indexApi')->name('nosotros.indexApi');
+Route::resource('vitrina', 'VitrinaController')
+    ->only(['index', 'show']);
+Route::resource('nosotros', 'NosotrosController')
+    ->only('index');
+Route::get('nosotros/indexApi', 'NosotrosController@indexApi')
+    ->name('nosotros.indexApi');
 
-Route::resource('categories', 'CategoryController')->only(['index', 'store']);
-Route::resource('colors', 'ColorController')->only(['index', 'store']);
-Route::resource('sizes', 'SizeController')->only(['index', 'store']);
+Route::resource('categories', 'CategoryController')
+    ->only(['index', 'store']);
+Route::resource('colors', 'ColorController')
+    ->only(['index', 'store']);
+Route::resource('sizes', 'SizeController')
+    ->only(['index', 'store']);
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
-Route::post('cart/add', 'CartController@add')->name('cart/add');
-Route::get('cart/remove', 'CartController@remove')->name('cart.remove');
-Route::resource('cart', 'CartController')->only(['show', 'destroy', 'update']);
+Route::post('cart/add', 'CartController@add')
+    ->name('cart/add');
+Route::get('cart/remove', 'CartController@remove')
+    ->name('cart.remove');
+Route::resource('cart', 'CartController')
+    ->only(['show', 'destroy', 'update']);
 
 Route::resource('orders', 'OrderController');
-Route::get('orders/{user}/orders', 'OrderController@showv')->name('orders.showv');
-Route::post('orders/resend', 'OrderController@resend')->name('orders.resend');
-Route::post('orders/complete', 'OrderController@complete')->name('orders.complete');
-Route::post('orders/reversePay', 'OrderController@reversePay')->name('orders.reversePay');
-Route::post('orders/paymentInStore', 'OrderController@paymentInStore')->name('orders.paymentInStore');
-Route::get('orders/{order}/shippingStatus')->uses('OrderController@shippingStatus')->name('orders.shippingStatus');
-Route::post('orders/cancellerOrderStore', 'OrderController@cancellerOrderStore')->name('cancellerOrderStore');
+Route::get('orders/{user}/orders', 'OrderController@showv')
+    ->name('orders.showv');
+Route::post('orders/resend', 'OrderController@resend')
+    ->name('orders.resend');
+Route::post('orders/complete', 'OrderController@complete')
+    ->name('orders.complete');
+Route::post('orders/reversePay', 'OrderController@reversePay')
+    ->name('orders.reversePay');
+Route::post('orders/paymentInStore', 'OrderController@paymentInStore')
+    ->name('orders.paymentInStore');
+Route::get('orders/{order}/shippingStatus')
+    ->uses('OrderController@shippingStatus')
+    ->name('orders.shippingStatus');
+Route::post('orders/cancellerOrderStore', 'OrderController@cancellerOrderStore')
+    ->name('cancellerOrderStore');
 
-Route::get('canceller')->uses('OrderController@canceller')->name('orders.canceller');
-Route::resource('shipping', 'ShippingController')->only(['create', 'store']);
+Route::get('canceller')->uses('OrderController@canceller')
+    ->name('orders.canceller');
+Route::resource('shipping', 'ShippingController')
+    ->only(['create', 'store']);
 
-Route::get('exportUsers', 'ExportController@exportUsers')->name('exportUsers');
-Route::get('exportProducts', 'ExportController@exportProducts')->name('exportProducts');
-Route::get('exportOrders', 'ExportController@exportOrders')->name('exportOrders');
-Route::get('reportGeneralExport', 'ExportController@reportGeneralExport')->name('reportGeneralExport');
-Route::get('reportProductExport', 'ExportController@reportProductExport')->name('reportProductExport');
-Route::post('/ruteExcel', 'ExportController@ruteExcel')->name('ruteExcel');
+Route::get('exportUsers', 'ExportController@exportUsers')
+    ->name('exportUsers');
+Route::get('exportProducts', 'ExportController@exportProducts')
+    ->name('exportProducts');
+Route::get('exportOrders', 'ExportController@exportOrders')
+    ->name('exportOrders');
+Route::get('reportGeneralExport', 'ExportController@reportGeneralExport')
+    ->name('reportGeneralExport');
+Route::get('reportProductExport', 'ExportController@reportProductExport')
+    ->name('reportProductExport');
+Route::post('/ruteExcel', 'ExportController@ruteExcel')
+    ->name('ruteExcel');
 
-Route::post('imports/import', 'ImportController@import')->name('import');
-Route::get('imports/index', 'ImportController@index')->name('imports.index');
-Route::get('imports/indexProducts', 'ImportController@indexProducts')->name('indexProducts');
-Route::post('imports/importProducts', 'ImportController@importProducts')->name('importProducts');
-Route::post('imports/imgsProducts', 'ImportController@imgsProducts')->name('imgsProducts');
+Route::post('imports/import', 'ImportController@import')
+    ->name('import');
+Route::get('imports/index', 'ImportController@index')
+    ->name('imports.index');
+Route::get('imports/indexProducts', 'ImportController@indexProducts')
+    ->name('indexProducts');
+Route::post('imports/importProducts', 'ImportController@importProducts')
+    ->name('importProducts');
+Route::post('imports/imgsProducts', 'ImportController@imgsProducts')
+    ->name('imgsProducts');
 
 
-Route::post('/reportOrders-pdf', 'ReportController@reportOrders')->name('reportOrders');
-Route::get('/reportGeneral-pdf', 'ReportController@reportGeneral')->name('reportGeneral');
-Route::post('/rute', 'ReportController@rute')->name('rute');
-Route::resource('reports', 'ReportController')->only('show', 'index', 'destroy');
+Route::post('/reportOrders-pdf', 'ReportController@reportOrders')
+    ->name('reportOrders');
+Route::get('/reportGeneral-pdf', 'ReportController@reportGeneral')
+    ->name('reportGeneral');
+Route::post('/rute', 'ReportController@rute')
+    ->name('rute');
+Route::resource('reports', 'ReportController')
+    ->only('show', 'index', 'destroy');
 
-Route::get('metrics', 'MetricController@index')->name('metrics.index');
-Route::get('metrics/{metric}', 'MetricController@show')->name('metrics.show');
+Route::get('metrics', 'MetricController@index')
+    ->name('metrics.index');
+Route::get('metrics/{metric}', 'MetricController@show')
+    ->name('metrics.show');
 
-Route::post('products/{product}/rate', 'ProductRatingController@rate')->name('rate');
-Route::post('products/{product}/unrate', 'ProductRatingController@unrate')->name('unrate');
+Route::post('products/{product}/rate', 'ProductRatingController@rate')
+    ->name('rate');
+Route::post('products/{product}/unrate', 'ProductRatingController@unrate')
+    ->name('unrate');
 
-Route::resource('notifications', 'NotificationController')->only('index');
-Route::post('/mark-as-read', 'NotificationController@markNotification')->name('markNotification');
+Route::resource('notifications', 'NotificationController')
+    ->only('index');
+Route::post('/mark-as-read', 'NotificationController@markNotification')
+    ->name('markNotification');
 
-Route::resource('messages', 'MessagesController')->only('index', 'store', 'destroy', 'show', 'create');
-Route::get('messages/response/{id}', 'MessagesController@response')->name('messages.response');
+Route::resource('messages', 'MessagesController')
+    ->only('index', 'store', 'destroy', 'show', 'create');
+Route::get('messages/response/{id}', 'MessagesController@response')
+    ->name('messages.response');
 
 Route::resource('spendings', 'SpendingController');
 
-Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+Route::get('lang/{lang}', 'LanguageController@swap')
+    ->name('lang.swap');
 
 Route::get('/phpinfo', function () {
     phpinfo();
