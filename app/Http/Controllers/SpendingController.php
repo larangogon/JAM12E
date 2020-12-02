@@ -38,14 +38,14 @@ class SpendingController extends Controller
 
         return view('spendings.index', [
             'spendings' => $spendings,
-            'search'   => $query
+            'search'    => $query
         ]);
     }
 
     /**
      * @return View
      */
-    public function create()
+    public function create(): View
     {
         return view('spendings.create');
     }
@@ -59,14 +59,14 @@ class SpendingController extends Controller
         $spending = Spending::create($request->all());
 
         return redirect('/spendings')
-            ->with('success', 'Creado Satisfactoriamente');
+            ->with('success', 'Creado satisfactoriamente');
     }
 
     /**
      * @param int $id
      * @return View
      */
-    public function show(int $id)
+    public function show(int $id): View
     {
         $spending = Spending::where('id', '=', $id)->firstOrFail();
 
@@ -77,7 +77,7 @@ class SpendingController extends Controller
      * @param int $id
      * @return View
      */
-    public function edit(int $id)
+    public function edit(int $id): View
     {
         $spending  = Spending::findOrFail($id);
 
@@ -100,10 +100,12 @@ class SpendingController extends Controller
 
     /**
      * @param int $id
+     * @return RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
         Spending::destroy($id);
+
         return redirect('spendings')
             ->with('success', 'Eliminado Satisfactoriamente');
     }

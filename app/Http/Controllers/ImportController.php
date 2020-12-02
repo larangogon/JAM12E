@@ -7,10 +7,7 @@ use App\Http\Requests\ImportRequest;
 use App\Imports\ProductsImport;
 use App\Imports\UsersImport;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Maatwebsite\Excel\Facades\Excel;
-use Maatwebsite\Excel\Validators\ValidationException;
 
 class ImportController extends Controller
 {

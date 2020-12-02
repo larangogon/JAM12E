@@ -42,6 +42,6 @@ class RuleColor implements Rule
      */
     public function message()
     {
-        return 'Color does not exist in the database';
+        return 'El color no existe en la base de datos';
     }
 }

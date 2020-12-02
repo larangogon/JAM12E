@@ -35,9 +35,13 @@ class MessagesController extends Controller
             ->orderBy('id', 'asc')
             ->paginate(6);
 
+        $messagesUserSee = Message::where('sender_id', '=', auth()->user()->id)
+            ->get();
+
         return view('messages.index', [
             'messages' => $messages,
-            'search'   => $query
+            'search'   => $query,
+            'messagesUserSee' => $messagesUserSee
         ]);
     }
 

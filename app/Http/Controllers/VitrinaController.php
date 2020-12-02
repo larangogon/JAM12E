@@ -45,9 +45,9 @@ class VitrinaController extends Controller
 
     /**
      * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View
+     * @return View
      */
-    public function show(int $id)
+    public function show(int $id): View
     {
         $product = Product::active()
             ->where('id', '=', $id)
