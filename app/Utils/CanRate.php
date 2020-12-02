@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 trait CanRate
 {
+    /**
+     * @param null $model
+     * @return mixed
+     */
     public function ratings($model = null)
     {
         $modelClass = $model ? (new $model)->getMorphClass() : $this->getMorphClass();
@@ -28,6 +32,11 @@ trait CanRate
         return $morphToMany;
     }
 
+    /**
+     * @param Model $model
+     * @param float $score
+     * @return bool
+     */
     public function rate(Model $model, float $score): bool
     {
         if ($this->hasRated($model)) {
@@ -42,6 +51,10 @@ trait CanRate
         return true;
     }
 
+    /**
+     * @param Model $model
+     * @return bool
+     */
     public function unrate(Model $model): bool
     {
         if (! $this->hasRated($model)) {
@@ -53,6 +66,10 @@ trait CanRate
         return true;
     }
 
+    /**
+     * @param Model $model
+     * @return bool
+     */
     public function hasRated(Model $model): bool
     {
         return ! is_null($this->ratings($model->getMorphClass())->find($model->getKey()));

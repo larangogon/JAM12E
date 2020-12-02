@@ -41,6 +41,6 @@ class CategoryRule implements Rule
      */
     public function message()
     {
-        return 'Category does not exist in the database';
+        return 'La categoría no existe en la base de datos';
     }
 }

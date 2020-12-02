@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Order;
-use App\Entities\Product;
 use App\Entities\Report;
 use App\Http\Requests\RequestFilter;
 use App\Jobs\ProcessReportGeneral;
@@ -71,9 +70,7 @@ class ReportController extends Controller
 
         if ($fechaInicio > $fechaFinal) {
             return redirect()->back()->with(
-                'success',
-                '...la fecha inicial es mayor que la final !'
-            );
+                'success', 'La fecha inicial es mayor que la final !');
         }
 
         $ordersx = Order::whereBetween('created_at', [
@@ -100,10 +97,7 @@ class ReportController extends Controller
         ]);
 
         return redirect()->back()
-            ->with(
-                'success',
-                '...El reporte se ha generado, verifica tu correo !'
-            );
+            ->with('success', 'El reporte se ha generado, verifica tu correo !');
     }
 
     /**
@@ -127,10 +121,7 @@ class ReportController extends Controller
         ]);
 
         return redirect()->back()
-            ->with(
-                'success',
-                '...El reporte se ha generado, verifica tu correo!'
-            );
+            ->with('success', 'El reporte se ha generado, verifica tu correo!');
     }
 
     /**

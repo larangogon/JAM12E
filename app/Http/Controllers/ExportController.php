@@ -68,10 +68,7 @@ class ExportController extends Controller
         ]);
 
         return redirect()->back()
-            ->with(
-                'success',
-                '...El reporte se ha generado, verifica tu correo!'
-            );
+            ->with('success', 'El reporte se ha generado, verifica tu correo!');
     }
 
     /**
@@ -92,10 +89,7 @@ class ExportController extends Controller
         ]);
 
         return redirect()->back()
-            ->with(
-                'success',
-                '...El reporte se ha generado, verifica tu correo!'
-            );
+            ->with('success', 'El reporte se ha generado, verifica tu correo!');
     }
 
     /**

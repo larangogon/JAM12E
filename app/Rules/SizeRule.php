@@ -41,6 +41,6 @@ class SizeRule implements Rule
      */
     public function message()
     {
-        return 'Size does not exist in the database';
+        return 'La talla no existe en la base de datos';
     }
 }

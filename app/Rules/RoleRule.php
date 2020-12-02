@@ -42,6 +42,6 @@ class RoleRule implements Rule
      */
     public function message()
     {
-        return 'Rol does not exist in the database';
+        return 'El Rol no existe en la base de datos';
     }
 }

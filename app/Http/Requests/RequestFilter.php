@@ -26,8 +26,8 @@ class RequestFilter extends FormRequest
     {
         return [
             'fechaInicio'  => 'required',
-            'fechaFinal' => 'required',
-            'status' => ['required'],
+            'fechaFinal'   => 'required',
+            'status'       => ['required'],
         ];
     }
 }

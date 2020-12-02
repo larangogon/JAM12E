@@ -168,14 +168,22 @@ class OrderController extends Controller
         ]);
     }
 
-    public function paymentInStore(RequestOrderStore $request)
+    /**
+     * @param RequestOrderStore $request
+     * @return RedirectResponse
+     */
+    public function paymentInStore(RequestOrderStore $request): RedirectResponse
     {
         $this->orders->paymentInStore($request);
 
         return redirect('orders')->with('success', 'Orden creada exitosamente');
     }
 
-    public function cancellerOrderStore(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function cancellerOrderStore(Request $request): RedirectResponse
     {
         $order = Order::find($request->get('order'));
 
