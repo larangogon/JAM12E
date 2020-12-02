@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Entities\Order;
+use App\Policies\OrderPolicy;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\Response;
@@ -16,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Order' => 'App\Policies\OrderPolicy',
+        Order::class => OrderPolicy::class,
         // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 

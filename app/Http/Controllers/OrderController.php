@@ -81,10 +81,11 @@ class OrderController extends Controller
      * @param Request $request
      * @param Order $order
      * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Request $request, Order $order): View
     {
+        $this->authorize('owner', $order);
+
         $order = $this->orders->update($request, $order->id);
 
         return view('orders.show', [
@@ -99,6 +100,10 @@ class OrderController extends Controller
      */
     public function showv(User $user): View
     {
+        $this->authorize('ownerIndex', [
+            Order::class, $user->id
+        ]);
+
         return view('orders.showv', [
             'orders' => $user->orders
         ]);
