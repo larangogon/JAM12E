@@ -16,17 +16,21 @@
      * -exit
      * -php artisan migrate --seed
      * -php artisan passport:install
+     
  - **Create databases:**
      * -mysql -u root
      * -use jam
      * -call metrics_generate('2020-10-20', '2021-01-11');
      * -call cancelled_metrics_generate('2020-10-20', '2021-01-11');
      * -exit
+     
 - **To finish and deploy the application, run the command:**
    * -php artisan optimize:clear
    * -php artisan passport:install
+   * -php artisan storage:link
    * -php artisan serve
-- **Login.**
+   
+- **Login Admin.**
     * -(user: admin@example.com, password: 123).
    
 - **Job and commands**

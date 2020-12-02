@@ -31,7 +31,7 @@ return [
     'Financial report' => 'Reporte financiero',
     'Report data' => 'Datos del reporte',
     'Registered Users' => 'Usuarios Registrados',
-    'Created Product' => 'Producto Creados',
+    'Created Product' => 'Productos Creados',
     'Show' => 'Detalle',
     'Edit' => 'Editar',
     'Destroy' => 'Eliminar',

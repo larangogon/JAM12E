@@ -49,6 +49,8 @@ class CrudCartTest extends TestCase
             ));
         $response
             ->assertStatus(200);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testHome(): void
@@ -60,6 +62,8 @@ class CrudCartTest extends TestCase
             ));
         $response
             ->assertStatus(200);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testRemove(): void
@@ -88,6 +92,8 @@ class CrudCartTest extends TestCase
         $this->assertDatabaseMissing('in_carts', [
         'size_id' => $this->size->id,
             ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testUpdate(): void
@@ -127,6 +133,8 @@ class CrudCartTest extends TestCase
             'size_id'    => $this->size->id,
             'cart_id'    => $this->user->cart->id,
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testDestroy()
@@ -161,5 +169,74 @@ class CrudCartTest extends TestCase
         $this->assertDatabaseMissing('in_carts', [
             'id'  => $this->user->cart->products->id,
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
+    }
+
+    public function testadd(): void
+    {
+        $this->withoutMiddleware();
+        $this->product    = factory(Product::class)->create(['stock' => '100']);
+        $this->color      = factory(Color::class)->create();
+        $this->size       = factory(Size::class)->create();
+        $this->category   = factory(Category::class)->create();
+
+        $response = $this->actingAs($this->user)
+            ->post(route('cart/add'), [
+                'products_id' => $this->product->id,
+                'stock'       => '23',
+                'color_id'    => $this->color->id,
+                'size_id'     => $this->size->id,
+                'category_id' => $this->category->id
+            ]);
+
+        $response
+            ->assertStatus(302)
+            ->assertSessionHas('success', 'Producto agregado al carrito con éxito');
+
+
+        $this->assertDatabaseHas('in_carts', [
+            'stock'      => '23',
+            'color_id'   => $this->color->id,
+            'size_id'    => $this->size->id,
+            'cart_id'    => $this->user->cart->id,
+        ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
+    }
+
+    public function testaddErrorStock(): void
+    {
+        $this->withoutMiddleware();
+
+        $this->product    = factory(Product::class)->create(['stock' => '5']);
+        $this->color      = factory(Color::class)->create();
+        $this->size       = factory(Size::class)->create();
+        $this->category   = factory(Category::class)->create();
+
+        $response = $this->actingAs($this->user)
+            ->post(route('cart/add'), [
+                'products_id' => $this->product->id,
+                'stock'       => '23',
+                'color_id'    => $this->color->id,
+                'size_id'     => $this->size->id,
+                'category_id' => $this->category->id
+            ]);
+        $response
+            ->assertStatus(302)
+            ->assertSessionHas('success', 'Excede la cantidad disponible');
+    }
+
+    public function testaddErrors(): void
+    {
+        $response = $this->actingAs($this->user)
+            ->post(route('cart/add'), []);
+
+        $response->assertSessionHasErrors([
+            'stock',
+            'color_id',
+            'size_id',
+        ])
+        ->assertStatus(302);
     }
 }

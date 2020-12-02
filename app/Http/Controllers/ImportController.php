@@ -42,7 +42,7 @@ class ImportController extends Controller
         }
 
         return back()
-            ->with('success', 'All good, import of users successfully!');
+            ->with('success', '¡Todo bien, importación de usuarios con éxito!');
     }
 
     /**
@@ -70,7 +70,7 @@ class ImportController extends Controller
         }
 
         return back()
-            ->with('success', 'All good, import of products successfully!');
+            ->with('success', '¡Todo bien, importación de productos con éxito!');
     }
 
     /**
@@ -97,7 +97,7 @@ class ImportController extends Controller
             $file->move(public_path() . '/uploads/', $name);
         }
 
-        return back()->with('success', 'All good,
-        import of imgs successfully!');
+        return back()
+            ->with('success', '¡Todo bien, importación de imagenes con éxito!!');
     }
 }

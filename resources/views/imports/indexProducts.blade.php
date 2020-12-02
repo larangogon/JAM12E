@@ -1,11 +1,12 @@
 @extends('layouts.app')
-
 @section('content')
     @can('Administrator')
         <div class="container">
             @if (session('success'))
                 <div class="alert-default-success" role="alert">
-                    <p>{{session('success')}}</p>
+                    <p>
+                        {{session('success')}}
+                    </p>
                 </div>
             @endif
             <h5>
@@ -54,6 +55,30 @@
                     </div>
                 </div>
             </div>
+                <div class="alert alert-primary" role="alert">
+                    1. Todos los productos que se importaran deben tener estado activo (1)!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-danger" role="alert">
+                    2. Recuerde importar las imagenes de los productos nuevos, ejemplo: Producto103.jpg,!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-info" role="alert">
+                    3. Todos los items son requeridos para crear un producto nuevo y deben existir en la base de datos!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    4. Recuerde agregar una coma al final de cada talla, color, categoria e imagen. ejemplo: XS,S,L,!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="col-sm-6">
                     @if (isset($errors) && $errors->any())
                         <div class="alert alert-danger">

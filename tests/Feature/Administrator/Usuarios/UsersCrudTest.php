@@ -134,4 +134,35 @@ class UsersCrudTest extends TestCase
             'name'  => 'new'
         ]);
     }
+
+    public function testStoreErrors(): void
+    {
+        $response = $this->actingAs($this->user)
+            ->post(route('users.store'), []);
+
+        $response->assertSessionHasErrors([
+            'name',
+            'phone',
+            'cellphone',
+            'document',
+            'address',
+            'email',
+            ]);
+    }
+
+    public function testUpdateErrors(): void
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($this->user)
+            ->put(route('users.update', $user->id), []);
+
+        $response->assertSessionHasErrors([
+            'name',
+            'phone',
+            'cellphone',
+            'document',
+            'address',
+        ]);
+    }
 }
