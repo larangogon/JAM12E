@@ -41,6 +41,8 @@ class ColorCrudTest extends TestCase
             ->assertStatus(200)
             ->assertViewHas('colors')
             ->assertViewIs('colors.index');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testStore(): void
@@ -57,5 +59,7 @@ class ColorCrudTest extends TestCase
         $this->assertDatabaseHas('colors', [
             'name' => 'amarillo'
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 }

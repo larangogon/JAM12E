@@ -49,27 +49,41 @@ class ShippiendTest extends TestCase
 
     public function teststore(): void
     {
-        $recipient= new Shipping();
-
-        $recipient->name_recipient      = 'name_recipient';
-        $recipient->phone_recipient     = '1223445';
-        $recipient->cellphone_recipient = '2334455';
-        $recipient->document_recipient  = '122335566';
-        $recipient->address_recipient   = 'address_recipient';
-        $recipient->email_recipient     = 'camila@gmail.com';
-        $recipient->country_recipient   = 'country_recipient';
-        $recipient->city_recipient      = 'city_recipient';
-        $recipient->order_id            = $this->order->id;
-
-        $recipient->save();
-
         $response = $this->actingAs($this->user)
-            ->post(route('shipping.store', $recipient->id));
+            ->post(route('shipping.store', [
+                'name_recipient'      => 'name_recipient',
+                'phone_recipient'     => '1223445',
+                'cellphone_recipient' => '2334455',
+                'document_recipient'  => '122335566',
+                'address_recipient'   => 'address_recipient',
+                'email_recipient'     => 'camila@gmail.com',
+                'country_recipient'   => 'country_recipient',
+                'city_recipient'      => 'city_recipient',
+                'order_id'            => $this->order->id,
+            ]));
         $response
-            ->assertStatus(302);
+            ->assertStatus(302)
+            ->assertSessionHas('message', 'Los datos para tu envio se han guardado exitosamente!');
 
         $this->assertDatabaseHas('shippings', [
             'name_recipient' => 'name_recipient'
+        ]);
+    }
+
+    public function teststoreErrors(): void
+    {
+        $response = $this->actingAs($this->user)
+            ->post(route('shipping.store', []));
+
+        $response->assertSessionHasErrors([
+            'name_recipient',
+            'phone_recipient',
+            'cellphone_recipient',
+            'document_recipient',
+            'address_recipient',
+            'email_recipient',
+            'country_recipient',
+            'city_recipient',
         ]);
     }
 }

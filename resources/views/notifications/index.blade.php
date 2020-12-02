@@ -17,6 +17,9 @@
                                         Nombre: {{ $notification->data['name'] }} <br>
                                         stock: ({{ $notification->data['stock'] }})<br>
                                         se agoto este producto.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                 @endcan
                                 @else
@@ -27,6 +30,9 @@
                                         Enviado a: ({{ $notification->data['recipient_id'] }})<br>
                                         Enviado por: ({{ $notification->data['sender_id'] }})<br>
                                         Nuevo mensaje
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                 @endif
                                 @if($loop->last)

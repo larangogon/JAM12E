@@ -36,7 +36,7 @@ Route::get('products/{product}/active')
     ->uses('ProductsController@active')
     ->name('products.active');
 Route::get('products/destroyimagen/{imagen_id}/{product_id}')
-    ->uses( 'ProductsController@destroyimagen')
+    ->uses('ProductsController@destroyimagen')
     ->name('products/destroyimagen');
 
 Route::resource('vitrina', 'VitrinaController')
