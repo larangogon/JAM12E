@@ -70,7 +70,9 @@ class ReportController extends Controller
 
         if ($fechaInicio > $fechaFinal) {
             return redirect()->back()->with(
-                'success', 'La fecha inicial es mayor que la final !');
+                'success',
+                'La fecha inicial es mayor que la final !'
+            );
         }
 
         $ordersx = Order::whereBetween('created_at', [
