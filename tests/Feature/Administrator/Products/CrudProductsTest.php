@@ -65,11 +65,14 @@ class CrudProductsTest extends TestCase
 
         $response
             ->assertStatus(302)
-            ->assertRedirect(route('products.index'));
+            ->assertRedirect(route('products.index'))
+            ->assertSessionHas('success', 'Eliminado Satisfactoriamente !');
 
         $this->assertDatabaseMissing('products', [
             'id'  => $products->id,
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testUpdate()
@@ -96,11 +99,24 @@ class CrudProductsTest extends TestCase
 
         $response
             ->assertStatus(302)
-            ->assertRedirect(route('products.index'));
+            ->assertRedirect(route('products.index'))
+            ->assertSessionHas('success', 'Producto Editado Satisfactoriamente');
 
         $this->assertDatabaseHas('products', [
             'id'   => $product->id,
             'name' => 'nameup'
+        ]);
+    }
+
+    public function testUpdateErrors()
+    {
+        $product = factory(Product::class)->create();
+
+        $response = $this->actingAs($this->user)
+            ->put(route('products.update', $product->id), []);
+
+        $response->assertSessionHasErrors(['stock',
+            'name','color', 'size',
         ]);
     }
 
@@ -128,11 +144,26 @@ class CrudProductsTest extends TestCase
 
         $response
             ->assertStatus(302)
-            ->assertRedirect(route('products.index'));
+            ->assertRedirect(route('products.index'))
+            ->assertSessionHas('success', 'producto Creado Satisfactoriamente');
 
         $this->assertDatabaseHas('products', [
             'name'  => 'new'
         ]);
+    }
+
+    public function testStoreErrors(): void
+    {
+        $response = $this->actingAs($this->user)
+            ->post(route('products.store'), []);
+
+        $response
+            ->assertSessionHasErrors(['stock',
+                'name', 'price',
+                'barcode', 'description',
+                'img', 'color', 'size', 'category'
+            ])
+            ->assertStatus(302);
     }
 
     public function testCreate()

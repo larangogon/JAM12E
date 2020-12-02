@@ -39,7 +39,7 @@ class VitrinaController extends Controller
                 ->category($category)
                 ->active()
                 ->search($search)
-                ->paginate(15)
+                ->paginate(20)
         ]);
     }
 

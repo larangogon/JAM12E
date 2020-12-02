@@ -45,7 +45,7 @@ class ProductsController extends Controller
             ->orwhere('stock', 'LIKE', '%' . $query . '%')
             ->orwhere('id', 'LIKE', '%' . $query . '%')
             ->orderBy('id', 'asc')
-            ->paginate(5);
+            ->paginate(15);
 
         return view('products.index', [
             'products' => $products,
@@ -159,7 +159,7 @@ class ProductsController extends Controller
     {
         $this->products->active($id);
 
-        Session::flash('message', ' Estatus del producto Editado Satisfactoriamente !');
+        Session::flash('message', 'Estatus del producto Editado Satisfactoriamente !');
 
         return redirect('/products');
     }

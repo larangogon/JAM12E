@@ -35,16 +35,8 @@ class MessagesController extends Controller
             ->orderBy('id', 'asc')
             ->paginate(6);
 
-        $users = User::where('id', '!=', auth()->id())->get();
-
-        $admins = User::whereHas('roles', function ($query) {
-            $query->where('name', 'Administrator');
-        })->get();
-
         return view('messages.index', [
             'messages' => $messages,
-            'users'    => $users,
-            'admins'   => $admins,
             'search'   => $query
         ]);
     }

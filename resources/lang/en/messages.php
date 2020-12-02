@@ -31,7 +31,7 @@ return [
     'Financial report' => 'Financial report',
     'Report data' => 'Report data',
     'Registered Users' => 'Registered Users',
-    'Created Product' => 'Created Product',
+    'Created Product' => 'Created Products',
     'Show' => 'Show',
     'Edit' => 'Edit',
     'Shipping' => 'Shipping',
