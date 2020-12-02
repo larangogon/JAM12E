@@ -47,6 +47,8 @@ class CrudProductsTest extends TestCase
             ->assertStatus(200)
             ->assertViewHas(['products', 'search'])
             ->assertViewIs('products.index');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testDestroy()
@@ -150,6 +152,8 @@ class CrudProductsTest extends TestCase
         $this->assertDatabaseHas('products', [
             'name'  => 'new'
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testStoreErrors(): void
@@ -174,6 +178,8 @@ class CrudProductsTest extends TestCase
         $response
             ->assertViewIs('products.create')
             ->assertStatus(200);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testEditView()
@@ -202,5 +208,7 @@ class CrudProductsTest extends TestCase
         $response
             ->assertStatus(200)
             ->assertViewIs('products.edit');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 }

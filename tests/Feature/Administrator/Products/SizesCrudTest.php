@@ -58,5 +58,7 @@ class SizesCrudTest extends TestCase
         $this->assertDatabaseHas('sizes', [
             'name' => 'Unico'
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 }

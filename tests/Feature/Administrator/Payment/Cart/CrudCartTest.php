@@ -49,6 +49,8 @@ class CrudCartTest extends TestCase
             ));
         $response
             ->assertStatus(200);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testHome(): void
@@ -60,6 +62,8 @@ class CrudCartTest extends TestCase
             ));
         $response
             ->assertStatus(200);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testRemove(): void
@@ -88,6 +92,8 @@ class CrudCartTest extends TestCase
         $this->assertDatabaseMissing('in_carts', [
         'size_id' => $this->size->id,
             ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testUpdate(): void
@@ -127,6 +133,8 @@ class CrudCartTest extends TestCase
             'size_id'    => $this->size->id,
             'cart_id'    => $this->user->cart->id,
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testDestroy()
@@ -161,6 +169,8 @@ class CrudCartTest extends TestCase
         $this->assertDatabaseMissing('in_carts', [
             'id'  => $this->user->cart->products->id,
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testadd(): void
@@ -191,6 +201,8 @@ class CrudCartTest extends TestCase
             'size_id'    => $this->size->id,
             'cart_id'    => $this->user->cart->id,
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testaddErrorStock(): void
