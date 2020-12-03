@@ -39,7 +39,7 @@ class ExportTest extends TestCase
     /**
      * @test
      */
-    public function user_can_download_products_export()
+    public function userCanDownloadProductsExport()
     {
         $this->withoutExceptionHandling();
         Excel::fake();
@@ -55,7 +55,7 @@ class ExportTest extends TestCase
     /**
      * @test
      */
-    public function user_can_download_users_export()
+    public function userCanDownloadUsersExport()
     {
         $this->withoutExceptionHandling();
         Excel::fake();
@@ -71,7 +71,7 @@ class ExportTest extends TestCase
     /**
      * @test
      */
-    public function user_can_download_orders_export()
+    public function userDanDownloadOrdersExport()
     {
         $this->withoutExceptionHandling();
         Excel::fake();

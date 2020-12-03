@@ -12,7 +12,7 @@ class RatingTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_a_product_belongs_to_many_users()
+    public function testAProductBelongsToManyUsers()
     {
         /** @var User $user */
         $user = factory(User::class)->create();
@@ -25,7 +25,7 @@ class RatingTest extends TestCase
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $product->qualifiers(User::class)->get());
     }
 
-    public function test_averageRating()
+    public function testAverageRating()
     {
         /** @var User $user */
         $user = factory(User::class)->create();
@@ -40,7 +40,7 @@ class RatingTest extends TestCase
         $this->assertEquals(7.5, $product->averageRating(User::class));
     }
 
-    public function test_rating_model()
+    public function testRatingModel()
     {
         /** @var User $user */
         $user = factory(User::class)->create();

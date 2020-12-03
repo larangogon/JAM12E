@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
                 SizeSeeder::class,
                 ColorSeeder::class,
                 ProductsTableSeeder::class,
-                OrderSeeder::class
+                OrderSeeder::class,
+                SpendingSeeder::class,
+                RatingSeeder::class
             ]
         );
     }

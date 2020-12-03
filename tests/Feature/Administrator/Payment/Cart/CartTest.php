@@ -9,10 +9,7 @@ class CartTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @return Void
-     */
-    public function testarrayProducts(): Void
+    public function testArrayProducts(): void
     {
         $this->assertContains('xs', [
             'vestido', 'xs', 'blue'

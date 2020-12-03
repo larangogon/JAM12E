@@ -8,7 +8,7 @@ return [
     'Description' => 'Description',
     'Price' => 'Precio',
     'Category' => 'Categoria',
-    'Size' =>'Talla',
+    'Size' => 'Talla',
     'Role' => 'Rol',
     'Qualification' => 'Calificacion',
     'Choose a quantity' => 'Elige una cantidad',
@@ -71,7 +71,7 @@ return [
     'See in detail' => 'Ver con detalle',
     'Add to cart' => 'Agregar al carrito',
     'Empty cart' => 'Vaciar carrito',
-    'Keep buying'=>'Seguir comprando',
+    'Keep buying' => 'Seguir comprando',
     'Continue with the purchase' => 'Continuar con la compra',
     'Sorry, There are no products in the cart' => 'Lo sentimos, no hay productos en el carrito.',
     'Total with IVA' => 'Total con IVA',
@@ -113,10 +113,10 @@ return [
     'Contact Us' => 'Contactenos',
     'Your purchase history' => 'Tu historal de compras',
     'Congratulations' => 'Felicitaciones',
-    'Suggestions' =>'Sugerencias',
-    'Complaints' =>'Quejas',
-    'Claims' =>'Reclamos',
-    'Petitions' =>'Peticiones',
+    'Suggestions' => 'Sugerencias',
+    'Complaints' => 'Quejas',
+    'Claims' => 'Reclamos',
+    'Petitions' => 'Peticiones',
     'Home' => 'Principal',
     'Bienvenido' => 'Hola!!',
     'Productos mas visitados' => 'Productos mas visitados',
@@ -155,9 +155,4 @@ return [
     'Man' => 'Hombre',
     'Woman' =>  'Mujer',
     'search' => 'buscador'
-
-
-
-
-
 ];
