@@ -8,7 +8,7 @@
      * -composer install
      * -npm install
      * -cp .env.example .env
-     * -cp .env.testing.example .env
+     * -"do not overwrite .env" , cp .env.testing.example .env
  - **Create databases:**
      * -mysql -u root
      * -create database jam;

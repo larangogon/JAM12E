@@ -12,23 +12,15 @@
                     <table class="table table-sm table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">
-                                    #
-                                </th>
-                                <th scope="col">
-                                    Nombre
-                                </th>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($colors as $color)
                                 <tr>
-                                    <th scope="row">
-                                        {{$color->id}}
-                                    </th>
-                                    <td>
-                                        {{$color->name}}
-                                    </td>
+                                    <th scope="row">{{$color->id}}</th>
+                                    <td>{{$color->name}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

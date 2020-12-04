@@ -53,6 +53,8 @@ class CrudOrderIndexAdminTest extends TestCase
             ->assertStatus(200)
             ->assertViewHas(['orders', 'search'])
             ->assertViewIs('orders.index');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testShowv(): void
@@ -64,6 +66,8 @@ class CrudOrderIndexAdminTest extends TestCase
             ->assertStatus(200)
             ->assertViewHas(['orders'])
             ->assertViewIs('orders.showv');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testStore(): void
@@ -95,6 +99,8 @@ class CrudOrderIndexAdminTest extends TestCase
         $this->assertDatabaseHas('orders', [
             'user_id' => $this->cart->user_id,
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testStoreTotalNull(): void
@@ -109,6 +115,8 @@ class CrudOrderIndexAdminTest extends TestCase
         $response
             ->assertStatus(302)
         ->assertRedirect('vitrina');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testUpdate()
@@ -166,6 +174,8 @@ class CrudOrderIndexAdminTest extends TestCase
             'id'   => $order->id,
             'status'   => 'APPROVED',
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testPayInStore()
@@ -207,5 +217,7 @@ class CrudOrderIndexAdminTest extends TestCase
             'mobile' => '23456789',
             'totalStore' => '2345678'
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 }

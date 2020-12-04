@@ -15,7 +15,7 @@ class UsuariosTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testlogin_displays_the_login_form(): void
+    public function testLoginDisplaysTheLoginForm(): void
     {
         $response = $this->get(route('login'));
 
@@ -23,7 +23,7 @@ class UsuariosTest extends TestCase
         $response->assertViewIs('auth.login');
     }
 
-    public function testlogin_authenticates_and_redirects_user(): void
+    public function testLoginAuthenticatesAndRedirectsUser(): void
     {
         $user = factory(User::class)->create();
 
@@ -36,7 +36,7 @@ class UsuariosTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
-    public function testlogin_displays_validation_errors(): void
+    public function testLoginLisplaysValidationErrors(): void
     {
         $response = $this->post(route('login'), []);
 

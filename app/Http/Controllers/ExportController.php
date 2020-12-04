@@ -51,7 +51,7 @@ class ExportController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function reportGeneralExport(): RedirectResponse
     {
@@ -72,7 +72,7 @@ class ExportController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function reportProductExport(): RedirectResponse
     {
