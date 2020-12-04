@@ -44,6 +44,8 @@ class ImportTest extends TestCase
 
         $response->assertStatus(200)
             ->assertViewIs('imports.indexProducts');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     /**
@@ -56,5 +58,7 @@ class ImportTest extends TestCase
 
         $response->assertStatus(200)
             ->assertViewIs('imports.index');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 }

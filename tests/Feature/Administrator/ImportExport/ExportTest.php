@@ -50,6 +50,8 @@ class ExportTest extends TestCase
         Excel::assertDownloaded('products.xlsx', function (ProductsExport $export) {
             return true;
         });
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     /**
@@ -66,6 +68,8 @@ class ExportTest extends TestCase
         Excel::assertDownloaded('users.xlsx', function (UsersExport $export) {
             return true;
         });
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     /**
@@ -82,5 +86,58 @@ class ExportTest extends TestCase
         Excel::assertDownloaded('orders.xlsx', function (OrdersExport $export) {
             return true;
         });
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
+    }
+
+    /**
+     * @test
+     */
+    public function userReporteGeneralExcel()
+    {
+        $this->withoutExceptionHandling();
+        $response = $this->actingAs($this->user, 'web')
+            ->get('reportGeneralExport');
+
+        $response
+            ->assertSessionHas('success', 'El reporte se ha generado, verifica tu correo!')
+            ->assertStatus(302);
+
+        $name = date('Y-m-d-H-i') . 'reporte.xlsx';
+
+        $this->assertDatabaseHas('reports', [
+            'created_by' => auth()->user()->id,
+            'file'       => $name,
+            'type'       => 'Excel',
+            'name'       => 'Reporte en excel',
+        ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
+    }
+
+    /**
+     * @test
+     */
+    public function userReporteProductsExcel()
+    {
+        $this->withoutExceptionHandling();
+        $response =  $this->actingAs($this->user, 'web')
+            ->get('reportProductExport');
+
+        $response
+            ->assertSessionHas('success', 'El reporte se ha generado, verifica tu correo!')
+            ->assertStatus(302);
+
+
+        $name = date('Y-m-d-H-i') . 'reporte.xlsx';
+
+        $this->assertDatabaseHas('reports', [
+            'created_by' => auth()->user()->id,
+            'file'       => $name,
+            'type'       => 'Excel',
+            'name'       => 'Reporte en excel de productos',
+        ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 }

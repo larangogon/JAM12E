@@ -40,6 +40,6 @@ class ProductRatingController extends Controller
         new ProductResource($product);
 
         return redirect()->back()
-        ->with('success', 'Producto calificado correctamente');
+        ->with('success', 'Calificacion actualizada correctamente');
     }
 }

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Administrator\Report;
 
 use App\Entities\Cart;
+use App\Entities\Order;
 use App\Entities\Report;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -54,7 +55,7 @@ class CrudReportTest extends TestCase
             ->assertStatus(302);
     }
 
-    public function testReportOrders(): void
+    public function testReportOrdersFechaNull(): void
     {
         $fechaInicio = date('Y-m-d', strtotime('2020-11-21'));
 
@@ -64,12 +65,33 @@ class CrudReportTest extends TestCase
 
         $response = $this->actingAs($this->user, 'web')
             ->post(route('reportOrders'), [
-                    'fechaFinal' => $fechaInicio,
+                    'fechaFinal'  => $fechaInicio,
                     'fechaInicio' => $fechaFinal,
-                    'status' => $status,
+                    'status'      => $status,
                 ]);
 
         $response
+            ->assertSessionHas('success', 'La fecha inicial es mayor que la final !')
+            ->assertStatus(302);
+    }
+
+    public function testReportOrders(): void
+    {
+        $fechaInicio = date('Y-m-d', strtotime('2020-12-02'));
+
+        $fechaFinal = date('Y-m-d', strtotime('2020-12-04'));
+
+        $status = 'APPROVED';
+
+        $response = $this->actingAs($this->user, 'web')
+            ->post(route('reportOrders'), [
+                'fechaFinal'  => $fechaInicio,
+                'fechaInicio' => $fechaFinal,
+                'status'      => $status,
+            ]);
+
+        $response
+            ->assertSessionHas('success', 'La fecha inicial es mayor que la final !')
             ->assertStatus(302);
     }
 
