@@ -135,7 +135,7 @@
                                         {{$message}}
                                         @enderror
                                         <input type="hidden" value="{{$product->id}}" name="products_id">
-                                        <input type="hidden" value="{{$product->categories[0]->id}}" name="category_id">
+                                        <input type="hidden" value="{{$product->categories()->first()['id']}}" name="category_id">
                                     </td>
                                 </tr>
 

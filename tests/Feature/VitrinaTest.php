@@ -3,6 +3,10 @@
 namespace Tests\Feature;
 
 use App\Entities\Cart;
+use App\Entities\Category;
+use App\Entities\Color;
+use App\Entities\Product;
+use App\Entities\Size;
 use App\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +22,10 @@ class VitrinaTest extends TestCase
      * @var Collection|Model|mixed
      */
     private $user;
+    /**
+     * @var Collection|Model|mixed
+     */
+    private $product;
 
     protected function setUp(): void
     {
@@ -44,5 +52,44 @@ class VitrinaTest extends TestCase
             ->assertStatus(200)
             ->assertViewHas(['products', 'search'])
             ->assertViewIs('vitrina.index');
+    }
+
+    public function testShow()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->seed([
+            \ColorSeeder::class,
+            \SizeSeeder::class,
+            \CategorySeeder::class,
+        ]);
+
+        $product = Product::create([
+            'name'        => 'new',
+            'stock'       => 56,
+            'price'       => 23456,
+            'barcode'     => '123243453545658',
+            'description' => 'jdhfbgyebhsabfreahbfgy',
+            'color'       => [Color::all()->random()->id],
+            'size'        => [Size::all()->random()->id],
+            'category'    => [Category::all()->random()->id],
+            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg',
+            'active'      => 1
+        ]);
+
+        $response = $this->actingAs($this->user, 'web')
+            ->get(route('vitrina.show', $product->id));
+
+        $response
+            ->assertStatus(200)
+            ->assertViewHas([
+                'product',
+                'promedio',
+                'total',
+                'promediox'
+            ])
+            ->assertViewIs('vitrina.show');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 }
