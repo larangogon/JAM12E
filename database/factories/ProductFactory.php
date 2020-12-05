@@ -13,6 +13,8 @@ $factory->define(Product::class, function (Faker $faker) {
         'description' => $faker->sentence(5),
         'stock'       => $faker->numberBetween(1, 100),
         'price'       => $faker->numberBetween(10000, 200000),
-        'active'      => 1
+        'active'      => 1,
+        'visits'      => $faker->numberBetween(1, 100),
+        'sales'       => $faker->numberBetween(1, 100),
     ];
 });
