@@ -16,6 +16,5 @@ $factory->define(Product::class, function (Faker $faker) {
         'active'      => 1,
         'visits'      => $faker->numberBetween(1, 100),
         'sales'       => $faker->numberBetween(1, 100),
-        'created_by'  => 1,
     ];
 });
