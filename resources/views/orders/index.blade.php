@@ -110,9 +110,20 @@
                             @endif
                         </td>
                         <td>
-                            @if($order->status == 'APPROVED')
-                                @if($order->shippingStatus == '0')
-                                    <form action="{{route('orders.reversePay')}}" method="post">
+                            @if($order->payment)
+                                @if($order->status == 'APPROVED')
+                                    @if($order->shippingStatus == '0')
+                                        <form action="{{route('orders.reversePay')}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="order" value="{{$order->id}}">
+                                            <button class="btn btn-sm btn-danger" onclick="return confirmarCancelar()" type="submit" >
+                                                <i class="fas fa-minus-circle"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endif
+                                @if($order->status == 'APROVADO_T')
+                                    <form action="{{route('cancellerOrderStore')}}" method="post">
                                         @csrf
                                         <input type="hidden" name="order" value="{{$order->id}}">
                                         <button class="btn btn-sm btn-danger" onclick="return confirmarCancelar()" type="submit" >
@@ -120,15 +131,8 @@
                                         </button>
                                     </form>
                                 @endif
-                            @endif
-                            @if($order->status == 'APROVADO_T')
-                                <form action="{{route('cancellerOrderStore')}}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="order" value="{{$order->id}}">
-                                    <button class="btn btn-sm btn-danger" onclick="return confirmarCancelar()" type="submit" >
-                                        <i class="fas fa-minus-circle"></i>
-                                    </button>
-                                </form>
+                            @else
+                                sin pago!! datos de prueba
                             @endif
                         </td>
                     </tr>

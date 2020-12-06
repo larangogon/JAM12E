@@ -1,7 +1,7 @@
-@if ( !empty ( $products->id) )
+@if ( !empty ( $product->id) )
     <div class="card">
         <div class="card-header">
-            {!! trans('messages.Edit product') !!} {{ $products->name }}
+            {!! trans('messages.Edit product') !!} {{ $product->name }}
         </div>
         <div class="container">
             <input type="hidden" value="{{auth()->user()->id}}" name="updated_by">
@@ -12,8 +12,8 @@
                             {!! trans('messages.Name') !!}
                         </label>
                         <div>
-                            <input class="form-control" placeholder="products" required="required"
-                                   name="name" type="text" id="name" value="{{ $products->name }}">
+                            <input class="form-control" placeholder="product" required="required"
+                                   name="name" type="text" id="name" value="{{ $product->name }}">
                         </div>
                     </div>
 
@@ -21,12 +21,9 @@
                         <label for="description" class="negrita">
                             {!! trans('messages.Description') !!}
                         </label>
-                        <div>
-                            <textarea class="form-control" placeholder="description"
-                                      required="required" name="description" type="text" id="description">
-                                {{$products->description }}
-                            </textarea>
-                        </div>
+                        <textarea name="description" placeholder="{{$product->description}}"
+                                  class="form-control" required="required"  id="description">
+                        </textarea>
                     </div>
 
                     <div class="form-group">
@@ -35,7 +32,7 @@
                         </label>
                         <div>
                             <input class="form-control" placeholder="4.500" required="required"
-                                   name="price" type="text" id="price" value="{{ $products->price }}">
+                                   name="price" type="text" id="price" value="{{ $product->price }}">
                         </div>
                     </div>
                 </div>
@@ -50,7 +47,7 @@
                                 {!! trans('messages.Select a category') !!}
                             </option>
                             @foreach ($categories as $category )
-                                @if($products->tieneCategory()->contains($category->name))
+                                @if($product->tieneCategory()->contains($category->name))
                                     <option value="{{$category->id}}"selected>{{$category->name}}</option>
                                 @else
                                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -70,7 +67,7 @@
                             @foreach  ($colors as $key => $color)
                                     <li class="list-group-item" data-spy="scroll">
                                         <input  type="checkbox"
-                                                @if($products->tieneColor()->contains($color->name))
+                                                @if($product->tieneColor()->contains($color->name))
                                                 checked @endif
                                                 name="color[]" value="{{$color->id}}"/>
                                         {{$color->name}}
@@ -90,7 +87,7 @@
                        </label>
                        <div>
                            <input class="form-control" placeholder="40" required="required"
-                                  name="stock" type="text" id="stock" value="{{ $products->stock }}">
+                                  name="stock" type="text" id="stock" value="{{ $product->stock }}">
                        </div>
                    </div>
 
@@ -101,7 +98,7 @@
                         <div>
                         @foreach  ($sizes as $key => $size)
                             <input type="checkbox"
-                                   @if($products->tieneSize()->contains($size->name))
+                                   @if($product->tieneSize()->contains($size->name))
                                    checked @endif
                                    name="size[]" value="{{$size->id}}"/>
                             {{$size->name}}

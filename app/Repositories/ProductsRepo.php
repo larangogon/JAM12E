@@ -71,11 +71,11 @@ class ProductsRepo implements InterfaceProducts
      */
     public function active(int $id): void
     {
-        $products = Product::findOrFail($id);
+        $product = Product::findOrFail($id);
 
-        $state = $products->active;
-        $products->active = !$state;
+        $state = $product->active;
+        $product->active = !$state;
 
-        $products->update();
+        $product->update();
     }
 }
