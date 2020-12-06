@@ -56,7 +56,7 @@ class CrudProductsTest extends TestCase
         $products = Product::create([
          'name'        => 'name',
          'description' => 'description',
-         'price'       =>  100000,
+         'price'       => 100000,
          'stock'       => 5,
         ]);
 
@@ -190,7 +190,7 @@ class CrudProductsTest extends TestCase
             \CategorySeeder::class,
         ]);
 
-        $products = Product::create([
+        $product = Product::create([
             'name'        => 'new',
             'stock'       => 56,
             'price'       => 23456,
@@ -203,12 +203,86 @@ class CrudProductsTest extends TestCase
         ]);
 
         $response = $this->actingAs($this->user, 'web')
-            ->get(route('products.edit', $products->id));
+            ->get(route('products.edit', $product->id));
 
         $response
             ->assertStatus(200)
+            ->assertViewHas([
+                'product',
+                'colors',
+                'categories',
+                'sizes',
+            ])
             ->assertViewIs('products.edit');
 
         $this->assertAuthenticatedAs($this->user, $guard = null);
+    }
+
+    public function testShow()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->seed([
+            \ColorSeeder::class,
+            \SizeSeeder::class,
+            \CategorySeeder::class,
+        ]);
+
+        $product = Product::create([
+            'name'        => 'new',
+            'stock'       => 56,
+            'price'       => 23456,
+            'barcode'     => '1232434535945658',
+            'description' => 'jdhfbgyebhsabfreahbfgy',
+            'color'       => [Color::all()->random()->id],
+            'size'        => [Size::all()->random()->id],
+            'category'    => [Category::all()->random()->id],
+            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg',
+            'active'      => 1
+        ]);
+
+        $response = $this->actingAs($this->user, 'web')
+            ->get(route('products.show', $product->id));
+
+        $response
+            ->assertStatus(200)
+            ->assertViewHas([
+                'product',
+            ])
+            ->assertViewIs('products.show');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
+    }
+
+    public function testUpdateActive()
+    {
+        $this->withoutExceptionHandling();
+        $this->seed([
+            \ColorSeeder::class,
+            \SizeSeeder::class
+        ]);
+        $product = Product::create([
+            'name'        => 'name',
+            'description' => 'description',
+            'price'       => 5666,
+            'stock'       => 5,
+            'active'      => 0
+        ]);
+
+        $response = $this->actingAs($this->user)
+            ->get(route('products.active', $product->id), [
+                'active' => 1
+            ]);
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect(route('products.index'))
+            ->assertSessionHas('message', 'Estatus del producto Editado Satisfactoriamente !');
+
+        $this->assertDatabaseHas('products', [
+            'id'     => $product->id,
+            'name'   => 'name',
+            'active' => 1
+        ]);
     }
 }

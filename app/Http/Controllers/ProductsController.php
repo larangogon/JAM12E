@@ -100,13 +100,13 @@ class ProductsController extends Controller
      */
     public function edit(int $id): View
     {
-        $products   = Product::find($id);
+        $product    = Product::find($id);
         $colors     = Color::all(['id','name']);
         $categories = Category::all(['id','name']);
         $sizes      = Size::all(['id','name']);
 
         return view('products.edit', [
-            'products'   => $products,
+            'product'    => $product,
             'colors'     => $colors,
             'categories' => $categories,
             'sizes'      => $sizes,

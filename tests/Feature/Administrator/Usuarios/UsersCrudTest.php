@@ -176,4 +176,35 @@ class UsersCrudTest extends TestCase
             'address',
         ]);
     }
+
+    public function testUpdateActive()
+    {
+        $this->withoutExceptionHandling();
+        $user = User::create([
+            'name'              => 'carmen',
+            'phone'             => '123445',
+            'cellphone'         => '12445',
+            'document'          => '445566',
+            'address'           => 'car33767',
+            'email'             => 'carmen@hotmail.com',
+            'active'            => 1,
+            'email_verified_at' => now(),
+            'password'          => '123456',
+        ]);
+
+        $response = $this->actingAs($this->user)
+            ->get(route('users.active', $user->id), [
+                'active' => 0
+            ]);
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+        $this->assertDatabaseHas('users', [
+            'id'     => $user->id,
+            'name'   => 'carmen',
+            'active' => 0
+        ]);
+    }
 }
