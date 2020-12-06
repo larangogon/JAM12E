@@ -40,7 +40,7 @@ class DecoratorOrder implements InterfaceOrders
 
         $cart = Cart::find($request->get('cart_id'));
 
-        if ($cart->totalCarrito() === 0) {
+        if (!$cart->totalCarrito()) {
             return redirect('vitrina')->with('success', 'Continue con su compra');
         }
 
@@ -90,7 +90,7 @@ class DecoratorOrder implements InterfaceOrders
 
         $order = Order::find($id);
 
-        if ($order->payment == null) {
+        if (!$order->payment) {
             $order = Order::find($id);
         } elseif ($order->payment->status === PlaceToPay::PENDING) {
             $response = $this->requestP2P('getRequestinformation', $order);

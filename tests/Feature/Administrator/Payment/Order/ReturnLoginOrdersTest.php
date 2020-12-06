@@ -6,13 +6,13 @@ use Tests\TestCase;
 
 class ReturnLoginOrdersTest extends TestCase
 {
-    public function testViewCeateOrders_login(): void
+    public function testViewCeateOrdersLogin(): void
     {
         $this->get(route('orders.create'))
             ->assertRedirect(route('login'));
     }
 
-    public function testViewIndexOrders_login(): void
+    public function testViewIndexOrdersLogin(): void
     {
         $this->get(route('orders.index'))
             ->assertRedirect(route('login'));

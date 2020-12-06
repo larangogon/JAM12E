@@ -53,6 +53,8 @@ class CrudOrderIndexAdminTest extends TestCase
             ->assertStatus(200)
             ->assertViewHas(['orders', 'search'])
             ->assertViewIs('orders.index');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testShowv(): void
@@ -64,6 +66,8 @@ class CrudOrderIndexAdminTest extends TestCase
             ->assertStatus(200)
             ->assertViewHas(['orders'])
             ->assertViewIs('orders.showv');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testStore(): void
@@ -95,6 +99,8 @@ class CrudOrderIndexAdminTest extends TestCase
         $this->assertDatabaseHas('orders', [
             'user_id' => $this->cart->user_id,
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testStoreTotalNull(): void
@@ -108,7 +114,10 @@ class CrudOrderIndexAdminTest extends TestCase
 
         $response
             ->assertStatus(302)
-        ->assertRedirect('vitrina');
+            ->assertSessionHas('success', 'Continue con su compra')
+            ->assertRedirect('vitrina');
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testUpdate()
@@ -166,46 +175,69 @@ class CrudOrderIndexAdminTest extends TestCase
             'id'   => $order->id,
             'status'   => 'APPROVED',
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testPayInStore()
     {
         $this->withoutExceptionHandling();
-        $this->color = factory(Color::class)->create();
-        $this->size = factory(Size::class)->create();
+
+        $this->color    = factory(Color::class)->create();
+        $this->size     = factory(Size::class)->create();
         $this->category = factory(Category::class)->create();
-        $this->product = factory(Product::class)->create();
+        $this->product  = factory(Product::class)->create();
 
         $inCart = InCart::create([
-            'stock' => 23,
-            'color_id' => $this->color->id,
-            'size_id' => $this->size->id,
+            'stock'       => 23,
+            'color_id'    => $this->color->id,
+            'size_id'     => $this->size->id,
             'category_id' => $this->category->id,
-            'product_id' => $this->product->id,
-            'cart_id' =>  $this->cart->id
+            'product_id'  => $this->product->id,
+            'cart_id'     => $this->cart->id
 
         ]);
         $response = $this->actingAs($this->user)
             ->post(route('orders.paymentInStore'), [
-                'cart_id' =>  $this->cart->id,
-                'name' => 'Ana',
-                'document' => '123456789',
-                'email' => 'admin@example.com',
-                'mobile' => '23456789',
+                'cart_id'    =>  $this->cart->id,
+                'name'       => 'Ana',
+                'document'   => '123456789',
+                'email'      => 'admin@example.com',
+                'mobile'     => '23456789',
                 'totalStore' => '2345678'
 
             ]);
 
         $response
             ->assertStatus(302)
+            ->assertSessionHas('success', 'Orden creada exitosamente')
             ->assertRedirect(route('orders.index'));
 
         $this->assertDatabaseHas('payments', [
-            'name' => 'Ana',
-            'document' => '123456789',
-            'email' => 'admin@example.com',
-            'mobile' => '23456789',
+            'name'       => 'Ana',
+            'document'   => '123456789',
+            'email'      => 'admin@example.com',
+            'mobile'     => '23456789',
             'totalStore' => '2345678'
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
+    }
+
+    public function testStorePayErrors(): void
+    {
+        $response = $this->actingAs($this->user)
+            ->post(route('orders.paymentInStore'), []);
+
+        $response
+            ->assertSessionHasErrors([
+                'name',
+                'document',
+                'email',
+                'mobile',
+                'totalStore'
+            ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 }

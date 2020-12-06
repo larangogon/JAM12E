@@ -25,7 +25,7 @@ class ProductsTest extends TestCase
             ->assertRedirect(route('login'));
     }
 
-    public function test_delete_products()
+    public function testDeleteProducts()
     {
         $products = factory(Product::class)->create();
 
@@ -58,7 +58,7 @@ class ProductsTest extends TestCase
         ->assertStatus(302);
     }
 
-    public function it_can_see_all_categories()
+    public function itCanSeeAllCategories()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user);

@@ -80,15 +80,22 @@
                           </tr>
                           <tr>
                               <th>{!! trans('messages.Qualification') !!}</th>
-                              <td><form action="{{route('rate', $product) }}" method="POST">
-                                  @csrf
+                              <td>
+                                  <div class="btn-group">
+                                  <form action="{{route('rate', $product) }}" method="POST">
+                                      @csrf
                                       <lave>1</lave><input name="score" value="1" type="radio"/>
                                       <lave>2</lave><input name="score" value="2" type="radio"/>
                                       <lave>3</lave><input name="score" value="3" type="radio"/>
                                       <lave>4</lave><input name="score" value="4" type="radio"/>
                                       <lave>5</lave><input name="score" value="5" type="radio" checked="checked"/>
-                                      <button type="submit"  class="btn btn-primary btn-sm">{!! trans('messages.Send') !!}</button>
+                                      <button type="submit"  class="btn btn-primary btn-sm"><i class="fas fa-redo"></i></button>
                                   </form>
+                                  <form action="{{route('unrate', $product) }}" method="POST">
+                                      @csrf
+                                      <button type="submit"  class="btn btn-dark btn-sm"><i class="fas fa-undo-alt"></i></button>
+                                  </form>
+                                  </div>
                               </td>
                           </tr>
                       </table>
@@ -128,7 +135,7 @@
                                         {{$message}}
                                         @enderror
                                         <input type="hidden" value="{{$product->id}}" name="products_id">
-                                        <input type="hidden" value="{{$product->categories[0]->id}}" name="category_id">
+                                        <input type="hidden" value="{{$product->categories()->first()['id']}}" name="category_id">
                                     </td>
                                 </tr>
 

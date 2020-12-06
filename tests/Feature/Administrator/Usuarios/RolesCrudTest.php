@@ -58,6 +58,8 @@ class RolesCrudTest extends TestCase
             ->assertRedirect(route('roles.index'));
 
         $this->assertDatabaseHas('roles', ['name' => 'rolesdr']);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
     public function testDestroy(): void
@@ -80,5 +82,7 @@ class RolesCrudTest extends TestCase
         $this->assertDatabaseMissing('roles', [
             'id'  => $role->id = 32,
         ]);
+
+        $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 }
