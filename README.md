@@ -24,9 +24,9 @@
      * -exit
      
  - **Create database test:**
-       * -mysql -u root
-       * -create database testing_laravel;
-       * -exit
+   * -mysql -u root
+   * -create database testing_laravel;
+   * -exit
        
  - **Open terminal and run the following commands-test:**
       * -cp .env.testing.example .env
