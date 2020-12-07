@@ -23,14 +23,14 @@
      * -call cancelled_metrics_generate('2020-10-20', '2021-01-11');
      * -exit
      
+ - **Create database test:**
+       * -mysql -u root
+       * -create database testing_laravel;
+       * -exit
+       
  - **Open terminal and run the following commands-test:**
       * -cp .env.testing.example .env
       * -php artisan test
-      
- - **Create database test:**
-      * -mysql -u root
-      * -create database testing_laravel;
-      * -exit
       
 - **To finish and deploy the application, run the command:**
    * -php artisan optimize:clear
