@@ -83,7 +83,7 @@
 <div class="d-flex flex-wrap justify-content-around">
     @foreach($visit as $product  )
         <div class="card cart:hover" style="width: 14rem; " >
-            <img src="../uploads/{{$product->imagenes()->first()['name']}}" style="width:100%"
+            <img src="../uploads/{{$product->imagenes()->first()['name'] ?? ""}}" style="width:100%"
                  class= "card-img-top">
             <div class="card-body">
                 <h6 class="card-title">{{$product->name}} <br>
@@ -102,7 +102,7 @@
 <div class="d-flex flex-wrap justify-content-around">
     @foreach($sales as $product)
         <div class="card cart:hover" style="width: 14rem; " >
-            <img src="../uploads/{{$product->imagenes()->first()['name']}}" style="width:100%"
+            <img src="../uploads/{{$product->imagenes()->first()['name'] ?? ""}}" style="width:100%"
                  class= "card-img-top">
             <div class="card-body">
                 <h6 class="card-title">{{$product->name}} <br>
@@ -121,7 +121,7 @@
 <div class="d-flex flex-wrap justify-content-around">
     @foreach($rating as $product)
         <div class="card cart:hover" style="width: 14rem; " >
-            <img src="../uploads/{{$product->rateable->imagenes()->first()['name']}}" style="width:100%"
+            <img src="../uploads/{{$product->rateable->imagenes()->first()['name'] ?? ""}}" style="width:100%"
                  class= "card-img-top">
             <div class="card-body">
                 <h6 class="card-title">{{$product->rateable->name}} <br>

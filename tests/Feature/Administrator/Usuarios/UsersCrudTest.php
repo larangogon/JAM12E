@@ -122,8 +122,6 @@ class UsersCrudTest extends TestCase
 
     public function testStore(): void
     {
-        $this->withoutExceptionHandling();
-
         $response = $this->actingAs($this->user)
             ->post(route('users.store'), [
                 'name'      => 'new',
@@ -179,7 +177,6 @@ class UsersCrudTest extends TestCase
 
     public function testUpdateActive()
     {
-        $this->withoutExceptionHandling();
         $user = User::create([
             'name'              => 'carmen',
             'phone'             => '123445',

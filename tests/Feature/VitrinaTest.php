@@ -56,8 +56,6 @@ class VitrinaTest extends TestCase
 
     public function testShow()
     {
-        $this->withoutExceptionHandling();
-
         $this->seed([
             \ColorSeeder::class,
             \SizeSeeder::class,

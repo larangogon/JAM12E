@@ -37,7 +37,7 @@ class ProductsController extends Controller
      */
     public function index(Request $request): View
     {
-        $this->middleware('role:Guest');
+        $this->authorize('product.index');
 
         $query = trim($request->get('search'));
 
@@ -58,6 +58,8 @@ class ProductsController extends Controller
      */
     public function create(): View
     {
+        $this->authorize('product.create');
+
         $colors     = Color::all(['id','name']);
         $categories = Category::all(['id','name']);
         $sizes      = Size::all(['id','name']);
@@ -77,6 +79,8 @@ class ProductsController extends Controller
      */
     public function store(ItemCreateRequest $request): RedirectResponse
     {
+        $this->authorize('product.store');
+
         $this->products->store($request);
 
         return redirect('/products')
@@ -89,6 +93,8 @@ class ProductsController extends Controller
      */
     public function show(int $id): View
     {
+        $this->authorize('product.show');
+
         $product = Product::where('id', '=', $id)->firstOrFail();
 
         return view('products.show', compact('product'));
@@ -100,6 +106,8 @@ class ProductsController extends Controller
      */
     public function edit(int $id): View
     {
+        $this->authorize('product.edit');
+
         $product    = Product::find($id);
         $colors     = Color::all(['id','name']);
         $categories = Category::all(['id','name']);
@@ -120,6 +128,8 @@ class ProductsController extends Controller
      */
     public function update(ItemUpdateRequest $request, Product $product): RedirectResponse
     {
+        $this->authorize('product.update');
+
         $this->products->update($request, $product);
 
         return redirect('/products')
@@ -132,6 +142,7 @@ class ProductsController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
+        $this->authorize('product.destroy');
         $this->products->destroy($id);
 
         return Redirect('/products')
@@ -145,6 +156,8 @@ class ProductsController extends Controller
      */
     public function destroyimagen(int $id, Product $product): RedirectResponse
     {
+        $this->authorize('product.destroy');
+
         $this->products->destroyimagen($id, $product);
 
         return redirect()->back()
@@ -157,6 +170,8 @@ class ProductsController extends Controller
      */
     public function active(int $id): RedirectResponse
     {
+        $this->authorize('product.status');
+
         $this->products->active($id);
 
         Session::flash('message', 'Estatus del producto Editado Satisfactoriamente !');

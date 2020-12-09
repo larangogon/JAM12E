@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
                 ProductsTableSeeder::class,
                 OrderSeeder::class,
                 SpendingSeeder::class,
-                RatingSeeder::class
             ]
         );
     }

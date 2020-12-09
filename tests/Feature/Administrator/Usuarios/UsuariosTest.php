@@ -7,12 +7,12 @@ use Tests\TestCase;
 
 class UsuariosTest extends TestCase
 {
-    public function testUsuariosTest(): void
+    public function testUsuariosTestNotAuthorize(): void
     {
         $this->withoutMiddleware();
         $response = $this->get('users');
 
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 
     public function testLoginDisplaysTheLoginForm(): void

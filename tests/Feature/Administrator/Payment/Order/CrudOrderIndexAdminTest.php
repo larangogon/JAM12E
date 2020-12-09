@@ -45,7 +45,6 @@ class CrudOrderIndexAdminTest extends TestCase
 
     public function testIndex(): void
     {
-        $this->withoutExceptionHandling();
         $response = $this->actingAs($this->user)
             ->get(route('orders.index'));
 
@@ -72,7 +71,6 @@ class CrudOrderIndexAdminTest extends TestCase
 
     public function testStore(): void
     {
-        $this->withoutExceptionHandling();
         $this->color = factory(Color::class)->create();
         $this->size = factory(Size::class)->create();
         $this->category = factory(Category::class)->create();
@@ -105,8 +103,6 @@ class CrudOrderIndexAdminTest extends TestCase
 
     public function testStoreTotalNull(): void
     {
-        $this->withoutExceptionHandling();
-
         $response = $this->actingAs($this->user)
             ->post(route('orders.store'), [
                 'cart_id' =>  $this->cart->id
@@ -122,7 +118,6 @@ class CrudOrderIndexAdminTest extends TestCase
 
     public function testUpdate()
     {
-        $this->withoutExceptionHandling();
         $this->color = factory(Color::class)->create();
         $this->size = factory(Size::class)->create();
         $this->category = factory(Category::class)->create();
@@ -181,8 +176,6 @@ class CrudOrderIndexAdminTest extends TestCase
 
     public function testPayInStore()
     {
-        $this->withoutExceptionHandling();
-
         $this->color    = factory(Color::class)->create();
         $this->size     = factory(Size::class)->create();
         $this->category = factory(Category::class)->create();

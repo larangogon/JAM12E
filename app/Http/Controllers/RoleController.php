@@ -23,7 +23,6 @@ class RoleController extends Controller
         $this->middleware('auth');
         $this->middleware('Status');
         $this->middleware('verified');
-        $this->middleware('role:Administrator');
     }
 
     /**
@@ -31,6 +30,8 @@ class RoleController extends Controller
      */
     public function index(): View
     {
+        $this->authorize('role.index');
+
         $roles = Role::all(['id','name']);
         $permissions = Permission::all(['id','name']);
 
@@ -46,6 +47,8 @@ class RoleController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $this->authorize('role.store');
+
         Role::create($request->all());
 
         return redirect('roles');
@@ -58,6 +61,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role): RedirectResponse
     {
+        $this->authorize('role.update');
         $role->syncPermissions($request->permissions);
 
         return redirect('roles');
@@ -70,6 +74,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role): RedirectResponse
     {
+        $this->authorize('role.destroy');
+
         $role->delete();
 
         return redirect('roles');

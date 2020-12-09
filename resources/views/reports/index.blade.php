@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    @can('Administrator')
     <div class="container">
         <h6>
             @if($search)
@@ -155,5 +154,4 @@
             </div>
         </div>
     </div>
-    @endcan
 @endsection
