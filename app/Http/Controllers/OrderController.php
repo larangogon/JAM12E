@@ -36,6 +36,8 @@ class OrderController extends Controller
      */
     public function index(Request $request): View
     {
+        $this->authorize('order.index');
+
         $search   = $request->get('search', null);
 
         $this->order = new Order();

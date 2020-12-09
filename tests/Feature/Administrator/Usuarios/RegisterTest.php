@@ -12,8 +12,6 @@ class RegisterTest extends TestCase
 
     public function testRegister(): void
     {
-        $this->withoutExceptionHandling();
-
         $credentials = [
             'name'                  => 'new',
             'phone'                 => '123445',

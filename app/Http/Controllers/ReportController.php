@@ -21,7 +21,6 @@ class ReportController extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('Status');
-        $this->middleware('role:Administrator');
     }
 
     /**
@@ -30,6 +29,8 @@ class ReportController extends Controller
      */
     public function index(Request $request): View
     {
+        $this->authorize('report.index');
+
         if ($request) {
             $query = trim($request->get('search'));
         }
@@ -50,6 +51,8 @@ class ReportController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('report.show');
+
         $factura = Order::find($id);
         $pdf = \PDF::loadView('reports.show', compact('factura'));
         return $pdf
@@ -62,6 +65,8 @@ class ReportController extends Controller
      */
     public function reportOrders(RequestFilter $request): RedirectResponse
     {
+        $this->authorize('report.reportOrders');
+
         $fechaInicio = date('Y-m-d', strtotime($request->get('fechaInicio')));
 
         $fechaFinal = date('Y-m-d', strtotime($request->get('fechaFinal')));
@@ -107,6 +112,8 @@ class ReportController extends Controller
      */
     public function reportGeneral(): RedirectResponse
     {
+        $this->authorize('report.reportGeneral');
+
         $details['email'] = 'johannitaarango2@gmail.com';
 
         dispatch(new ProcessReportGeneral($details));
@@ -132,6 +139,8 @@ class ReportController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
+        $this->authorize('report.destroy');
+
         Report::destroy($id);
 
         return Redirect()->back()
@@ -144,6 +153,8 @@ class ReportController extends Controller
      */
     public function rute(Request $request)
     {
+        $this->authorize('report.rute');
+
         $file = $request->file;
         $name = '/app/public/' . $file;
 

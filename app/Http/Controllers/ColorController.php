@@ -22,7 +22,6 @@ class ColorController extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('Status');
-        $this->middleware('role:Administrator');
     }
 
     /**
@@ -30,6 +29,8 @@ class ColorController extends Controller
      */
     public function index(): View
     {
+        $this->authorize('color.index');
+
         $colors = Color::all(['id','name']);
 
         return view('colors.index', ['colors' => $colors]);
@@ -41,6 +42,8 @@ class ColorController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $this->authorize('color.store');
+
         $this->colors->store($request);
 
         return redirect('colors');

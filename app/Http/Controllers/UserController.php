@@ -27,7 +27,6 @@ class UserController extends Controller
         $this->middleware('auth');
         $this->middleware('Status');
         $this->middleware('verified');
-        $this->middleware('role:Administrator');
     }
 
     /**
@@ -36,6 +35,8 @@ class UserController extends Controller
      */
     public function index(Request $request): View
     {
+        $this->authorize('user.index');
+
         $role = $request->get('role', null);
 
         $search   = $request->get('search', null);
@@ -56,6 +57,8 @@ class UserController extends Controller
      */
     public function create(): View
     {
+        $this->authorize('user.create');
+
         $roles = Role::all(['name', 'id']);
 
         return view('users.create', ['roles' => $roles]);
@@ -67,6 +70,8 @@ class UserController extends Controller
      */
     public function store(UserFormRequest $request): RedirectResponse
     {
+        $this->authorize('user.store');
+
         $this->users->store($request);
 
         return redirect('/users');
@@ -78,6 +83,8 @@ class UserController extends Controller
      */
     public function show(int $id): View
     {
+        $this->authorize('user.show');
+
         return view('users.show', [
             'user' => User::findOrFail($id)
         ]);
@@ -89,6 +96,8 @@ class UserController extends Controller
      */
     public function edit(int $id): View
     {
+        $this->authorize('user.edit');
+
         $user  = User::findOrFail($id);
         $roles = Role::all(['id', 'name']);
 
@@ -105,6 +114,8 @@ class UserController extends Controller
      */
     public function update(UserEditFormRequest $request, int $id): RedirectResponse
     {
+        $this->authorize('user.update');
+
         $this->users->update($request, $id);
 
         return redirect('/users');
@@ -116,6 +127,8 @@ class UserController extends Controller
      */
     public function active(int $id): RedirectResponse
     {
+        $this->authorize('user.status');
+
         $this->users->active($id);
 
         return redirect('/users');

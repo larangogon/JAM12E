@@ -57,8 +57,6 @@ class AuthTest extends TestCase
 
     public function testAuthApiNotAuthorize(): void
     {
-        $this->withoutExceptionHandling();
-
         $credentials = [
             "email"    => "users@mail.com",
             "password" => "secret"

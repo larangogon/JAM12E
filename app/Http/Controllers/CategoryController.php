@@ -22,7 +22,6 @@ class CategoryController extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('Status');
-        $this->middleware('role:Administrator');
     }
 
     /**
@@ -30,6 +29,8 @@ class CategoryController extends Controller
      */
     public function index(): View
     {
+        $this->authorize('category.index');
+
         $categories = Category::all(['id','name']);
 
         return view('categories.index', [
@@ -43,6 +44,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $this->authorize('category.store');
+
         $this->categories->store($request);
 
         return redirect('categories');

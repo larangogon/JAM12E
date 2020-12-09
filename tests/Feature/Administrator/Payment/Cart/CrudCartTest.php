@@ -98,7 +98,6 @@ class CrudCartTest extends TestCase
 
     public function testUpdate(): void
     {
-        $this->withoutExceptionHandling();
         $this->product = factory(Product::class)->create();
         $this->color   = factory(Color::class)->create();
         $this->size    = factory(Size::class)->create();
@@ -139,7 +138,6 @@ class CrudCartTest extends TestCase
 
     public function testDestroy()
     {
-        $this->withoutExceptionHandling();
         $this->product = factory(Product::class)->create();
         $this->color   = factory(Color::class)->create();
         $this->size    = factory(Size::class)->create();

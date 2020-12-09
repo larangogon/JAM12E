@@ -17,31 +17,31 @@ class IndexTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testSizesTest(): void
+    public function testSizesNotAuthorizeTest(): void
     {
         $this->withoutMiddleware();
         $response = $this->get('sizes');
 
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 
-    public function testColorsTest()
+    public function testColorsNotAuthorizeTest()
     {
         $this->withoutMiddleware();
         $response = $this->get('colors');
 
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 
-    public function testCategoriesTest(): void
+    public function testCategoriesNotAuthorizeTest(): void
     {
         $this->withoutMiddleware();
         $response = $this->get('categories');
 
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 
-    public function testNosotrosTest(): void
+    public function testNosotrosNotAuthorizeTest(): void
     {
         $this->withoutMiddleware();
         $response = $this->get('nosotros');
@@ -49,11 +49,11 @@ class IndexTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testRolTest(): void
+    public function testRolTestNotAuthorize(): void
     {
         $this->withoutMiddleware();
         $response = $this->get('roles');
 
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 }
