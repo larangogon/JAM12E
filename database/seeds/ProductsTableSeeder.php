@@ -16,7 +16,7 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Product::class, 200)->create();
+        factory(Product::class, 6)->create();
 
         $colors = Color::all();
 

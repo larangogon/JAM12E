@@ -75,6 +75,9 @@ class DecoratorOrder implements InterfaceOrders
             'status'     => PlaceToPay::PENDING,
             ]);
 
+        logger()->channel('stack')
+            ->info('respuesta de p2p conexion', [$response]);
+
         return redirect()->away($processUrl)->send();
     }
 
@@ -101,6 +104,9 @@ class DecoratorOrder implements InterfaceOrders
             $order->payment->update([
                 'status' => $status
             ]);
+
+            logger()->channel('stack')
+                ->info('respuesta de p2p actualizacion de estado', [$response]);
         } elseif ($order->payment->status === PlaceToPay::APPROVED) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
@@ -129,6 +135,9 @@ class DecoratorOrder implements InterfaceOrders
                 'mobile'            => $payermobile,
                 'locale'            => $locale
             ]);
+
+            logger()->channel('stack')
+                ->info('respuesta de p2p actualizacion de estado', [$response]);
         } elseif ($order->payment->status === PlaceToPay::REJECTED) {
             $response = $this->requestP2P('getRequestinformation', $order);
 
@@ -139,6 +148,9 @@ class DecoratorOrder implements InterfaceOrders
                 'status'  => $status,
                 "message" => $message
             ]);
+
+            logger()->channel('stack')
+                ->info('respuesta de p2p actualizacion de estado', [$response]);
         }
 
         return $order;
@@ -237,6 +249,7 @@ class DecoratorOrder implements InterfaceOrders
                 'https://test.placetopay.com/redirection/api/reverse',
                 ['json' => $request]
             );
+
             return json_decode($res->getBody()->getContents());
         } elseif ($requestType === 'complete') {
             $requestId = $order->payment->requestId;
@@ -248,6 +261,7 @@ class DecoratorOrder implements InterfaceOrders
                 'https://test.placetopay.com/redirection/api/session/' . $requestId,
                 ['json' => $request]
             );
+
             return json_decode($res->getBody()->getContents());
         }
     }
@@ -271,6 +285,9 @@ class DecoratorOrder implements InterfaceOrders
             'requestId'  => $requestId,
             'status'     => PlaceToPay::PENDING,
         ]);
+
+        logger()->channel('stack')
+            ->info('respuesta de p2p reintentar pago', [$response]);
 
         return redirect()->away($processUrl)->send();
     }
@@ -305,6 +322,9 @@ class DecoratorOrder implements InterfaceOrders
         'totalOrder'        => $order->total,
         ]);
 
+        logger()->channel('stack')
+            ->info('respuesta de p2p reverse pago', [$response]);
+
         Order::destroy($request->get('order'));
     }
 
@@ -327,6 +347,9 @@ class DecoratorOrder implements InterfaceOrders
             'requestId'  => $requestId,
             'status'     => PlaceToPay::PENDING,
         ]);
+
+        logger()->channel('stack')
+            ->info('respuesta de p2p completar pago', [$response]);
 
         return redirect()->away($processUrl)->send();
     }

@@ -76,7 +76,6 @@ class ApiTest extends TestCase
 
     public function testUpdate()
     {
-        $this->withoutExceptionHandling();
         $this->seed([
             \ColorSeeder::class,
             \SizeSeeder::class,
@@ -109,8 +108,6 @@ class ApiTest extends TestCase
 
     public function testStoreApi(): void
     {
-        $this->withoutExceptionHandling();
-
         $this->seed([
             \ColorSeeder::class,
             \SizeSeeder::class,

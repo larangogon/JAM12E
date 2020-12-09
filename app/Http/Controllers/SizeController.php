@@ -22,7 +22,6 @@ class SizeController extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('Status');
-        $this->middleware('role:Administrator');
     }
 
     /**
@@ -30,6 +29,8 @@ class SizeController extends Controller
      */
     public function index(): View
     {
+        $this->authorize('size.index');
+
         $sizes = Size::all(['id','name']);
 
         return view('sizes.index', [
@@ -43,6 +44,8 @@ class SizeController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $this->authorize('size.store');
+
         $this->sizes->store($request);
 
         return redirect('sizes');
