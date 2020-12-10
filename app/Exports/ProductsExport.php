@@ -37,21 +37,27 @@ class ProductsExport implements FromCollection, WithMapping, WithHeadings, Shoul
         foreach ($product->colors()->pluck('name') as $color) {
             $colors .= $color . ',';
         }
+        $colors = substr($colors, 0, -1);
 
         $categories = '';
         foreach ($product->categories()->pluck('name') as $category) {
             $categories .= $category . ',';
         }
+        $categories = substr($categories, 0, -1);
 
         $sizes = '';
         foreach ($product->sizes()->pluck('name') as $size) {
             $sizes .= $size . ',';
         }
 
+        $sizes = substr($sizes, 0, -1);
+
         $imagenes = '';
         foreach ($product->imagenes()->pluck('name') as $imagen) {
             $imagenes .= $imagen . ',';
         }
+
+        $imagenes = trim($imagenes, ',');
 
         return [
             $product->id,
