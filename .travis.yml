@@ -20,7 +20,6 @@ before_script:
   - npm install
 script:
   - php artisan migrate
-  - php artisan config:cache
   - php artisan test
 notifications:
   email:
