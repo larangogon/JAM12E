@@ -62,7 +62,7 @@
                     </button>
                 </div>
                 <div class="alert alert-danger" role="alert">
-                    2. Recuerde importar las imagenes de los productos nuevos, ejemplo: Producto103.jpg,!
+                    2. Recuerde importar las imagenes de los productos nuevos, ejemplo: Producto103.jpg!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -74,7 +74,7 @@
                     </button>
                 </div>
                 <div class="alert alert-warning" role="alert">
-                    4. Recuerde agregar una coma al final de cada talla, color, categoria e imagen. ejemplo: XS,S,L,!
+                    4. Recuerde agregar una coma al final de cada talla, color, categoria e imagen. ejemplo: XS,S,L!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

@@ -18,8 +18,6 @@ class SizeRule implements Rule
     {
         $values = explode(',', $value);
 
-        array_pop($values);
-
         $pase = true;
 
         foreach ($values as $value) {

@@ -18,8 +18,6 @@ class CategoryRule implements Rule
     {
         $values = explode(',', $value);
 
-        array_pop($values);
-
         $paso = true;
 
         foreach ($values as $value) {

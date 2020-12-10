@@ -52,7 +52,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
         $count = count($colors);
 
         foreach ($colors as $key => $color) {
-            if ($key == $count - 1) {
+            if ($key == $count ) {
                 break;
             }
 
@@ -69,7 +69,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
         $count = count($sizes);
 
         foreach ($sizes as $key => $size) {
-            if ($key == $count - 1) {
+            if ($key == $count) {
                 break;
             }
 
@@ -85,7 +85,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
         $count = count($categories);
 
         foreach ($categories as $key => $category) {
-            if ($key == $count - 1) {
+            if ($key == $count) {
                 break;
             }
 
@@ -99,7 +99,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
         $count = count($imagenes);
 
         foreach ($imagenes as $key => $imagen) {
-            if ($key == $count - 1) {
+            if ($key == $count) {
                 break;
             }
 
