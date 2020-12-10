@@ -112,7 +112,7 @@ class SendEmailReportGeneral extends Mailable
             'approved'        => $approved,
             'sumRechazada'    => $sumRechazada,
             'sumPending'      => $sumPending,
-        ])->save(storage_path('app/public/') . $name);
+        ])->save(storage_path('app/') . $name);
 
         return $this->from('johannitaarango2@gmail.com')
             ->view('emails.report')

@@ -156,7 +156,7 @@ class ReportController extends Controller
         $this->authorize('report.rute');
 
         $file = $request->file;
-        $name = '/app/public/' . $file;
+        $name = '/app/' . $file;
 
         $rutaDeArchivo = storage_path() . $name;
 
