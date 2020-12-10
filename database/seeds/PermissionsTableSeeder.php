@@ -55,6 +55,15 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::create(['name' => 'order.index']);
 
+        Permission::create(['name' => 'api.index']);
+        Permission::create(['name' => 'metric.index']);
+        Permission::create(['name' => 'cancell.index']);
+        Permission::create(['name' => 'gastos.index']);
+        Permission::create(['name' => 'herraminetas.index']);
+        Permission::create(['name' => 'message.index']);
+        Permission::create(['name' => 'index.importUser']);
+        Permission::create(['name' => 'index.importProduct']);
+
         $admin = Role::create(['name' => 'Administrator']);
 
         $admin->givePermissionTo([
@@ -98,6 +107,15 @@ class PermissionsTableSeeder extends Seeder
             'role.destroy',
 
             'order.index',
+
+            'api.index',
+            'metric.index',
+            'cancell.index',
+            'gastos.index',
+            'herraminetas.index',
+            'message.index',
+            'index.importUser',
+            'index.importProduct',
         ]);
 
         $guest = Role::create(['name' => 'Guest']);
