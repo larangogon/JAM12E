@@ -46,14 +46,6 @@ class CrudReportTest extends TestCase
             ->assertViewIs('reports.index');
     }
 
-    public function testReportGeneral(): void
-    {
-        $response = $this->actingAs($this->user, 'web')
-            ->get(route('reportGeneral'));
-
-        $response
-            ->assertStatus(302);
-    }
 
     public function testReportOrdersFechaNull(): void
     {
