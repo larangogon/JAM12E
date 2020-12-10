@@ -62,9 +62,11 @@
                         <h5 class="card-title">Reporte en excel de productos</h5>
                         <p class="card-text">
 
-                            - Datos productos y ventas de los mismos
+                            - Top de colores mas vendidos
                             <br>
-                            - Reporte para analisis administrativo
+                            - Top de productos mas vendidos
+                            <br>
+                            - Top de tallas mas vendidas
                         </p>
                         <a href="{{ route('reportProductExport') }}">
                             <button type="button" class="btn btn-block btn-dark btn-sm float-right">

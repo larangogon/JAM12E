@@ -214,7 +214,7 @@
                                     </p>
                                 </a>
                             </li>
-                            @can('Administrator')
+                            @can('api.index')
                                 <li class="nav-item">
                                     <a href="{{route('nosotros.indexApi')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-medical-alt"></i>
@@ -224,7 +224,7 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('Administrator')
+                            @can('metric.index')
                                 <li class="nav-item">
                                     <a href="{{route('metrics.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-alt"></i>
@@ -242,7 +242,7 @@
                                         </p>
                                     </a>
                                 </li>
-                            @can('Administrator')
+                            @can('report.index')
                             <li class="nav-item">
                                 <a href="{{route('reports.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="fas fa-file-alt"></i>
@@ -261,7 +261,7 @@
                                 </a>
                             </li>
 
-                            @can('Administrator')
+                            @can('user.index')
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
                                         <i class="fas fa-shopping-bag"></i>
@@ -317,7 +317,7 @@
                                     </ul>
                                 </li>
                             @endcan
-                            @can('Administrator')
+                            @can('order.index')
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
                                         <i class="fas fa-file-medical-alt"></i>
@@ -378,7 +378,7 @@
                                     </ul>
                                 </li>
                             @endcan
-                            @can('Administrator')
+                            @can('cancell.index')
                                 <li class="nav-item">
                                     <a href="{{route('orders.canceller')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-medical-alt"></i>
@@ -388,7 +388,7 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('Administrator')
+                            @can('gastos.index')
                                 <li class="nav-item">
                                     <a href="{{route('spendings.index')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-medical-alt"></i>
@@ -399,13 +399,15 @@
                                 </li>
                             @endcan
 
-                            @can('Administrator')
+                            @can('herraminetas.index')
                               <li class="nav-item has-treeview">
                                   <a href="#" class="nav-link">
                                       <i class="fas fa-wrench"></i>
                                       <p>{!! trans('messages.Crear herramientas') !!}<i class="fas fa-angle-left right"></i></p>
                                   </a>
+
                                   <ul class="nav nav-treeview">
+                                      @can('category.index')
                                       <li class="nav-item">
                                           <a href="{{url('categories')}}"
                                              class="{{ Request::path() === 'categories' ? 'nav-link active' : 'nav-link' }}">
@@ -413,6 +415,8 @@
                                               <p>{!! trans('messages.Categories') !!}</p>
                                           </a>
                                       </li>
+                                      @endcan
+                                          @can('color.index')
                                       <li class="nav-item">
                                           <a href="{{url('colors')}}"
                                               class="{{ Request::path() === 'colors' ? 'nav-link active' : 'nav-link' }}">
@@ -420,6 +424,8 @@
                                               <p>{!! trans('messages.Colors') !!}</p>
                                           </a>
                                       </li>
+                                          @endcan
+                                          @can('size.index')
                                       <li class="nav-item">
                                           <a href="{{url('sizes')}}"
                                              class="{{ Request::path() === 'sizes' ? 'nav-link active' : 'nav-link' }}">
@@ -427,6 +433,8 @@
                                               <p>{!! trans('messages.Sizes') !!}</p>
                                           </a>
                                       </li>
+                                          @endcan
+                                          @can('role.index')
                                       <li class="nav-item">
                                           <a href="{{url('roles')}}"
                                               class="{{ Request::path() === 'roles' ? 'nav-link active' : 'nav-link' }}">
@@ -434,9 +442,10 @@
                                               <p>Roles</p>
                                           </a>
                                       </li>
+                                          @endcan
                                   </ul>
                                 @endcan
-                            @can('hasrole')
+                            @can('product.index')
                                 <li class="nav-item">
                                     <a href="{{url('products')}}"
                                         class="{{ Request::path() === 'products' ? 'nav-link active' : 'nav-link' }}">

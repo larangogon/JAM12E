@@ -14,7 +14,7 @@
             </div>
         @endif
         <h2>
-            @can('Administrator')
+            @can('message.index')
              Mensajes
             @endcan
                 <a href="{{ route('messages.create') }}">
@@ -23,8 +23,8 @@
                     </button>
                 </a>
         </h2>
-            @if(auth()->user()->hasRole('Administrator'))
-
+            @if(auth()->user('hasRole'))
+            @can('message.index')
             <table class="table table-sm table-hover table-bordered">
                 <thead>
                 <tr class="table-primary">
@@ -76,6 +76,7 @@
                     {{ $messages->links()}}
                 </div>
             </div>
+            @endcan
         @else
             <div class="row">
                 <div class="col mb-4">

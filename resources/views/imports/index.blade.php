@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @can('Administrator')
+    @can('index.importUser')
         @if (session('success'))
             <div class="alert-default-success" role="alert">
                 <p>{{session('success')}}</p>

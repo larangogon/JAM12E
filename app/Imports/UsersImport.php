@@ -47,7 +47,7 @@ class UsersImport implements WithValidation, ToModel, WithBatchInserts
         $count = count($roles);
 
         foreach ($roles as $key => $role) {
-            if ($key == $count - 1) {
+            if ($key == $count) {
                 break;
             }
             $roleBd = Role::where('name', $role)->first();
