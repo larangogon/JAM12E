@@ -32,6 +32,8 @@ class UsersExport implements FromCollection, WithMapping, WithHeadings, ShouldAu
             $roles .= $rol . ',';
         }
 
+        $roles = trim($roles, ',');
+
         return [
             $user->id,
             $user->name,
