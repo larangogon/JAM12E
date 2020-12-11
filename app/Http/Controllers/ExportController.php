@@ -54,7 +54,7 @@ class ExportController extends Controller
      */
     public function reportGeneralExport(): RedirectResponse
     {
-        $details['email'] = 'johannitaarango2@gmail.com';
+        $details['email'] = config('app.emailReport');
 
         dispatch(new ProcessReportGeneralExcel($details));
 
@@ -75,7 +75,7 @@ class ExportController extends Controller
      */
     public function reportProductExport(): RedirectResponse
     {
-        $details['email'] = 'johannitaarango2@gmail.com';
+        $details['email'] = config('app.emailReport');
 
         dispatch(new ProcessReportProductExcel($details));
 

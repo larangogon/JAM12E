@@ -114,7 +114,7 @@ class SendEmailReportGeneral extends Mailable
             'sumPending'      => $sumPending,
         ])->save(storage_path('app/') . $name);
 
-        return $this->from('johannitaarango2@gmail.com')
+        return $this->from(config('app.emailReportFrom'))
             ->view('emails.report')
             ->attachData($pdf->output(), 'reports.reportGeneral.pdf');
     }

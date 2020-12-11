@@ -29,7 +29,7 @@ class SendEmailReport extends Mailable
             'order'     => $this->ordersx,
             ])->save(storage_path('app/') . $name);
 
-        return $this->from('johannitaarango2@gmail.com')
+        return $this->from(config('app.emailReportFrom'))
         ->view('emails.report')
         ->attachData($pdf->output(), 'reports.orders.pdf');
     }

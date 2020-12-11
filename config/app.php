@@ -4,6 +4,8 @@ return [
 
     'login' => env('PAY_LOGIN'),
     'secretKey' => env('PAY_SECRETKEY'),
+    'emailReport' => env('EMAIL_REPORT'),
+    'emailReportFrom' => env('EMAIL_REPORT_FROM'),
 
     /*
     |--------------------------------------------------------------------------
