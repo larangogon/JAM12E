@@ -36,25 +36,28 @@ class ProductTest extends TestCase
 
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
+
+        $this->size = factory(Size::class)->create();
+        $this->color = factory(Color::class)->create();
+        $this->category = factory(Category::class)->create();
     }
 
     public function testUpdate()
     {
-        $this->seed([
-            \ColorSeeder::class,
-            \SizeSeeder::class,
-            \CategorySeeder::class,
-        ]);
+        factory(Size::class, 1)->create();
+        factory(Color::class, 1)->create();
+        factory(Category::class, 1)->create();
+
         $product = Product::create([
             'name'  => 'new',
-            'stock' => 56,
-            'price' => 23456,
-            'barcode' => '12324345354565',
+            'stock'       => 56,
+            'price'       => 23456,
+            'barcode'     => '12324345354565',
             'description' => 'jdhfbgyebhsabfreahbfgy',
-            'color' => [Color::all()->random()->id],
-            'size' => [Size::all()->random()->id],
-            'category' => [Category::all()->random()->id],
-            'img' => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
+            'color'       => [$this->color->id],
+            'size'        => [$this->size->id],
+            'category'    => [$this->category->id],
+            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
         ]);
 
         $response = $this->actingAs($this->user, 'api')
@@ -74,23 +77,17 @@ class ProductTest extends TestCase
 
     public function testStore(): void
     {
-        $this->seed([
-            \ColorSeeder::class,
-            \SizeSeeder::class,
-            \CategorySeeder::class,
-        ]);
-
         $response = $this->actingAs($this->user, 'api')
             ->postJson(route('product.store'), [
-                'name'  => 'new',
-                'stock' => 56,
-                'price' => 23456,
-                'barcode' => '12324345354565',
+                'name'        => 'new',
+                'stock'       => 56,
+                'price'       => 23456,
+                'barcode'     => '12324345354565',
                 'description' => 'jdhfbgyebhsabfreahbfgy',
-                'color' => [Color::all()->random()->id],
-                'size' => [Size::all()->random()->id],
-                'category' => [Category::all()->random()->id],
-                'img' => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
+                'color'       => [$this->color->id],
+                'size'        => [$this->size->id],
+                'category'    => [$this->category->id],
+                'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
             ]);
 
         $response

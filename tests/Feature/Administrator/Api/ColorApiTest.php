@@ -34,7 +34,6 @@ class ColorApiTest extends TestCase
         $this->cart->save();
     }
 
-
     public function testStore(): void
     {
         $response = $this->actingAs($this->user, 'api')

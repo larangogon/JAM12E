@@ -36,6 +36,10 @@ class CrudProductsTest extends TestCase
 
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
+
+        $this->size = factory(Size::class)->create();
+        $this->color = factory(Color::class)->create();
+        $this->category = factory(Category::class)->create();
     }
 
     public function testIndex()
@@ -79,10 +83,6 @@ class CrudProductsTest extends TestCase
 
     public function testUpdate()
     {
-        $this->seed([
-            \ColorSeeder::class,
-            \SizeSeeder::class
-        ]);
         $product = Product::create([
             'name'        => 'name',
             'description' => 'description',
@@ -94,8 +94,8 @@ class CrudProductsTest extends TestCase
             ->put(route('products.update', $product->id), [
                 'name'  => 'nameup',
                 'stock' => $product->stock,
-                'color' => [Color::all()->random()->id],
-                'size'  => [Size::all()->random()->id]
+                'color' => [$this->color->id],
+                'size'  => [$this->size->id]
             ]);
 
         $response
@@ -104,8 +104,19 @@ class CrudProductsTest extends TestCase
             ->assertSessionHas('success', 'Producto Editado Satisfactoriamente');
 
         $this->assertDatabaseHas('products', [
-            'id'   => $product->id,
-            'name' => 'nameup'
+            'id'    => $product->id,
+            'name'  => 'nameup',
+            'stock' => $product->stock,
+        ]);
+
+        $this->assertDatabaseHas('color_product', [
+            'product_id' => $product->id,
+            'color_id'   => [$this->color->id],
+        ]);
+
+        $this->assertDatabaseHas('product_size', [
+            'product_id' => $product->id,
+            'size_id'    => [$this->size->id],
         ]);
     }
 
@@ -123,23 +134,17 @@ class CrudProductsTest extends TestCase
 
     public function testStore(): void
     {
-        $this->seed([
-            \ColorSeeder::class,
-            \SizeSeeder::class,
-            \CategorySeeder::class,
-        ]);
-
         $response = $this->actingAs($this->user)
             ->post(route('products.store'), [
-            'name'  => 'new',
-            'stock' => 56,
-            'price' => 23456,
-            'barcode' => '12324345354565',
+            'name'        => 'new',
+            'stock'       => 56,
+            'price'       => 23456,
+            'barcode'     => '12324345354565',
             'description' => 'jdhfbgyebhsabfreahbfgy',
-            'color' => [Color::all()->random()->id],
-            'size' => [Size::all()->random()->id],
-            'category' => [Category::all()->random()->id],
-            'img' => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
+            'color'       => [$this->color->id],
+            'size'        => [$this->size->id],
+            'category'    => [$this->category->id],
+            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
         ]);
 
         $response
@@ -182,21 +187,15 @@ class CrudProductsTest extends TestCase
 
     public function testEditView()
     {
-        $this->seed([
-            \ColorSeeder::class,
-            \SizeSeeder::class,
-            \CategorySeeder::class,
-        ]);
-
         $product = Product::create([
             'name'        => 'new',
             'stock'       => 56,
             'price'       => 23456,
             'barcode'     => '12324345354565',
             'description' => 'jdhfbgyebhsabfreahbfgy',
-            'color'       => [Color::all()->random()->id],
-            'size'        => [Size::all()->random()->id],
-            'category'    => [Category::all()->random()->id],
+            'color'       => [$this->color->id],
+            'size'        => [$this->size->id],
+            'category'    => [$this->category->id],
             'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
         ]);
 
@@ -218,21 +217,15 @@ class CrudProductsTest extends TestCase
 
     public function testShow()
     {
-        $this->seed([
-            \ColorSeeder::class,
-            \SizeSeeder::class,
-            \CategorySeeder::class,
-        ]);
-
         $product = Product::create([
             'name'        => 'new',
             'stock'       => 56,
             'price'       => 23456,
             'barcode'     => '1232434535945658',
             'description' => 'jdhfbgyebhsabfreahbfgy',
-            'color'       => [Color::all()->random()->id],
-            'size'        => [Size::all()->random()->id],
-            'category'    => [Category::all()->random()->id],
+            'color'       => [$this->color->id],
+            'size'        => [$this->size->id],
+            'category'    => [$this->category->id],
             'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg',
             'active'      => 1
         ]);
@@ -252,10 +245,6 @@ class CrudProductsTest extends TestCase
 
     public function testUpdateActive()
     {
-        $this->seed([
-            \ColorSeeder::class,
-            \SizeSeeder::class
-        ]);
         $product = Product::create([
             'name'        => 'name',
             'description' => 'description',
