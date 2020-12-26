@@ -8,7 +8,7 @@
     @endif
     <div class="row justify-content-center">
         <h2>
-            {!! trans('messages.Generated order') !!} N# {{$order->id}}
+            {!! trans('messages.Generated order') !!} N# {{str_pad($order->id, 8, '*')}}
         </h2>
     </div>
     <div class="container">
@@ -51,7 +51,7 @@
                     <table class="table table-sm">
                         <tr>
                             <th># {!! trans('messages.Order') !!}</th>
-                            <td>{{$order->id}}</td>
+                            <td>{{str_pad($order->id, 8, '*')}}</td>
                         </tr>
                         <tr>
                             <th>{!! trans('messages.Order total') !!}</th>
@@ -59,11 +59,11 @@
                         </tr>
                         <tr>
                             <th>{!! trans('messages.Order status') !!} </th>
-                            <td>{{trans($order->status)}}</td>
+                            <td>{{strtolower(trans($order->status))}}</td>
                         </tr>
                         <tr>
                             <th>{!! trans('messages.Payment status') !!}</th>
-                            <td>{{trans($order->payment->status ?? __('no existe'))}}</td>
+                            <td>{{strtolower(trans($order->payment->status ?? __('no existe')))}}</td>
                         </tr>
                         @if($order->status == 'APROVADO_T')
                             <tr>

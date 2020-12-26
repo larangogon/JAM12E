@@ -13,7 +13,7 @@
     <div class="container">
         <div class="justify-content-center">
             <h2>
-                Order generada N# {{$factura->id}}
+                Order generada N# {{str_pad($factura->id, 8, '*')}}
             </h2>
             <h6>
                 {{$factura->created_at}}

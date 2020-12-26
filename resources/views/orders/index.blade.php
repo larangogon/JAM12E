@@ -68,7 +68,7 @@
                 <tr>
                     <td>{{$order->id}}</td>
                     <td>{{$order->user->name}}</td>
-                    <td>{{trans($order->status)}}</td>
+                    <td>{{strtolower(trans($order->status))}}</td>
                     <td>$.{{number_format($order->total)}}</td>
                     <td>
                         <a href="{{route('orders.show', $order->id) }}">
@@ -77,7 +77,7 @@
                             </button>
                         </a>
                     </td>
-                    <td>{{trans($order->payment->status ?? __('no existe'))}}</td>
+                    <td>{{strtolower(trans($order->payment->status ?? __('no existe')))}}</td>
                     <td>{{$order->payment->updated_at ?? __('no existe')}}</td>
 
 
