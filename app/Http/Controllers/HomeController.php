@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Detail;
+use App\Entities\Order;
 use App\Entities\Product;
 use App\Entities\Rating;
 use Illuminate\Contracts\View\View;

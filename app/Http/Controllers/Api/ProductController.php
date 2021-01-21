@@ -71,13 +71,6 @@ class ProductController extends Controller
             ->orderBy('id', 'asc')
             ->paginate(2);
 
-        foreach ($products as $product) {
-            $product->colors;
-            $product->sizes;
-            $product->categories;
-            $product->imagenes;
-        }
-
         return response()
             ->json([
                 'Lista de productos', $products, 'search',$query

@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Entities\Cart;
 use App\Http\Requests\UserFormRequest;
 use App\Entities\User;
 use App\Interfaces\InterfaceUsers;

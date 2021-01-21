@@ -12,23 +12,11 @@ use App\Jobs\ActualStockProduct;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Constants\PlaceToPay;
-use App\Repositories\OrdersRepo;
 use App\Interfaces\InterfaceOrders;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DecoratorOrder implements InterfaceOrders
 {
-    protected $ordersRepo;
-
-    /**
-     * DecoratorOrder constructor.
-     * @param OrdersRepo $ordersRepo
-     */
-    public function __construct(OrdersRepo $ordersRepo)
-    {
-        $this->ordersRepo = $ordersRepo;
-    }
-
     /**
      * @param Request $request
      * @return RedirectResponse
@@ -36,8 +24,6 @@ class DecoratorOrder implements InterfaceOrders
      */
     public function store(Request $request): RedirectResponse
     {
-        $this->ordersRepo->store($request);
-
         $cart = Cart::find($request->get('cart_id'));
 
         if (!$cart->totalCarrito()) {
@@ -89,8 +75,6 @@ class DecoratorOrder implements InterfaceOrders
      */
     public function update(Request $request, int $id)
     {
-        $this->ordersRepo->update($request, $id);
-
         $order = Order::find($id);
 
         if (!$order->payment) {
@@ -294,7 +278,7 @@ class DecoratorOrder implements InterfaceOrders
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|mixed
+     * @return mixed|void
      * @throws \Exception
      */
     public function reversePay(Request $request)
@@ -360,8 +344,6 @@ class DecoratorOrder implements InterfaceOrders
      */
     public function paymentInStore(RequestOrderStore $request)
     {
-        $this->ordersRepo->paymentInStore($request);
-
         $cart = Cart::find($request->get('cart_id'));
 
         if ($cart->totalCarrito() === 0) {

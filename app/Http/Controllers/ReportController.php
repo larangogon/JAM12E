@@ -91,7 +91,7 @@ class ReportController extends Controller
                 ->get();
         }
 
-        $details['email'] = 'johannitaarango2@gmail.com';
+        $details['email'] = config('app.emailReport');
         dispatch(new ProcessReport($details, $ordersx));
 
         $name = date('Y-m-d-H-i') . 'report.pdf';
@@ -114,7 +114,7 @@ class ReportController extends Controller
     {
         $this->authorize('report.reportGeneral');
 
-        $details['email'] = 'johannitaarango2@gmail.com';
+        $details['email'] = config('app.emailReport');
 
         dispatch(new ProcessReportGeneral($details));
 

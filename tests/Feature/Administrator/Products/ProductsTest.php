@@ -54,6 +54,7 @@ class ProductsTest extends TestCase
     public function testEditAuth()
     {
         $product = factory(Product::class)->create();
+
         $this->get(route('products.edit', $product))
         ->assertStatus(302);
     }
