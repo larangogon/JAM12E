@@ -14,8 +14,6 @@ use App\Entities\Product;
 use App\Entities\Size;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class CrudOrderIndexAdminTest extends TestCase

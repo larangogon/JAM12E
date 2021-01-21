@@ -3,7 +3,6 @@
 namespace App\Report;
 
 use App\Entities\Cancelled;
-use App\Entities\Detail;
 use App\Entities\Order;
 use App\Entities\Payment;
 use App\Entities\Product;

@@ -4,7 +4,6 @@ namespace App\Decorators;
 
 use App\Entities\InCart;
 use Illuminate\Http\Request;
-use App\Repositories\CartsRepo;
 use App\Interfaces\InterfaceCarts;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CartAddRequest;
@@ -12,25 +11,12 @@ use App\Http\Requests\CartUpdateRequest;
 
 class DecoratorCart implements InterfaceCarts
 {
-    protected $cartsRepo;
-
-    /**
-     * DecoratorCart constructor.
-     * @param CartsRepo $cartsRepo
-     */
-    public function __construct(CartsRepo $cartsRepo)
-    {
-        $this->cartsRepo = $cartsRepo;
-    }
-
     /**
      * @param CartAddRequest $request
      * @return void
      */
     public function add(CartAddRequest $request): void
     {
-        $this->cartsRepo->add($request);
-
         $product   = $request->get('products_id');
         $stock     = $request->get('stock');
         $color     = $request->get('color_id');
@@ -73,8 +59,6 @@ class DecoratorCart implements InterfaceCarts
      */
     public function update(CartUpdateRequest $request, int $id): void
     {
-        $this->cartsRepo->update($request, $id);
-
         $inCartItem = InCart::findOrFail($id);
 
         $inCartItem->stock = $request->get('stock');

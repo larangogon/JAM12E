@@ -52,7 +52,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
         $count = count($colors);
 
         foreach ($colors as $key => $color) {
-            if ($key == $count ) {
+            if ($key == $count) {
                 break;
             }
 
