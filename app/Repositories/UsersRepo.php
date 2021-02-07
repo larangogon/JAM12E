@@ -33,26 +33,20 @@ class UsersRepo implements InterfaceUsers
 
     /**
      * @param UserEditFormRequest $request
-     * @param int $id
-     * @return mixed|void
+     * @param User $user
      */
-    public function update(UserEditFormRequest $request, int $id): void
+    public function update(UserEditFormRequest $request, User $user): void
     {
-        $usuario = User::findOrFail($id);
+        $user->update($request->all());
 
-        $usuario->update($request->all());
-
-        User::find($id)->roles()->sync($request->get('rol'));
+        $user->roles()->sync($request->get('rol'));
     }
 
     /**
-     * @param int $id
-     * @return mixed|void
+     * @param User $user
      */
-    public function active(int $id): void
+    public function active(User $user): void
     {
-        $user = User::findOrFail($id);
-
         $state = $user->active;
         $user->active = !$state;
 

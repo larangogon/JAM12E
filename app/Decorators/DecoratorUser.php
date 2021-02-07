@@ -7,6 +7,7 @@ use App\Http\Requests\UserFormRequest;
 use App\Repositories\UsersRepo;
 use App\Interfaces\InterfaceUsers;
 use Illuminate\Support\Facades\Cache;
+use App\Entities\User;
 
 class DecoratorUser implements InterfaceUsers
 {
@@ -33,23 +34,21 @@ class DecoratorUser implements InterfaceUsers
 
     /**
      * @param UserEditFormRequest $request
-     * @param int $id
-     * @return mixed|void
+     * @param User $user
      */
-    public function update(UserEditFormRequest $request, int $id): void
+    public function update(UserEditFormRequest $request, User $user): void
     {
-        $this->usersRepo->update($request, $id);
+        $this->usersRepo->update($request, $user);
 
         Cache::tags('users')->flush();
     }
 
     /**
-     * @param int $id
-     * @return void
+     * @param User $user
      */
-    public function active(int $id): void
+    public function active(User $user): void
     {
-        $this->usersRepo->active($id);
+        $this->usersRepo->active($user);
 
         Cache::tags('users')->flush();
     }

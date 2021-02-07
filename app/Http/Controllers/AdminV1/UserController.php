@@ -82,29 +82,26 @@ class UserController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param User $user
      * @return View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show(int $id): View
+    public function show(User $user): View
     {
         $this->authorize('user.show');
 
-        return view('users.show', [
-            'user' => User::findOrFail($id)
-        ]);
+        return view('users.show', compact('user'));
     }
 
     /**
-     * @param int $id
+     * @param User $user
      * @return View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit(int $id): View
+    public function edit(User $user): View
     {
         $this->authorize('user.edit');
 
-        $user  = User::findOrFail($id);
         $roles = Role::all(['id', 'name']);
 
         return view('users.edit', [
@@ -115,29 +112,29 @@ class UserController extends Controller
 
     /**
      * @param UserEditFormRequest $request
-     * @param int $id
+     * @param User $user
      * @return RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(UserEditFormRequest $request, int $id): RedirectResponse
+    public function update(UserEditFormRequest $request, User $user): RedirectResponse
     {
         $this->authorize('user.update');
 
-        $this->users->update($request, $id);
+        $this->users->update($request, $user);
 
         return redirect('/users');
     }
 
     /**
-     * @param int $id
+     * @param User $user
      * @return RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function active(int $id): RedirectResponse
+    public function active(user $user): RedirectResponse
     {
         $this->authorize('user.status');
 
-        $this->users->active($id);
+        $this->users->active($user);
 
         return redirect('/users');
     }
