@@ -21,8 +21,9 @@
                         <label for="description" class="negrita">
                             {!! trans('messages.Description') !!}
                         </label>
-                        <textarea name="description" placeholder="{{$product->description}}"
+                        <textarea name="description" rows="4" cols="50"
                                   class="form-control" required="required"  id="description">
+                            {{ $product->description }}
                         </textarea>
                     </div>
 

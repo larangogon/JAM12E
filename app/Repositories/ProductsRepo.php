@@ -44,12 +44,11 @@ class ProductsRepo implements InterfaceProducts
     }
 
     /**
-     * @param int $id
-     * @return mixed|void
+     * @param Product $product
      */
-    public function destroy(int $id): void
+    public function destroy(Product $product): void
     {
-        Product::destroy($id);
+        $product->destroy($product->id);
     }
 
     /**
@@ -66,13 +65,10 @@ class ProductsRepo implements InterfaceProducts
     }
 
     /**
-     * @param int $id
-     * @return void
+     * @param Product $product
      */
-    public function active(int $id): void
-    {
-        $product = Product::findOrFail($id);
-
+    public function active(Product $product): void
+    {;
         $state = $product->active;
         $product->active = !$state;
 
