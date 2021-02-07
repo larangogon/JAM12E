@@ -44,11 +44,11 @@ class DecoratorProduct implements InterfaceProducts
     }
 
     /**
-     * @param int $id
+     * @param Product $product
      */
-    public function destroy(int $id): void
+    public function destroy(Product $product): void
     {
-        $this->productsRepo->destroy($id);
+        $this->productsRepo->destroy($product);
 
         Cache::tags('products')->flush();
     }
@@ -65,11 +65,11 @@ class DecoratorProduct implements InterfaceProducts
     }
 
     /**
-     * @param int $id
+     * @param Product $product
      */
-    public function active(int $id): void
+    public function active(Product $product): void
     {
-        $this->productsRepo->active($id);
+        $this->productsRepo->active($product);
 
         Cache::tags('products')->flush();
     }

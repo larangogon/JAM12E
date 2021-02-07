@@ -16,16 +16,16 @@ interface InterfaceProducts
 
     /**
      * @param ItemUpdateRequest $request
-     * @param int $id
+     * @param Product $product
      * @return mixed
      */
     public function update(ItemUpdateRequest $request, Product $product);
 
     /**
-     * @param int $id
+     * @param Product $product
      * @return mixed
      */
-    public function destroy(int $id);
+    public function destroy(Product $product);
 
     /**
      * @param int $id
@@ -35,8 +35,8 @@ interface InterfaceProducts
     public function destroyimagen(int $id, Product $product);
 
     /**
-     * @param int $id
+     * @param Product $product
      * @return mixed
      */
-    public function active(int $id);
+    public function active(Product $product);
 }

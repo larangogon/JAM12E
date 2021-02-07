@@ -2,6 +2,7 @@
 
 namespace App\Interfaces;
 
+use App\Entities\User;
 use App\Http\Requests\UserEditFormRequest;
 use App\Http\Requests\UserFormRequest;
 
@@ -15,14 +16,14 @@ interface InterfaceUsers
 
     /**
      * @param UserEditFormRequest $request
-     * @param int $id
+     * @param User $user
      * @return mixed
      */
-    public function update(UserEditFormRequest $request, int $id);
+    public function update(UserEditFormRequest $request, User $user);
 
     /**
-     * @param int $id
+     * @param User $user
      * @return mixed
      */
-    public function active(int $id);
+    public function active(User $user);
 }

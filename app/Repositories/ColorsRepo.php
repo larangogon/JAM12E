@@ -10,13 +10,9 @@ class ColorsRepo implements InterfaceColors
 {
     /**
      * @param Request $request
-     * @return mixed|void
      */
     public function store(Request $request): void
     {
-        $color = new Color();
-        $color->name = request('name');
-
-        $color->save();
+        $color = Color::create($request->all());
     }
 }

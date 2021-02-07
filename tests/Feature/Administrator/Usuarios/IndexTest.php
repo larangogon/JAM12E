@@ -9,7 +9,7 @@ class IndexTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testVitrinaTest(): void
+    public function testStoreTest(): void
     {
         $this->withoutMiddleware();
         $response = $this->get('vitrina');
@@ -41,7 +41,7 @@ class IndexTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function testNosotrosNotAuthorizeTest(): void
+    public function testWeNotAuthorizeTest(): void
     {
         $this->withoutMiddleware();
         $response = $this->get('nosotros');

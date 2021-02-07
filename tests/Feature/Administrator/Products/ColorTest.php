@@ -1,15 +1,14 @@
 <?php
 
-namespace Tests\Feature\Administrator\ImportExport;
+namespace Tests\Feature\Administrator\Products;
 
 use App\Entities\Cart;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
 
-class ImportTest extends TestCase
+class ColorTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -25,7 +24,6 @@ class ImportTest extends TestCase
         $this->withoutMiddleware();
 
         $this->seed(\PermissionsTableSeeder::class);
-
         $this->user = factory(User::class)->create();
 
         $this->user->assignRole('Administrator');
@@ -35,30 +33,32 @@ class ImportTest extends TestCase
         $this->cart->save();
     }
 
-    /**
-     * @test
-     */
-    public function indexImportProducts()
+    public function testIndex(): void
     {
         $response = $this->actingAs($this->user)
-            ->get(route('indexProducts'));
-
-        $response->assertStatus(200)
-            ->assertViewIs('imports.indexProducts');
+            ->get(route('colors.index'));
+        $response
+            ->assertStatus(200)
+            ->assertViewHas('colors')
+            ->assertViewIs('colors.index');
 
         $this->assertAuthenticatedAs($this->user, $guard = null);
     }
 
-    /**
-     * @test
-     */
-    public function indexImportUsers()
+    public function testStore(): void
     {
         $response = $this->actingAs($this->user)
-            ->get(route('imports.index'));
+            ->post(route('colors.store'), [
+            'name' => 'amarillo',
+        ]);
 
-        $response->assertStatus(200)
-            ->assertViewIs('imports.index');
+        $response
+            ->assertStatus(302)
+            ->assertRedirect(route('colors.index'));
+
+        $this->assertDatabaseHas('colors', [
+            'name' => 'amarillo'
+        ]);
 
         $this->assertAuthenticatedAs($this->user, $guard = null);
     }

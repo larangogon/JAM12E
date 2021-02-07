@@ -61,12 +61,21 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'gastos.index']);
         Permission::create(['name' => 'herraminetas.index']);
         Permission::create(['name' => 'message.index']);
+
         Permission::create(['name' => 'index.importUser']);
         Permission::create(['name' => 'index.importProduct']);
+        Permission::create(['name' => 'import.user']);
+        Permission::create(['name' => 'product.import']);
+        Permission::create(['name' => 'imgs.import']);
+
+        Permission::create(['name' => 'destroy.message']);
 
         $admin = Role::create(['name' => 'Administrator']);
 
         $admin->givePermissionTo([
+            'import.user',
+            'imgs.import',
+            'product.import',
             'product.index',
             'product.store',
             'product.update',
@@ -76,6 +85,7 @@ class PermissionsTableSeeder extends Seeder
             'product.status',
             'product.destroy',
             'opciones.avanzadas',
+            'destroy.message',
 
             'report.index',
             'report.show',

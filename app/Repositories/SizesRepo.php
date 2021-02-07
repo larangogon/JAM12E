@@ -10,14 +10,9 @@ class SizesRepo implements InterfaceSizes
 {
     /**
      * @param Request $request
-     * @return mixed|void
      */
     public function store(Request $request): void
     {
-        $size = new Size();
-
-        $size->name = request('name');
-
-        $size->save();
+        $size = Size::create($request->all());
     }
 }
