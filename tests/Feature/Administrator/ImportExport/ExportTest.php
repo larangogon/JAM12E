@@ -3,10 +3,10 @@
 namespace Tests\Feature\Administrator\ImportExport;
 
 use App\Entities\Cart;
+use App\Entities\User;
 use App\Exports\OrdersExport;
 use App\Exports\ProductsExport;
 use App\Exports\UsersExport;
-use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
@@ -31,7 +31,7 @@ class ExportTest extends TestCase
 
         $this->user->assignRole('Administrator');
 
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
     }
@@ -50,7 +50,7 @@ class ExportTest extends TestCase
             return true;
         });
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     /**
@@ -67,7 +67,7 @@ class ExportTest extends TestCase
             return true;
         });
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     /**
@@ -84,7 +84,7 @@ class ExportTest extends TestCase
             return true;
         });
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     /**
@@ -108,7 +108,7 @@ class ExportTest extends TestCase
             'name'       => 'Reporte en excel',
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     /**
@@ -116,13 +116,12 @@ class ExportTest extends TestCase
      */
     public function userReporteProductsExcel()
     {
-        $response =  $this->actingAs($this->user, 'web')
+        $response = $this->actingAs($this->user, 'web')
             ->get('reportProductExport');
 
         $response
             ->assertSessionHas('success', 'El reporte se ha generado, verifica tu correo!')
             ->assertStatus(302);
-
 
         $name = date('Y-m-d-H-i') . 'reporte.xlsx';
 
@@ -133,6 +132,6 @@ class ExportTest extends TestCase
             'name'       => 'Reporte en excel de productos',
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 }

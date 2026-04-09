@@ -30,7 +30,7 @@ class ShippingObserver
             'se ha editado un nuevo dato para el envio',
             [
                 'name_recipient' => $shipping->name_recipient,
-                'city_recipient' => $shipping->city_recipient
+                'city_recipient' => $shipping->city_recipient,
             ]
         );
     }

@@ -17,36 +17,24 @@ class Spending extends Model
         'total',
         'created_by',
         'updated_by',
-        'barcode'
+        'barcode',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function userCreate(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function userUpdate(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'barcode');
     }
 
-    /**
-     * @param $query
-     */
     public function scopeSpendinTotal($query)
     {
         $query->with('product')

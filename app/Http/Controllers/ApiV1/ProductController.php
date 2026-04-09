@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\ApiV1;
 
+use App\Contracts\Api\ApiProductsContract;
+use App\Entities\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApiStoreRequest;
 use App\Http\Requests\ApiUpdateRequest;
-use App\Interfaces\Api\InterfaceApiProducts;
-use App\Entities\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -16,9 +16,9 @@ class ProductController extends Controller
 
     /**
      * ProductsController constructor.
-     * @param InterfaceApiProducts $products
+     * @param ApiProductsContract $products
      */
-    public function __construct(InterfaceApiProducts $products)
+    public function __construct(ApiProductsContract $products)
     {
         $this->products = $products;
         $this->middleware('role:Administrator');
@@ -65,7 +65,7 @@ class ProductController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $query    = trim($request->get('search'));
+        $query = trim($request->get('search'));
         $products = Product::where('name', 'LIKE', '%' . $query . '%')
             ->orwhere('id', 'LIKE', '%' . $query . '%')
             ->orderBy('id', 'asc')
@@ -73,10 +73,9 @@ class ProductController extends Controller
 
         return response()
             ->json([
-                'Lista de productos', $products, 'search',$query
+                'Lista de productos', $products, 'search', $query,
             ], 200);
     }
-
 
     /**
      * @OA\Post (
@@ -209,7 +208,7 @@ class ProductController extends Controller
         }
 
         return response()->json([
-            'status' => 'created'
+            'status' => 'created',
         ], 200);
     }
 
@@ -263,7 +262,7 @@ class ProductController extends Controller
     public function show($id): JsonResponse
     {
         $product = Product::find($id, [
-            'id','name', 'description', 'price', 'stock'
+            'id', 'name', 'description', 'price', 'stock',
         ]);
 
         if (!$product) {
@@ -278,7 +277,7 @@ class ProductController extends Controller
 
         return response()
             ->json([
-                'Producto', $product
+                'Producto', $product,
             ], 200);
     }
 
@@ -385,7 +384,7 @@ class ProductController extends Controller
         }
 
         return response()->json([
-            'status' => ($product) ? 'updated' : 'failed'
+            'status' => ($product) ? 'updated' : 'failed',
         ], 200);
     }
 
@@ -448,7 +447,7 @@ class ProductController extends Controller
 
         return response()
             ->json([
-                'status' => ($product) ? 'deleted' : 'failed'
+                'status' => ($product) ? 'deleted' : 'failed',
         ]);
     }
 }

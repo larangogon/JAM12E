@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Contracts\ColorsContract;
 use App\Entities\Color;
 use Illuminate\Http\Request;
-use App\Interfaces\InterfaceColors;
 
-class ColorsRepo implements InterfaceColors
+class ColorsContractRepo implements ColorsContract
 {
     /**
      * @param Request $request

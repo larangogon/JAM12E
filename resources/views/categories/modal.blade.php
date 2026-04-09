@@ -2,8 +2,9 @@
     Crear Categoria
 </button>
 
-{!! Form::open(['url' => 'categories']) !!}
-{{ Form::token() }}
+
+<form action="{{ url('categories') }}" method="POST">
+    @csrf
 <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -36,4 +37,4 @@
         </div>
     </div>
 </div>
-{!! Form::close() !!}
+</form>

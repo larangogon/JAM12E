@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         PaymentOrders::class,
-        ReportExcel::class
+        ReportExcel::class,
     ];
 
     /**

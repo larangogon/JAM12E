@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Administrator\Payment\Order;
 
-use App\Constants\PlaceToPay;
+use App\Constants\Statuses;
 use App\Entities\Cart;
 use App\Entities\Category;
 use App\Entities\Color;
@@ -51,7 +51,7 @@ class OrderTest extends TestCase
             ->assertViewHas(['orders', 'search'])
             ->assertViewIs('orders.index');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testShowv(): void
@@ -64,46 +64,45 @@ class OrderTest extends TestCase
             ->assertViewHas(['orders'])
             ->assertViewIs('orders.showv');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testStore(): void
     {
-        $this->color = factory(Color::class)->create();
-        $this->size = factory(Size::class)->create();
-        $this->category = factory(Category::class)->create();
-        $this->product = factory(Product::class)->create();
+        $color = factory(Color::class)->create();
+        $size = factory(Size::class)->create();
+        $category = factory(Category::class)->create();
+        $product = factory(Product::class)->create();
 
-        $inCart = InCart::create([
+        InCart::create([
             'stock' => 23,
-            'color_id' => $this->color->id,
-            'size_id' => $this->size->id,
-            'category_id' => $this->category->id,
-            'product_id' => $this->product->id,
-            'cart_id' =>  $this->cart->id
+            'color_id' => $color->id,
+            'size_id' => $size->id,
+            'category_id' => $category->id,
+            'product_id' => $product->id,
+            'cart_id' =>  $this->cart->id,
 
         ]);
 
         $response = $this->actingAs($this->user)
             ->post(route('orders.store'), [
-                'cart_id' =>  $this->cart->id
+                'cart_id' =>  $this->cart->id,
             ]);
 
-        $response
-            ->assertStatus(302);
+        $response->assertStatus(302);
 
         $this->assertDatabaseHas('orders', [
             'user_id' => $this->cart->user_id,
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testStoreTotalNull(): void
     {
         $response = $this->actingAs($this->user)
             ->post(route('orders.store'), [
-                'cart_id' =>  $this->cart->id
+                'cart_id' =>  $this->cart->id,
             ]);
 
         $response
@@ -111,7 +110,7 @@ class OrderTest extends TestCase
             ->assertSessionHas('success', 'Continue con su compra')
             ->assertRedirect('vitrina');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testUpdate()
@@ -127,17 +126,17 @@ class OrderTest extends TestCase
             'size_id' => $this->size->id,
             'category_id' => $this->category->id,
             'product_id' => $this->product->id,
-            'cart_id' =>  $this->cart->id
+            'cart_id' =>  $this->cart->id,
 
         ]);
 
         $order = Order::create([
             'user_id' => $this->cart->user_id,
-            'total'   => $this->cart->totalCarrito()
+            'total'   => $this->cart->valueCart(),
         ]);
 
         foreach ($this->cart->products as $product) {
-            $detail = Detail::create([
+            Detail::create([
                 'order_id'    => $order->id,
                 'product_id'  => $product->id,
                 'size_id'     => $product->pivot->size_id,
@@ -150,15 +149,14 @@ class OrderTest extends TestCase
 
         Payment::create([
             'order_id'   => $order->id,
-            'processUrl' => "https://test.placetopay.com/redirection/session/429524/47a34d65abeee316e36f882d3757a355",
+            'processUrl' => 'https://test.placetopay.com/redirection/session/429524/47a34d65abeee316e36f882d3757a355',
             'requestId'  => '429524',
-            'status'     => PlaceToPay::PENDING,
+            'status'     => Statuses::PENDING,
         ]);
-
 
         $response = $this->actingAs($this->user)
             ->put(route('orders.update', $order->id), [
-                'status'  => PlaceToPay::APPROVED,
+                'status'  => Statuses::APPROVED,
             ]);
 
         $response
@@ -169,15 +167,15 @@ class OrderTest extends TestCase
             'status'   => 'APPROVED',
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testPayInStore()
     {
-        $this->color    = factory(Color::class)->create();
-        $this->size     = factory(Size::class)->create();
+        $this->color = factory(Color::class)->create();
+        $this->size = factory(Size::class)->create();
         $this->category = factory(Category::class)->create();
-        $this->product  = factory(Product::class)->create();
+        $this->product = factory(Product::class)->create();
 
         $inCart = InCart::create([
             'stock'       => 23,
@@ -185,7 +183,7 @@ class OrderTest extends TestCase
             'size_id'     => $this->size->id,
             'category_id' => $this->category->id,
             'product_id'  => $this->product->id,
-            'cart_id'     => $this->cart->id
+            'cart_id'     => $this->cart->id,
 
         ]);
         $response = $this->actingAs($this->user)
@@ -195,7 +193,7 @@ class OrderTest extends TestCase
                 'document'   => '123456789',
                 'email'      => 'admin@example.com',
                 'mobile'     => '23456789',
-                'totalStore' => '2345678'
+                'totalStore' => '2345678',
 
             ]);
 
@@ -209,10 +207,10 @@ class OrderTest extends TestCase
             'document'   => '123456789',
             'email'      => 'admin@example.com',
             'mobile'     => '23456789',
-            'totalStore' => '2345678'
+            'totalStore' => '2345678',
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testStorePayErrors(): void
@@ -226,9 +224,9 @@ class OrderTest extends TestCase
                 'document',
                 'email',
                 'mobile',
-                'totalStore'
+                'totalStore',
             ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 }

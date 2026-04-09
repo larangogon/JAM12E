@@ -2,35 +2,34 @@
 
 namespace App\Mail;
 
-use App\Entities\Report;
+use DateTime;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use PDF;
 
 class SendEmailReport extends Mailable
 {
     use Queueable;
     use SerializesModels;
 
-    public function __construct($ordersx)
+    public function __construct($orders)
     {
-        $this->ordersx = $ordersx;
+        $this->orders = $orders;
     }
-
-    /**
-     * @return SendEmailReport
-     */
-    public function build()
+    public function build(): self
     {
-        $now = new \DateTime();
-        $name = date('Y-m-d-H-i') . 'report.pdf';
-        $pdf = \PDF::loadView('reports.orders', [
-            'now'       => $now,
-            'order'     => $this->ordersx,
-            ])->save(storage_path('app/') . $name);
+        $now = new DateTime();
 
-        return $this->from(config('app.emailReportFrom'))
-        ->view('emails.report')
-        ->attachData($pdf->output(), 'reports.orders.pdf');
+        $name = date('Y-m-d-H-i') . 'report.pdf';
+
+        $pdf = PDF::loadView('reports.orders', [
+            'now' => $now,
+            'order' => $this->orders,
+        ])->save(storage_path('app/') . $name);
+
+        return $this->from(config('jam.email_report_from'))
+            ->view('emails.report')
+            ->attachData($pdf->output(), 'reports.orders.pdf');
     }
 }

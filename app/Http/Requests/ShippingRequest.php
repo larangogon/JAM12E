@@ -31,7 +31,7 @@ class ShippingRequest extends FormRequest
             'address_recipient'   => 'required|min:2|max:20',
             'email_recipient'     => 'required|min:2|max:40',
             'country_recipient'   => 'required|min:2|max:20',
-            'city_recipient'      => 'required|min:2|max:20'
+            'city_recipient'      => 'required|min:2|max:20',
         ];
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\AdminV1;
 
+use App\Contracts\ColorsContract;
 use App\Entities\Color;
 use App\Http\Controllers\Controller;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Interfaces\InterfaceColors;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ColorController extends Controller
 {
@@ -15,9 +15,9 @@ class ColorController extends Controller
 
     /**
      * ColorController constructor.
-     * @param InterfaceColors $colors
+     * @param ColorsContract $colors
      */
-    public function __construct(InterfaceColors $colors)
+    public function __construct(ColorsContract $colors)
     {
         $this->colors = $colors;
         $this->middleware('auth');
@@ -32,7 +32,7 @@ class ColorController extends Controller
     {
         $this->authorize('color.index');
 
-        $colors = Color::all(['id','name']);
+        $colors = Color::all(['id', 'name']);
 
         return view('colors.index', ['colors' => $colors]);
     }

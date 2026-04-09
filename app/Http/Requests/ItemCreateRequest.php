@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ItemCreateRequest extends FormRequest
@@ -31,9 +30,9 @@ class ItemCreateRequest extends FormRequest
             'price'       => 'required|numeric',
             'barcode'     => 'required|numeric|min:13|unique:products',
             'img'         => 'required',
-            'color'       => ['required','exists:colors,id'],
-            'category'    => ['required','exists:categories,id'],
-            'size'        => ['required','exists:sizes,id'],
+            'color'       => ['required', 'exists:colors,id'],
+            'category'    => ['required', 'exists:categories,id'],
+            'size'        => ['required', 'exists:sizes,id'],
         ];
     }
 }

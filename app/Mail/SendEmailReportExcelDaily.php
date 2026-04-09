@@ -18,7 +18,7 @@ class SendEmailReportExcelDaily extends Mailable
      */
     public function build()
     {
-        return $this->from(config('app.emailReportFrom'))
+        return $this->from(config('jam.email_report_from'))
             ->view('emails.report')
             ->attach(
                 Excel::download(new ReportExcelDaily(), 'reporte.xlsx')

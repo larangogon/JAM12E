@@ -7,8 +7,6 @@ use App\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
@@ -28,7 +26,7 @@ class AuthTest extends TestCase
         $this->user = factory(User::class)->create([
             'email'    => 'admin@example.com',
             'password' => bcrypt('secret'),
-            'active'   => 1
+            'active'   => 1,
         ]);
         $this->user->assignRole('Administrator');
         $this->cart = new Cart();
@@ -42,7 +40,7 @@ class AuthTest extends TestCase
         $user = factory(User::class)->create([
             'email'    => 'user@example.com',
             'password' => bcrypt('example'),
-            'active'   => 1
+            'active'   => 1,
         ]);
 
         $user->assignRole('Administrator');
@@ -52,14 +50,14 @@ class AuthTest extends TestCase
             'password' => 'example',
         ]);
 
-        $this->assertAuthenticated($guard = null);
+        $this->assertAuthenticated();
     }
 
     public function testAuthApiNotAuthorize(): void
     {
         $credentials = [
-            "email"    => "users@mail.com",
-            "password" => "secret"
+            'email'    => 'users@mail.com',
+            'password' => 'secret',
         ];
 
         $response = $this->from('api/auth/login')->postJson('api/auth/login', $credentials);
@@ -67,8 +65,8 @@ class AuthTest extends TestCase
         $response
             ->assertStatus(401);
 
-        $this->assertGuest($guard = null);
+        $this->assertGuest();
 
-        $this->assertInvalidCredentials($credentials, $guard = null);
+        $this->assertInvalidCredentials($credentials);
     }
 }

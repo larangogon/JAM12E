@@ -1,13 +1,12 @@
 <?php
 
-namespace Tests\Feature\Administrator\Usuarios;
+namespace Tests\Feature\Administrator\Users;
 
 use App\Entities\Cart;
 use App\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -26,12 +25,12 @@ class UserTest extends TestCase
         $this->seed(\PermissionsTableSeeder::class);
 
         $this->user = factory(User::class)->create([
-            'active' => 1
+            'active' => 1,
         ]);
 
         $this->user->assignRole('Administrator');
 
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
 
         $this->cart->user_id = $this->user->id;
 
@@ -46,7 +45,7 @@ class UserTest extends TestCase
             ->assertViewHas(['users', 'search'])
             ->assertViewIs('users.index');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testCreate()
@@ -58,7 +57,7 @@ class UserTest extends TestCase
             ->assertViewIs('users.create')
             ->assertStatus(200);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testEditView()
@@ -82,7 +81,7 @@ class UserTest extends TestCase
             ->assertStatus(200)
             ->assertViewIs('users.edit');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testUpdate()
@@ -116,7 +115,7 @@ class UserTest extends TestCase
 
         $this->assertDatabaseHas('users', [
             'id'   => $user->id,
-            'name' => 'carmelo'
+            'name' => 'carmelo',
         ]);
     }
 
@@ -138,10 +137,10 @@ class UserTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->assertDatabaseHas('users', [
-            'name'  => 'new'
+            'name'  => 'new',
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testStoreErrors(): void
@@ -191,7 +190,7 @@ class UserTest extends TestCase
 
         $response = $this->actingAs($this->user)
             ->get(route('users.active', $user->id), [
-                'active' => 0
+                'active' => 0,
             ]);
 
         $response
@@ -201,7 +200,7 @@ class UserTest extends TestCase
         $this->assertDatabaseHas('users', [
             'id'     => $user->id,
             'name'   => 'carmen',
-            'active' => 0
+            'active' => 0,
         ]);
     }
 }

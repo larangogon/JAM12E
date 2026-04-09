@@ -2,21 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Carbon\Carbon;
+use Closure;
 
-/**
- * Class LocaleMiddleware
- * @package App\Http\Middleware
- */
 class LocaleMiddleware
 {
-    /**
-     * @param $request
-     * @param Closure $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next): mixed
     {
         if (config('locale.status')) {
             if (session()->has('locale') && in_array(session()->get('locale'), array_keys(config('locale.languages')))) {

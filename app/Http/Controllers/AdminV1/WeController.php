@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\AdminV1;
 
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
 class WeController extends Controller
 {

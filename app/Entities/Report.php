@@ -11,14 +11,11 @@ class Report extends Model
         'created_by',
         'file',
         'name',
-        'type'
+        'type',
     ];
 
     protected $table = 'reports';
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');

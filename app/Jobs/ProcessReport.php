@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
+use App\Mail\SendEmailReport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Mail\SendEmailReport;
 use Illuminate\Support\Facades\Mail;
 
 class ProcessReport implements ShouldQueue

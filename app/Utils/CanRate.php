@@ -12,7 +12,7 @@ trait CanRate
      */
     public function ratings($model = null)
     {
-        $modelClass = $model ? (new $model)->getMorphClass() : $this->getMorphClass();
+        $modelClass = $model ? (new $model())->getMorphClass() : $this->getMorphClass();
 
         $morphToMany = $this->morphToMany(
             $modelClass,
@@ -45,7 +45,7 @@ trait CanRate
 
         $this->ratings($model)->attach($model->getKey(), [
             'score' => $score,
-            'rateable_type' => get_class($model)
+            'rateable_type' => get_class($model),
         ]);
 
         return true;
@@ -57,7 +57,7 @@ trait CanRate
      */
     public function unrate(Model $model): bool
     {
-        if (! $this->hasRated($model)) {
+        if (!$this->hasRated($model)) {
             return false;
         }
 
@@ -72,6 +72,6 @@ trait CanRate
      */
     public function hasRated(Model $model): bool
     {
-        return ! is_null($this->ratings($model->getMorphClass())->find($model->getKey()));
+        return !is_null($this->ratings($model->getMorphClass())->find($model->getKey()));
     }
 }

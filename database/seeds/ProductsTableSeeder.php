@@ -9,12 +9,7 @@ use Illuminate\Database\Seeder;
 
 class ProductsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         factory(Product::class, 6)->create();
 
@@ -38,7 +33,7 @@ class ProductsTableSeeder extends Seeder
             );
 
             factory(Imagen::class, rand(1, 2))->create([
-                'product_id' => $product->id
+                'product_id' => $product->id,
             ]);
         });
     }

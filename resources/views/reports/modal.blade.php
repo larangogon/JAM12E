@@ -22,7 +22,7 @@
                             Desde:
                         </label>
                         <div>
-                            <input type="date"  class="form-control" name="fechaInicio"/>
+                            <input type="date"  class="form-control" name="startDate"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -30,7 +30,7 @@
                             Hasta:
                         </label>
                         <div>
-                            <input type="date"  class="form-control" name="fechaFinal"/>
+                            <input type="date"  class="form-control" name="$endDate"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -43,7 +43,7 @@
                                 <option value="APPROVED">Aprovadas</option>
                                 <option value="PENDING">Pendientes</option>
                                 <option value="REJECTED">Rechazadas</option>
-                                <option value="APROVADO_T">Aprovados en tienda</option>
+                                <option value="APPROVED_IN_STORE">Aprovados en tienda</option>
                                 <option value="all">Todos los estados</option>
                             </select>
                         </div>

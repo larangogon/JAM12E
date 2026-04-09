@@ -36,7 +36,7 @@ class ApiUpdateRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         abort(response()->json([
-            'errors' => $validator->errors()->toArray()
+            'errors' => $validator->errors()->toArray(),
         ]));
     }
 }

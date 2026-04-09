@@ -40,7 +40,7 @@
                                 <h5>
                                     <div class="row justify-content-center align-items-center">
                                         @auth {{auth()->user()->cart->productsCount()}}
-                                        @endauth {!! trans('messages.Product (s) with a total of') !!} ${{$cart->valorCarrito()}}
+                                        @endauth {!! trans('messages.Product (s) with a total of') !!} ${{$cart->valueCart()}}
                                     </div>
                                 </h5>
                             </tr>

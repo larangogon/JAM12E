@@ -4,10 +4,9 @@ namespace App\Providers;
 
 use App\Entities\Order;
 use App\Policies\OrderPolicy;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\Response;
-use Laravel\Passport\Passport;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -52,7 +51,5 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
-
-        Passport::routes();
     }
 }

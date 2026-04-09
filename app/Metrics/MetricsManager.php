@@ -2,8 +2,8 @@
 
 namespace App\Metrics;
 
-use Illuminate\Support\Collection;
 use App\Contracts\MetricContract;
+use Illuminate\Support\Collection;
 
 class MetricsManager
 {

@@ -7,14 +7,11 @@ use App\Entities\Order;
 use App\Entities\Payment;
 use App\Entities\Product;
 use App\Entities\Rating;
-use App\Entities\Report;
 use App\Entities\User;
-use App\Report\ReportGeneralPdf;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class SendEmailReportGeneral extends Mailable
 {
@@ -92,7 +89,6 @@ class SendEmailReportGeneral extends Mailable
 
         $name = date('Y-m-d-H-i') . 'report.pdf';
 
-
         $pdf = \PDF::loadView('reports.reportGeneral', [
             'ratinAllProducs' => $ratinAllProducs,
             'rating'          => $rating,
@@ -114,7 +110,7 @@ class SendEmailReportGeneral extends Mailable
             'sumPending'      => $sumPending,
         ])->save(storage_path('app/') . $name);
 
-        return $this->from(config('app.emailReportFrom'))
+        return $this->from(config('jam.email_report_from'))
             ->view('emails.report')
             ->attachData($pdf->output(), 'reports.reportGeneral.pdf');
     }

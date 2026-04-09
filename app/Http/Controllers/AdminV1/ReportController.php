@@ -4,13 +4,13 @@ namespace App\Http\Controllers\AdminV1;
 
 use App\Entities\Order;
 use App\Entities\Report;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestFilter;
-use App\Jobs\ProcessReportGeneral;
 use App\Jobs\ProcessReport;
+use App\Jobs\ProcessReportGeneral;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {
@@ -42,7 +42,7 @@ class ReportController extends Controller
 
         return view('reports.index', [
             'reports' => $reports,
-            'search'  => $query
+            'search'  => $query,
         ]);
     }
 
@@ -68,36 +68,36 @@ class ReportController extends Controller
     {
         $this->authorize('report.reportOrders');
 
-        $fechaInicio = date('Y-m-d', strtotime($request->get('fechaInicio')));
+        $startDate = date('Y-m-d', strtotime($request->get('startDate')));
 
-        $fechaFinal = date('Y-m-d', strtotime($request->get('fechaFinal')));
+        $endDate = date('Y-m-d', strtotime($request->get('endDate')));
 
         $status = $request->get('status');
 
-        if ($fechaInicio > $fechaFinal) {
+        if ($startDate > $endDate) {
             return redirect()->back()->with(
                 'success',
                 'La fecha inicial es mayor que la final !'
             );
         }
 
-        $ordersx = Order::whereBetween('created_at', [
-            $fechaInicio . ' 00:00:00', $fechaFinal . ' 23:59:29'])
+        $orders = Order::whereBetween('created_at', [
+            $startDate . ' 00:00:00', $endDate . ' 23:59:29'])
             ->where('status', $status)
             ->get();
 
-        if ($status === "all") {
-            $ordersx = Order::whereBetween('created_at', [
-                $fechaInicio . ' 00:00:00', $fechaFinal . ' 23:59:29'])
+        if ($status === 'all') {
+            $orders = Order::whereBetween('created_at', [
+                "$startDate  00:00:00, $endDate  23:59:29"])
                 ->get();
         }
 
-        $details['email'] = config('app.emailReport');
-        dispatch(new ProcessReport($details, $ordersx));
+        $details['email'] = config('jam.email_report');
+        dispatch(new ProcessReport($details, $orders));
 
         $name = date('Y-m-d-H-i') . 'report.pdf';
 
-        $report = Report::create([
+        Report::create([
             'created_by' => auth()->user()->id,
             'file'       => $name,
             'type'       => 'PDF',
@@ -115,7 +115,7 @@ class ReportController extends Controller
     {
         $this->authorize('report.reportGeneral');
 
-        $details['email'] = config('app.emailReport');
+        $details['email'] = config('jam.email_report');
 
         dispatch(new ProcessReportGeneral($details));
 
@@ -135,7 +135,7 @@ class ReportController extends Controller
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      * @return RedirectResponse
      */
     public function destroy(int $id): RedirectResponse
@@ -159,8 +159,8 @@ class ReportController extends Controller
         $file = $request->file;
         $name = '/app/' . $file;
 
-        $rutaDeArchivo = storage_path() . $name;
+        $route = storage_path() . $name;
 
-        return response()->download($rutaDeArchivo);
+        return response()->download($route);
     }
 }

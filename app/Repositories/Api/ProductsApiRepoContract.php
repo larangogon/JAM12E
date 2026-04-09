@@ -2,12 +2,12 @@
 
 namespace App\Repositories\Api;
 
+use App\Contracts\Api\ApiProductsContract;
+use App\Entities\Product;
 use App\Http\Requests\ApiStoreRequest;
 use App\Http\Requests\ApiUpdateRequest;
-use App\Interfaces\Api\InterfaceApiProducts;
-use App\Entities\Product;
 
-class ProductsApiRepo implements InterfaceApiProducts
+class ProductsApiRepoContract implements ApiProductsContract
 {
     /**
      * @param ApiStoreRequest $request
@@ -16,12 +16,12 @@ class ProductsApiRepo implements InterfaceApiProducts
     {
         $product = Product::create($request->all());
 
-        $product->asignarColor($request->get('color'));
-        $product->asignarCategory($request->get('category'));
-        $product->asignarSize($request->get('size'));
+        $product->assignColor($request->get('color'));
+        $product->assignCategory($request->get('category'));
+        $product->assignSize($request->get('size'));
 
         $files = $request->file('img');
-        $product->asignarImagen($files, $product->id);
+        $product->assignImage($files, $product->id);
     }
 
     /**
@@ -38,7 +38,7 @@ class ProductsApiRepo implements InterfaceApiProducts
         $product->sizes()->sync($request->get('size'));
 
         $files = $request->file('img');
-        $product->asignarImagen($files, $product->id);
+        $product->assignImage($files, $product->id);
     }
 
     /**

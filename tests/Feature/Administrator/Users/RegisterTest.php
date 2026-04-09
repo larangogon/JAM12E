@@ -1,9 +1,8 @@
 <?php
 
-namespace Tests\Feature\Administrator\Usuarios;
+namespace Tests\Feature\Administrator\Users;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -20,7 +19,7 @@ class RegisterTest extends TestCase
             'address'               => 'car33767',
             'email'                 => 'marianew@hotmail.com',
             'password'              => '123456987',
-            'password_confirmation' => '123456987'
+            'password_confirmation' => '123456987',
         ];
 
         $response = $this->from('/register')->post('/register', $credentials);
@@ -29,7 +28,7 @@ class RegisterTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect(route('home'));
 
-        $this->assertCredentials($credentials, $guard = null);
+        $this->assertCredentials($credentials);
 
         $this->assertDatabaseHas('users', [
             'name'      => 'new',
@@ -47,7 +46,7 @@ class RegisterTest extends TestCase
 
         $response = $this->from('/register')->post('/register', $credentials);
 
-        $this->assertInvalidCredentials($credentials, $guard = null);
+        $this->assertInvalidCredentials($credentials);
 
         $response->assertSessionHasErrors([
             'name',

@@ -10,7 +10,6 @@ use App\Entities\Product;
 use App\Entities\Size;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CartTest extends TestCase
@@ -29,7 +28,7 @@ class CartTest extends TestCase
 
         $this->user = factory(User::class)->create([
             'active' => 1,
-            'id' => 4
+            'id' => 4,
         ]);
 
         $this->user->assignRole('Administrator');
@@ -50,7 +49,7 @@ class CartTest extends TestCase
         $response
             ->assertStatus(200);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testHome(): void
@@ -63,15 +62,15 @@ class CartTest extends TestCase
         $response
             ->assertStatus(200);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testRemove(): void
     {
         $this->withoutMiddleware();
         $this->product = factory(Product::class)->create();
-        $this->color   = factory(Color::class)->create();
-        $this->size    = factory(Size::class)->create();
+        $this->color = factory(Color::class)->create();
+        $this->size = factory(Size::class)->create();
 
         $this->user->cart->products = InCart::create([
             'stock'      => '12',
@@ -83,7 +82,7 @@ class CartTest extends TestCase
 
         $response = $this->actingAs($this->user, 'web')
             ->get(route('cart.remove', $this->user->cart->products->id), [
-                    $this->user->cart->products->id
+                    $this->user->cart->products->id,
                 ]);
 
         $response
@@ -93,15 +92,14 @@ class CartTest extends TestCase
         'size_id' => $this->size->id,
             ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testUpdate(): void
     {
         $this->product = factory(Product::class)->create();
-        $this->color   = factory(Color::class)->create();
-        $this->size    = factory(Size::class)->create();
-
+        $this->color = factory(Color::class)->create();
+        $this->size = factory(Size::class)->create();
 
         $this->user->cart->products = InCart::create([
             'id'         => 1,
@@ -133,14 +131,14 @@ class CartTest extends TestCase
             'cart_id'    => $this->user->cart->id,
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testDestroy()
     {
         $this->product = factory(Product::class)->create();
-        $this->color   = factory(Color::class)->create();
-        $this->size    = factory(Size::class)->create();
+        $this->color = factory(Color::class)->create();
+        $this->size = factory(Size::class)->create();
 
         $this->user->cart->products = InCart::create([
             'id'         => 6,
@@ -168,16 +166,16 @@ class CartTest extends TestCase
             'id'  => $this->user->cart->products->id,
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testadd(): void
     {
         $this->withoutMiddleware();
-        $this->product    = factory(Product::class)->create(['stock' => '100']);
-        $this->color      = factory(Color::class)->create();
-        $this->size       = factory(Size::class)->create();
-        $this->category   = factory(Category::class)->create();
+        $this->product = factory(Product::class)->create(['stock' => '100']);
+        $this->color = factory(Color::class)->create();
+        $this->size = factory(Size::class)->create();
+        $this->category = factory(Category::class)->create();
 
         $response = $this->actingAs($this->user)
             ->post(route('cart/add'), [
@@ -185,13 +183,12 @@ class CartTest extends TestCase
                 'stock'       => '23',
                 'color_id'    => $this->color->id,
                 'size_id'     => $this->size->id,
-                'category_id' => $this->category->id
+                'category_id' => $this->category->id,
             ]);
 
         $response
             ->assertStatus(302)
             ->assertSessionHas('success', 'Producto agregado al carrito con éxito');
-
 
         $this->assertDatabaseHas('in_carts', [
             'stock'      => '23',
@@ -200,17 +197,17 @@ class CartTest extends TestCase
             'cart_id'    => $this->user->cart->id,
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testaddErrorStock(): void
     {
         $this->withoutMiddleware();
 
-        $this->product    = factory(Product::class)->create(['stock' => '5']);
-        $this->color      = factory(Color::class)->create();
-        $this->size       = factory(Size::class)->create();
-        $this->category   = factory(Category::class)->create();
+        $this->product = factory(Product::class)->create(['stock' => '5']);
+        $this->color = factory(Color::class)->create();
+        $this->size = factory(Size::class)->create();
+        $this->category = factory(Category::class)->create();
 
         $response = $this->actingAs($this->user)
             ->post(route('cart/add'), [
@@ -218,7 +215,7 @@ class CartTest extends TestCase
                 'stock'       => '23',
                 'color_id'    => $this->color->id,
                 'size_id'     => $this->size->id,
-                'category_id' => $this->category->id
+                'category_id' => $this->category->id,
             ]);
         $response
             ->assertStatus(302)
@@ -241,7 +238,7 @@ class CartTest extends TestCase
     public function testArrayProducts(): void
     {
         $this->assertContains('xs', [
-            'vestido', 'xs', 'blue'
+            'vestido', 'xs', 'blue',
         ]);
     }
 }

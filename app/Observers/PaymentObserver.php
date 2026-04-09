@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Constants\Statuses;
 use App\Entities\Payment;
 use App\Events\PaymentIsCreated;
 use App\Jobs\PayActuality;
@@ -28,7 +29,7 @@ class PaymentObserver
 
     public function created(Payment $payment)
     {
-        if ($payment->status === 'APROVADO_T') {
+        if ($payment->status === Statuses::APPROVED_IN_STORE) {
             event(new PaymentIsCreated($payment));
         }
     }

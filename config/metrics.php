@@ -2,10 +2,10 @@
 
 return [
     'order-count' => [
-        'behaviour' => \App\Metrics\Behaviour\OrderMetricBehaviour::class,
+        'behaviour' => App\Metrics\Behaviour\OrderMetricBehaviour::class,
     ],
 
     'cancelled-count' => [
-        'behaviour' => \App\Metrics\Behaviour\CancelledMetricBehaviour::class,
+        'behaviour' => App\Metrics\Behaviour\CancelledMetricBehaviour::class,
     ],
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Report;
 
+use App\Constants\Statuses;
 use App\Entities\Cancelled;
 use App\Entities\Order;
 use App\Entities\Payment;
@@ -56,23 +57,23 @@ class ReportGeneralPdf
             ->count();
 
         $approved = DB::table('orders')
-            ->where('status', 'APPROVED')
+            ->where('status', Statuses::APPROVED)
             ->count();
 
         $rejected = DB::table('orders')
-            ->where('status', 'REJECTED')
+            ->where('status', Statuses::APPROVED)
             ->count();
 
         $sum = DB::table('orders')
-            ->where('status', 'APPROVED')
+            ->where('status', Statuses::APPROVED)
             ->sum('total');
 
         $sumRechazada = DB::table('orders')
-            ->where('status', 'REJECTED')
+            ->where('status', Statuses::REJECTED)
             ->sum('total');
 
         $sumPending = DB::table('orders')
-            ->where('status', 'PENDING')
+            ->where('status', Statuses::PENDING)
             ->sum('total');
 
         $order = Order::all();
@@ -83,23 +84,23 @@ class ReportGeneralPdf
 
         return \PDF::loadView('reports.reportGeneral', [
             'ratinAllProducs' => $ratinAllProducs,
-            'rating'          => $rating,
-            'hoy'             => $hoy,
-            'sum'             => $sum,
-            'pay'             => $pay,
-            'rejected'        => $rejected,
-            'visit'           => $visit,
-            'sales'           => $sales,
-            'now'             => $now,
-            'products'        => $products,
-            'users'           => $users,
-            'payments'        => $payments,
-            'cancelled'       => $cancelled,
-            'order'           => $order,
-            'price'           => $price,
-            'approved'        => $approved,
-            'sumRechazada'    => $sumRechazada,
-            'sumPending'      => $sumPending,
+            'rating' => $rating,
+            'hoy' => $hoy,
+            'sum' => $sum,
+            'pay' => $pay,
+            'rejected' => $rejected,
+            'visit' => $visit,
+            'sales' => $sales,
+            'now' => $now,
+            'products' => $products,
+            'users' => $users,
+            'payments' => $payments,
+            'cancelled' => $cancelled,
+            'order' => $order,
+            'price' => $price,
+            'approved' => $approved,
+            'sumRechazada' => $sumRechazada,
+            'sumPending' => $sumPending,
         ]);
     }
 }

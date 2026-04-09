@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\AdminV1;
 
-use App\Entities\Size;
+use App\Contracts\ProductsContract;
+use App\Entities\Category;
 use App\Entities\Color;
 use App\Entities\Imagen;
 use App\Entities\Product;
-use App\Entities\Category;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Interfaces\InterfaceProducts;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Session;
+use App\Entities\Size;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemCreateRequest;
 use App\Http\Requests\ItemUpdateRequest;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class ProductsController extends Controller
 {
@@ -22,9 +22,9 @@ class ProductsController extends Controller
 
     /**
      * ProductsController constructor.
-     * @param InterfaceProducts $products
+     * @param ProductsContract $products
      */
-    public function __construct(InterfaceProducts $products)
+    public function __construct(ProductsContract $products)
     {
         $this->products = $products;
         $this->middleware('auth');
@@ -50,7 +50,7 @@ class ProductsController extends Controller
 
         return view('products.index', [
             'products' => $products,
-            'search'   => $query
+            'search'   => $query,
         ]);
     }
 
@@ -61,10 +61,10 @@ class ProductsController extends Controller
     {
         $this->authorize('product.create');
 
-        $colors     = Color::all(['id','name']);
-        $categories = Category::all(['id','name']);
-        $sizes      = Size::all(['id','name']);
-        $imagenes   = Imagen::all(['id','name']);
+        $colors = Color::all(['id', 'name']);
+        $categories = Category::all(['id', 'name']);
+        $sizes = Size::all(['id', 'name']);
+        $imagenes = Imagen::all(['id', 'name']);
 
         return view('products.create', [
             'colors'     => $colors,
@@ -109,9 +109,9 @@ class ProductsController extends Controller
     {
         $this->authorize('product.edit');
 
-        $colors     = Color::all(['id','name']);
-        $categories = Category::all(['id','name']);
-        $sizes      = Size::all(['id','name']);
+        $colors = Color::all(['id', 'name']);
+        $categories = Category::all(['id', 'name']);
+        $sizes = Size::all(['id', 'name']);
 
         return view('products.edit', [
             'product'    => $product,

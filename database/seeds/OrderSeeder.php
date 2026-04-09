@@ -6,9 +6,10 @@ use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         factory(Order::class, 100)->create();
+
         Order::inRandomOrder()->each(function ($order) {
             factory(Detail::class, rand(1, 2))->create([
                 'order_id' => $order->id,

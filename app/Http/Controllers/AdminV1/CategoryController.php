@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\AdminV1;
 
+use App\Contracts\CategoriesContract;
 use App\Entities\Category;
 use App\Http\Controllers\Controller;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use App\Interfaces\InterfaceCategories;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
@@ -15,9 +15,9 @@ class CategoryController extends Controller
 
     /**
      * CategoryController constructor.
-     * @param InterfaceCategories $categories
+     * @param CategoriesContract $categories
      */
-    public function __construct(InterfaceCategories $categories)
+    public function __construct(CategoriesContract $categories)
     {
         $this->categories = $categories;
         $this->middleware('auth');
@@ -32,10 +32,10 @@ class CategoryController extends Controller
     {
         $this->authorize('category.index');
 
-        $categories = Category::all(['id','name']);
+        $categories = Category::all(['id', 'name']);
 
         return view('categories.index', [
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 

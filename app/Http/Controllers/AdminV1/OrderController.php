@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\AdminV1;
 
+use App\Constants\Statuses;
+use App\Contracts\OrdersContract;
 use App\Entities\Cancelled;
-use App\Entities\User;
 use App\Entities\Order;
-use App\Http\Requests\RequestOrderStore;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Interfaces\InterfaceOrders;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
+use App\Entities\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RequestOrderStore;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
@@ -19,10 +20,10 @@ class OrderController extends Controller
 
     /**
      * OrderController constructor.
-     * @param InterfaceOrders $orders
+     * @param OrdersContract $orders
      * @param Order $order
      */
-    public function __construct(InterfaceOrders $orders, Order $order)
+    public function __construct(OrdersContract $orders, Order $order)
     {
         $this->order = $order;
         $this->orders = $orders;
@@ -39,7 +40,7 @@ class OrderController extends Controller
     {
         $this->authorize('order.index');
 
-        $search   = $request->get('search', null);
+        $search = $request->get('search', null);
 
         $this->order = new Order();
 
@@ -47,7 +48,7 @@ class OrderController extends Controller
             'search' => $search,
             'orders' => $this->order
                 ->search($search)
-                ->paginate(15)
+                ->paginate(15),
         ]);
     }
 
@@ -58,7 +59,7 @@ class OrderController extends Controller
     public function create(Request $request): View
     {
         return view('orders.create', [
-            'cart' => Auth::user()->cart
+            'cart' => Auth::user()->cart,
         ]);
     }
 
@@ -92,7 +93,7 @@ class OrderController extends Controller
         $order = $this->orders->update($request, $order->id);
 
         return view('orders.show', [
-            'order' => $order
+            'order' => $order,
         ]);
     }
 
@@ -104,11 +105,11 @@ class OrderController extends Controller
     public function showv(User $user): View
     {
         $this->authorize('ownerIndex', [
-            Order::class, $user->id
+            Order::class, $user->id,
         ]);
 
         return view('orders.showv', [
-            'orders' => $user->orders
+            'orders' => $user->orders,
         ]);
     }
 
@@ -170,7 +171,7 @@ class OrderController extends Controller
             'search'     => $search,
             'cancellers' => $this->canceller
                 ->search($search)
-                ->paginate(5)
+                ->paginate(5),
         ]);
     }
 
@@ -193,20 +194,20 @@ class OrderController extends Controller
     {
         $order = Order::find($request->get('order'));
 
-        $orderCancelled = Cancelled::create([
-            'user_id'           => $order->user->id,
-            'statusTransaction' => 'APROVADO_T',
-            'message'           => $order->payment->message,
-            'document'          => $order->payment->document,
-            'name'              => $order->payment->name,
-            'email'             => $order->payment->email,
-            'mobile'            => $order->payment->mobile,
-            'amountReturn'      => $order->payment->totalStore,
-            'order_id'          => $order->id,
-            'description'       => 'Garantia',
-            'cancelled_by'      => auth()->user()->id,
-            'totalOrder'        => $order->total,
-            'status'            => 'CANCELADO_T'
+        Cancelled::create([
+            'user_id' => $order->user->id,
+            'statusTransaction' => Statuses::APPROVED_IN_STORE,
+            'message' => $order->payment->message,
+            'document' => $order->payment->document,
+            'name' => $order->payment->name,
+            'email' => $order->payment->email,
+            'mobile' => $order->payment->mobile,
+            'amountReturn' => $order->payment->totalStore,
+            'order_id' => $order->id,
+            'description' => 'Garantia',
+            'cancelled_by' => auth()->user()->id,
+            'totalOrder' => $order->total,
+            'status' => Statuses::CANCELED,
         ]);
 
         Order::destroy($request->get('order'));

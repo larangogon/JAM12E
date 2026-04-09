@@ -15,7 +15,7 @@ class ProductsObserver
             'name'        => $product->name,
             'stock'       => $product->stock,
             'price'       => $product->price,
-            'description' => $product->description
+            'description' => $product->description,
         ]);
     }
 
@@ -31,7 +31,7 @@ class ProductsObserver
             'name'        => $product->name,
             'stock'       => $product->stock,
             'price'       => $product->price,
-            'description' => $product->description
+            'description' => $product->description,
         ]);
     }
 }

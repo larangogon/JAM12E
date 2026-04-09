@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ItemUpdateRequest extends FormRequest
@@ -27,8 +26,8 @@ class ItemUpdateRequest extends FormRequest
         return [
             'name'  => 'required|max:25',
             'stock' => 'required|integer|min:1',
-            'color' => ['required','exists:colors,id'],
-            'size'  => ['required','exists:sizes,id'],
+            'color' => ['required', 'exists:colors,id'],
+            'size'  => ['required', 'exists:sizes,id'],
         ];
     }
 }

@@ -13,14 +13,7 @@ class PaymentIsCreated
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $payment;
-
-    /**
-     * OrderIsCreated constructor.
-     * @param Payment $payment
-     */
-    public function __construct(Payment $payment)
+    public function __construct(public readonly Payment $payment)
     {
-        $this->payment = $payment;
     }
 }

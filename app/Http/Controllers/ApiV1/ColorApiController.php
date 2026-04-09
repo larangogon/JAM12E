@@ -56,11 +56,11 @@ class ColorApiController extends Controller
      */
     public function index()
     {
-        $colors = Color::all(['id','name']);
+        $colors = Color::all(['id', 'name']);
 
         return response()
             ->json([
-                'lista de colores', $colors
+                'lista de colores', $colors,
             ], 200);
     }
 
@@ -74,7 +74,7 @@ class ColorApiController extends Controller
 
         return response()
             ->json([
-            'status' => ($color) ? 'created' : 'failed'
+            'status' => ($color) ? 'created' : 'failed',
             ], 200);
     }
 }

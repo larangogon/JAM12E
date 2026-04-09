@@ -115,7 +115,7 @@
                       <div class="card-body">
                           @foreach($product->imagenes as $img)
                               <a data-fancybox="gallery" href="../../../uploads/{{ $img->name }}">
-                                  <img class="img img:hover" src="../../../uploads/{{ $img->name }}" width="200"  class="img-fluid">
+                                  <img src="../../../uploads/{{ $img->name }}" width="200"  class="img img:hover img-fluid">
                               </a>
                           @endforeach
                       </div>

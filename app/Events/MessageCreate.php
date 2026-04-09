@@ -13,14 +13,7 @@ class MessageCreate
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $message;
-
-    /**
-     * MessageCreate constructor.
-     * @param Message $message
-     */
-    public function __construct(Message $message)
+    public function __construct(public readonly Message $message)
     {
-        $this->message = $message;
     }
 }

@@ -4,8 +4,6 @@ namespace App\Notifications;
 
 use App\Entities\Message;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class MessageNotification extends Notification
@@ -34,7 +32,6 @@ class MessageNotification extends Notification
     {
         return ['database'];
     }
-
 
     /**
      * @param $notifiable

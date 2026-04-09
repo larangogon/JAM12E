@@ -2,388 +2,272 @@
 
 namespace App\Decorators;
 
-use App\Entities\Cancelled;
-use App\Entities\Cart;
-use App\Entities\Order;
-use App\Entities\Detail;
-use App\Entities\Payment;
+use App\Constants\Statuses;
+use App\Contracts\OrdersContract;
+use App\Entities\{Cancelled, Cart, Detail, Order, Payment};
 use App\Http\Requests\RequestOrderStore;
 use App\Jobs\ActualStockProduct;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use App\Constants\PlaceToPay;
-use App\Interfaces\InterfaceOrders;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class DecoratorOrder implements InterfaceOrders
+class DecoratorOrder implements OrdersContract
 {
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     * @throws \Exception
-     */
+    private Client $client;
+
+    public function __construct()
+    {
+        $this->client = new Client([
+            'base_uri' => config('jam.place_to_pay.url_base'),
+            'timeout'  => 10,
+        ]);
+    }
+
     public function store(Request $request): RedirectResponse
     {
-        $cart = Cart::find($request->get('cart_id'));
+        return DB::transaction(function () use ($request) {
 
-        if (!$cart->totalCarrito()) {
-            return redirect('vitrina')->with('success', 'Continue con su compra');
+            $cart = Cart::findOrFail($request->get('cart_id'));
+
+            if (!$cart->valueCart()) {
+                return redirect('vitrina')->with('success', 'Continue con su compra');
+            }
+
+            $order = $this->createOrderFromCart($cart);
+
+            $response = $this->createSession($order);
+
+            $this->createPayment($order, $response);
+
+            logger()->info('P2P create session', ['response' => $response]);
+
+            return redirect()->away($response->processUrl);
+        });
+    }
+
+    public function update(Request $request, int $id): Order
+    {
+        $order = Order::with('payment')->findOrFail($id);
+
+        if (!$order->payment) {
+            return $order;
         }
 
+        $response = $this->getSession($order);
+
+        $this->updatePaymentStatus($order, $response);
+
+        logger()->info('P2P update status', ['response' => $response]);
+
+        return $order->refresh();
+    }
+
+    public function resend(Request $request): RedirectResponse
+    {
+        $order = Order::findOrFail($request->get('order'));
+
+        $response = $this->createSession($order);
+
+        $order->payment->update([
+            'processUrl' => $response->processUrl,
+            'requestId' => $response->requestId,
+            'status' => Statuses::PENDING,
+        ]);
+
+        return redirect()->away($response->processUrl);
+    }
+
+    public function reversePay(Request $request): void
+    {
+        DB::transaction(function () use ($request) {
+
+            $order = Order::with(['payment', 'user'])->findOrFail($request->get('order'));
+
+            $response = $this->reverseSession($order);
+
+            Cancelled::create([
+                'user_id' => $order->user->id,
+                'status' => Statuses::CANCELED,
+                'statusTransaction' => $response->status->status,
+                'requestId' => $order->payment->requestId,
+                'internalReference' => $order->payment->internalReference,
+                'processUrl' => $order->payment->processUrl,
+                'message' => $response->status->message,
+                'document' => $order->payment->document,
+                'name' => $order->payment->name,
+                'email' => $order->payment->email,
+                'mobile' => $order->payment->mobile,
+                'locale' => $order->payment->locale,
+                'amountReturn' => data_get($response, 'payment.amount.from.total'),
+                'order_id' => $order->id,
+                'cancelled_by' => auth()->id(),
+                'totalOrder' => $order->total,
+            ]);
+
+            $order->delete();
+        });
+    }
+
+    public function complete(Request $request): RedirectResponse
+    {
+        $order = Order::findOrFail($request->get('order'));
+
+        $this->getSession($order);
+
+        return redirect()->away($order->payment->processUrl);
+    }
+
+    public function paymentInStore(RequestOrderStore $request)
+    {
+        return DB::transaction(function () use ($request) {
+
+            $cart = Cart::findOrFail($request->get('cart_id'));
+
+            if ($cart->valueCart() === 0) {
+                return redirect('vitrina')->with('success', 'Continue con su compra');
+            }
+
+            $order = $this->createOrderFromCart($cart, Statuses::APPROVED_IN_STORE);
+
+            $user = auth()->user();
+
+            Payment::create([
+                'order_id' => $order->id,
+                'status' => Statuses::APPROVED_IN_STORE,
+                'base' => 'tienda',
+                'message' => "pago en tienda por {$user->name} ({$user->id})",
+                'document' => $request->get('document'),
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'mobile' => $request->get('mobile'),
+                'amount' => $order->total,
+                'totalStore' => $request->get('totalStore'),
+                'expiration' => now()->addDays(30),
+            ]);
+
+            dispatch(new ActualStockProduct($order));
+
+            return $order;
+        });
+    }
+
+    private function createOrderFromCart(Cart $cart, string $status = Statuses::PENDING): Order
+    {
         $order = Order::create([
             'user_id' => $cart->user_id,
-            'total'   => $cart->totalCarrito(),
-            'status'  => 'PENDING'
+            'total' => $cart->valueCart(),
+            'status' => $status,
         ]);
 
         foreach ($cart->products as $product) {
-            $detail = Detail::create([
-                'order_id'    => $order->id,
-                'product_id'  => $product->id,
-                'size_id'     => $product->pivot->size_id,
+            Detail::create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'size_id' => $product->pivot->size_id,
                 'category_id' => $product->pivot->category_id,
-                'color_id'    => $product->pivot->color_id,
-                'stock'       => $product->pivot->stock,
-                'total'       => $product->price * $product->pivot->stock,
+                'color_id' => $product->pivot->color_id,
+                'stock' => $product->pivot->stock,
+                'total' => $product->price * $product->pivot->stock,
             ]);
         }
 
         $cart->products()->detach();
 
-        $response = $this->requestP2P('create', $order);
-        $processUrl = $response->processUrl;
-        $requestId  = $response->requestId;
-
-        Payment::create([
-            'order_id'   => $order->id,
-            'processUrl' => $processUrl,
-            'requestId'  => $requestId,
-            'status'     => PlaceToPay::PENDING,
-            ]);
-
-        logger()->channel('stack')
-            ->info('respuesta de p2p conexion', [$response]);
-
-        return redirect()->away($processUrl)->send();
-    }
-
-    /**
-     * @param Request $request
-     * @param int $id
-     * @return mixed
-     * @throws \Exception
-     */
-    public function update(Request $request, int $id)
-    {
-        $order = Order::find($id);
-
-        if (!$order->payment) {
-            $order = Order::find($id);
-        } elseif ($order->payment->status === PlaceToPay::PENDING) {
-            $response = $this->requestP2P('getRequestinformation', $order);
-
-            $status = $response->status->status;
-
-
-            $order->payment->update([
-                'status' => $status
-            ]);
-
-            logger()->channel('stack')
-                ->info('respuesta de p2p actualizacion de estado', [$response]);
-        } elseif ($order->payment->status === PlaceToPay::APPROVED) {
-            $response = $this->requestP2P('getRequestinformation', $order);
-
-            foreach ($response->payment as $payments) {
-                $pay = $payments;
-            }
-
-            $status            = $response->status->status;
-            $amount            = $pay->amount->from->total;
-            $internalReference = $pay->internalReference;
-            $message           = $response->status->message;
-            $payerdocument     = $response->request->payer->document;
-            $payername         = $response->request->payer->name;
-            $payeremail        = $response->request->payer->email;
-            $payermobile       = $response->request->payer->mobile;
-            $locale            = $response->request->locale;
-
-            $order->payment->update([
-                'internalReference' => $internalReference,
-                'status'            => $status,
-                "message"           => $message,
-                'amount'            => $amount,
-                'document'          => $payerdocument,
-                'name'              => $payername,
-                'email'             => $payeremail,
-                'mobile'            => $payermobile,
-                'locale'            => $locale
-            ]);
-
-            logger()->channel('stack')
-                ->info('respuesta de p2p actualizacion de estado', [$response]);
-        } elseif ($order->payment->status === PlaceToPay::REJECTED) {
-            $response = $this->requestP2P('getRequestinformation', $order);
-
-            $status  = $response->status->status;
-            $message = $response->status->message;
-
-            $order->payment->update([
-                'status'  => $status,
-                "message" => $message
-            ]);
-
-            logger()->channel('stack')
-                ->info('respuesta de p2p actualizacion de estado', [$response]);
-        }
-
         return $order;
     }
 
-    /**
-     * @return array
-     * @throws \Exception
-     */
-    private function authP2P(): array
+    private function createPayment(Order $order, object $response): void
     {
-        $secretKey = config('app.secretKey');
-        $login     = config('app.login');
+        Payment::create([
+            'order_id' => $order->id,
+            'processUrl' => $response->processUrl,
+            'requestId' => $response->requestId,
+            'status' => Statuses::PENDING,
+        ]);
+    }
 
-        $seed = date('c');
+    private function createSession(Order $order): object
+    {
+        return $this->request('/api/session', [
+            'auth' => $this->auth(),
+            'payment' => [
+                'reference' => $order->id,
+                'description' => "Orden #{$order->id}",
+                'amount' => [
+                    'currency' => 'COP',
+                    'total' => $order->total,
+                ],
+                'allowPartial' => false,
+            ],
+            'expiration' => now()->addDays(2)->toIso8601String(),
+            'returnUrl' => route('orders.show', [
+                'user' => auth()->id(),
+                'order' => $order->id,
+            ]),
+            'ipAddress' => request()->ip(),
+            'userAgent' => request()->userAgent(),
+        ]);
+    }
 
-        if (function_exists('random_bytes')) {
-            $nonce = bin2hex(random_bytes(16));
-        } elseif (function_exists('openssl_random_pseudo_bytes')) {
-            $nonce = bin2hex(openssl_random_pseudo_bytes(16));
-        } else {
-            $nonce = mt_rand();
+    private function getSession(Order $order): object
+    {
+        return $this->request("/api/session/{$order->payment->requestId}", [
+            'auth' => $this->auth(),
+        ]);
+    }
+
+    private function reverseSession(Order $order): object
+    {
+        return $this->request('/api/reverse', [
+            'auth' => $this->auth(),
+            'internalReference' => $order->payment->internalReference,
+        ]);
+    }
+
+    private function request(string $uri, array $data): object
+    {
+        $response = $this->client->post($uri, ['json' => $data]);
+
+        return json_decode($response->getBody()->getContents());
+    }
+
+    private function updatePaymentStatus(Order $order, object $response): void
+    {
+        $status = $response->status->status;
+
+        $payload = [
+            'status' => $status,
+            'message' => $response->status->message ?? null,
+        ];
+
+        if ($status === Statuses::APPROVED) {
+            $payment = collect($response->payment)->first();
+
+            $payload += [
+                'internalReference' => $payment->internalReference,
+                'amount' => data_get($payment, 'amount.from.total'),
+                'document' => data_get($response, 'request.payer.document'),
+                'name' => data_get($response, 'request.payer.name'),
+                'email' => data_get($response, 'request.payer.email'),
+                'mobile' => data_get($response, 'request.payer.mobile'),
+                'locale' => data_get($response, 'request.locale'),
+            ];
         }
 
-        $nonceBase64 = base64_encode($nonce);
+        $order->payment->update($payload);
+    }
 
-        $tranKey = base64_encode(sha1($nonce . $seed . $secretKey, true));
+    private function auth(): array
+    {
+        $seed = now()->toIso8601String();
+        $nonce = bin2hex(random_bytes(16));
 
         return [
-            'login'   => $login,
-            'seed'    => $seed,
-            'nonce'   => $nonceBase64,
-            'tranKey' => $tranKey
-            ];
-    }
-
-    /**
-     * @param $requestType
-     * @param $order
-     * @return mixed
-     * @throws \Exception
-     */
-    public function requestP2P($requestType, $order)
-    {
-        $client = new Client();
-
-        if ($requestType === 'create') {
-            $request = [
-                'auth' => $this->authP2P(),
-                'payment' => [
-                    "reference"   => $order->id,
-                    "description" => "Pago realizado con numero de orden_" . $order->id,
-                    "amount"      => [
-                        "currency" => "COP",
-                        "total"    => $order->total,
-                    ],
-
-                    "allowPartial" => false,
-                ],
-
-                "expiration" => date('c', strtotime('+2 days')),
-                "returnUrl"  => route('orders.show', [
-                    'user'   => auth()->id(),
-                    'order'  => $order->id
-                ]),
-                "ipAddress" => request()->getClientIp(),
-                "userAgent" => request()->userAgent()
-            ];
-
-            $res = $client->post(
-                'https://test.placetopay.com/redirection/api/session',
-                ['json' => $request]
-            );
-
-            return json_decode($res->getBody()->getContents());
-        } elseif ($requestType === 'getRequestinformation') {
-            $requestId = $order->payment->requestId;
-
-            $request = [
-                'auth' => $this->authP2P()
-            ];
-            $res = $client->post(
-                'https://test.placetopay.com/redirection/api/session/' . $requestId,
-                ['json' => $request]
-            );
-
-            return json_decode($res->getBody()->getContents());
-        } elseif ($requestType === 'reverse') {
-            $request = [
-                'auth' => $this->authP2P(),
-
-                "internalReference"  => $order->payment->internalReference,
-            ];
-
-            $res = $client->post(
-                'https://test.placetopay.com/redirection/api/reverse',
-                ['json' => $request]
-            );
-
-            return json_decode($res->getBody()->getContents());
-        } elseif ($requestType === 'complete') {
-            $requestId = $order->payment->requestId;
-
-            $request = [
-                'auth' => $this->authP2P()
-            ];
-            $res = $client->post(
-                'https://test.placetopay.com/redirection/api/session/' . $requestId,
-                ['json' => $request]
-            );
-
-            return json_decode($res->getBody()->getContents());
-        }
-    }
-
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     * @throws \Exception
-     */
-    public function resend(Request $request): RedirectResponse
-    {
-        $order = Order::find($request->get('order'));
-
-        $response = $this->requestP2P('create', $order);
-
-        $processUrl = $response->processUrl;
-        $requestId  = $response->requestId;
-
-        $order->payment->update([
-            'processUrl' => $processUrl,
-            'requestId'  => $requestId,
-            'status'     => PlaceToPay::PENDING,
-        ]);
-
-        logger()->channel('stack')
-            ->info('respuesta de p2p reintentar pago', [$response]);
-
-        return redirect()->away($processUrl)->send();
-    }
-
-    /**
-     * @param Request $request
-     * @return mixed|void
-     * @throws \Exception
-     */
-    public function reversePay(Request $request)
-    {
-        $order = Order::find($request->get('order'));
-
-        $response = $this->requestP2P('reverse', $order);
-
-        $orderCancelled = Cancelled::create([
-        'user_id'           => $order->user->id,
-        'status'            => 'CANCELADO',
-        'statusTransaction' => $response->status->status,
-        'requestId'         => $order->payment->requestId,
-        'internalReference' => $order->payment->internalReference,
-        'processUrl'        => $order->payment->processUrl,
-        'message'           => $response->status->message,
-        'document'          => $order->payment->document,
-        'name'              => $order->payment->name,
-        'email'             => $order->payment->email,
-        'mobile'            => $order->payment->mobile,
-        'locale'            => $order->payment->locale,
-        'amountReturn'      => $response->payment->amount->from->total,
-        'order_id'          => $order->id,
-        'cancelled_by'      => auth()->user()->id,
-        'totalOrder'        => $order->total,
-        ]);
-
-        logger()->channel('stack')
-            ->info('respuesta de p2p reverse pago', [$response]);
-
-        Order::destroy($request->get('order'));
-    }
-
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     * @throws \Exception
-     */
-    public function complete(Request $request): RedirectResponse
-    {
-        $order = Order::find($request->get('order'));
-
-        $response = $this->requestP2P('complete', $order);
-
-        $processUrl = $order->payment->processUrl;
-        $requestId  = $order->payment->requestId;
-
-        $order->payment->update([
-            'processUrl' => $processUrl,
-            'requestId'  => $requestId,
-            'status'     => PlaceToPay::PENDING,
-        ]);
-
-        logger()->channel('stack')
-            ->info('respuesta de p2p completar pago', [$response]);
-
-        return redirect()->away($processUrl)->send();
-    }
-
-    /**
-     * @param RequestOrderStore $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed
-     */
-    public function paymentInStore(RequestOrderStore $request)
-    {
-        $cart = Cart::find($request->get('cart_id'));
-
-        if ($cart->totalCarrito() === 0) {
-            return redirect('vitrina')->with('success', 'Continue con su compra');
-        }
-
-        $order = Order::create([
-            'user_id' => $cart->user_id,
-            'total'   => $cart->totalCarrito(),
-            'status'  => 'APROVADO_T',
-        ]);
-
-        foreach ($cart->products as $product) {
-            $detail = Detail::create([
-                'order_id'    => $order->id,
-                'product_id'  => $product->id,
-                'size_id'     => $product->pivot->size_id,
-                'category_id' => $product->pivot->category_id,
-                'color_id'    => $product->pivot->color_id,
-                'stock'       => $product->pivot->stock,
-                'total'       => $product->price * $product->pivot->stock,
-            ]);
-        }
-
-        $cart->products()->detach(null);
-
-        Payment::create([
-            'order_id'   => $order->id,
-            'status'     => 'APROVADO_T',
-            'base'       => 'tienda',
-            'message'    => 'pago generado en la tienda por el admin' . auth()->user()->id,
-            'document'   => $request->get('document'),
-            'name'       => $request->get('name'),
-            'email'      => $request->get('email'),
-            'mobile'     => $request->get('mobile'),
-            'amount'     => $order->total,
-            'totalStore' => $request->get('totalStore'),
-            'expiration' => now()->addDays(30)->toDateString()
-        ]);
-
-        dispatch(new ActualStockProduct($order));
+            'login' => config('jam.place_to_pay.login'),
+            'seed' => $seed,
+            'nonce' => base64_encode($nonce),
+            'tranKey' => base64_encode(sha1($nonce . $seed . config('jam.place_to_pay.secret_key'), true)),
+        ];
     }
 }

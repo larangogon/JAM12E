@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\AdminV1;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ImportImgsRequest;
 use App\Http\Requests\ImportRequest;
 use App\Imports\ProductsImport;
 use App\Imports\UsersImport;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use App\Http\Controllers\Controller;
 
 class ImportController extends Controller
 {
@@ -27,7 +27,7 @@ class ImportController extends Controller
      * @return RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function import(importRequest $request): RedirectResponse
+    public function import(ImportRequest $request): RedirectResponse
     {
         $this->authorize('import.user');
 
@@ -60,7 +60,7 @@ class ImportController extends Controller
      * @return RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function importProducts(importRequest $request)
+    public function importProducts(ImportRequest $request)
     {
         $this->authorize('product.import');
 

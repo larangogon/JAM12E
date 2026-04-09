@@ -5,7 +5,6 @@ namespace Tests\Feature\Administrator\Products;
 use App\Entities\Cart;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ColorTest extends TestCase
@@ -28,7 +27,7 @@ class ColorTest extends TestCase
 
         $this->user->assignRole('Administrator');
 
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
     }
@@ -42,7 +41,7 @@ class ColorTest extends TestCase
             ->assertViewHas('colors')
             ->assertViewIs('colors.index');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testStore(): void
@@ -57,9 +56,9 @@ class ColorTest extends TestCase
             ->assertRedirect(route('colors.index'));
 
         $this->assertDatabaseHas('colors', [
-            'name' => 'amarillo'
+            'name' => 'amarillo',
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 }

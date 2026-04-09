@@ -55,7 +55,7 @@ class ExportController extends Controller
      */
     public function reportGeneralExport(): RedirectResponse
     {
-        $details['email'] = config('app.emailReport');
+        $details['email'] = config('jam.email_report');
 
         dispatch(new ProcessReportGeneralExcel($details));
 
@@ -76,7 +76,7 @@ class ExportController extends Controller
      */
     public function reportProductExport(): RedirectResponse
     {
-        $details['email'] = config('app.emailReport');
+        $details['email'] = config('jam.email_report');
 
         dispatch(new ProcessReportProductExcel($details));
 

@@ -2,10 +2,10 @@
 
 namespace App\Jobs;
 
+use App\Constants\Statuses;
 use App\Entities\Product;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -30,7 +30,7 @@ class ActualStockProduct implements ShouldQueue
 
     public function handle()
     {
-        if ($this->order->status == 'APROVADO_T') {
+        if ($this->order->status == Statuses::APPROVED_IN_STORE) {
             foreach ($this->order->details as $details) {
                 $detail = $details->product_id;
 

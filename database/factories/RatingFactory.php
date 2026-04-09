@@ -1,6 +1,6 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+/** @var Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Entities\Rating;
 use Faker\Generator as Faker;

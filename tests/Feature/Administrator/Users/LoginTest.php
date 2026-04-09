@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Administrator\Usuarios;
+namespace Tests\Feature\Administrator\Users;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -17,8 +17,8 @@ class LoginTest extends TestCase
     public function testNotAuthenticateToAUserWithCredentialsInvalid()
     {
         $credentials = [
-            "email" => "users@mail.com",
-            "password" => "secret"
+            'email' => 'users@mail.com',
+            'password' => 'secret',
         ];
 
         $this->assertInvalidCredentials($credentials);
@@ -27,8 +27,8 @@ class LoginTest extends TestCase
     public function testTheEmailIsRequiredForAuthenticate()
     {
         $credentials = [
-            "email" => null,
-            "password" => "secret"
+            'email' => null,
+            'password' => 'secret',
         ];
 
         $response = $this->from('/login')->post('/login', $credentials);
@@ -39,8 +39,8 @@ class LoginTest extends TestCase
     public function testThePasswordIsRequiredForAuthenticate()
     {
         $credentials = [
-            "email" => "zaratedev@gmail.com",
-            "password" => null
+            'email' => 'zaratedev@gmail.com',
+            'password' => null,
         ];
 
         $response = $this->from('/login')->post('/login', $credentials);

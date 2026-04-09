@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\AdminV1;
 
-use App\Http\Requests\UserFormRequest;
+use App\Contracts\UsersContract;
 use App\Entities\Role;
 use App\Entities\User;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Interfaces\InterfaceUsers;
-use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\UserEditFormRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserEditFormRequest;
+use App\Http\Requests\UserFormRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -18,10 +18,10 @@ class UserController extends Controller
 
     /**
      * UserController constructor.
-     * @param InterfaceUsers $users
+     * @param UsersContract $users
      * @param User $user
      */
-    public function __construct(InterfaceUsers $users, User $user)
+    public function __construct(UsersContract $users, User $user)
     {
         $this->users = $users;
         $this->user = $user;
@@ -41,7 +41,7 @@ class UserController extends Controller
 
         $role = $request->get('role', null);
 
-        $search   = $request->get('search', null);
+        $search = $request->get('search', null);
 
         $this->user = new User();
 
@@ -50,7 +50,7 @@ class UserController extends Controller
             'users'  => $this->user
                 ->role($role)
                 ->search($search)
-                ->paginate(15)
+                ->paginate(15),
         ]);
     }
 
@@ -106,7 +106,7 @@ class UserController extends Controller
 
         return view('users.edit', [
             'user'  => $user,
-            'roles' => $roles
+            'roles' => $roles,
         ]);
     }
 
@@ -130,7 +130,7 @@ class UserController extends Controller
      * @return RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function active(user $user): RedirectResponse
+    public function active(User $user): RedirectResponse
     {
         $this->authorize('user.status');
 

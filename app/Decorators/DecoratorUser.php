@@ -2,29 +2,19 @@
 
 namespace App\Decorators;
 
+use App\Contracts\UsersContract;
+use App\Entities\User;
 use App\Http\Requests\UserEditFormRequest;
 use App\Http\Requests\UserFormRequest;
-use App\Repositories\UsersRepo;
-use App\Interfaces\InterfaceUsers;
+use App\Repositories\UsersContractRepo;
 use Illuminate\Support\Facades\Cache;
-use App\Entities\User;
 
-class DecoratorUser implements InterfaceUsers
+class DecoratorUser implements UsersContract
 {
-    protected $usersRepo;
-
-    /**
-     * DecoratorUser constructor.
-     * @param UsersRepo $usersRepo
-     */
-    public function __construct(UsersRepo $usersRepo)
+    public function __construct(public readonly UsersContractRepo $usersRepo)
     {
-        $this->usersRepo = $usersRepo;
     }
 
-    /**
-     * @param UserFormRequest $request
-     */
     public function store(UserFormRequest $request)
     {
         $this->usersRepo->store($request);
@@ -32,10 +22,6 @@ class DecoratorUser implements InterfaceUsers
         Cache::tags('users')->flush();
     }
 
-    /**
-     * @param UserEditFormRequest $request
-     * @param User $user
-     */
     public function update(UserEditFormRequest $request, User $user): void
     {
         $this->usersRepo->update($request, $user);
@@ -43,9 +29,6 @@ class DecoratorUser implements InterfaceUsers
         Cache::tags('users')->flush();
     }
 
-    /**
-     * @param User $user
-     */
     public function active(User $user): void
     {
         $this->usersRepo->active($user);

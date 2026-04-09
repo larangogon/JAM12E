@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,7 +108,6 @@ Route::post('imports/importProducts', 'AdminV1\ImportController@importProducts')
     ->name('importProducts');
 Route::post('imports/imgsProducts', 'AdminV1\ImportController@imgsProducts')
     ->name('imgsProducts');
-
 
 Route::post('/reportOrders-pdf', 'AdminV1\ReportController@reportOrders')
     ->name('reportOrders');

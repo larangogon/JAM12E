@@ -1,12 +1,6 @@
 <?php
 
 return [
-
-    'login' => env('PAY_LOGIN'),
-    'secretKey' => env('PAY_SECRETKEY'),
-    'emailReport' => env('EMAIL_REPORT'),
-    'emailReportFrom' => env('EMAIL_REPORT_FROM'),
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -44,7 +38,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +160,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        'Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider',
 
         /*
          * Package Service Providers...
@@ -182,8 +175,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Milon\Barcode\BarcodeServiceProvider::class,
-        Laraveles\Spanish\SpanishServiceProvider::class,
     ],
 
     /*
@@ -235,9 +226,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'PaymentCons' => App\Constants\PlaceToPay::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
     ],

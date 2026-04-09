@@ -105,7 +105,6 @@ class ReportGeneralExport implements FromView, ShouldAutoSize
 
         $userTotalComprasMasAltas = Order::userSales()->get();
 
-
         return view('reports.reportExcel', [
             'userTotalComprasMasAltas'  => $userTotalComprasMasAltas,
             'gastoDescrip'    => $gastoDescrip,

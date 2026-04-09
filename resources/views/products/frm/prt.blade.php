@@ -22,7 +22,7 @@
                             {!! trans('messages.Description') !!}
                         </label>
                         <textarea name="description" rows="4" cols="50"
-                                  class="form-control" required="required"  id="description">
+                                  class="form-control" required="required" id="description">
                             {{ $product->description }}
                         </textarea>
                     </div>
@@ -48,8 +48,8 @@
                                 {!! trans('messages.Select a category') !!}
                             </option>
                             @foreach ($categories as $category )
-                                @if($product->tieneCategory()->contains($category->name))
-                                    <option value="{{$category->id}}"selected>{{$category->name}}</option>
+                                @if($product->hasCategory()->contains($category->name))
+                                    <option value="{{$category->id}}" selected>{{$category->name}}</option>
                                 @else
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endif
@@ -66,13 +66,13 @@
                         </label>
                         <div class="list-group-scr">
                             @foreach  ($colors as $key => $color)
-                                    <li class="list-group-item" data-spy="scroll">
-                                        <input  type="checkbox"
-                                                @if($product->tieneColor()->contains($color->name))
-                                                checked @endif
-                                                name="color[]" value="{{$color->id}}"/>
-                                        {{$color->name}}
-                                    </li>
+                                <li class="list-group-item" data-spy="scroll">
+                                    <input type="checkbox"
+                                           @if($product->hasColor()->contains($color->name))
+                                               checked @endif
+                                           name="color[]" value="{{$color->id}}"/>
+                                    {{$color->name}}
+                                </li>
                             @endforeach
                         </div>
                     </div>
@@ -82,28 +82,29 @@
                 </div>
 
                 <div class="col-sm-4">
-                   <div class="form-group">
-                       <label for="stock" class="negrita">
-                           Stock:
-                       </label>
-                       <div>
-                           <input class="form-control" placeholder="40" required="required"
-                                  name="stock" type="text" id="stock" value="{{ $product->stock }}">
-                       </div>
-                   </div>
+                    <div class="form-group">
+                        <label for="stock" class="negrita">
+                            Stock:
+                        </label>
+                        <div>
+                            <input class="form-control" placeholder="40" required="required"
+                                   name="stock" type="text" id="stock" value="{{ $product->stock }}">
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="stock" class="negrita">
                             {!! trans('messages.Select a size') !!}
                         </label>
                         <div>
-                        @foreach  ($sizes as $key => $size)
-                            <input type="checkbox"
-                                   @if($product->tieneSize()->contains($size->name))
-                                   checked @endif
-                                   name="size[]" value="{{$size->id}}"/>
-                            {{$size->name}}
-                        @endforeach
+                            @foreach  ($sizes as $key => $size)
+                                <input type="checkbox"
+                                       @if($product->hasSize()->contains($size->name))
+                                           checked
+                                       @endif
+                                       name="size[]" value="{{$size->id}}"/>
+                                {{$size->name}}
+                            @endforeach
                         </div>
                     </div>
                     @error('size')
@@ -155,8 +156,8 @@
                             {!! trans('messages.Description') !!}
                         </label>
                         <div>
-                            <textarea name="description" placeholder="description"  class="form-control"
-                                      required="required"  id="description">
+                            <textarea name="description" placeholder="description" class="form-control"
+                                      required="required" id="description">
                             </textarea>
                         </div>
                     </div>
@@ -198,15 +199,15 @@
                 <div class="col-sm-3">
                     <div class="form-group">
                         {{Form::label('size[]', 'Selecciona una talla:')}}
-                    <div>
-                        @foreach  ($sizes as $size )
-                            {{Form::checkbox('size[]', $size->id)}} {{$size->name}},
-                        @endforeach
+                        <div>
+                            @foreach  ($sizes as $size )
+                                {{Form::checkbox('size[]', $size->id)}} {{$size->name}},
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-                @error('size')
-                {{$message}}
-                @enderror
+                    @error('size')
+                    {{$message}}
+                    @enderror
                     <div class="form-group">
                         <label for="stock" class="negrita">
                             {!! trans('messages.Select a category') !!}:

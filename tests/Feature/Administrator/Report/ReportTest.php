@@ -2,21 +2,19 @@
 
 namespace Tests\Feature\Administrator\Report;
 
+use App\Constants\Statuses;
 use App\Entities\Cart;
-use App\Entities\Order;
 use App\Entities\Report;
 use App\Entities\User;
+use Database\Seeders\PermissionsTableSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class CrudReportTest extends TestCase
+class ReportTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @var \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
-     */
-    private $user;
+    private User $user;
 
     protected function setUp(): void
     {
@@ -24,14 +22,12 @@ class CrudReportTest extends TestCase
         $this->withoutExceptionHandling();
         $this->withoutMiddleware();
 
-        $this->seed(\PermissionsTableSeeder::class);
-        $this->user = factory(User::class)->create(
-            ['id' => 1,]
-        );
+        $this->seed(PermissionsTableSeeder::class);
+        $this->user = factory(User::class)->create(['id' => 1]);
 
         $this->user->assignRole('Administrator');
 
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
     }
@@ -57,17 +53,17 @@ class CrudReportTest extends TestCase
 
     public function testReportOrdersFechaNull(): void
     {
-        $fechaInicio = date('Y-m-d', strtotime('2020-11-21'));
+        $startDate = date('Y-m-d', strtotime('2020-11-21'));
 
-        $fechaFinal = date('Y-m-d', strtotime('2020-11-22'));
+        $endDate = date('Y-m-d', strtotime('2020-11-22'));
 
         $status = 'APPROVED';
 
         $response = $this->actingAs($this->user, 'web')
             ->post(route('reportOrders'), [
-                    'fechaFinal'  => $fechaInicio,
-                    'fechaInicio' => $fechaFinal,
-                    'status'      => $status,
+                    'startDate'  => $endDate,
+                    'endDate' => $startDate,
+                    'status' => $status,
                 ]);
 
         $response
@@ -77,17 +73,11 @@ class CrudReportTest extends TestCase
 
     public function testReportOrders(): void
     {
-        $fechaInicio = date('Y-m-d', strtotime('2020-12-02'));
-
-        $fechaFinal = date('Y-m-d', strtotime('2020-12-04'));
-
-        $status = 'APPROVED';
-
         $response = $this->actingAs($this->user, 'web')
             ->post(route('reportOrders'), [
-                'fechaFinal'  => $fechaInicio,
-                'fechaInicio' => $fechaFinal,
-                'status'      => $status,
+                'endDate'  => date('Y-m-d', strtotime('2020-12-02')),
+                'startDate' => date('Y-m-d', strtotime('2020-12-04')),
+                'status' => Statuses::APPROVED,
             ]);
 
         $response
@@ -100,12 +90,12 @@ class CrudReportTest extends TestCase
         $report = Report::create([
             'created_by' => 1,
             'file' => 'Enviado_A_johannitaarango2@gmail.com',
-            'type' => 'Excel'
+            'type' => 'Excel',
         ]);
 
         $response = $this->actingAs($this->user)
             ->delete(route('reports.destroy', $report->id), [
-                'id' => $report->id
+                'id' => $report->id,
             ]);
 
         $response

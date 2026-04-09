@@ -31,16 +31,16 @@ class ApiStoreRequest extends FormRequest
             'stock'       => 'required|numeric',
             'price'       => 'required|numeric',
             'img'         => 'required',
-            'color'       => ['required','exists:colors,id'],
-            'category'    => ['required','exists:categories,id'],
-            'size'        => ['required','exists:sizes,id'],
+            'color'       => ['required', 'exists:colors,id'],
+            'category'    => ['required', 'exists:categories,id'],
+            'size'        => ['required', 'exists:sizes,id'],
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
         abort(response()->json([
-            'errors' => $validator->errors()->toArray()
+            'errors' => $validator->errors()->toArray(),
         ]));
     }
 }

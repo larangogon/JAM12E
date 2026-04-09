@@ -16,7 +16,7 @@ class CancelledMetricBehaviour implements MetricContract
     {
         $primary = $filters['primary'] ?? null;
 
-        $metrics =  MetricCancelled::filterByPrimaryId($primary)
+        $metrics = MetricCancelled::filterByPrimaryId($primary)
             ->whereBetween('date', [
                 $filters['from'] ?? now()->subMonth()->format('Y-m-d'),
                 $filters['to'] ?? now()->format('Y-m-d'),

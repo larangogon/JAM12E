@@ -5,9 +5,8 @@ namespace App\Entities;
 use App\Utils\CanBeRate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -28,7 +27,7 @@ class Product extends Model
         'active',
         'visits',
         'created_by',
-        'updated_by'
+        'updated_by',
     ];
 
     /**
@@ -39,11 +38,7 @@ class Product extends Model
         return $this->hasMany(Imagen::class, 'product_id');
     }
 
-    /**
-     * @param array|null $files
-     * @param int $product_id
-     */
-    public function asignarImagen(?array $files, int $product_id)
+    public function assignImage(?array $files, int $product_id)
     {
         if (!$files) {
             return;
@@ -54,38 +49,18 @@ class Product extends Model
 
             $imagen = new Imagen();
 
-            $imagen->name       = $name;
+            $imagen->name = $name;
             $imagen->product_id = $product_id;
 
             $imagen->save();
         }
     }
 
-    /**
-     * @return mixed
-     */
-    public function tieneImagen()
-    {
-        return $this->imagenes
-            ->flatten()
-            ->pluck('name')
-            ->unique();
-    }
-
-    /**
-     * @param $query
-     * @return mixed
-     */
     public function scopeActive($query)
     {
         return $query->where('active', 1);
     }
 
-    /**
-     * @param $query
-     * @param $search
-     * @return mixed
-     */
     public function scopeSearch($query, $search)
     {
         if ($search) {
@@ -94,10 +69,6 @@ class Product extends Model
         }
     }
 
-    /**
-     * @param $query
-     * @param $category
-     */
     public function scopeCategory($query, $category)
     {
         if (empty($category)) {
@@ -109,26 +80,17 @@ class Product extends Model
         });
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function colors(): BelongsToMany
     {
         return $this->belongsToMany(Color::class);
     }
 
-    /**
-     * @param $color
-     */
-    public function asignarColor($color): void
+    public function assignColor($color): void
     {
         $this->colors()->sync($color, false);
     }
 
-    /**
-     * @return mixed
-     */
-    public function tieneColor()
+    public function hasColor()
     {
         return $this->colors
             ->flatten()
@@ -136,26 +98,17 @@ class Product extends Model
             ->unique();
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
 
-    /**
-     * @param $category
-     */
-    public function asignarCategory($category): void
+    public function assignCategory($category): void
     {
         $this->categories()->sync($category, false);
     }
 
-    /**
-     * @return mixed
-     */
-    public function tieneCategory()
+    public function hasCategory()
     {
         return $this->categories
             ->flatten()
@@ -163,70 +116,38 @@ class Product extends Model
             ->unique();
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function sizes(): BelongsToMany
     {
-        return $this->belongsToMany(Size::class)
-            ->withTimestamps();
+        return $this->belongsToMany(Size::class)->withTimestamps();
     }
 
-    /**
-     * @param $size
-     */
-    public function asignarSize($size): void
+    public function assignSize($size): void
     {
         $this->sizes()->sync($size, false);
     }
 
-    /**
-     * @return mixed
-     */
-    public function tieneSize()
+    public function hasSize()
     {
         return $this->sizes->flatten()
             ->pluck('name')
             ->unique();
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function carts(): BelongsToMany
     {
         return $this->belongsToMany(Cart::class, 'in_carts')->withTimestamps();
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCacheProducts()
-    {
-        return Cache::remember('products', now()->addDay(), function () {
-            return $this->all();
-        });
-    }
-
-    /**
-     * @return BelongsTo
-     */
     public function userCreate(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function userUpdate(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    /**
-     * @return HasMany
-     */
     public function barcode(): HasMany
     {
         return $this->hasMany(Spending::class, 'barcode');

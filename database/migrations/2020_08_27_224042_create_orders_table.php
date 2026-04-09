@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\Statuses;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('user_id');
-            $table->string('status')->default('pending_pay');
+            $table->enum('status', Statuses::values())->default(Statuses::PENDING);
             $table->boolean('shippingStatus')->default(false);
 
             $table->integer('total');

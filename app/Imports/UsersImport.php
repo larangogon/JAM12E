@@ -26,7 +26,7 @@ class UsersImport implements WithValidation, ToModel, WithBatchInserts
     public function model(array $row)
     {
         $user = User::updateOrCreate(
-            ['id' => $row[0]
+            ['id' => $row[0],
             ],
             [
                 'name'      => $row[1],
@@ -51,7 +51,7 @@ class UsersImport implements WithValidation, ToModel, WithBatchInserts
                 break;
             }
             $roleBd = Role::where('name', $role)->first();
-            $user->roles()->attach(array($roleBd->id));
+            $user->roles()->attach([$roleBd->id]);
         }
     }
 

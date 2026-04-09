@@ -4,10 +4,8 @@ namespace Tests\Feature\Administrator\Payment\Shipping;
 
 use App\Entities\Cart;
 use App\Entities\Order;
-use App\Entities\Shipping;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ShippiendTest extends TestCase
@@ -26,7 +24,7 @@ class ShippiendTest extends TestCase
         $this->seed(\PermissionsTableSeeder::class);
 
         $this->user = factory(User::class)->create([
-            'active' => 1
+            'active' => 1,
         ]);
         $this->user->assignRole('Administrator');
 
@@ -36,7 +34,7 @@ class ShippiendTest extends TestCase
 
         $this->order = new Order();
         $this->order->user_id = $this->user->id;
-        $this->order->total   = $this->user->cart->total = '239844';
+        $this->order->total = $this->user->cart->total = '239844';
         $this->order->save();
     }
 
@@ -66,7 +64,7 @@ class ShippiendTest extends TestCase
             ->assertSessionHas('message', 'Los datos para tu envio se han guardado exitosamente!');
 
         $this->assertDatabaseHas('shippings', [
-            'name_recipient' => 'name_recipient'
+            'name_recipient' => 'name_recipient',
         ]);
     }
 

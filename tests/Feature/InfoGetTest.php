@@ -7,7 +7,6 @@ use App\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class InfoGetTest extends TestCase
@@ -25,11 +24,11 @@ class InfoGetTest extends TestCase
         $this->seed(\PermissionsTableSeeder::class);
 
         $this->user = factory(User::class)->create([
-            'active' => 1
+            'active' => 1,
         ]);
         $this->user->assignRole('Administrator');
 
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
 
         $this->cart->user_id = $this->user->id;
         $this->cart->save();

@@ -2,28 +2,18 @@
 
 namespace App\Decorators\Api;
 
+use App\Contracts\Api\ApiProductsContract;
 use App\Http\Requests\ApiStoreRequest;
 use App\Http\Requests\ApiUpdateRequest;
-use App\Interfaces\Api\InterfaceApiProducts;
-use App\Repositories\Api\ProductsApiRepo;
+use App\Repositories\Api\ProductsApiRepoContract;
 use Illuminate\Support\Facades\Cache;
 
-class DecoratorApiProduct implements InterfaceApiProducts
+class DecoratorApiProduct implements ApiProductsContract
 {
-    protected $productsApiRepo;
-
-    /**
-     * DecoratorApiProduct constructor.
-     * @param ProductsApiRepo $productsApiRepo
-     */
-    public function __construct(ProductsApiRepo $productsApiRepo)
+    public function __construct(public readonly ProductsApiRepoContract $productsApiRepo)
     {
-        $this->productsApiRepo = $productsApiRepo;
     }
 
-    /**
-     * @param ApiStoreRequest $request
-     */
     public function store(ApiStoreRequest $request): void
     {
         $this->productsApiRepo->store($request);
@@ -31,10 +21,6 @@ class DecoratorApiProduct implements InterfaceApiProducts
         Cache::tags('products')->flush();
     }
 
-    /**
-     * @param ApiUpdateRequest $request
-     * @param int $id
-     */
     public function update(ApiUpdateRequest $request, int $id): void
     {
         $this->productsApiRepo->update($request, $id);
@@ -42,9 +28,6 @@ class DecoratorApiProduct implements InterfaceApiProducts
         Cache::tags('products')->flush();
     }
 
-    /**
-     * @param int $id
-     */
     public function destroy(int $id): void
     {
         $this->productsApiRepo->destroy($id);

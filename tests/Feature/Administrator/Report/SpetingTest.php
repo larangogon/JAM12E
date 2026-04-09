@@ -25,10 +25,10 @@ class SpetingTest extends TestCase
         $this->seed(\PermissionsTableSeeder::class);
 
         $this->user = factory(User::class)->create([
-            'active' => 1
+            'active' => 1,
         ]);
         $this->user->assignRole('Administrator');
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
 
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
@@ -54,7 +54,7 @@ class SpetingTest extends TestCase
 
         $response = $this->actingAs($this->user, 'web')
             ->delete(route('spendings.destroy', $spenting->id), [
-                'id'  => $spenting->id
+                'id'  => $spenting->id,
             ]);
 
         $response
@@ -77,7 +77,7 @@ class SpetingTest extends TestCase
         $response = $this->actingAs($this->user)
             ->put(route('spendings.update', $spenting->id), [
                 'description'  => 'description uptated',
-                'total'        => 364553
+                'total'        => 364553,
             ]);
 
         $response
@@ -97,7 +97,7 @@ class SpetingTest extends TestCase
         $response = $this->actingAs($this->user)
             ->post(route('spendings.store'), [
                 'description' => 'new description',
-                'total'       => 100000
+                'total'       => 100000,
             ]);
 
         $response
@@ -123,7 +123,7 @@ class SpetingTest extends TestCase
     {
         $spendings = Spending::create([
             'description' => 'new description',
-            'total'       => 100000
+            'total'       => 100000,
         ]);
         $response = $this->actingAs($this->user, 'web')
             ->get(route('spendings.edit', $spendings->id));

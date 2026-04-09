@@ -7,7 +7,6 @@ use App\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CategoryTest extends TestCase
@@ -25,7 +24,7 @@ class CategoryTest extends TestCase
         $this->seed(\PermissionsTableSeeder::class);
 
         $this->user = factory(User::class)->create([
-            'active' => 1
+            'active' => 1,
         ]);
         $this->user->assignRole('Administrator');
         $this->cart = new Cart();
@@ -34,7 +33,6 @@ class CategoryTest extends TestCase
         $this->cart->save();
     }
 
-
     public function testStore(): void
     {
         $response = $this->actingAs($this->user, 'api')
@@ -42,12 +40,9 @@ class CategoryTest extends TestCase
                 'name' => 'adultos',
             ]);
 
-        $response
-            ->assertStatus(200);
+        $response->assertStatus(200);
 
-        $this->assertDatabaseHas('categories', [
-            'name' => 'adultos'
-        ]);
+        $this->assertDatabaseHas('categories', ['name' => 'adultos']);
     }
 
     public function testIndex(): void

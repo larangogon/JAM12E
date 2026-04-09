@@ -1,6 +1,6 @@
 <div>
     @switch($order->status)
-        @case('APROVADO_T')
+        @case('APPROVED_IN_STORE')
             <h5>
                 <small>
                     {!! trans('messages.The status of your payment is Approved') !!}
@@ -15,7 +15,7 @@
                 </button>
             </a>
         @break
-        @case('pending_pay')
+        @case(\App\Constants\Statuses::PENDING)
             @switch($order->payment->status ?? __('no existe'))
                 @case('PENDING')
                     <h5>

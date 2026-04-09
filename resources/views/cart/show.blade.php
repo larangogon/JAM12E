@@ -99,7 +99,7 @@
                         <th>
                             <div class="badge badge-light text-wrap">
                                 <h5>
-                                    {!! trans('messages.Total with IVA') !!} ${{$cart->valorCarrito()}}
+                                    {!! trans('messages.Total with IVA') !!} ${{$cart->valueCart()}}
                                 </h5>
                                 <a href="{{route('orders.create', $product->id) }}">
                                     <button type="button" class="btn btn-success btn-block text-left">

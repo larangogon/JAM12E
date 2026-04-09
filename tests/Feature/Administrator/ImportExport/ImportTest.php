@@ -5,8 +5,6 @@ namespace Tests\Feature\Administrator\ImportExport;
 use App\Entities\Cart;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
 
 class ImportTest extends TestCase
@@ -30,7 +28,7 @@ class ImportTest extends TestCase
 
         $this->user->assignRole('Administrator');
 
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
     }
@@ -46,7 +44,7 @@ class ImportTest extends TestCase
         $response->assertStatus(200)
             ->assertViewIs('imports.indexProducts');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     /**
@@ -60,6 +58,6 @@ class ImportTest extends TestCase
         $response->assertStatus(200)
             ->assertViewIs('imports.index');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 }

@@ -3,11 +3,10 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
 
 class Order extends Model
@@ -22,36 +21,24 @@ class Order extends Model
         'user_id',
         'id',
         'status',
-        'total'
+        'total',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function details(): HasMany
     {
         return $this->hasMany(Detail::class);
     }
 
-    /**
-     * @return HasOne
-     */
     public function payment(): HasOne
     {
         return $this->hasOne(Payment::class);
     }
 
-    /**
-     * @return mixed
-     */
     public function getCacheOrder()
     {
         return Cache::remember('orders', now()->addDay(), function () {
@@ -59,19 +46,11 @@ class Order extends Model
         });
     }
 
-    /**
-     * @return HasOne
-     */
     public function shipping(): HasOne
     {
         return $this->hasOne(Shipping::class);
     }
 
-    /**
-     * @param $query
-     * @param $search
-     * @return mixed
-     */
     public function scopeSearch($query, $search)
     {
         if ($search) {
@@ -80,11 +59,6 @@ class Order extends Model
         }
     }
 
-    /**
-     * @param $query
-     * @param $status
-     * @return mixed
-     */
     public function scopeStatus($query, $status)
     {
         if ($status) {
@@ -93,35 +67,21 @@ class Order extends Model
         }
     }
 
-    /**
-     * @param $query
-     * @param $fechaInicio
-     * @return mixed
-     */
-    public function scopeFechaInicio($query, $fechaInicio)
+    public function scopeStartDate($query, $startDate)
     {
-        if ($fechaInicio) {
-            return $query
-                ->where('created_at', 'LIKE', "%$fechaInicio%");
+        if ($startDate) {
+            return $query->where('created_at', 'LIKE', "%$startDate%");
         }
     }
 
-    /**
-     * @param $query
-     * @param $fechaFinal
-     * @return mixed
-     */
-    public function scopeFechaFinal($query, $fechaFinal)
+    public function scopeEndDate($query, $endDate)
     {
-        if ($fechaFinal) {
+        if ($endDate) {
             return $query
-                ->where('created_at', 'LIKE', "%$fechaFinal%");
+                ->where('created_at', 'LIKE', "%$endDate%");
         }
     }
 
-    /**
-     * @param $query
-     */
     public function scopeUserSales($query)
     {
         $query->with('user')

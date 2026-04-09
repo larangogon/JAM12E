@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\UserFormRequest;
+use App\Contracts\UsersContract;
 use App\Entities\User;
-use App\Interfaces\InterfaceUsers;
 use App\Http\Requests\UserEditFormRequest;
+use App\Http\Requests\UserFormRequest;
 
-class UsersRepo implements InterfaceUsers
+class UsersContractRepo implements UsersContract
 {
     /**
      * @param UserFormRequest $request
@@ -17,13 +17,13 @@ class UsersRepo implements InterfaceUsers
     {
         $user = new User();
 
-        $user->name              = request('name');
-        $user->email             = request('email');
-        $user->phone             = request('phone');
-        $user->cellphone         = request('cellphone');
-        $user->address           = request('address');
-        $user->document          = request('document');
-        $user->password          = bcrypt(request('password'));
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->phone = request('phone');
+        $user->cellphone = request('cellphone');
+        $user->address = request('address');
+        $user->document = request('document');
+        $user->password = bcrypt(request('password'));
         $user->email_verified_at = now();
 
         $user->save();

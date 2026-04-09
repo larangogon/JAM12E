@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Contracts\SizesContract;
 use App\Entities\Size;
 use Illuminate\Http\Request;
-use App\Interfaces\InterfaceSizes;
 
-class SizesRepo implements InterfaceSizes
+class SizesContractRepo implements SizesContract
 {
     /**
      * @param Request $request

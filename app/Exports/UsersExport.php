@@ -14,8 +14,8 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
 class UsersExport implements FromCollection, WithMapping, WithHeadings, ShouldAutoSize, WithEvents
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return User::all();

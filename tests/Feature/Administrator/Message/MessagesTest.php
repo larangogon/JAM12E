@@ -6,7 +6,6 @@ use App\Entities\Cart;
 use App\Entities\Message;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class MessagesTest extends TestCase
@@ -26,12 +25,12 @@ class MessagesTest extends TestCase
 
         $this->seed(\PermissionsTableSeeder::class);
         $this->user = factory(User::class)->create(
-            ['id' => 1,]
+            ['id' => 1]
         );
 
         $this->user->assignRole('Administrator');
 
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
     }
@@ -45,7 +44,7 @@ class MessagesTest extends TestCase
             ->assertStatus(200)
             ->assertViewIs('notifications.index');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testStore(): void
@@ -62,7 +61,7 @@ class MessagesTest extends TestCase
 
         $this->assertDatabaseHas('messages', ['body' => 'holaAdmin']);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testDestroy(): void
@@ -75,7 +74,7 @@ class MessagesTest extends TestCase
 
         $response = $this->actingAs($this->user)
             ->delete(route('messages.destroy', $message->id), [
-                'id' => $message->id
+                'id' => $message->id,
             ]);
 
         $response
@@ -85,6 +84,6 @@ class MessagesTest extends TestCase
             'id'  => $message->id,
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 }

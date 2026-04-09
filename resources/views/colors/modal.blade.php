@@ -2,9 +2,9 @@
     Crear Color
 </button>
 
-{!! Form::open(['url' => 'colors']) !!}
-{{ Form::token() }}
-<div class="modal fade" id="addColor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<form action="{{ url('colors') }}" method="POST">
+    @csrf
+    <div class="modal fade" id="addColor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -36,4 +36,4 @@
         </div>
     </div>
 </div>
-{!! Form::close() !!}
+</form>

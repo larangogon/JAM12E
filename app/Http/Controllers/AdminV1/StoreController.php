@@ -4,9 +4,9 @@ namespace App\Http\Controllers\AdminV1;
 
 use App\Entities\Product;
 use App\Entities\Rating;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class StoreController extends Controller
 {
@@ -30,7 +30,7 @@ class StoreController extends Controller
     public function index(Request $request): View
     {
         $category = $request->get('category', null);
-        $search   = $request->get('search', null);
+        $search = $request->get('search', null);
 
         $this->products = new Product();
 
@@ -40,7 +40,7 @@ class StoreController extends Controller
                 ->category($category)
                 ->active()
                 ->search($search)
-                ->paginate(20)
+                ->paginate(20),
         ]);
     }
 
@@ -74,7 +74,7 @@ class StoreController extends Controller
             'product'   => $product,
             'promedio'  => $promedio,
             'total'     => $total,
-            'promediox' => $promediox
+            'promediox' => $promediox,
         ]);
     }
 }

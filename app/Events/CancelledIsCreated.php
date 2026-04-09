@@ -13,14 +13,7 @@ class CancelledIsCreated
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $cancelled;
-
-    /**
-     * OrderIsCreated constructor.
-     * @param Cancelled $cancelled
-     */
-    public function __construct(Cancelled $cancelled)
+    public function __construct(public readonly Cancelled $cancelled)
     {
-        $this->cancelled = $cancelled;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RequestFilter extends FormRequest
@@ -25,9 +24,9 @@ class RequestFilter extends FormRequest
     public function rules()
     {
         return [
-            'fechaInicio'  => 'required',
-            'fechaFinal'   => 'required',
-            'status'       => ['required'],
+            'startDate' => 'required',
+            'endDate' => 'required',
+            'status' => ['required'],
         ];
     }
 }

@@ -55,7 +55,7 @@ class ReportExcelDaily implements FromView, ShouldAutoSize, WithEvents
             'cancel' => $cancel,
             'fecha' => $fecha,
             'pending' => $pending,
-            'rechazadas' => $rechazadas
+            'rechazadas' => $rechazadas,
 
         ]);
     }

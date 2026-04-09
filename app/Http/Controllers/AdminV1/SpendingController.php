@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\AdminV1;
 
 use App\Entities\Spending;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestStoreSpending;
 use App\Http\Requests\RequestUpdateSpending;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Http\Controllers\Controller;
 
 class SpendingController extends Controller
 {
@@ -39,7 +39,7 @@ class SpendingController extends Controller
 
         return view('spendings.index', [
             'spendings' => $spendings,
-            'search'    => $query
+            'search'    => $query,
         ]);
     }
 
@@ -80,7 +80,7 @@ class SpendingController extends Controller
      */
     public function edit(int $id): View
     {
-        $spending  = Spending::findOrFail($id);
+        $spending = Spending::findOrFail($id);
 
         return view('spendings.edit', ['spending' => $spending]);
     }

@@ -2,14 +2,14 @@
 
 namespace App\Repositories;
 
+use App\Contracts\ProductsContract;
 use App\Entities\Imagen;
 use App\Entities\Product;
-use App\Interfaces\InterfaceProducts;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ItemCreateRequest;
 use App\Http\Requests\ItemUpdateRequest;
+use Illuminate\Support\Facades\Storage;
 
-class ProductsRepo implements InterfaceProducts
+class ProductsContractRepo implements ProductsContract
 {
     /**
      * @param ItemCreateRequest $request
@@ -19,12 +19,12 @@ class ProductsRepo implements InterfaceProducts
     {
         $product = Product::create($request->all());
 
-        $product->asignarColor($request->get('color'));
-        $product->asignarCategory($request->get('category'));
-        $product->asignarSize($request->get('size'));
+        $product->assignColor($request->get('color'));
+        $product->assignCategory($request->get('category'));
+        $product->assignSize($request->get('size'));
 
         $files = $request->file('img');
-        $product->asignarImagen($files, $product->id);
+        $product->assignImage($files, $product->id);
     }
 
     /**
@@ -40,7 +40,7 @@ class ProductsRepo implements InterfaceProducts
         $product->sizes()->sync($request->get('size'));
 
         $files = $request->file('img');
-        $product->asignarImagen($files, $product->id);
+        $product->assignImage($files, $product->id);
     }
 
     /**
@@ -68,7 +68,7 @@ class ProductsRepo implements InterfaceProducts
      * @param Product $product
      */
     public function active(Product $product): void
-    {;
+    {
         $state = $product->active;
         $product->active = !$state;
 

@@ -2,7 +2,6 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Rating extends Pivot
@@ -21,9 +20,6 @@ class Rating extends Pivot
         return $this->morphTo();
     }
 
-    /**
-     * @param Builder $query
-     */
     public function scopeTopRating($query)
     {
         $query->with('rateable')

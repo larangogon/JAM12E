@@ -2,8 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Mail\SendEmailReportGeneral;
-use App\Mail\SendEmailReportGeneralExcel;
 use App\Mail\SendEmailReportProductExcel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

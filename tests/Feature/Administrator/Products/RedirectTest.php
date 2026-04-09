@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Administrator\Products;
 
-use App\Entities\User;
 use App\Entities\Product;
+use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -65,9 +65,9 @@ class RedirectTest extends TestCase
         $this->actingAs($user);
 
         $permission = Permission::create([
-            'group' => 'categories' ,
-            'name' => 'view categories' ,
-            'label' => 'view categories'
+            'group' => 'categories',
+            'name' => 'view categories',
+            'label' => 'view categories',
         ]);
 
         $role = Role::find($user->role_id);

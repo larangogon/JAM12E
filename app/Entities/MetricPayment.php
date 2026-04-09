@@ -17,24 +17,14 @@ class MetricPayment extends Model
         'date',
         'keyword',
         'status_type',
-        'status'
+        'status',
     ];
 
-    /**
-     * @
-     * param array|string|null $primaryId
-     * @return bool
-     */
     public static function isFilteredByPrimaryId($primaryId): bool
     {
         return $primaryId != 'all' && $primaryId != null;
     }
 
-    /**
-     * @param Builder $query
-     * @param array|string|null $primaryId
-     * @return bool
-     */
     public static function scopeFilterByPrimaryId(Builder $query, $primaryId): Builder
     {
         if (self::isFilteredByPrimaryId($primaryId)) {
@@ -46,10 +36,6 @@ class MetricPayment extends Model
         return $query;
     }
 
-    /**
-     * @param Collection $metrics
-     * @return Collection
-     */
     public static function readThreeLevelsMetric(Collection $metrics): Collection
     {
         $data = [];

@@ -5,7 +5,6 @@ namespace Tests\Feature\Administrator\Products;
 use App\Entities\Cart;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class SizesTest extends TestCase
@@ -28,7 +27,7 @@ class SizesTest extends TestCase
 
         $this->user->assignRole('Administrator');
 
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
     }
@@ -56,9 +55,9 @@ class SizesTest extends TestCase
             ->assertRedirect(route('sizes.index'));
 
         $this->assertDatabaseHas('sizes', [
-            'name' => 'Unico'
+            'name' => 'Unico',
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 }

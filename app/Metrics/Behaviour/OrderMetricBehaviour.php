@@ -16,7 +16,7 @@ class OrderMetricBehaviour implements MetricContract
     {
         $primary = $filters['primary'] ?? null;
 
-        $metrics =  Metric::filterByPrimaryId($primary)
+        $metrics = Metric::filterByPrimaryId($primary)
             ->whereBetween('date', [
                 $filters['from'] ?? now()->subMonth()->format('Y-m-d'),
                 $filters['to'] ?? now()->format('Y-m-d'),
