@@ -50,7 +50,7 @@
     <div class= "card mb-3"  style="width: 14rem;">
       <img src="dist/img/61ccdf3a04bb750129a9805e246d1a22.jpg" style="width: 14rem;" alt="20">
       <div class="card-img-overlay">
-        <h5 class="card-title"><form action="{{route('vitrina.index')}}" method="get">
+        <h5 class="card-title"><form action="{{route('storefront.index')}}" method="get">
           <input type="text" name="category" id="" value="Mujer" hidden>
           <button type="submit" class="btn btn-link">Mujer</button>
       </form></h5>
@@ -60,7 +60,7 @@
     <div class= "card mb-3" style="width: 14rem;">
       <img src="dist/img/3449bfd35ccc40a54deb30e3d613275f.jpg" style="width: 14rem;" alt="20">
       <div class="card-img-overlay">
-        <h5 class="card-title"><form action="{{route('vitrina.index')}}" method="get">
+        <h5 class="card-title"><form action="{{route('storefront.index')}}" method="get">
           <input type="text" name="category" id="" value="Hombre" hidden>
           <button type="submit" class="btn btn-link">Hombre</button>
       </form></h5>
@@ -70,7 +70,7 @@
     <div class= "card mb-3" style="width: 14rem;">
       <img src="dist/img/2740de713615d74d2e9a4814040f88a5.jpg" style="width: 14rem;" alt="20">
       <div class="card-img-overlay">
-        <form action="{{route('vitrina.index')}}" method="get">
+        <form action="{{route('storefront.index')}}" method="get">
           <input type="text" name="category" id="" value="Hogar" hidden>
           <button type="submit" class="btn btn-link">Hogar</button>
       </form>
@@ -89,7 +89,7 @@
                 <h6 class="card-title">{{$product->name}} <br>
                     {!! trans('messages.Price') !!}: ${{number_format($product->price)}}
                 </h6>
-                <a href="{{route('vitrina.show', $product->id) }}">
+                <a href="{{route('storefront.show', $product->id) }}">
                     <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >{!! trans('messages.See in detail') !!}</button>
                 </a>
             </div>
@@ -108,7 +108,7 @@
                 <h6 class="card-title">{{$product->name}} <br>
                     {!! trans('messages.Price') !!}: ${{number_format($product->price)}}
                 </h6>
-                <a href="{{route('vitrina.show', $product->id) }}">
+                <a href="{{route('storefront.show', $product->id) }}">
                     <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >{!! trans('messages.See in detail') !!}</button>
                 </a>
             </div>
@@ -127,7 +127,7 @@
                 <h6 class="card-title">{{$product->rateable->name}} <br>
                     {!! trans('messages.Price') !!}: ${{number_format($product->rateable->price)}}
                 </h6>
-                <a href="{{route('vitrina.show', $product->rateable->id) }}">
+                <a href="{{route('storefront.show', $product->rateable->id) }}">
                     <button type="button" class="btn btn-block btn-sm btn-dark btn:hover" >{!! trans('messages.See in detail') !!}</button>
                 </a>
             </div>

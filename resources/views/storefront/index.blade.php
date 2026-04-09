@@ -7,6 +7,6 @@
               <p>{{session('success')}}</p>
           </div>
       @endif
-    @include('vitrina.frm.prt')
+    @include('storefront.frm.prt')
   </div>
 @endsection

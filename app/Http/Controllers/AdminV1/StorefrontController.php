@@ -8,25 +8,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class StoreController extends Controller
+class StorefrontController extends Controller
 {
     protected $products;
 
-    /**
-     * @param Product $products
-     */
     public function __construct(Product $products)
     {
         $this->middleware('auth');
         $this->middleware('Status');
         $this->middleware('verified');
-        $this->$products = $products;
+        $this->products = $products;
     }
 
-    /**
-     * @param Request $request
-     * @return View
-     */
     public function index(Request $request): View
     {
         $category = $request->get('category', null);
@@ -34,8 +27,8 @@ class StoreController extends Controller
 
         $this->products = new Product();
 
-        return view('vitrina/index', [
-            'search'   => $search,
+        return view('storefront.index', [
+            'search' => $search,
             'products' => $this->products
                 ->category($category)
                 ->active()
@@ -44,10 +37,6 @@ class StoreController extends Controller
         ]);
     }
 
-    /**
-     * @param int $id
-     * @return View
-     */
     public function show(int $id): View
     {
         $product = Product::active()
@@ -58,23 +47,23 @@ class StoreController extends Controller
 
         $product->save();
 
-        $ratin = Rating::all()
+        $ratings = Rating::all()
             ->where('rateable_id', '=', $id);
 
-        $total = $ratin->sum('score');
-        $promedio = $ratin->count('qualifiqier_type');
+        $total = $ratings->sum('score');
+        $average = $ratings->count();
 
         if ($total) {
-            $promediox = $total / $promedio;
+            $averageScore = $total / $average;
         } else {
-            $promediox = $total;
+            $averageScore = $total;
         }
 
-        return view('vitrina/show', [
-            'product'   => $product,
-            'promedio'  => $promedio,
-            'total'     => $total,
-            'promediox' => $promediox,
+        return view('storefront.show', [
+            'product' => $product,
+            'average' => $average,
+            'total' => $total,
+            'averageScore' => $averageScore,
         ]);
     }
 }

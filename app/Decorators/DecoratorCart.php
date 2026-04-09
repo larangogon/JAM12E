@@ -23,10 +23,10 @@ class DecoratorCart implements CartsContract
             ->cart
             ->products()
             ->attach($product, [
-                'stock'       => $stock,
-                'color_id'    => $color,
+                'stock' => $stock,
+                'color_id' => $color,
                 'category_id' => $category,
-                'size_id'     => $size,
+                'size_id' => $size,
             ]);
     }
 

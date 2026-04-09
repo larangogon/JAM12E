@@ -4,45 +4,83 @@ namespace App\Decorators;
 
 use App\Constants\Statuses;
 use App\Contracts\OrdersContract;
-use App\Entities\{Cancelled, Cart, Detail, Order, Payment};
+use App\Entities\Cancelled;
+use App\Entities\Cart;
+use App\Entities\Detail;
+use App\Entities\Order;
+use App\Entities\Payment;
 use App\Http\Requests\RequestOrderStore;
 use App\Jobs\ActualStockProduct;
-use GuzzleHttp\Client;
+use App\Services\PaymentTransactionService;
+use App\Services\PlaceToPayService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DecoratorOrder implements OrdersContract
 {
-    private Client $client;
+    private PlaceToPayService $placeToPayService;
+    private PaymentTransactionService $transactionService;
 
-    public function __construct()
-    {
-        $this->client = new Client([
-            'base_uri' => config('jam.place_to_pay.url_base'),
-            'timeout'  => 10,
-        ]);
+    public function __construct(
+        PlaceToPayService $placeToPayService,
+        PaymentTransactionService $transactionService
+    ) {
+        $this->placeToPayService = $placeToPayService;
+        $this->transactionService = $transactionService;
     }
 
     public function store(Request $request): RedirectResponse
     {
         return DB::transaction(function () use ($request) {
-
             $cart = Cart::findOrFail($request->get('cart_id'));
 
             if (!$cart->valueCart()) {
-                return redirect('vitrina')->with('success', 'Continue con su compra');
+                return redirect('storefront')->with('success', 'Continue with your purchase');
             }
 
             $order = $this->createOrderFromCart($cart);
 
-            $response = $this->createSession($order);
+            try {
+                $user = auth()->user();
+                $response = $this->placeToPayService->createSession(
+                    payment: [
+                        'reference' => (string)$order->id,
+                        'description' => "Order #{$order->id}",
+                        'amount' => [
+                            'currency' => 'COP',
+                            'total' => $order->total,
+                        ],
+                    ],
+                    payer: [
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'document' => $user->document ?? '',
+                        'mobile' => $user->cellphone ?? '',
+                    ],
+                    returnUrl: route('orders.show', ['order' => $order->id]),
+                    cancelUrl: route('orders.index'),
+                );
 
-            $this->createPayment($order, $response);
+                $this->createPayment($order, $response);
 
-            logger()->info('P2P create session', ['response' => $response]);
+                Log::info('PlaceToPay session created successfully', [
+                    'order_id' => $order->id,
+                    'request_id' => $response->requestId ?? null,
+                ]);
 
-            return redirect()->away($response->processUrl);
+                return redirect()->away($response->processUrl);
+            } catch (Exception $e) {
+                Log::error('Failed to create PlaceToPay session', [
+                    'order_id' => $order->id,
+                    'error' => $e->getMessage(),
+                ]);
+
+                $order->delete();
+                return redirect()->back()->with('error', 'Could not process payment. Try again.');
+            }
         });
     }
 
@@ -54,58 +92,160 @@ class DecoratorOrder implements OrdersContract
             return $order;
         }
 
-        $response = $this->getSession($order);
+        try {
+            $response = $this->placeToPayService->getSession($order->payment->requestId);
+            $newStatus = $response->status->status;
 
-        $this->updatePaymentStatus($order, $response);
+            $this->transactionService->updatePaymentStatus(
+                $order->payment,
+                $newStatus,
+                'UPDATE',
+                $this->extractPaymentData($response),
+                [
+                    'request_id' => $order->payment->requestId,
+                    'placetopay_status' => $newStatus,
+                    'response' => $response,
+                    'initiated_by' => 'update_check',
+                ]
+            );
 
-        logger()->info('P2P update status', ['response' => $response]);
+            Log::info('PlaceToPay session status updated', [
+                'order_id' => $order->id,
+                'request_id' => $order->payment->requestId,
+                'status' => $newStatus,
+            ]);
 
-        return $order->refresh();
+            return $order->refresh();
+        } catch (Exception $e) {
+            Log::error('Failed to update PlaceToPay session status', [
+                'order_id' => $order->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            return $order;
+        }
     }
 
     public function resend(Request $request): RedirectResponse
     {
         $order = Order::findOrFail($request->get('order'));
 
-        $response = $this->createSession($order);
+        try {
+            $response = $this->placeToPayService->createSession(
+                payment: [
+                    'reference' => (string)$order->id,
+                    'description' => "Order #{$order->id} (Resend)",
+                    'amount' => [
+                        'currency' => 'COP',
+                        'total' => $order->total,
+                    ],
+                ],
+                payer: [
+                    'name' => $order->user->name,
+                    'email' => $order->user->email,
+                    'document' => $order->user->document ?? '',
+                    'mobile' => $order->user->cellphone ?? '',
+                ],
+                returnUrl: route('orders.show', ['order' => $order->id]),
+                cancelUrl: route('orders.index'),
+            );
 
-        $order->payment->update([
-            'processUrl' => $response->processUrl,
-            'requestId' => $response->requestId,
-            'status' => Statuses::PENDING,
-        ]);
-
-        return redirect()->away($response->processUrl);
-    }
-
-    public function reversePay(Request $request): void
-    {
-        DB::transaction(function () use ($request) {
-
-            $order = Order::with(['payment', 'user'])->findOrFail($request->get('order'));
-
-            $response = $this->reverseSession($order);
-
-            Cancelled::create([
-                'user_id' => $order->user->id,
-                'status' => Statuses::CANCELED,
-                'statusTransaction' => $response->status->status,
-                'requestId' => $order->payment->requestId,
-                'internalReference' => $order->payment->internalReference,
-                'processUrl' => $order->payment->processUrl,
-                'message' => $response->status->message,
-                'document' => $order->payment->document,
-                'name' => $order->payment->name,
-                'email' => $order->payment->email,
-                'mobile' => $order->payment->mobile,
-                'locale' => $order->payment->locale,
-                'amountReturn' => data_get($response, 'payment.amount.from.total'),
-                'order_id' => $order->id,
-                'cancelled_by' => auth()->id(),
-                'totalOrder' => $order->total,
+            $order->payment->update([
+                'processUrl' => $response->processUrl,
+                'requestId' => $response->requestId,
+                'status' => Statuses::PENDING,
             ]);
 
-            $order->delete();
+            Log::info('PlaceToPay session resent', ['order_id' => $order->id]);
+
+            return redirect()->away($response->processUrl);
+        } catch (Exception $e) {
+            Log::error('Failed to resend PlaceToPay session', [
+                'order_id' => $order->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            return redirect()->back()->with('error', 'Could not resend payment link.');
+        }
+    }
+
+    public function reversePayment(Request $request): void
+    {
+        DB::transaction(function () use ($request) {
+            $order = Order::with(['payment', 'user'])->findOrFail($request->get('order'));
+
+            try {
+                $this->transactionService->updatePaymentStatus(
+                    $order->payment,
+                    Statuses::REVERSE_PENDING,
+                    'REVERSE',
+                    [],
+                    ['initiated_by' => 'user']
+                );
+
+                $response = $this->placeToPayService->reverse($order->payment->internalReference);
+
+                $this->transactionService->updatePaymentStatus(
+                    $order->payment,
+                    Statuses::REVERSED,
+                    'REVERSE',
+                    [],
+                    [
+                        'placetopay_status' => $response->status->status ?? 'OK',
+                        'response' => $response,
+                        'initiated_by' => 'reverse_success',
+                    ]
+                );
+
+                Cancelled::create([
+                    'user_id' => $order->user->id,
+                    'status' => Statuses::REVERSED,
+                    'statusTransaction' => $response->status->status ?? 'OK',
+                    'requestId' => $order->payment->requestId,
+                    'internalReference' => $order->payment->internalReference,
+                    'processUrl' => $order->payment->processUrl,
+                    'message' => $response->status->message ?? 'Reverse processed successfully',
+                    'document' => $order->payment->document,
+                    'name' => $order->payment->name,
+                    'email' => $order->payment->email,
+                    'mobile' => $order->payment->mobile,
+                    'locale' => $order->payment->locale,
+                    'amountReturn' => data_get($response, 'payment.0.amount.from.total', $order->payment->amount),
+                    'order_id' => $order->id,
+                    'cancelled_by' => auth()->id(),
+                    'totalOrder' => $order->total,
+                ]);
+
+                Log::info('Payment reversed successfully', [
+                    'order_id' => $order->id,
+                    'payment_id' => $order->payment->id,
+                    'status_before' => $order->payment->status,
+                    'status_after' => Statuses::REVERSED,
+                ]);
+
+                $order->delete();
+            } catch (Exception $e) {
+                $this->transactionService->updatePaymentStatus(
+                    $order->payment,
+                    Statuses::REVERSE_FAILED,
+                    'REVERSE',
+                    [],
+                    [
+                        'error' => $e->getMessage(),
+                        'error_details' => $e->getTraceAsString(),
+                        'success' => false,
+                        'initiated_by' => 'reverse_failed',
+                    ]
+                );
+
+                Log::error('Failed to reverse payment', [
+                    'order_id' => $order->id,
+                    'payment_id' => $order->payment->id,
+                    'error' => $e->getMessage(),
+                ]);
+
+                throw $e;
+            }
         });
     }
 
@@ -113,7 +253,14 @@ class DecoratorOrder implements OrdersContract
     {
         $order = Order::findOrFail($request->get('order'));
 
-        $this->getSession($order);
+        try {
+            $this->placeToPayService->getSession($order->payment->requestId);
+        } catch (Exception $e) {
+            Log::error('Failed to verify session on complete', [
+                'order_id' => $order->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
 
         return redirect()->away($order->payment->processUrl);
     }
@@ -121,11 +268,10 @@ class DecoratorOrder implements OrdersContract
     public function paymentInStore(RequestOrderStore $request)
     {
         return DB::transaction(function () use ($request) {
-
             $cart = Cart::findOrFail($request->get('cart_id'));
 
             if ($cart->valueCart() === 0) {
-                return redirect('vitrina')->with('success', 'Continue con su compra');
+                return redirect('storefront')->with('success', 'Continue with your purchase');
             }
 
             $order = $this->createOrderFromCart($cart, Statuses::APPROVED_IN_STORE);
@@ -135,8 +281,8 @@ class DecoratorOrder implements OrdersContract
             Payment::create([
                 'order_id' => $order->id,
                 'status' => Statuses::APPROVED_IN_STORE,
-                'base' => 'tienda',
-                'message' => "pago en tienda por {$user->name} ({$user->id})",
+                'base' => 'store',
+                'message' => "In-store payment by {$user->name} ({$user->id})",
                 'document' => $request->get('document'),
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
@@ -181,93 +327,32 @@ class DecoratorOrder implements OrdersContract
     {
         Payment::create([
             'order_id' => $order->id,
-            'processUrl' => $response->processUrl,
-            'requestId' => $response->requestId,
+            'processUrl' => $response->processUrl ?? '',
+            'requestId' => $response->requestId ?? '',
             'status' => Statuses::PENDING,
         ]);
     }
 
-    private function createSession(Order $order): object
+    private function extractPaymentData(object $response): array
     {
-        return $this->request('/api/session', [
-            'auth' => $this->auth(),
-            'payment' => [
-                'reference' => $order->id,
-                'description' => "Orden #{$order->id}",
-                'amount' => [
-                    'currency' => 'COP',
-                    'total' => $order->total,
-                ],
-                'allowPartial' => false,
-            ],
-            'expiration' => now()->addDays(2)->toIso8601String(),
-            'returnUrl' => route('orders.show', [
-                'user' => auth()->id(),
-                'order' => $order->id,
-            ]),
-            'ipAddress' => request()->ip(),
-            'userAgent' => request()->userAgent(),
-        ]);
-    }
+        $data = [];
 
-    private function getSession(Order $order): object
-    {
-        return $this->request("/api/session/{$order->payment->requestId}", [
-            'auth' => $this->auth(),
-        ]);
-    }
-
-    private function reverseSession(Order $order): object
-    {
-        return $this->request('/api/reverse', [
-            'auth' => $this->auth(),
-            'internalReference' => $order->payment->internalReference,
-        ]);
-    }
-
-    private function request(string $uri, array $data): object
-    {
-        $response = $this->client->post($uri, ['json' => $data]);
-
-        return json_decode($response->getBody()->getContents());
-    }
-
-    private function updatePaymentStatus(Order $order, object $response): void
-    {
-        $status = $response->status->status;
-
-        $payload = [
-            'status' => $status,
-            'message' => $response->status->message ?? null,
-        ];
-
-        if ($status === Statuses::APPROVED) {
+        if (isset($response->payment) && !empty($response->payment)) {
             $payment = collect($response->payment)->first();
 
-            $payload += [
-                'internalReference' => $payment->internalReference,
-                'amount' => data_get($payment, 'amount.from.total'),
-                'document' => data_get($response, 'request.payer.document'),
-                'name' => data_get($response, 'request.payer.name'),
-                'email' => data_get($response, 'request.payer.email'),
-                'mobile' => data_get($response, 'request.payer.mobile'),
-                'locale' => data_get($response, 'request.locale'),
-            ];
+            if ($payment) {
+                $data = [
+                    'internalReference' => $payment->internalReference ?? '',
+                    'amount' => data_get($payment, 'amount.from.total', 0),
+                    'document' => data_get($response, 'request.payer.document', ''),
+                    'name' => data_get($response, 'request.payer.name', ''),
+                    'email' => data_get($response, 'request.payer.email', ''),
+                    'mobile' => data_get($response, 'request.payer.mobile', ''),
+                    'locale' => data_get($response, 'request.locale', 'es_CO'),
+                ];
+            }
         }
 
-        $order->payment->update($payload);
-    }
-
-    private function auth(): array
-    {
-        $seed = now()->toIso8601String();
-        $nonce = bin2hex(random_bytes(16));
-
-        return [
-            'login' => config('jam.place_to_pay.login'),
-            'seed' => $seed,
-            'nonce' => base64_encode($nonce),
-            'tranKey' => base64_encode(sha1($nonce . $seed . config('jam.place_to_pay.secret_key'), true)),
-        ];
+        return $data;
     }
 }

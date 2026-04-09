@@ -18,11 +18,6 @@ class OrderController extends Controller
 {
     protected $orders;
 
-    /**
-     * OrderController constructor.
-     * @param OrdersContract $orders
-     * @param Order $order
-     */
     public function __construct(OrdersContract $orders, Order $order)
     {
         $this->order = $order;
@@ -32,10 +27,6 @@ class OrderController extends Controller
         $this->middleware('verified');
     }
 
-    /**
-     * @param Request $request
-     * @return View
-     */
     public function index(Request $request): View
     {
         $this->authorize('order.index');
@@ -52,10 +43,6 @@ class OrderController extends Controller
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return View
-     */
     public function create(Request $request): View
     {
         return view('orders.create', [
@@ -63,29 +50,16 @@ class OrderController extends Controller
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function store(Request $request): RedirectResponse
     {
         return $this->orders->store($request);
     }
 
-    /**
-     * @param Request $request
-     * @param int $id
-     */
     public function update(Request $request, int $id)
     {
         $this->orders->update($request, $id);
     }
 
-    /**
-     * @param Request $request
-     * @param Order $order
-     * @return View
-     */
     public function show(Request $request, Order $order): View
     {
         $this->authorize('owner', $order);
@@ -97,11 +71,6 @@ class OrderController extends Controller
         ]);
     }
 
-    /**
-     * @param User $user
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
     public function showv(User $user): View
     {
         $this->authorize('ownerIndex', [
@@ -113,10 +82,6 @@ class OrderController extends Controller
         ]);
     }
 
-    /**
-     * @param Order $order
-     * @return RedirectResponse
-     */
     public function shippingStatus(Order $order): RedirectResponse
     {
         $state = $order->shippingStatus;
@@ -128,69 +93,46 @@ class OrderController extends Controller
         return redirect('/orders');
     }
 
-    /**
-     * @param Request $request
-     */
     public function resend(Request $request)
     {
         $this->orders->resend($request);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function reversePay(Request $request): RedirectResponse
+    public function reversePayment(Request $request): RedirectResponse
     {
-        $this->orders->reversePay($request);
+        $this->orders->reversePayment($request);
 
-        return redirect('canceller')
-            ->with('success', ' El pago se  ha revertido exitosamente!');
+        return redirect('cancelled-orders')
+            ->with('success', 'Payment has been successfully reversed!');
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function complete(Request $request): RedirectResponse
     {
         return $this->orders->complete($request);
     }
 
-    /**
-     * @param Request $request
-     * @return View
-     */
-    public function canceller(Request $request): View
+    public function cancelled(Request $request): View
     {
         $search = $request->get('search', null);
 
-        $this->canceller = new Cancelled();
+        $this->cancelled = new Cancelled();
 
-        return view('orders.canceller', [
-            'search'     => $search,
-            'cancellers' => $this->canceller
+        return view('orders.cancelled', [
+            'search' => $search,
+            'cancelledOrders' => $this->cancelled
                 ->search($search)
                 ->paginate(5),
         ]);
     }
 
-    /**
-     * @param RequestOrderStore $request
-     * @return RedirectResponse
-     */
     public function paymentInStore(RequestOrderStore $request): RedirectResponse
     {
         $this->orders->paymentInStore($request);
 
-        return redirect('orders')->with('success', 'Orden creada exitosamente');
+        return redirect('orders')->with('success', 'Order created successfully');
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function cancellerOrderStore(Request $request): RedirectResponse
+    public function cancelStoreOrder(Request $request): RedirectResponse
     {
         $order = Order::find($request->get('order'));
 
@@ -213,6 +155,6 @@ class OrderController extends Controller
         Order::destroy($request->get('order'));
 
         return Redirect()->back()
-            ->with('success', 'Eliminado Satisfactoriamente !');
+            ->with('success', 'Deleted successfully!');
     }
 }

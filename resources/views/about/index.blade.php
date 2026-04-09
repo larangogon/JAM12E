@@ -71,7 +71,7 @@
                                     </p>
                                 </div>
                                 <h5>
-                                    <a href="{{ url('vitrina') }}">
+                                    <a href="{{ url('storefront') }}">
                                         <button type="button" class="btn btn-dark btn-sm btn-block">Volver
                                         </button>
                                     </a>

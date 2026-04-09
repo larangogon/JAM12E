@@ -183,11 +183,11 @@
                     </div>
 
                     <div class="form-group">
-                        {{Form::label('color[]', 'Selecciona un color:')}}
+                        <label for="color[]">Selecciona un color:</label>
                         <div class="list-group-scr">
                             @foreach  ($colors as $color )
                                 <li class="list-group-item" data-spy="scroll">
-                                    {{Form::checkbox('color[]', $color->id)}} {{$color->name}}
+                                    <input type="checkbox" name="color[]" value="{{$color->id}}" id="color_{{$loop->index}}"/> {{$color->name}}
                                 </li>
                             @endforeach
                         </div>
@@ -198,10 +198,10 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
-                        {{Form::label('size[]', 'Selecciona una talla:')}}
+                        <label for="size[]">Selecciona una talla:</label>
                         <div>
                             @foreach  ($sizes as $size )
-                                {{Form::checkbox('size[]', $size->id)}} {{$size->name}},
+                                <input type="checkbox" name="size[]" value="{{$size->id}}" id="size_{{$loop->index}}" /> {{$size->name}},
                             @endforeach
                         </div>
                     </div>

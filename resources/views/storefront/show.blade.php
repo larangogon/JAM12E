@@ -23,7 +23,7 @@
         <div class="panel-heading">
             <div class="panel-title">
                 <h2>{!! trans('messages.Product name') !!}: {{ $product->name }}
-                    <a href="{{ route('vitrina.index') }}" class="btn btn-outline-success btn-sm btn:hover">{!! trans('messages.Return') !!}</a>
+                    <a href="{{ route('storefront.index') }}" class="btn btn-outline-success btn-sm btn:hover">{!! trans('messages.Return') !!}</a>
                </h2></div>
 
             </div>
@@ -33,10 +33,10 @@
                           <div class="container">
                               {{--Start Rating--}}
                               @for ($i = 0; $i < 5; $i++)
-                                  @if (floor($promediox) - $i >= 1)
+                                  @if (floor($averageScore) - $i >= 1)
                                       {{--Full Start--}}
                                       <i class="fas fa-star text-warning"> </i>
-                                  @elseif ($promediox - $i > 0)
+                                  @elseif ($averageScore - $i > 0)
                                       {{--Half Start--}}
                                       <i class="fas fa-star-half-alt text-warning"> </i>
                                   @else
@@ -45,10 +45,10 @@
                                   @endif
                               @endfor
                               {{--End Rating--}}
-                              @if($promedio == 1)
-                                  {{$promedio}} voto
+                              @if($average == 1)
+                                  {{$average}} voto
                               @else($total > 1)
-                                  {{$promedio}} votos
+                                  {{$average}} votos
                               @endif
                           </div>
                       </div>

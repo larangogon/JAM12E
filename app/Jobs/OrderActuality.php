@@ -18,10 +18,6 @@ class OrderActuality implements ShouldQueue
 
     protected $order;
 
-    /**
-     * OrderActuality constructor.
-     * @param $order
-     */
     public function __construct($order)
     {
         $this->order = $order;

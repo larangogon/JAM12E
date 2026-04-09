@@ -12,7 +12,7 @@ class IndexTest extends TestCase
     public function testStoreTest(): void
     {
         $this->withoutMiddleware();
-        $response = $this->get('vitrina');
+        $response = $this->get('storefront');
 
         $response->assertStatus(200);
     }
@@ -44,7 +44,7 @@ class IndexTest extends TestCase
     public function testWeNotAuthorizeTest(): void
     {
         $this->withoutMiddleware();
-        $response = $this->get('nosotros');
+        $response = $this->get('about-us');
 
         $response->assertStatus(200);
     }

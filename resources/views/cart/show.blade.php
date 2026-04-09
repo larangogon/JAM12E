@@ -29,7 +29,7 @@
                         <a href="{{ route('cart.remove')}}" class="btn btn-danger btn-sm">
                             {!! trans('messages.Empty cart') !!}
                         </a>
-                        <a href="{{route('vitrina.index') }}" class="btn btn-primary btn-sm">
+                        <a href="{{route('storefront.index') }}" class="btn btn-primary btn-sm">
                             {!! trans('messages.Keep buying') !!}
                         </a>
                     </p>
@@ -119,7 +119,7 @@
                                 </div>
                             </h3>
                             <div class="row justify-content-center align-items-center">
-                                <a href="{{route('vitrina.index') }}" class="btn btn-outline-primary">
+                                <a href="{{route('storefront.index') }}" class="btn btn-outline-primary">
                                     {!! trans('messages.Keep buying') !!}
                                 </a>
                             </div>

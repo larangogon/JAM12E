@@ -35,16 +35,16 @@ Route::resource('products', 'AdminV1\ProductsController');
 Route::get('products/{product}/active')
     ->uses('AdminV1\ProductsController@active')
     ->name('products.active');
-Route::get('products/destroyimagen/{imagen_id}/{product_id}')
-    ->uses('AdminV1\ProductsController@destroyimagen')
-    ->name('products/destroyimagen');
+Route::get('products/destroy-image/{image_id}/{product_id}')
+    ->uses('AdminV1\ProductsController@destroyImage')
+    ->name('products/destroy-image');
 
-Route::resource('vitrina', 'AdminV1\StoreController')
+Route::resource('storefront', 'AdminV1\StorefrontController')
     ->only(['index', 'show']);
-Route::resource('nosotros', 'AdminV1\WeController')
+Route::resource('about-us', 'AdminV1\AboutController')
     ->only('index');
-Route::get('nosotros/indexApi', 'AdminV1\WeController@indexApi')
-    ->name('nosotros.indexApi');
+Route::get('about-us/api', 'AdminV1\AboutController@indexApi')
+    ->name('about-us.indexApi');
 
 Route::resource('categories', 'AdminV1\CategoryController')
     ->only(['index', 'store']);
@@ -69,52 +69,52 @@ Route::post('orders/resend', 'AdminV1\OrderController@resend')
     ->name('orders.resend');
 Route::post('orders/complete', 'AdminV1\OrderController@complete')
     ->name('orders.complete');
-Route::post('orders/reversePay', 'AdminV1\OrderController@reversePay')
-    ->name('orders.reversePay');
-Route::post('orders/paymentInStore', 'AdminV1\OrderController@paymentInStore')
+Route::post('orders/reverse-payment', 'AdminV1\OrderController@reversePayment')
+    ->name('orders.reversePayment');
+Route::post('orders/payment-in-store', 'AdminV1\OrderController@paymentInStore')
     ->name('orders.paymentInStore');
-Route::get('orders/{order}/shippingStatus')
+Route::get('orders/{order}/shipping-status')
     ->uses('AdminV1\OrderController@shippingStatus')
     ->name('orders.shippingStatus');
-Route::post('orders/cancellerOrderStore', 'AdminV1\OrderController@cancellerOrderStore')
-    ->name('cancellerOrderStore');
+Route::post('orders/cancel-store-order', 'AdminV1\OrderController@cancelStoreOrder')
+    ->name('cancelStoreOrder');
 
-Route::get('canceller')
-    ->uses('AdminV1\OrderController@canceller')
-    ->name('orders.canceller');
+Route::get('cancelled-orders')
+    ->uses('AdminV1\OrderController@cancelled')
+    ->name('orders.cancelled');
 Route::resource('shipping', 'AdminV1\ShippingController')
     ->only(['create', 'store']);
 
-Route::get('exportUsers', 'AdminV1\ExportController@exportUsers')
+Route::get('export-users', 'AdminV1\ExportController@exportUsers')
     ->name('exportUsers');
-Route::get('exportProducts', 'AdminV1\ExportController@exportProducts')
+Route::get('export-products', 'AdminV1\ExportController@exportProducts')
     ->name('exportProducts');
-Route::get('exportOrders', 'AdminV1\ExportController@exportOrders')
+Route::get('export-orders', 'AdminV1\ExportController@exportOrders')
     ->name('exportOrders');
-Route::get('reportGeneralExport', 'AdminV1\ExportController@reportGeneralExport')
+Route::get('report-general-export', 'AdminV1\ExportController@reportGeneralExport')
     ->name('reportGeneralExport');
-Route::get('reportProductExport', 'AdminV1\ExportController@reportProductExport')
+Route::get('report-product-export', 'AdminV1\ExportController@reportProductExport')
     ->name('reportProductExport');
-Route::post('/ruteExcel', 'AdminV1\ExportController@ruteExcel')
-    ->name('ruteExcel');
+Route::post('/export-excel', 'AdminV1\ExportController@exportExcel')
+    ->name('exportExcel');
 
 Route::post('imports/import', 'AdminV1\ImportController@import')
     ->name('import');
 Route::get('imports/index', 'AdminV1\ImportController@index')
     ->name('imports.index');
-Route::get('imports/indexProducts', 'AdminV1\ImportController@indexProducts')
-    ->name('indexProducts');
-Route::post('imports/importProducts', 'AdminV1\ImportController@importProducts')
+Route::get('imports/import-products', 'AdminV1\ImportController@importProducts')
     ->name('importProducts');
-Route::post('imports/imgsProducts', 'AdminV1\ImportController@imgsProducts')
-    ->name('imgsProducts');
+Route::post('imports/import-products', 'AdminV1\ImportController@storeImportProducts')
+    ->name('storeImportProducts');
+Route::post('imports/import-product-images', 'AdminV1\ImportController@importProductImages')
+    ->name('importProductImages');
 
-Route::post('/reportOrders-pdf', 'AdminV1\ReportController@reportOrders')
+Route::post('/report-orders-pdf', 'AdminV1\ReportController@reportOrders')
     ->name('reportOrders');
-Route::get('/reportGeneral-pdf', 'AdminV1\ReportController@reportGeneral')
+Route::get('/report-general-pdf', 'AdminV1\ReportController@reportGeneral')
     ->name('reportGeneral');
-Route::post('/rute', 'AdminV1\ReportController@rute')
-    ->name('rute');
+Route::post('/export-route', 'AdminV1\ReportController@exportRoute')
+    ->name('exportRoute');
 Route::resource('reports', 'AdminV1\ReportController')
     ->only('show', 'index', 'destroy');
 
@@ -140,8 +140,8 @@ Route::get('messages/response/{id}', 'AdminV1\MessagesController@response')
 
 Route::resource('spendings', 'AdminV1\SpendingController');
 
-Route::get('lang/{lang}', 'LanguageController@swap')
-    ->name('lang.swap');
+Route::get('lang/{lang}', 'AdminV1\LanguageController@switchLanguage')
+    ->name('lang.switch');
 
 Route::get('/phpinfo', function () {
     phpinfo();

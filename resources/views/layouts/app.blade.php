@@ -57,7 +57,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
-                            <form action="{{route('vitrina.index')}}" method="get">
+                            <form action="{{route('storefront.index')}}" method="get">
                                 <label for=""></label><input type="text" name="category" id="" value="Hogar" hidden>
                                 <button type="submit" class="btn btn-link">{!! trans('messages.HomeCategory') !!}</button>
                             </form>
@@ -65,7 +65,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
-                            <form action="{{route('vitrina.index')}}" method="get">
+                            <form action="{{route('storefront.index')}}" method="get">
                                 <input type="text" name="category" id="" value="Hombre" hidden>
                                 <button type="submit" class="btn btn-link">{!! trans('messages.Man') !!}</button>
                             </form>
@@ -73,7 +73,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
-                            <form action="{{route('vitrina.index')}}" method="get">
+                            <form action="{{route('storefront.index')}}" method="get">
                                 <input type="text" name="category" id="" value="Mujer" hidden>
                                 <button type="submit" class="btn btn-link">{!! trans('messages.Woman') !!}</button>
                             </form>
@@ -110,7 +110,7 @@
                         @endauth
                      <li class="nav-item dropdown">
                         <div class="container">
-                            <a class="navbar-brand" href="{{ url('/vitrina') }}">
+                            <a class="navbar-brand" href="{{ url('/storefront') }}">
                                 <i class="fas fa-shopping-bag"></i>JAM Store
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" >
@@ -143,7 +143,7 @@
                                     <div class="top-right links">
                                         @foreach (array_keys(config('locale.languages')) as $lang)
                                             @if ($lang != App::getLocale())
-                                                <a  href="{!! route('lang.swap', $lang) !!}">
+                                                <a  href="{!! route('lang.switch', $lang) !!}">
                                                     <span class="badge badge-danger">
                                                      {!! $lang !!} <small>{!! $lang !!}</small>
                                                     </span>
@@ -207,7 +207,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{url('nosotros')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                <a href="{{url('about-us')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="fas fa-store"></i>
                                     <p>
                                         {!! trans('messages.Quienes somos!') !!}
@@ -216,7 +216,7 @@
                             </li>
                             @can('api.index')
                                 <li class="nav-item">
-                                    <a href="{{route('nosotros.indexApi')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <a href="{{route('about-us.indexApi')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-medical-alt"></i>
                                         <p>
                                             {!! trans('messages.Como consumir nuestra API!') !!}
@@ -235,7 +235,7 @@
                                 </li>
                             @endcan
                                 <li class="nav-item">
-                                    <a href="{{route('vitrina.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <a href="{{route('storefront.index')}}" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-gifts"></i>
                                         <p>
                                             {!! trans('messages.Vitrina') !!}
@@ -279,7 +279,7 @@
                                         </li>
                                         <li class="nav-item has-treeview">
                                             <a href="#" class="nav-link"
-                                               class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
+                                               class="{{ Request::path() === 'storefront' ? 'nav-link active' : 'nav-link' }}">
                                                 <i class="nav-icon fas fa-users"></i>
                                                 <p>
                                                     {!! trans('messages.Empleados') !!}
@@ -288,7 +288,7 @@
                                             <ul class="nav nav-treeview" cass="nav nav-pills nav-sidebar flex-column">
                                                 <li class="nav-item has-treeview">
                                                     <a href="#" class="nav-link"
-                                                       class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
+                                                       class="{{ Request::path() === 'storefront' ? 'nav-link active' : 'nav-link' }}">
                                                         <form action="{{route('users.index')}}" method="get">
                                                             <input type="text" name="role" id="" value="Administrator" hidden>
                                                             <button type="submit"  class="btn-dark btn-sm btn-block text-left">
@@ -301,7 +301,7 @@
                                                 </li>
                                                 <li class="nav-item has-treeview">
                                                     <a href="#" class="nav-link"
-                                                       class="{{ Request::path() === 'vitrina' ? 'nav-link active' : 'nav-link' }}">
+                                                       class="{{ Request::path() === 'storefront' ? 'nav-link active' : 'nav-link' }}">
                                                         <form action="{{route('users.index')}}" method="get">
                                                             <input type="text" name="role" id="" value="Guest" hidden>
                                                             <button type="submit"  class="btn-dark btn-sm btn-block text-left">
@@ -380,7 +380,7 @@
                             @endcan
                             @can('cancell.index')
                                 <li class="nav-item">
-                                    <a href="{{route('orders.canceller')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
+                                    <a href="{{route('orders.cancelled')}}"class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
                                         <i class="fas fa-file-medical-alt"></i>
                                         <p>
                                             {!! trans('messages.Pagos cancelados') !!}

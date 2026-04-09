@@ -19,10 +19,6 @@ class ActualStockProduct implements ShouldQueue
 
     protected $order;
 
-    /**
-     * ProcessReport constructor.
-     * @param $order
-     */
     public function __construct($order)
     {
         $this->order = $order;

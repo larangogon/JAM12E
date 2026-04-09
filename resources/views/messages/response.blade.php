@@ -31,7 +31,7 @@
                             <table class="table table-sm">
                                 <tr>
                                     <th>Enviado por:</th>
-                                    <td>{{$msg->senderId->name}}</td>
+                                    <td>{{$msg->sender->name}}</td>
                                 </tr>
                                 <tr>
                                     <th>Mensaje</th>

@@ -18,12 +18,12 @@ class Message extends Model
         'sender_id',
     ];
 
-    public function recipientId(): BelongsTo
+    public function recipient(): BelongsTo
     {
         return $this->belongsTo(User::class, 'recipient_id');
     }
 
-    public function senderId(): BelongsTo
+    public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class, 'sender_id');
     }

@@ -15,7 +15,7 @@ class DecoratorUser implements UsersContract
     {
     }
 
-    public function store(UserFormRequest $request)
+    public function store(UserFormRequest $request): void
     {
         $this->usersRepo->store($request);
 

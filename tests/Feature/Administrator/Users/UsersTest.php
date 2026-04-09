@@ -10,7 +10,7 @@ class UsersTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUsuariosTestNotAuthorize(): void
+    public function testUsersTestNotAUsers(): void
     {
         $this->withoutMiddleware();
         $response = $this->get('users');
