@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
+use App\Mail\SendEmailReport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Mail\SendEmailReport;
 use Illuminate\Support\Facades\Mail;
 
 class ProcessReport implements ShouldQueue
@@ -19,22 +19,17 @@ class ProcessReport implements ShouldQueue
     use SerializesModels;
 
     protected $details;
-    protected $ordersx;
+    protected $orders;
 
-    /**
-     * ProcessReport constructor.
-     * @param array $details
-     * @param Collection $ordersx
-     */
-    public function __construct(array $details, Collection $ordersx)
+    public function __construct(array $details, Collection $orders)
     {
         $this->details = $details;
-        $this->ordersx = $ordersx;
+        $this->orders = $orders;
     }
 
-    public function handle()
+    public function handle(): void
     {
-        $email = new SendEmailReport($this->ordersx);
+        $email = new SendEmailReport($this->orders);
 
         Mail::to($this->details['email'])->send($email);
     }

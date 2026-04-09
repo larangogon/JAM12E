@@ -65,7 +65,7 @@
                             <th>{!! trans('messages.Payment status') !!}</th>
                             <td>{{strtolower(trans($order->payment->status ?? __('no existe')))}}</td>
                         </tr>
-                        @if($order->status == 'APROVADO_T')
+                        @if($order->status == 'APPROVED_IN_STORE')
                             <tr>
                                 <th>{!! trans('messages.Expires') !!}</th>
                                 <td>{{$order->payment->expiration ?? ('Procesando informacion...')}}</td>

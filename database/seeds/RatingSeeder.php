@@ -5,12 +5,7 @@ use Illuminate\Database\Seeder;
 
 class RatingSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         factory(Rating::class, 10)->create();
     }

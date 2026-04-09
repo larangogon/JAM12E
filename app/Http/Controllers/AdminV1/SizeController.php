@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\AdminV1;
 
+use App\Contracts\SizesContract;
 use App\Entities\Size;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Interfaces\InterfaceSizes;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SizeController extends Controller
 {
@@ -15,9 +15,9 @@ class SizeController extends Controller
 
     /**
      * SizeController constructor.
-     * @param InterfaceSizes $sizes
+     * @param SizesContract $sizes
      */
-    public function __construct(InterfaceSizes $sizes)
+    public function __construct(SizesContract $sizes)
     {
         $this->sizes = $sizes;
         $this->middleware('auth');
@@ -32,10 +32,10 @@ class SizeController extends Controller
     {
         $this->authorize('size.index');
 
-        $sizes = Size::all(['id','name']);
+        $sizes = Size::all(['id', 'name']);
 
         return view('sizes.index', [
-            'sizes' => $sizes
+            'sizes' => $sizes,
         ]);
     }
 

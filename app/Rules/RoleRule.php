@@ -29,7 +29,6 @@ class RoleRule implements Rule
             }
         }
 
-
         return $pase;
     }
 
@@ -38,7 +37,7 @@ class RoleRule implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'El Rol no existe en la base de datos';
     }

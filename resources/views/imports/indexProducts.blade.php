@@ -22,7 +22,7 @@
                             <h5 class="card-title">
                                 Importar Productos
                             </h5>
-                            <form method="POST" action="{{route('importProducts')}}" enctype="multipart/form-data">
+                            <form method="POST" action="{{route('storeImportProducts')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
@@ -40,7 +40,7 @@
                             <h5 class="card-title">
                                 Importar imagenes
                             </h5>
-                            <form method="POST" action="{{route('imgsProducts')}}" enctype="multipart/form-data">
+                            <form method="POST" action="{{route('importProductImages')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <div>

@@ -33,17 +33,7 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_ID'),
         'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect' => 'http://localhost:8000/auth/facebook/callback'
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
 
     ],
-
-    'placeToPay' => [
-        'login' => env('PAY_LOGIN'),
-        'secretKey' => env('PAY_SECRETKEY'),
-    ],
-
-
-
-
-
 ];

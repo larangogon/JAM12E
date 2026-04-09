@@ -11,7 +11,6 @@ use App\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
@@ -29,10 +28,10 @@ class ProductTest extends TestCase
         $this->seed(\PermissionsTableSeeder::class);
 
         $this->user = factory(User::class)->create([
-            'active' => 1
+            'active' => 1,
         ]);
         $this->user->assignRole('Administrator');
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
 
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
@@ -52,7 +51,7 @@ class ProductTest extends TestCase
             ->assertViewHas(['products', 'search'])
             ->assertViewIs('products.index');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testDestroy()
@@ -66,7 +65,7 @@ class ProductTest extends TestCase
 
         $response = $this->actingAs($this->user, 'web')
             ->delete(route('products.destroy', $products->id), [
-            'id'  => $products->id
+            'id'  => $products->id,
         ]);
 
         $response
@@ -78,7 +77,7 @@ class ProductTest extends TestCase
             'id'  => $products->id,
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testUpdate()
@@ -95,7 +94,7 @@ class ProductTest extends TestCase
                 'name'  => 'nameup',
                 'stock' => $product->stock,
                 'color' => [$this->color->id],
-                'size'  => [$this->size->id]
+                'size'  => [$this->size->id],
             ]);
 
         $response
@@ -128,7 +127,7 @@ class ProductTest extends TestCase
             ->put(route('products.update', $product->id), []);
 
         $response->assertSessionHasErrors(['stock',
-            'name','color', 'size',
+            'name', 'color', 'size',
         ]);
     }
 
@@ -144,7 +143,7 @@ class ProductTest extends TestCase
             'color'       => [$this->color->id],
             'size'        => [$this->size->id],
             'category'    => [$this->category->id],
-            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
+            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg',
         ]);
 
         $response
@@ -153,10 +152,10 @@ class ProductTest extends TestCase
             ->assertSessionHas('success', 'producto Creado Satisfactoriamente');
 
         $this->assertDatabaseHas('products', [
-            'name'  => 'new'
+            'name'  => 'new',
         ]);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testStoreErrors(): void
@@ -168,7 +167,7 @@ class ProductTest extends TestCase
             ->assertSessionHasErrors(['stock',
                 'name', 'price',
                 'barcode', 'description',
-                'img', 'color', 'size', 'category'
+                'img', 'color', 'size', 'category',
             ])
             ->assertStatus(302);
     }
@@ -182,7 +181,7 @@ class ProductTest extends TestCase
             ->assertViewIs('products.create')
             ->assertStatus(200);
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testEditView()
@@ -196,7 +195,7 @@ class ProductTest extends TestCase
             'color'       => [$this->color->id],
             'size'        => [$this->size->id],
             'category'    => [$this->category->id],
-            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
+            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg',
         ]);
 
         $response = $this->actingAs($this->user, 'web')
@@ -212,7 +211,7 @@ class ProductTest extends TestCase
             ])
             ->assertViewIs('products.edit');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testShow()
@@ -227,7 +226,7 @@ class ProductTest extends TestCase
             'size'        => [$this->size->id],
             'category'    => [$this->category->id],
             'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg',
-            'active'      => 1
+            'active'      => 1,
         ]);
 
         $response = $this->actingAs($this->user, 'web')
@@ -240,7 +239,7 @@ class ProductTest extends TestCase
             ])
             ->assertViewIs('products.show');
 
-        $this->assertAuthenticatedAs($this->user, $guard = null);
+        $this->assertAuthenticatedAs($this->user);
     }
 
     public function testUpdateActive()
@@ -250,12 +249,12 @@ class ProductTest extends TestCase
             'description' => 'description',
             'price'       => 5666,
             'stock'       => 5,
-            'active'      => 0
+            'active'      => 0,
         ]);
 
         $response = $this->actingAs($this->user)
             ->get(route('products.active', $product->id), [
-                'active' => 1
+                'active' => 1,
             ]);
 
         $response
@@ -266,7 +265,7 @@ class ProductTest extends TestCase
         $this->assertDatabaseHas('products', [
             'id'     => $product->id,
             'name'   => 'name',
-            'active' => 1
+            'active' => 1,
         ]);
     }
 }

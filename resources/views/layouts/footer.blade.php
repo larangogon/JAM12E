@@ -15,18 +15,18 @@
             <div class="col-xs-12 col-sm-6 col-md-2 footers-two">
                 <h5 class="tool">Essentials </h5>
                 <ul class="list-unstyled">
-                    <li><a id="social-fb" href="{{ url('nosotros') }}">{!! trans('messages.About us') !!}</a></li>
+                    <li><a id="social-fb" href="{{ url('about-us') }}">{!! trans('messages.About us') !!}</a></li>
                     <li><a id="social-fb" href="{{ route('login') }}">{!! trans('messages.Login') !!}</a></li>
                     <li><a id="social-fb"href="{{ route('register') }}">{!! trans('messages.RegisterU') !!}</a></li>
                     <li><a id="social-fb" href="{{ url('/home') }}">{!! trans('messages.Start') !!}</a></li>
-                    <li><a id="social-fb" href="{{ url('vitrina') }}">{!! trans('messages.Store') !!}</a></li>
+                    <li><a id="social-fb" href="{{ url('storefront') }}">{!! trans('messages.Store') !!}</a></li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-2 footers-three">
                 <h5 class="tool">Information </h5>
                 <ul class="list-unstyled">
                     <li><a id="social-tw" href="{{url('messages')}}">{!! trans('messages.Contact Us') !!}</a></li>
-                    <li><a id="social-tw" href="{{url('vitrina')}}">{!! trans('messages.Store') !!}</a></li>
+                    <li><a id="social-tw" href="{{url('storefront')}}">{!! trans('messages.Store') !!}</a></li>
                     <li><a id="social-tw" href="#">Videos</a></li>
                     <li>
                         @auth
@@ -36,7 +36,7 @@
                         @endauth
 
                     </li>
-                    <li><a href="{{url('nosotros/indexApi')}}">JAM Api</a></li>
+                    <li><a href="{{url('about-us/indexApi')}}">JAM Api</a></li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-2 footers-four">

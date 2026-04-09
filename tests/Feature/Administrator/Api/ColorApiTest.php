@@ -7,7 +7,6 @@ use App\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ColorApiTest extends TestCase
@@ -25,7 +24,7 @@ class ColorApiTest extends TestCase
         $this->seed(\PermissionsTableSeeder::class);
 
         $this->user = factory(User::class)->create([
-            'active' => 1
+            'active' => 1,
         ]);
         $this->user->assignRole('Administrator');
         $this->cart = new Cart();
@@ -45,7 +44,7 @@ class ColorApiTest extends TestCase
             ->assertStatus(200);
 
         $this->assertDatabaseHas('colors', [
-            'name' => 'rojo'
+            'name' => 'rojo',
         ]);
     }
 

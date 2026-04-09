@@ -5,7 +5,6 @@ namespace Tests\Feature\Administrator\Products;
 use App\Entities\Cart;
 use App\Entities\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CategoriesTest extends TestCase
@@ -28,7 +27,7 @@ class CategoriesTest extends TestCase
 
         $this->user->assignRole('Administrator');
 
-        $this->cart =  new Cart();
+        $this->cart = new Cart();
         $this->cart->user_id = $this->user->id;
         $this->cart->save();
     }
@@ -56,7 +55,7 @@ class CategoriesTest extends TestCase
             ->assertRedirect(route('categories.index'));
 
         $this->assertDatabaseHas('categories', [
-            'name' => 'adultos'
+            'name' => 'adultos',
         ]);
     }
 }

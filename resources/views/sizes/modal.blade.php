@@ -1,7 +1,7 @@
 <button type="button" class="btn btn-warning btn-sm float-right" data-toggle="modal" data-target="#addSize">Crear talla</button>
 
-{!! Form::open(['url' => 'sizes']) !!}
-{{ Form::token() }}
+<form action="{{ url('sizes') }}" method="POST">
+    @csrf
 <div class="modal fade" id="addSize" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -34,4 +34,4 @@
         </div>
     </div>
 </div>
-{!! Form::close() !!}
+</form>

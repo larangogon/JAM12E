@@ -13,14 +13,7 @@ class ProductCreate
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $product;
-
-    /**
-     * OrderIsCreated constructor.
-     * @param Product $product
-     */
-    public function __construct(Product $product)
+    public function __construct(public readonly Product $product)
     {
-        $this->product = $product;
     }
 }

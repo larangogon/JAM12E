@@ -20,8 +20,8 @@ class ProductsExport implements FromCollection, WithMapping, WithHeadings, Shoul
     use RegistersEventListeners;
 
     /**
-    * @return Collection
-    */
+     * @return Collection
+     */
     public function collection()
     {
         return Product::all();

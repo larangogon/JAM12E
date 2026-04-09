@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\AdminV1;
 
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Interfaces\InterfaceRoles;
+use App\Contracts\RolesContract;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
 {
@@ -16,9 +16,9 @@ class RoleController extends Controller
 
     /**
      * RoleController constructor.
-     * @param InterfaceRoles $roles
+     * @param RolesContract $roles
      */
-    public function __construct(InterfaceRoles $roles)
+    public function __construct(RolesContract $roles)
     {
         $this->roles = $roles;
         $this->middleware('auth');
@@ -33,12 +33,12 @@ class RoleController extends Controller
     {
         $this->authorize('role.index');
 
-        $roles = Role::all(['id','name']);
-        $permissions = Permission::all(['id','name']);
+        $roles = Role::all(['id', 'name']);
+        $permissions = Permission::all(['id', 'name']);
 
         return view('roles.index', [
             'roles'       => $roles,
-            'permissions' => $permissions
+            'permissions' => $permissions,
         ]);
     }
 

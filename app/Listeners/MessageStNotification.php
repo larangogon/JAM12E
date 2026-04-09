@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Entities\User;
 use App\Notifications\MessageNotification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 
 class MessageStNotification

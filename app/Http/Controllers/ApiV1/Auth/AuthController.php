@@ -9,8 +9,8 @@ use App\Http\Requests\AuthApiRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -241,20 +241,20 @@ class AuthController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('authToken')->accessToken;
-        $success['name'] =  $user->name;
+        $success['token'] = $user->createToken('authToken')->accessToken;
+        $success['name'] = $user->name;
         return response()->json(['success' => $success])->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
      * @param Request $request
-     * @return \string[][]
+     * @return string[][]
      */
     public function autorize(Request $request)
     {
         $auth = [
-            $clientId = "4",
-            $clientSecret = "GUUmCY7dz4wrHaVc7vb4AaD2Izi8tkwaXwxAS4Ka"
+            $clientId = '4',
+            $clientSecret = 'GUUmCY7dz4wrHaVc7vb4AaD2Izi8tkwaXwxAS4Ka',
         ];
 
         return [

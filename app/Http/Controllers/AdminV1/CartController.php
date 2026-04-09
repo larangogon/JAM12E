@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\AdminV1;
 
+use App\Contracts\CartsContract;
 use App\Entities\Product;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CartAddRequest;
 use App\Http\Requests\CartUpdateRequest;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Interfaces\InterfaceCarts;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -18,9 +18,9 @@ class CartController extends Controller
 
     /**
      * CartController constructor.
-     * @param InterfaceCarts $carts
+     * @param CartsContract $carts
      */
-    public function __construct(InterfaceCarts $carts)
+    public function __construct(CartsContract $carts)
     {
         $this->middleware('auth');
         $this->middleware('Status');
@@ -34,7 +34,7 @@ class CartController extends Controller
     public function show(): View
     {
         return view('cart.show', [
-            'cart' => Auth::user()->cart
+            'cart' => Auth::user()->cart,
         ]);
     }
 
@@ -66,8 +66,8 @@ class CartController extends Controller
         $this->carts->remove();
 
         return redirect()
-            ->route("cart.show", [
-                'cart' => Auth::user()->cart
+            ->route('cart.show', [
+                'cart' => Auth::user()->cart,
             ]);
     }
 

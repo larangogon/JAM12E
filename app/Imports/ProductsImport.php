@@ -13,12 +13,12 @@ use App\Rules\SizeRule;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
-use Maatwebsite\Excel\Concerns\ToModel;
 
-class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withStartRow
+class ProductsImport implements WithValidation, ToModel, WithBatchInserts, WithStartRow
 {
     use Importable;
     use SkipsErrors;
@@ -31,7 +31,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
     public function model(array $row)
     {
         $product = Product::updateOrCreate(
-            ['id' => $row[0]
+            ['id' => $row[0],
             ],
             [
                 'name'        => $row[1],
@@ -41,7 +41,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
                 'stock'       => $row[5],
                 'active'      => $row[6],
                 'created_by'  => auth()->user()->id,
-                'updated_by'  => auth()->user()->id
+                'updated_by'  => auth()->user()->id,
             ]
         );
 
@@ -58,9 +58,8 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
 
             $colorBd = Color::where('name', $color)->first();
 
-            $product->colors()->attach(array($colorBd->id));
+            $product->colors()->attach([$colorBd->id]);
         }
-
 
         $product->sizes()->detach(null);
 
@@ -105,7 +104,7 @@ class ProductsImport implements WithValidation, ToModel, WithBatchInserts, withS
 
             Imagen::updateOrCreate([
                 'name'       => $imagen,
-                'product_id' => $product->id
+                'product_id' => $product->id,
             ]);
         }
     }

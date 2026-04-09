@@ -5,7 +5,6 @@ namespace App\Jobs;
 use App\Entities\Product;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -19,10 +18,6 @@ class OrderActuality implements ShouldQueue
 
     protected $order;
 
-    /**
-     * OrderActuality constructor.
-     * @param $order
-     */
     public function __construct($order)
     {
         $this->order = $order;

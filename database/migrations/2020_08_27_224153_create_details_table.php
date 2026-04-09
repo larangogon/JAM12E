@@ -51,7 +51,6 @@ class CreateDetailsTable extends Migration
                 ->on('sizes')
                 ->onDelete('cascade');
 
-
             $table->timestamps();
         });
     }

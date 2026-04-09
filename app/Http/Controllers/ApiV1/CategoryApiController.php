@@ -56,11 +56,11 @@ class CategoryApiController extends Controller
      */
     public function index()
     {
-        $categories = Category::all(['id','name']);
+        $categories = Category::all(['id', 'name']);
 
         return response()
             ->json([
-                'lista de categorias', $categories
+                'lista de categorias', $categories,
             ], 200);
     }
 
@@ -74,7 +74,7 @@ class CategoryApiController extends Controller
 
         return response()
             ->json([
-            'status' => ($category) ? 'created' : 'failed'
+            'status' => ($category) ? 'created' : 'failed',
             ], 200);
     }
 }

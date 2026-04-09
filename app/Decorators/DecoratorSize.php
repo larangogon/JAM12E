@@ -2,28 +2,17 @@
 
 namespace App\Decorators;
 
+use App\Contracts\SizesContract;
+use App\Repositories\SizesContractRepo;
 use Illuminate\Http\Request;
-use App\Repositories\SizesRepo;
-use App\Interfaces\InterfaceSizes;
 use Illuminate\Support\Facades\Cache;
 
-class DecoratorSize implements InterfaceSizes
+class DecoratorSize implements SizesContract
 {
-    protected $sizesRepo;
-
-    /**
-     * DecoratorSize constructor.
-     * @param SizesRepo $sizesRepo
-     */
-    public function __construct(SizesRepo $sizesRepo)
+    public function __construct(public readonly SizesContractRepo $sizesRepo)
     {
-        $this->sizesRepo = $sizesRepo;
     }
 
-    /**
-     * @param Request $request
-     * @return void
-     */
     public function store(Request $request): void
     {
         $this->sizesRepo->store($request);

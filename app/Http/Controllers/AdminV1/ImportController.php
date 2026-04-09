@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\AdminV1;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ImportImgsRequest;
 use App\Http\Requests\ImportRequest;
 use App\Imports\ProductsImport;
 use App\Imports\UsersImport;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use App\Http\Controllers\Controller;
 
 class ImportController extends Controller
 {
-    /**
-     * ImportController constructor.
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -22,12 +19,7 @@ class ImportController extends Controller
         $this->middleware('verified');
     }
 
-    /**
-     * @param ImportRequest $request
-     * @return RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function import(importRequest $request): RedirectResponse
+    public function import(ImportRequest $request): RedirectResponse
     {
         $this->authorize('import.user');
 
@@ -42,25 +34,16 @@ class ImportController extends Controller
         }
 
         return back()
-            ->with('success', '¡Todo bien, importación de usuarios con éxito!');
+            ->with('success', 'Successfully imported users!');
     }
 
-    /**
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
     public function index(): View
     {
         $this->authorize('index.importUser');
         return view('imports.index');
     }
 
-    /**
-     * @param ImportRequest $request
-     * @return RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function importProducts(importRequest $request)
+    public function storeImportProducts(ImportRequest $request)
     {
         $this->authorize('product.import');
 
@@ -75,13 +58,9 @@ class ImportController extends Controller
         }
 
         return back()
-            ->with('success', '¡Todo bien, importación de productos con éxito!');
+            ->with('success', 'Successfully imported products!');
     }
 
-    /**
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
     public function indexProducts(): View
     {
         $this->authorize('index.importProduct');

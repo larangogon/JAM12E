@@ -27,17 +27,17 @@ class HomeController extends Controller
     {
         $rating = Rating::topRating()->get();
 
-        $visit  = Product::orderBy('visits', 'desc')
-            ->take(4)->get(['name', 'id','price', 'visits']);
+        $visit = Product::orderBy('visits', 'desc')
+            ->take(4)->get(['name', 'id', 'price', 'visits']);
 
         $sales = Product::orderBy('sales', 'desc')
-            ->take(4)->get(['name', 'id', 'sales','price']);
+            ->take(4)->get(['name', 'id', 'sales', 'price']);
 
         return view('home', [
             'rating' => $rating,
             'visit'  => $visit,
             'sales'  => $sales,
-            'cart'   => Auth::user()->cart
+            'cart'   => Auth::user()->cart,
         ]);
     }
 }

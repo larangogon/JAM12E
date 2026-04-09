@@ -100,7 +100,7 @@
                                 </button>
                             </a>
                         @endif
-                        @if($order->status == 'APROVADO_T')
+                        @if($order->status == 'APPROVED_IN_STORE')
                             <a href="{{ route('reports.show', $order->id) }}">
                                 <button type="button" class="btn btn-primary btn-sm ">
                                     Factura
@@ -121,7 +121,7 @@
                                     </form>
                                 @endif
                             @endif
-                            @if($order->status == 'APROVADO_T')
+                            @if($order->status == 'APPROVED_IN_STORE')
                                 <form action="{{route('cancellerOrderStore')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="order" value="{{$order->id}}">

@@ -4,8 +4,6 @@ namespace App\Notifications;
 
 use App\Entities\Message;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class MessageNotification extends Notification
@@ -35,7 +33,6 @@ class MessageNotification extends Notification
         return ['database'];
     }
 
-
     /**
      * @param $notifiable
      * @return array
@@ -45,8 +42,8 @@ class MessageNotification extends Notification
         return [
             'id'           => $this->message->id,
             'body'         => $this->message->body,
-            'recipient_id' => $this->message->recipientId->name,
-            'sender_id'    => $this->message->senderId->name,
+            'recipient_id' => $this->message->recipient->name,
+            'sender_id'    => $this->message->sender->name,
         ];
     }
 }

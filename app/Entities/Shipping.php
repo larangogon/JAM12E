@@ -18,12 +18,9 @@ class Shipping extends Model
         'email_recipient',
         'country_recipient',
         'city_recipient',
-        'order_id'
+        'order_id',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);

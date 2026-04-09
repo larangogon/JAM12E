@@ -28,7 +28,7 @@ class UserEditFormRequest extends FormRequest
             'phone'     => 'required',
             'cellphone' => 'required',
             'document'  => 'required|numeric',
-            'address'   => 'required'
+            'address'   => 'required',
         ];
     }
 }

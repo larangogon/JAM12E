@@ -7,13 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserStatus
 {
-    /**
-     * Undocumented function
-     *
-     * @param [type] $request
-     * @param Closure $next
-     * @return void
-     */
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
@@ -22,7 +15,7 @@ class UserStatus
             if ($user->active) {
                 return $next($request);
             } else {
-                Auth::logout() ;
+                Auth::logout();
 
                 return redirect('login');
             }

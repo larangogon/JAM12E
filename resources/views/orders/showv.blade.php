@@ -31,7 +31,7 @@
                 </div>
             </h3>
             <div class="row justify-content-center align-items-center">
-                <a href="{{route('vitrina.index') }}" class="btn btn-outline-primary">
+                <a href="{{route('storefront.index') }}" class="btn btn-outline-primary">
                     Seguir comprando
                 </a>
             </div>

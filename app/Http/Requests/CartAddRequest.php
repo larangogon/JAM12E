@@ -26,7 +26,7 @@ class CartAddRequest extends FormRequest
         return [
            'stock'    => 'required',
            'color_id' => 'required',
-           'size_id'  => 'required'
+           'size_id'  => 'required',
         ];
     }
 }

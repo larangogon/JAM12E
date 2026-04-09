@@ -154,5 +154,5 @@ return [
     'HomeCategory' => 'Hogar',
     'Man' => 'Hombre',
     'Woman' =>  'Mujer',
-    'search' => 'buscador'
+    'search' => 'buscador',
 ];

@@ -26,16 +26,13 @@ class Payment extends Model
         'locale',
         'base',
         'totalStore',
-        'expiration'
+        'expiration',
         ];
 
     protected $table = 'payments';
 
-    /**
-     * @return BelongsTo
-     */
     public function order(): BelongsTo
     {
-        return $this->belongsTo('App\Entities\Order');
+        return $this->belongsTo(Order::class);
     }
 }

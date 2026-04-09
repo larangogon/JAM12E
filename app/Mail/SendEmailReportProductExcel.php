@@ -20,7 +20,7 @@ class SendEmailReportProductExcel extends Mailable
     {
         $name = date('Y-m-d-H-i') . 'reporte.xlsx';
         Excel::store(new ReportProductsExport(), $name);
-        return $this->from(config('app.emailReportFrom'))
+        return $this->from(config('jam.email_report_from'))
             ->view('emails.report')
             ->attach(
                 Excel::download(new ReportProductsExport(), 'reporteProduct.xlsx')

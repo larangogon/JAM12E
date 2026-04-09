@@ -14,11 +14,11 @@
                                 <table class="table table-sm">
                                     <tr>
                                         <th>Enviado a</th>
-                                        <td>{{$msg->senderId->name ?? __('no existe este registro')}}</strong></td>
+                                        <td>{{$msg->sender->name ?? __('no existe este registro')}}</strong></td>
                                     </tr>
                                     <tr>
                                         <th>Enviado por</th>
-                                        <td>{{$msg->recipientId->name ?? __('no existe este registro')}}</strong></td>
+                                        <td>{{$msg->recipient->name ?? __('no existe este registro')}}</strong></td>
                                     </tr>
                                     <tr>
                                         <th>Menssage</th>

@@ -29,7 +29,7 @@
                         <a href="{{ route('cart.remove')}}" class="btn btn-danger btn-sm">
                             {!! trans('messages.Empty cart') !!}
                         </a>
-                        <a href="{{route('vitrina.index') }}" class="btn btn-primary btn-sm">
+                        <a href="{{route('storefront.index') }}" class="btn btn-primary btn-sm">
                             {!! trans('messages.Keep buying') !!}
                         </a>
                     </p>
@@ -99,7 +99,7 @@
                         <th>
                             <div class="badge badge-light text-wrap">
                                 <h5>
-                                    {!! trans('messages.Total with IVA') !!} ${{$cart->valorCarrito()}}
+                                    {!! trans('messages.Total with IVA') !!} ${{$cart->valueCart()}}
                                 </h5>
                                 <a href="{{route('orders.create', $product->id) }}">
                                     <button type="button" class="btn btn-success btn-block text-left">
@@ -119,7 +119,7 @@
                                 </div>
                             </h3>
                             <div class="row justify-content-center align-items-center">
-                                <a href="{{route('vitrina.index') }}" class="btn btn-outline-primary">
+                                <a href="{{route('storefront.index') }}" class="btn btn-outline-primary">
                                     {!! trans('messages.Keep buying') !!}
                                 </a>
                             </div>

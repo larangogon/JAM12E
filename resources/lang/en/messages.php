@@ -154,14 +154,6 @@ return [
     'HomeCategory' => 'Home',
     'Man' => 'Man',
     'Woman' =>  'Woman',
-    'search' => 'search'
-
-
-
-
-
-
-
-
+    'search' => 'search',
 
 ];

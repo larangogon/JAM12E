@@ -45,7 +45,7 @@ export default {
                 this.sum(Object.values(this.orderData['APPROVED'] ?? [0]).map(mapper)),
                 this.sum(Object.values(this.orderData['REJECTED'] ?? [0]).map(mapper)),
                 this.sum(Object.values(this.orderData['PENDING'] ?? [0]).map(mapper)),
-                this.sum(Object.values(this.orderData['APROVADO_T'] ?? [0]).map(mapper)),
+                this.sum(Object.values(this.orderData['APPROVED_IN_STORE'] ?? [0]).map(mapper)),
             ]);
         }
     },
@@ -152,9 +152,9 @@ export default {
                     'backgroundColor': 'rgba(255, 206, 86, 0.6)'
                 },
                 {
-                    'label': 'APROVADO_T',
-                    'data': Object.values(this.orderData['APROVADO_T'] ?? [0]),
-                    'hidden': stringify([0]) === stringify(Object.values(this.orderData['APROVADO_T'] ?? [0])),
+                    'label': 'APPROVED_IN_STORE',
+                    'data': Object.values(this.orderData['APPROVED_IN_STORE'] ?? [0]),
+                    'hidden': stringify([0]) === stringify(Object.values(this.orderData['APPROVED_IN_STORE'] ?? [0])),
                     'borderColor': 'rgba(54, 162, 23)',
                     'borderWidth': 2,
                     'backgroundColor': 'rgba(54, 162, 23, 0.6)'
@@ -174,7 +174,7 @@ export default {
                         this.sum(Object.values(this.orderData['APPROVED'] ?? [0])),
                         this.sum(Object.values(this.orderData['REJECTED'] ?? [0])),
                         this.sum(Object.values(this.orderData['PENDING'] ?? [0])),
-                        this.sum(Object.values(this.orderData['APROVADO_T'] ?? [0])),
+                        this.sum(Object.values(this.orderData['APPROVED_IN_STORE'] ?? [0])),
                     ],
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.6)',
@@ -191,7 +191,7 @@ export default {
                     borderWidth: 2,
                 }],
                 'totals': this.total,
-                'labels': ['APPROVED', 'REJECTED', 'PENDING', 'APROVADO_T']
+                'labels': ['APPROVED', 'REJECTED', 'PENDING', 'APPROVED_IN_STORE']
             }
         },
     },

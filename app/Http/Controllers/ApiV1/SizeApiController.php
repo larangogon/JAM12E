@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\ApiV1;
 
-use App\Http\Controllers\Controller;
 use App\Entities\Size;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class SizeApiController extends Controller
@@ -57,12 +57,12 @@ class SizeApiController extends Controller
     public function index()
     {
         $sizes = Size::all([
-            'id','name'
+            'id', 'name',
         ]);
 
         return response()
             ->json([
-                'lista de colores', $sizes
+                'lista de colores', $sizes,
             ], 200);
     }
 
@@ -76,7 +76,7 @@ class SizeApiController extends Controller
 
         return response()
             ->json([
-                'status' => ($size) ? 'created' : 'failed'
+                'status' => ($size) ? 'created' : 'failed',
             ], 200);
     }
 }

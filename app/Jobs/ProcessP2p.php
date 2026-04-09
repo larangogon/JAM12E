@@ -2,9 +2,9 @@
 
 namespace App\Jobs;
 
-use App\Constants\PlaceToPay;
-use App\Entities\Order;
+use App\Constants\Statuses;
 use App\Decorators\DecoratorOrder;
+use App\Entities\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -36,45 +36,45 @@ class ProcessP2p implements ShouldQueue
      */
     public function handle(DecoratorOrder $orderD)
     {
-        if ($this->order->payment->status === PlaceToPay::PENDING) {
+        if ($this->order->payment->status === Statuses::PENDING) {
             $response = $orderD->requestP2P('getRequestinformation', $this->order);
 
             if ($response->payment === null) {
                 $status = $response->status->status;
 
                 $this->order->payment->update([
-                    'status' => $status
+                    'status' => $status,
                 ]);
                 return logger()->channel('stack')
                     ->info('pago pendiente con numero de orden-' . $this->order->id);
-            } elseif ($response->payment[0]->status->status  !== "APPROVED") {
+            } elseif ($response->payment[0]->status->status !== 'APPROVED') {
                 $status = $response->payment[0]->status->status;
 
                 $this->order->payment->update([
-                    'status' => $status
+                    'status' => $status,
                 ]);
 
                 return logger()->channel('stack')
                     ->info('orden con estado pendiente o rechazada en proceso');
-            } elseif ($response->payment[0]->status->status  === "APPROVED") {
+            } elseif ($response->payment[0]->status->status === 'APPROVED') {
                 foreach ($response->payment as $payments) {
                     $pay = $payments;
                 }
 
-                $status            = $response->status->status;
-                $amount            = $pay->amount->from->total;
+                $status = $response->status->status;
+                $amount = $pay->amount->from->total;
                 $internalReference = $pay->internalReference;
-                $message           = $response->status->message;
-                $payerdocument     = $response->request->payer->document;
-                $payername         = $response->request->payer->name;
-                $payeremail        = $response->request->payer->email;
-                $payermobile       = $response->request->payer->mobile;
-                $locale            = $response->request->locale;
+                $message = $response->status->message;
+                $payerdocument = $response->request->payer->document;
+                $payername = $response->request->payer->name;
+                $payeremail = $response->request->payer->email;
+                $payermobile = $response->request->payer->mobile;
+                $locale = $response->request->locale;
 
                 $this->order->payment->update([
                     'internalReference' => $internalReference,
                     'status'            => $status,
-                    "message"           => $message,
+                    'message'           => $message,
                     'amount'            => $amount,
                     'document'          => $payerdocument,
                     'name'              => $payername,

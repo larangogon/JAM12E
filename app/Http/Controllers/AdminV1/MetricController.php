@@ -7,11 +7,11 @@ use App\Entities\Order;
 use App\Entities\Payment;
 use App\Entities\Product;
 use App\Entities\User;
+use App\Http\Controllers\Controller;
 use App\Metrics\MetricsManager;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Http\Controllers\Controller;
 
 class MetricController extends Controller
 {

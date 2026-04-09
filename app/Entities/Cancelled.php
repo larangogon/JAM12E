@@ -24,24 +24,16 @@ class Cancelled extends Model
         'cancelled_by',
         'totalOrder',
         'description',
-        'status'
+        'status',
     ];
 
     protected $table = 'cancelleds';
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'cancelled_by');
     }
 
-    /**
-     * @param $query
-     * @param $search
-     * @return mixed
-     */
     public function scopeSearch($query, $search)
     {
         if ($search) {

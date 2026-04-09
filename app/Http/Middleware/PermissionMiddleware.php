@@ -3,23 +3,20 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 
 class PermissionMiddleware
 {
-    /**
-     * @param $request
-     * @param Closure $next
-     * @param $permission
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed
-     */
-    public function handle($request, Closure $next, $permission)
+    public function handle($request, Closure $next, $permission): Application|RedirectResponse|Redirector
     {
         if (Auth::guest()) {
             return redirect('/login');
         }
 
-        if (! $request->user()->can($permission)) {
+        if (!$request->user()->can($permission)) {
             abort(403);
         }
 

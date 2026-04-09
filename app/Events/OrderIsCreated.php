@@ -13,14 +13,7 @@ class OrderIsCreated
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $order;
-
-    /**
-     * OrderIsCreated constructor.
-     * @param Order $order
-     */
-    public function __construct(Order $order)
+    public function __construct(public readonly Order $order)
     {
-        $this->order = $order;
     }
 }

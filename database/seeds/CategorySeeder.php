@@ -5,17 +5,12 @@ use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         $categories = ['Hombre', 'Mujer', 'Hogar', 'Niño', 'Accesorios'];
         foreach ($categories as $category) {
             factory(Category::class)->create([
-                'name' => $category
+                'name' => $category,
             ]);
         }
     }

@@ -1,18 +1,14 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-use Spatie\Permission\Models\Role;
+use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         Permission::create(['name' => 'product.index']);
         Permission::create(['name' => 'product.store']);

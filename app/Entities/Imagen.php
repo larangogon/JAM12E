@@ -10,14 +10,11 @@ class Imagen extends Model
     protected $fillable = [
         'id',
         'name',
-        'product_id'
+        'product_id',
     ];
 
     protected $table = 'imagenes';
 
-    /**
-     * @return BelongsToMany
-     */
     public function product(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);

@@ -6,7 +6,6 @@ use App\Exports\ReportGeneralExport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SendEmailReportGeneralExcel extends Mailable
@@ -22,7 +21,7 @@ class SendEmailReportGeneralExcel extends Mailable
         $name = date('Y-m-d-H-i') . 'reporte.xlsx';
         Excel::store(new ReportGeneralExport(), $name);
 
-        return $this->from(config('app.emailReportFrom'))
+        return $this->from(config('jam.email_report_from'))
             ->view('emails.report')
             ->attach(
                 Excel::download(new ReportGeneralExport(), 'reporte.xlsx')

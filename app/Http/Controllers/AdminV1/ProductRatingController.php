@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\AdminV1;
 
 use App\Entities\Product;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ScoreRequest;
 use App\Http\Resources\ProductResource;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class ProductRatingController extends Controller
 {

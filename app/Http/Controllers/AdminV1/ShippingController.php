@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\AdminV1;
 
 use App\Entities\Shipping;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\ShippingRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShippingRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ShippingController extends Controller
 {

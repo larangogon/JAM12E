@@ -29,7 +29,6 @@ class RuleColor implements Rule
             }
         }
 
-
         return $pase;
     }
 

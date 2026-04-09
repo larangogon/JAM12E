@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Constants\Statuses;
 use App\Entities\Order;
 use App\Events\OrderIsCreated;
 use App\Jobs\OrderActuality;
@@ -13,7 +14,7 @@ class OrderObserver
      */
     public function created(Order $order)
     {
-        if ($order->status === 'APROVADO_T') {
+        if ($order->status === Statuses::APPROVED_IN_STORE) {
             event(new OrderIsCreated($order));
         }
     }

@@ -2436,7 +2436,7 @@ __webpack_require__.r(__webpack_exports__);
         return Number(item);
       };
 
-      return this.sum([this.sum(Object.values((_this$orderData$APPRO = this.orderData['APPROVED']) !== null && _this$orderData$APPRO !== void 0 ? _this$orderData$APPRO : [0]).map(mapper)), this.sum(Object.values((_this$orderData$REJEC = this.orderData['REJECTED']) !== null && _this$orderData$REJEC !== void 0 ? _this$orderData$REJEC : [0]).map(mapper)), this.sum(Object.values((_this$orderData$PENDI = this.orderData['PENDING']) !== null && _this$orderData$PENDI !== void 0 ? _this$orderData$PENDI : [0]).map(mapper)), this.sum(Object.values((_this$orderData$APROV = this.orderData['APROVADO_T']) !== null && _this$orderData$APROV !== void 0 ? _this$orderData$APROV : [0]).map(mapper))]);
+      return this.sum([this.sum(Object.values((_this$orderData$APPRO = this.orderData['APPROVED']) !== null && _this$orderData$APPRO !== void 0 ? _this$orderData$APPRO : [0]).map(mapper)), this.sum(Object.values((_this$orderData$REJEC = this.orderData['REJECTED']) !== null && _this$orderData$REJEC !== void 0 ? _this$orderData$REJEC : [0]).map(mapper)), this.sum(Object.values((_this$orderData$PENDI = this.orderData['PENDING']) !== null && _this$orderData$PENDI !== void 0 ? _this$orderData$PENDI : [0]).map(mapper)), this.sum(Object.values((_this$orderData$APROV = this.orderData['APPROVED_IN_STORE']) !== null && _this$orderData$APROV !== void 0 ? _this$orderData$APROV : [0]).map(mapper))]);
     }
   },
   created: function created() {
@@ -2536,7 +2536,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         'label': 'APROVADO_T',
         'data': Object.values((_this$orderData$APROV2 = this.orderData['APROVADO_T']) !== null && _this$orderData$APROV2 !== void 0 ? _this$orderData$APROV2 : [0]),
-        'hidden': Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])([0]) === Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])(Object.values((_this$orderData$APROV3 = this.orderData['APROVADO_T']) !== null && _this$orderData$APROV3 !== void 0 ? _this$orderData$APROV3 : [0])),
+        'hidden': Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])([0]) === Object(qs__WEBPACK_IMPORTED_MODULE_1__["stringify"])(Object.values((_this$orderData$APROV3 = this.orderData['APPROVED_IN_STORE']) !== null && _this$orderData$APROV3 !== void 0 ? _this$orderData$APROV3 : [0])),
         'borderColor': 'rgba(54, 162, 23)',
         'borderWidth': 2,
         'backgroundColor': 'rgba(54, 162, 23, 0.6)'
@@ -2550,13 +2550,13 @@ __webpack_require__.r(__webpack_exports__);
 
       return {
         'datasets': [{
-          data: [this.sum(Object.values((_this$orderData$APPRO4 = this.orderData['APPROVED']) !== null && _this$orderData$APPRO4 !== void 0 ? _this$orderData$APPRO4 : [0])), this.sum(Object.values((_this$orderData$REJEC4 = this.orderData['REJECTED']) !== null && _this$orderData$REJEC4 !== void 0 ? _this$orderData$REJEC4 : [0])), this.sum(Object.values((_this$orderData$PENDI4 = this.orderData['PENDING']) !== null && _this$orderData$PENDI4 !== void 0 ? _this$orderData$PENDI4 : [0])), this.sum(Object.values((_this$orderData$APROV4 = this.orderData['APROVADO_T']) !== null && _this$orderData$APROV4 !== void 0 ? _this$orderData$APROV4 : [0]))],
+          data: [this.sum(Object.values((_this$orderData$APPRO4 = this.orderData['APPROVED']) !== null && _this$orderData$APPRO4 !== void 0 ? _this$orderData$APPRO4 : [0])), this.sum(Object.values((_this$orderData$REJEC4 = this.orderData['REJECTED']) !== null && _this$orderData$REJEC4 !== void 0 ? _this$orderData$REJEC4 : [0])), this.sum(Object.values((_this$orderData$PENDI4 = this.orderData['PENDING']) !== null && _this$orderData$PENDI4 !== void 0 ? _this$orderData$PENDI4 : [0])), this.sum(Object.values((_this$orderData$APROV4 = this.orderData['APPROVED_IN_STORE']) !== null && _this$orderData$APROV4 !== void 0 ? _this$orderData$APROV4 : [0]))],
           backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(54, 162, 23, 0.6)'],
           borderColor: ['rgba(54, 162, 235)', 'rgba(255,99,132)', 'rgba(255, 206, 86)', 'rgba(54, 162, 23)'],
           borderWidth: 2
         }],
         'totals': this.total,
-        'labels': ['APPROVED', 'REJECTED', 'PENDING', 'APROVADO_T']
+        'labels': ['APPROVED', 'REJECTED', 'PENDING', 'APPROVED_IN_STORE']
       };
     }
   }
@@ -8530,7 +8530,7 @@ function getAlpha(string) {
 // generators
 function hexString(rgba, a) {
    var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-   return "#" + hexDouble(rgba[0]) 
+   return "#" + hexDouble(rgba[0])
               + hexDouble(rgba[1])
               + hexDouble(rgba[2])
               + (
@@ -94753,7 +94753,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -94773,7 +94773,7 @@ component.options.__file = "resources/js/metrics/cancelledMetric.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cancelledMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./cancelledMetric.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/metrics/cancelledMetric.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cancelledMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cancelledMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -94803,7 +94803,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -94823,7 +94823,7 @@ component.options.__file = "resources/js/metrics/charts/BarChart.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BarChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/metrics/charts/BarChart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -94853,7 +94853,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -94873,7 +94873,7 @@ component.options.__file = "resources/js/metrics/charts/LineChart.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LineChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./LineChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/metrics/charts/LineChart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LineChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LineChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -94903,7 +94903,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -94923,7 +94923,7 @@ component.options.__file = "resources/js/metrics/charts/PieChart.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PieChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/metrics/charts/PieChart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -94953,7 +94953,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -94973,7 +94973,7 @@ component.options.__file = "resources/js/metrics/orderMetric.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_orderMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./orderMetric.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/metrics/orderMetric.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_orderMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_orderMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 

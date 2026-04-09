@@ -5,12 +5,7 @@ use Illuminate\Database\Seeder;
 
 class SpendingSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         factory(Spending::class, 10)->create();
     }

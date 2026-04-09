@@ -41,8 +41,8 @@
                 @foreach($messages as $msg)
                     <tr>
                         <td class="v-align-middle">{{$msg->id}}</td>
-                        <td class="v-align-middle">{{$msg->senderId->name}}</td>
-                        <td class="v-align-middle">{{$msg->recipientId->name}}</td>
+                        <td class="v-align-middle">{{$msg->sender->name}}</td>
+                        <td class="v-align-middle">{{$msg->recipient->name}}</td>
                         <td class="v-align-middle text-truncate" style="max-width: 200px" >{{$msg->body}}</td>
                         <td class="v-align-middle">
                             <a href="{{route('messages.show', $msg->id) }}">
@@ -130,7 +130,7 @@
                                 </tr>
                             </table>
 
-                            <a href="{{ route('vitrina.index') }}" class="btn btn-primary btn-sm btn-block">Volver</a>
+                            <a href="{{ route('storefront.index') }}" class="btn btn-primary btn-sm btn-block">Volver</a>
                         </div>
                     </div>
                 </div>
@@ -140,8 +140,8 @@
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     [{{ $msg->created_at }}]
                     msg: {{$msg->body}} <br>
-                    Enviado a: ({{$msg->recipientId->name}})<br>
-                    Enviado por: ({{$msg->senderId->name}})<br>
+                    Enviado a: ({{$msg->recipient->name}})<br>
+                    Enviado por: ({{$msg->sender->name}})<br>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

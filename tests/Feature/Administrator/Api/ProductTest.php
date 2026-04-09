@@ -11,7 +11,6 @@ use App\Entities\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
@@ -29,7 +28,7 @@ class ProductTest extends TestCase
         $this->seed(\PermissionsTableSeeder::class);
 
         $this->user = factory(User::class)->create([
-            'active' => 1
+            'active' => 1,
         ]);
         $this->user->assignRole('Administrator');
         $this->cart = new Cart();
@@ -57,7 +56,7 @@ class ProductTest extends TestCase
             'color'       => [$this->color->id],
             'size'        => [$this->size->id],
             'category'    => [$this->category->id],
-            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
+            'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg',
         ]);
 
         $response = $this->actingAs($this->user, 'api')
@@ -87,14 +86,14 @@ class ProductTest extends TestCase
                 'color'       => [$this->color->id],
                 'size'        => [$this->size->id],
                 'category'    => [$this->category->id],
-                'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg'
+                'img'         => '0af47a0f0bb89e7ce4d88f121faea42b.jpg',
             ]);
 
         $response
             ->assertStatus(200);
 
         $this->assertDatabaseHas('products', [
-            'name'  => 'new'
+            'name'  => 'new',
         ]);
     }
 
@@ -109,7 +108,7 @@ class ProductTest extends TestCase
 
         $response = $this->actingAs($this->user, 'api')
             ->deleteJson(route('product.destroy', $products->id), [
-                'id'  => $products->id
+                'id'  => $products->id,
             ]);
 
         $response
